@@ -1,7 +1,8 @@
 //**************************************************************************************************
 //
-// プレイヤー処理(motion.h)
+// モーション処理(motion.h)
 // Auther：唐﨑結斗
+// 概要 : モーションクラスの設定
 //
 //**************************************************************************************************
 #ifndef _MOTION_H_			// このマクロ定義がされてなかったら
@@ -13,91 +14,119 @@
 #include"main.h"
 #include "renderer.h"
 
-//***************************************************************************
-// マクロ定義
-//***************************************************************************
-#define	MAX_MODEL_PARTS		(128)		// モデル数の最大数
-#define MAX_KEY				(64)		// キーの最大数
-#define MAX_KEYSET			(64)		// キー設定の最大数
-
-//***************************************************************
-// パーツファイル構造体を定義
-//***************************************************************
-typedef struct
+//=============================================================================
+// モーションクラス
+// Author : 唐﨑結斗
+// 概要 : モーション設定を行うクラス
+//=============================================================================
+class CMotion
 {
-	char	aName[MAX_MODEL_PARTS];		// 名前
-}PartsFile;
+public:
+	//***************************************************************************
+	// 定数定義
+	//***************************************************************************
+	static const unsigned int MAX_MOTION = (128);					// モーション数の最大数
+	static const unsigned int MAX_MODEL_PARTS = (128);				// モデル数の最大数
+	static const unsigned int MAX_KEY = (64);						// キーの最大数
+	static const unsigned int MAX_KEYSET = (64);					// キー設定の最大数
+	static const unsigned int MOTION_BLEND_FRAM = (12);				// モーションブレンドのフレーム数	
 
-//***************************************************************
-// キー構造体を定義
-//***************************************************************
-typedef struct
-{
-	D3DXVECTOR3		pos;	// 現在位置
-	D3DXVECTOR3		rot;	// 現在の向き
-}MyKey;
+	//***************************************************************
+	// パーツファイル構造体を定義
+	//***************************************************************
+	typedef struct
+	{
+		char	aName[MAX_MODEL_PARTS];		// 名前
+	}PartsFile;
 
-//***************************************************************
-// キー設定構造体を定義
-//***************************************************************
-typedef struct
-{
-	int		nFrame;			// フレーム数
-	MyKey	key[MAX_KEY];	// キー情報
-}MyKeySet;
+	//***************************************************************
+	// キー構造体を定義
+	//***************************************************************
+	typedef struct
+	{
+		D3DXVECTOR3		pos;	// 現在位置
+		D3DXVECTOR3		rot;	// 現在の向き
+	}MyKey;
 
-//***************************************************************
-// モーション設定構造体を定義
-//***************************************************************
-typedef struct
-{
-	int			nNumKey;				// キー数
-	int			nCntKeySet;				// キーセットカウント
-	int			nCntFrame;				// フレームカウント
-	bool		bLoop;					// ループ使用状況
-	MyKeySet		keySet[MAX_KEYSET];		// キー設定情報
-}MyMotion;
+	//***************************************************************
+	// キー設定構造体を定義
+	//***************************************************************
+	typedef struct
+	{
+		int		nFrame;			// フレーム数
+		MyKey	key[MAX_KEY];	// キー情報
+	}MyKeySet;
 
-//***************************************************************
-// モデルパーツ構造体を定義
-//***************************************************************
-typedef struct
-{
-	LPD3DXMESH		pMesh;					// メッシュ情報へのポインタ
-	LPD3DXBUFFER	pBuffer;				// マテリアル情報へのポインタ
-	DWORD			nNumMat;				// マテリアル情報の数
-	D3DXMATRIX		mtxWorld;				// ワールドマトリックス
-	D3DXVECTOR3		posOrigin;				// 元の位置
-	D3DXVECTOR3		rotOrigin;				// 元の向き
-	D3DXVECTOR3		pos;					// 現在の位置
-	D3DXVECTOR3		rot;					// 現在の向き
-	D3DXVECTOR3		posDest;				// 目的の位置
-	D3DXVECTOR3		rotDest;				// 目的の向き
-	D3DXVECTOR3		vtxMin;					// 頂点座標の最小値
-	D3DXVECTOR3		vtxMax;					// 頂点座標の最大値
-	int				nIdxModelParent;		// 親モデルのインデックス数
-	int				nType;					// パーツのタイプ
-}Parts;
+	//***************************************************************
+	// モーション設定構造体を定義
+	//***************************************************************
+	typedef struct
+	{
+		int				nNumKey;				// キー数
+		int				nCntKeySet;				// キーセットカウント
+		int				nCntFrame;				// フレームカウント
+		bool			bLoop;					// ループ使用状況
+		MyKeySet		keySet[MAX_KEYSET];		// キー設定情報
+	}MyMotion;
 
-//***************************************************************
-// プロトタイプ宣言
-//***************************************************************
-// 入力関数
-void SetParts(int nMaxParts,							// パーツ数
-	Parts *parts,										// パーツ情報
-	D3DXMATRIX mtxWorld,								// ワールドマトリックス
-	D3DXMATRIX mtxRot,									// 計算用マトリックス
-	D3DXMATRIX mtxTrans,								// 計算用マトリックス
-	D3DMATERIAL9 *matDef,								// マテリアル保存変数
-	D3DXMATERIAL *pMat);								// マテリアルデータ
-bool PlayMotion(int nMaxParts,							// パーツ数
-	Parts *parts,										// パーツ情報
-	MyMotion *motion);									// モーション情報
-bool MotionBlend(int nCntMotionSet,						// モーションの配列番号
-	Parts *parts,										// パーツ情報
-	int nMaxParts,										// パーツ数
-	MyMotion *motion);									// モーション情報						
-void LoodSetMotion(char *pFileName, PartsFile *partsFile, Parts *parts, MyMotion *Motion, int *nMaxParts);
+	//***************************************************************
+	// モデルパーツ構造体を定義
+	//***************************************************************
+	typedef struct
+	{
+		LPD3DXMESH		pMesh;					// メッシュ情報へのポインタ
+		LPD3DXBUFFER	pBuffer;				// マテリアル情報へのポインタ
+		DWORD			nNumMat;				// マテリアル情報の数
+		D3DXMATRIX		mtxWorld;				// ワールドマトリックス
+		D3DXVECTOR3		posOrigin;				// 元の位置
+		D3DXVECTOR3		rotOrigin;				// 元の向き
+		D3DXVECTOR3		pos;					// 現在の位置
+		D3DXVECTOR3		rot;					// 現在の向き
+		D3DXVECTOR3		posDest;				// 目的の位置
+		D3DXVECTOR3		rotDest;				// 目的の向き
+		D3DXVECTOR3		vtxMin;					// 頂点座標の最小値
+		D3DXVECTOR3		vtxMax;					// 頂点座標の最大値
+		int				nIdxModelParent;		// 親モデルのインデックス数
+		int				nType;					// パーツのタイプ
+	}Parts;
+
+	//--------------------------------------------------------------------
+	// コンストラクタとデストラクタ
+	//--------------------------------------------------------------------
+	CMotion(char *pFileName);
+	~CMotion();
+
+	//--------------------------------------------------------------------
+	// メンバ関数
+	//--------------------------------------------------------------------
+	// パーツの設定
+	void SetParts(D3DXMATRIX mtxWorld,						// ワールドマトリックス
+		D3DXMATRIX mtxRot,									// 計算用マトリックス
+		D3DXMATRIX mtxTrans,								// 計算用マトリックス
+		D3DMATERIAL9 *matDef,								// マテリアル保存変数
+		D3DXMATERIAL *pMat);								// マテリアルデータ
+
+	// モーションの再生
+	bool PlayMotion(void);
+
+	// モーションブレンド
+	bool MotionBlend(int nCntMotionSet);	
+
+	// モーション読み込み
+	void LoodSetMotion(char *pFileName);
+
+	// 終了
+	void Uninit(void);
+
+private:
+	//--------------------------------------------------------------------
+	// メンバ変数
+	//--------------------------------------------------------------------
+	MyMotion	*m_motion;			// モーション
+	Parts		*m_parts;			// パーツ
+	PartsFile	*partsFile;			// パーツのXファイル名
+	int			m_nMaxParts;		// パーツ数
+};
 
 #endif
 
