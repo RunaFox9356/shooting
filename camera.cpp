@@ -34,7 +34,7 @@ void CCamera::Init(void)
 {
 	m_aCamera.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	//視点　注視点　上方向　設定
-	m_aCamera.posV = D3DXVECTOR3(0.0f, 100.0f, -150.0f);
+	m_aCamera.posV = D3DXVECTOR3(0.0f, 0.0f, -150.0f);
 	m_aCamera.posR = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	m_aCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	m_aCamera.directionR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -76,7 +76,7 @@ void CCamera::Set(void)
 {
 	LPDIRECT3DDEVICE9  pDevice = CManeager::GetRenderer()->GetDevice();//デバイスのポインタ
 
-											 //ビューマトリックスを初期化
+	//ビューマトリックスを初期化
 	D3DXMatrixIdentity(&m_aCamera.MtxView);
 
 	//ビューマトリックスの作成
@@ -92,12 +92,19 @@ void CCamera::Set(void)
 	//プロジェクションマトリックスを初期化
 	D3DXMatrixIdentity(&m_aCamera.MtxProje);
 
-	//プロジェクションマトリックス作成
-	D3DXMatrixPerspectiveFovLH(&m_aCamera.MtxProje,
-		D3DXToRadian(90.0f),
-		(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,
-		10.0f,
-		10000.0f);
+	////プロジェクションマトリックス作成
+	//D3DXMatrixPerspectiveFovLH(&m_aCamera.MtxProje,
+	//	D3DXToRadian(90.0f),
+	//	(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,
+	//	10.0f,
+	//	10000.0f);
+
+	// プロジェクションマトリックスの作成(平行投影)
+	D3DXMatrixOrthoLH(&m_aCamera.MtxProje,					// プロジェクションマトリックス
+		(float)SCREEN_WIDTH,								// 幅
+		(float)SCREEN_HEIGHT,								// 高さ
+		10.0f,												// ニア
+		1000.0f);											// ファー
 
 	//適用
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_aCamera.MtxProje);
