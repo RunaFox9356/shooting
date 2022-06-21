@@ -84,8 +84,6 @@ public:
 		D3DXVECTOR3		rot;					// 現在の向き
 		D3DXVECTOR3		posDest;				// 目的の位置
 		D3DXVECTOR3		rotDest;				// 目的の向き
-		D3DXVECTOR3		vtxMin;					// 頂点座標の最小値
-		D3DXVECTOR3		vtxMax;					// 頂点座標の最大値
 		int				nIdxModelParent;		// 親モデルのインデックス数
 		int				nType;					// パーツのタイプ
 	}Parts;

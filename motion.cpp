@@ -51,12 +51,12 @@ CMotion::~CMotion()
 //=============================================================================
 // 初期化
 // Author : 唐﨑結斗
-// 概要 : パーツの情報の読み込み
+// 概要 : パーツ情報のXファイル読み込み
 //=============================================================================
 void CMotion::Init(void)
 {
 	for (int nCntMotion = 0; nCntMotion < MAX_MOTION; nCntMotion++)
-	{
+	{// カウントのリセット
 		CntReset(nCntMotion);
 	}
 
@@ -68,8 +68,6 @@ void CMotion::Init(void)
 
 		// パーツ情報の初期化
 		(m_parts + i)->mtxWorld = {};												// ワールドマトリックス
-		(m_parts + i)->vtxMin = D3DXVECTOR3(1000.0f, 1000.0f, 1000.0f);				// 頂点座標の最小値
-		(m_parts + i)->vtxMax = D3DXVECTOR3(-1000.0f, -1000.0f, -1000.0f);			// 頂点座標の最大値
 
 		// Xファイルの読み込み
 		D3DXLoadMeshFromX(m_partsFile[(m_parts + i)->nType].aName,
@@ -80,84 +78,6 @@ void CMotion::Init(void)
 			NULL,
 			&(m_parts + i)->nNumMat,
 			&(m_parts + i)->pMesh);
-
-		// 頂点座標の最小値・最大値の算出
-		int		nNumVtx;			// 頂点数
-		DWORD	sizeFVF;			// 頂点フォーマットのサイズ
-		BYTE	*pVtxBuff;			// 頂点バッファへのポインタ
-
-		// 頂点数の取得
-		nNumVtx = (m_parts + i)->pMesh->GetNumVertices();
-
-		// 頂点フォーマットのサイズの取得
-		sizeFVF = D3DXGetFVFVertexSize((m_parts + i)->pMesh->GetFVF());
-
-		// 頂点バッファのロック
-		(m_parts + i)->pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVtxBuff);
-
-		//for (int nCntVtx = 0; nCntVtx < nNumVtx; nCntVtx++)
-		//{
-		//	// 頂点座標の代入
-		//	D3DXVECTOR3 vtx = *(D3DXVECTOR3*)pVtxBuff;
-
-		//	if (vtx.x < pParts->vtxMin.x)
-		//	{// 比較対象が現在の頂点座標(X)の最小値より小さい
-		//		pParts->vtxMin.x = vtx.x;
-		//	}
-		//	if (vtx.y < pParts->vtxMin.y)
-		//	{// 比較対象が現在の頂点座標(Y)の最小値より小さい
-		//		pParts->vtxMin.y = vtx.y;
-		//	}
-		//	if (vtx.z < pParts->vtxMin.z)
-		//	{// 比較対象が現在の頂点座標(Z)の最小値より小さい
-		//		pParts->vtxMin.z = vtx.z;
-		//	}
-
-		//	if (vtx.x > pParts->vtxMax.x)
-		//	{// 比較対象が現在の頂点座標(X)の最大値より大きい
-		//		pParts->vtxMax.x = vtx.x;
-		//	}
-		//	if (vtx.y > pParts->vtxMax.y)
-		//	{// 比較対象が現在の頂点座標(Y)の最大値より大きい
-		//		pParts->vtxMax.y = vtx.y;
-		//	}
-		//	if (vtx.z > pParts->vtxMax.z)
-		//	{// 比較対象が現在の頂点座標(Z)の最大値より大きい
-		//		pParts->vtxMax.z = vtx.z;
-		//	}
-
-		//	// 頂点フォーマットのサイズ分ポインタを進める
-		//	pVtxBuff += sizeFVF;
-		//}
-
-		//if (pParts->vtxMin.x < m_modelMin.x)
-		//{// 比較対象が現在の頂点座標(X)の最小値より小さい
-		//	m_modelMin.x = pParts->vtxMin.x;
-		//}
-		//if (pParts->vtxMin.y < m_modelMin.y)
-		//{// 比較対象が現在の頂点座標(Y)の最小値より小さい
-		//	m_modelMin.y = pParts->vtxMin.y;
-		//}
-		//if (pParts->vtxMin.z < m_modelMin.z)
-		//{// 比較対象が現在の頂点座標(Z)の最小値より小さい
-		//	m_modelMin.z = pParts->vtxMin.z;
-		//}
-
-		//if (pParts->vtxMax.x > m_modelMax.x)
-		//{// 比較対象が現在の頂点座標(X)の最大値より大きい
-		//	m_modelMax.x = pParts->vtxMax.x;
-		//}
-		//if (pParts->vtxMax.y > m_modelMax.y)
-		//{// 比較対象が現在の頂点座標(Y)の最大値より大きい
-		//	m_modelMax.y = pParts->vtxMax.y;
-		//}
-		//if (pParts->vtxMax.z > m_modelMax.z)
-		//{// 比較対象が現在の頂点座標(Z)の最大値より大きい
-		//	m_modelMax.z = pParts->vtxMax.z;
-		//}
-
-		// 頂点バッファのアンロック
-		(m_parts + i)->pMesh->UnlockVertexBuffer();
 	}
 }
 
@@ -176,9 +96,8 @@ void CMotion::SetParts(D3DXMATRIX mtxWorld,
 	LPDIRECT3DDEVICE9	pDevice = CManeager::GetRenderer()->GetDevice();
 
 	for (int i = 0; i < m_nMaxParts; i++)
-	{
-		// ワールドマトリックスの初期化
-		D3DXMatrixIdentity(&(m_parts + i)->mtxWorld);				// 行列初期化関数
+	{// ワールドマトリックスの初期化
+		D3DXMatrixIdentity(&(m_parts + i)->mtxWorld);			// 行列初期化関数
 
 		// 向きの反映
 		D3DXMatrixRotationYawPitchRoll(&mtxRot,
@@ -374,7 +293,7 @@ bool CMotion::MotionBlend(const int nCntMotionSet)
 //=============================================================================
 // パーツとモーションの読み込み
 // Author : 唐﨑結斗
-// 概要 : パーツとモーションの読み込み
+// 概要 : パーツとモーションの読み込み、初期化を呼び出す
 //=============================================================================
 void CMotion::LoodSetMotion(char * pFileName)
 {
