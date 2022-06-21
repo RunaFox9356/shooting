@@ -11,6 +11,9 @@
 #include "motion.h"
 #include "renderer.h"
 #include "object.h"
+
+class  CMotion;
+
 class CEnemy : public CObject
 {
 public:
@@ -59,7 +62,7 @@ public:
 		int nowKey;		// 今のキー
 		int loop;		// ループするかどうか[0:ループしない / 1 : ループする]
 		int num_key;  	// キー数
-		MyKeySet KeySet[MAX_KEY];
+						/*MyKeySet KeySet[MAX_KEY];*/
 	}MODELDATAPLAYER;
 
 public:
@@ -85,13 +88,14 @@ public:
 
 	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);	// セット引数座標と読み込むファイル名
 	void SetPos(const D3DXVECTOR3 &pos) override;
-	void SetCopy(char *pFileName, PartsFile *partsFile, Parts *parts, MyMotion *Motion, int *nMaxParts);
+	/*void SetCopy(char *pFileName, PartsFile *partsFile, Parts *parts, MyMotion *Motion, int *nMaxParts);*/
 
 private:
 	void Collision(void);	// 当たり判定まとめ
 	void Move(void);		// 移動
 
 private:
+	CMotion			*m_pMotion;					// モーション
 	D3DXVECTOR3		m_pos;						// 位置
 	D3DXVECTOR3		m_posOld;					// 位置過去
 	D3DXVECTOR3		m_move;						// ムーブ
@@ -105,9 +109,6 @@ private:
 	DAMEGE			m_damege;					// ダメージくらってるかくらってないか
 	COPY			m_copy;						// コピー
 
-	Parts			m_parts[MAX_MODELPARTS];		// モデルパーツ
-	PartsFile		m_partsFile[MAX_MODELPARTS];	// パーツファイル
-	MyMotion		m_motion[ANIME_MAX];			// モーション
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
 	int				m_nMaxModelType;				// モデルのタイプ数
