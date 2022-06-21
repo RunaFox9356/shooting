@@ -9,7 +9,7 @@
 #include "object2d.h"
 #include "player.h"
 #include "manager.h"
-
+#include "enemy.h"
 CObject *CObject::m_pObject[MAX_OBJECT] = {};
 int CObject::m_AllMember = 0;
 
@@ -96,7 +96,8 @@ void CObject::AllCreate()
 	CObject2d::Create();
 	m_pObject[3]->SetPos(D3DXVECTOR3(D3DXVECTOR3(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 3, 0.0f)));
 	CPlayer::Create();
-	
+	CEnemy::Create();
+	m_pObject[5]->SetPos(D3DXVECTOR3(D3DXVECTOR3(100.0f, 0.0f, 0.0f)));
 }
 
 //=============================================================================

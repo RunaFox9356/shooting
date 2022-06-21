@@ -1,11 +1,11 @@
 //============================
 //
-// 言語設定
+// ファイル設定ヘッター
 // Author:hamada ryuuga
 //
 //============================
-#ifndef _LETTER_H_			// このマクロ定義がされてなかったら
-#define _LETTER_H_			// 二重インクルード防止のマクロ定義
+#ifndef _FILE_H_			// このマクロ定義がされてなかったら
+#define _FILE_H_			// 二重インクルード防止のマクロ定義
 
 //=====================================
 // インクルード
@@ -14,6 +14,8 @@
 #include <fstream>
 #include <string>
 #include <windows.h>
+#include "nlohmann/json.hpp"
+
 #include <stdio.h>
 #include <tchar.h>
 #include <locale.h>
@@ -21,17 +23,18 @@
 #include <iostream>
 #include <windows.h>
 #include <sstream>
-#include "nlohmann/json.hpp"
 
+#include "main.h"
+#include "particle.h"
 
 
 //=====================================
 // プロトタイプ宣言
 //=====================================
 // 制御関数
-std::string WStringToString(std::wstring oWString);
-std::wstring StringToWString(std::string oString);
-std::string UTF8toSjis(std::string srcUTF8);
-std::string SjistoUTF8(std::string srcSjis);
+
+CParticle::Particle GetStatus(void);//ゲット
+void OutputStatus();
+void LoodJson(const char* cUrl);
 
 #endif

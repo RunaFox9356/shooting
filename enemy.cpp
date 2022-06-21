@@ -11,22 +11,23 @@
 #include "camera.h"
 #include "motion.h"
 #include "manager.h"
+#include "enemy.h"
 
 //------------------------------------
 // static変数
 //------------------------------------
-const float CPlayer::ATTENUATION = 0.5f;	// 
-const float CPlayer::SPEED = 1.0f;			// 移動量
-const float CPlayer::WIDTH = 10.0f;			// モデルの半径
-const int CPlayer::MAX_PRAYER = 16;			// 最大数
-const int CPlayer::MAX_MOVE = 9;			// アニメーションの最大数
-const int CPlayer::INVINCIBLE = 300;		// 無敵時間
-const int CPlayer::MAX_COPY = 4;			// 最大コピー数
+const float CEnemy::ATTENUATION = 0.5f;	// 
+const float CEnemy::SPEED = 1.0f;			// 移動量
+const float CEnemy::WIDTH = 10.0f;			// モデルの半径
+const int CEnemy::MAX_PRAYER = 16;			// 最大数
+const int CEnemy::MAX_MOVE = 9;			// アニメーションの最大数
+const int CEnemy::INVINCIBLE = 300;		// 無敵時間
+const int CEnemy::MAX_COPY = 4;			// 最大コピー数
 
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CPlayer::CPlayer() :
+CEnemy::CEnemy() :
 	m_pos(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
 	m_posOld(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
 	m_move(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
@@ -61,14 +62,14 @@ CPlayer::CPlayer() :
 	m_nMotion(0)
 {
 	//memset(&s_Player, NULL, sizeof(s_Player));
-	memset(&m_motion,0,sizeof(m_motion));
+	memset(&m_motion, 0, sizeof(m_motion));
 
 }
 
 //------------------------------------
 // デストラクタ
 //------------------------------------
-CPlayer::~CPlayer()
+CEnemy::~CEnemy()
 {
 
 }
@@ -76,12 +77,12 @@ CPlayer::~CPlayer()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CPlayer::Init(void)
+HRESULT CEnemy::Init(void)
 {
 	CAMERA *pCamera = GetCamera()->Get();
 
 	//カメラのデータ取得
-	
+
 	m_rotMove = D3DXVECTOR3(D3DX_PI + pCamera->rot.y, D3DX_PI * 0.5f + pCamera->rot.y, 0.0f);
 
 	m_modelMin = D3DXVECTOR3(FLT_MAX, FLT_MAX, FLT_MAX);
@@ -97,7 +98,7 @@ HRESULT CPlayer::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CPlayer::Uninit(void)
+void CEnemy::Uninit(void)
 {
 	for (int i = 0; i < MAX_MODELPARTS; i++)
 	{
@@ -118,7 +119,7 @@ void CPlayer::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CPlayer::Update(void)
+void CEnemy::Update(void)
 {
 	// 現在のモーション番号の保管
 	m_motionTypeOld = m_motionType;
@@ -138,7 +139,7 @@ void CPlayer::Update(void)
 	{
 		m_motionType = ANIME_NORMAL;
 	}
-	
+
 	if (m_motionTypeOld != m_motionType)
 	{// モーションタイプが変更された時
 		m_motion[m_motionTypeOld].nCntFrame = 0;
@@ -165,7 +166,7 @@ void CPlayer::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CPlayer::Draw(void)
+void CEnemy::Draw(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();
 	D3DXMATRIX mtxScale, mtxTrans, mtxRot;	// 計算用マトリックス
@@ -217,7 +218,7 @@ void CPlayer::Draw(void)
 //------------------------------------
 // 設定
 //------------------------------------
-void CPlayer::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
+void CEnemy::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 {
 	// プレイヤー情報の初期化
 	m_pos = pos;											// 位置の初期化
@@ -227,7 +228,7 @@ void CPlayer::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 	m_modelMin = D3DXVECTOR3(100.0f, 100.0f, 100.0f);	// 頂点座標の最小値
 	m_modelMax = D3DXVECTOR3(-100.0f, -100.0f, -100.0f);	// 頂点座標の最大値
 	m_mtxWorld = {};										// ワールドマトリックス
-	//m_rotDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			// 目的の向き
+															//m_rotDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			// 目的の向き
 	m_motionType = ANIME_NORMAL;							// ニュートラルモーション
 	m_motionTypeOld = m_motionType;				// ニュートラルモーション
 	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);				// 移動量
@@ -235,7 +236,7 @@ void CPlayer::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 	m_isUse = true;										// 使用状況
 
 														// ファイルの読み込み
-	LoodSetMotion("Data/system/Gon/Fox.txt", m_partsFile, m_parts, m_motion, &m_nMaxModelParts);
+	LoodSetMotion("Data/system/enemy/FoxBlock.txt", m_partsFile, m_parts, m_motion, &m_nMaxModelParts);
 
 	for (int i = 0; i < m_nMaxModelParts; i++)
 	{
@@ -249,7 +250,7 @@ void CPlayer::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 		pParts->mtxWorld = {};										// ワールドマトリックス
 		pParts->vtxMin = D3DXVECTOR3(1000.0f, 1000.0f, 1000.0f);		// 頂点座標の最小値
 		pParts->vtxMax = D3DXVECTOR3(-1000.0f, -1000.0f, -1000.0f);	// 頂点座標の最大値
-		
+
 																	// Xファイルの読み込み
 		D3DXLoadMeshFromX(m_partsFile[pParts->nType].aName,
 			D3DXMESH_SYSTEMMEM,
@@ -265,7 +266,7 @@ void CPlayer::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 		DWORD sizeFVF;	// 頂点フォーマットのサイズ
 		BYTE *pVtxBuff;	// 頂点バッファへのポインタ
 
-		// 頂点数の取得
+						// 頂点数の取得
 		nNumVtx = pParts->pMesh->GetNumVertices();
 
 		// 頂点フォーマットのサイズの取得
@@ -343,17 +344,17 @@ void CPlayer::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 //------------------------------------
 // 移動処理
 //------------------------------------
-void CPlayer::Move(void)
+void CEnemy::Move(void)
 {
 	// 移動係数の宣言
 	int nDash = 1;
-	
+
 	CAMERA *pCamera = GetCamera()->Get();
 
 	//ゲームの時の移動方法
 	m_consumption = 0.0f;
 
-	
+
 	m_posOld = m_pos;//過去の移動量を保存
 
 	if (m_invincible <= 0)
@@ -380,7 +381,7 @@ void CPlayer::Move(void)
 	//減算設定（慣性）
 	m_rot.y += m_consumption * ATTENUATION;	//目的の値-現在の値）＊減衰係数
 
-	//正規化
+											//正規化
 	if (m_rot.y > D3DX_PI)
 	{
 		m_rot.y += -D3DX_PI * 2;
@@ -394,7 +395,7 @@ void CPlayer::Move(void)
 //------------------------------------
 // 当たり判定
 //------------------------------------
-void CPlayer::Collision(void)
+void CEnemy::Collision(void)
 {
 	if (m_pos.y <= 0.0f)
 	{
@@ -405,14 +406,14 @@ void CPlayer::Collision(void)
 //------------------------------------
 //コピーしたときモーションをロードする処理
 //------------------------------------
-void CPlayer::SetCopy(char * pFileName, PartsFile * partsFile, Parts * parts, MyMotion * Motion, int * nMaxParts)
+void CEnemy::SetCopy(char * pFileName, PartsFile * partsFile, Parts * parts, MyMotion * Motion, int * nMaxParts)
 {
 	// 変数宣言
 	char aString[128] = {};			// 文字列比較用の変数
 	char g_aEqual[128] = {};		// ＝読み込み用変数
 	int	nCntKeySet = 0;				// KeySetカウント
 	int	nCntKey = 0;				// Keyカウント
-
+	
 	//-------------------------------
 	//コピーを処理
 	//-------------------------------
@@ -611,10 +612,10 @@ void CPlayer::SetCopy(char * pFileName, PartsFile * partsFile, Parts * parts, My
 //------------------------------------
 // create
 //------------------------------------
-CPlayer *CPlayer::Create()
+CEnemy *CEnemy::Create()
 {
-	CPlayer * pObject = nullptr;
-	pObject = new CPlayer;
+	CEnemy * pObject = nullptr;
+	pObject = new CEnemy;
 
 	if (pObject != nullptr)
 	{
@@ -628,7 +629,7 @@ CPlayer *CPlayer::Create()
 //------------------------------------
 // POSだけセット
 //------------------------------------
-void CPlayer::SetPos(const D3DXVECTOR3 &pos)
+void CEnemy::SetPos(const D3DXVECTOR3 &pos)
 {
 	m_pos = pos;
 }

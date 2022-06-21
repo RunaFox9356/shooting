@@ -15,7 +15,7 @@ class CObject
 {
 
 public:
-	const static int MAX_OBJECT = 10;
+	const static int MAX_OBJECT = 256;
 
 	CObject();
 	virtual ~CObject();
