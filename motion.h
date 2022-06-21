@@ -99,6 +99,9 @@ public:
 	//--------------------------------------------------------------------
 	// メンバ関数
 	//--------------------------------------------------------------------
+	// 初期化
+	void Init(void);
+
 	// パーツの設定
 	void SetParts(D3DXMATRIX mtxWorld,						// ワールドマトリックス
 		D3DXMATRIX mtxRot,									// 計算用マトリックス
@@ -107,10 +110,10 @@ public:
 		D3DXMATERIAL *pMat);								// マテリアルデータ
 
 	// モーションの再生
-	bool PlayMotion(void);
+	bool PlayMotion(const int nCntMotionSet);
 
 	// モーションブレンド
-	bool MotionBlend(int nCntMotionSet);	
+	bool MotionBlend(const int nCntMotionSet);	
 
 	// モーション読み込み
 	void LoodSetMotion(char *pFileName);
@@ -118,14 +121,17 @@ public:
 	// 終了
 	void Uninit(void);
 
+	// カウントリセット
+	void CntReset(const int nNumMotionOld);
+
 private:
 	//--------------------------------------------------------------------
 	// メンバ変数
 	//--------------------------------------------------------------------
-	MyMotion	*m_motion;			// モーション
-	Parts		*m_parts;			// パーツ
-	PartsFile	*partsFile;			// パーツのXファイル名
-	int			m_nMaxParts;		// パーツ数
+	MyMotion	*m_motion;							// モーション
+	Parts		*m_parts;							// パーツ
+	PartsFile	m_partsFile[MAX_MODEL_PARTS];		// パーツのXファイル名
+	int			m_nMaxParts;						// パーツ数
 };
 
 #endif

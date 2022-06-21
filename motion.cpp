@@ -21,11 +21,14 @@
 //=============================================================================
 CMotion::CMotion(char * pFileName)
 {
+	// パーツ名の初期化
+	memset(&m_partsFile, 0, sizeof(m_partsFile));
+
 	// モーションの初期化
-	memset(&m_motion, 0, sizeof(MyMotion));
+	memset(&m_motion, 0, sizeof(m_motion));
 
 	// パーツの初期化
-	memset(&m_parts, 0, sizeof(Parts));
+	memset(&m_parts, 0, sizeof(m_parts));
 
 	// パーツ数の初期化
 	m_nMaxParts = 0;
@@ -42,6 +45,120 @@ CMotion::CMotion(char * pFileName)
 CMotion::~CMotion()
 {
 
+}
+
+
+//=============================================================================
+// 初期化
+// Author : 唐﨑結斗
+// 概要 : パーツの情報の読み込み
+//=============================================================================
+void CMotion::Init(void)
+{
+	for (int nCntMotion = 0; nCntMotion < MAX_MOTION; nCntMotion++)
+	{
+		CntReset(nCntMotion);
+	}
+
+	for (int i = 0; i < m_nMaxParts; i++)
+	{
+		// 位置と向きの初期値を保存
+		(m_parts + i)->posOrigin = (m_parts + i)->pos;
+		(m_parts + i)->rotOrigin = (m_parts + i)->rot;
+
+		// パーツ情報の初期化
+		(m_parts + i)->mtxWorld = {};												// ワールドマトリックス
+		(m_parts + i)->vtxMin = D3DXVECTOR3(1000.0f, 1000.0f, 1000.0f);				// 頂点座標の最小値
+		(m_parts + i)->vtxMax = D3DXVECTOR3(-1000.0f, -1000.0f, -1000.0f);			// 頂点座標の最大値
+
+		// Xファイルの読み込み
+		D3DXLoadMeshFromX(m_partsFile[(m_parts + i)->nType].aName,
+			D3DXMESH_SYSTEMMEM,
+			CManeager::GetRenderer()->GetDevice(),
+			NULL,
+			&(m_parts + i)->pBuffer,
+			NULL,
+			&(m_parts + i)->nNumMat,
+			&(m_parts + i)->pMesh);
+
+		// 頂点座標の最小値・最大値の算出
+		int		nNumVtx;			// 頂点数
+		DWORD	sizeFVF;			// 頂点フォーマットのサイズ
+		BYTE	*pVtxBuff;			// 頂点バッファへのポインタ
+
+		// 頂点数の取得
+		nNumVtx = (m_parts + i)->pMesh->GetNumVertices();
+
+		// 頂点フォーマットのサイズの取得
+		sizeFVF = D3DXGetFVFVertexSize((m_parts + i)->pMesh->GetFVF());
+
+		// 頂点バッファのロック
+		(m_parts + i)->pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVtxBuff);
+
+		//for (int nCntVtx = 0; nCntVtx < nNumVtx; nCntVtx++)
+		//{
+		//	// 頂点座標の代入
+		//	D3DXVECTOR3 vtx = *(D3DXVECTOR3*)pVtxBuff;
+
+		//	if (vtx.x < pParts->vtxMin.x)
+		//	{// 比較対象が現在の頂点座標(X)の最小値より小さい
+		//		pParts->vtxMin.x = vtx.x;
+		//	}
+		//	if (vtx.y < pParts->vtxMin.y)
+		//	{// 比較対象が現在の頂点座標(Y)の最小値より小さい
+		//		pParts->vtxMin.y = vtx.y;
+		//	}
+		//	if (vtx.z < pParts->vtxMin.z)
+		//	{// 比較対象が現在の頂点座標(Z)の最小値より小さい
+		//		pParts->vtxMin.z = vtx.z;
+		//	}
+
+		//	if (vtx.x > pParts->vtxMax.x)
+		//	{// 比較対象が現在の頂点座標(X)の最大値より大きい
+		//		pParts->vtxMax.x = vtx.x;
+		//	}
+		//	if (vtx.y > pParts->vtxMax.y)
+		//	{// 比較対象が現在の頂点座標(Y)の最大値より大きい
+		//		pParts->vtxMax.y = vtx.y;
+		//	}
+		//	if (vtx.z > pParts->vtxMax.z)
+		//	{// 比較対象が現在の頂点座標(Z)の最大値より大きい
+		//		pParts->vtxMax.z = vtx.z;
+		//	}
+
+		//	// 頂点フォーマットのサイズ分ポインタを進める
+		//	pVtxBuff += sizeFVF;
+		//}
+
+		//if (pParts->vtxMin.x < m_modelMin.x)
+		//{// 比較対象が現在の頂点座標(X)の最小値より小さい
+		//	m_modelMin.x = pParts->vtxMin.x;
+		//}
+		//if (pParts->vtxMin.y < m_modelMin.y)
+		//{// 比較対象が現在の頂点座標(Y)の最小値より小さい
+		//	m_modelMin.y = pParts->vtxMin.y;
+		//}
+		//if (pParts->vtxMin.z < m_modelMin.z)
+		//{// 比較対象が現在の頂点座標(Z)の最小値より小さい
+		//	m_modelMin.z = pParts->vtxMin.z;
+		//}
+
+		//if (pParts->vtxMax.x > m_modelMax.x)
+		//{// 比較対象が現在の頂点座標(X)の最大値より大きい
+		//	m_modelMax.x = pParts->vtxMax.x;
+		//}
+		//if (pParts->vtxMax.y > m_modelMax.y)
+		//{// 比較対象が現在の頂点座標(Y)の最大値より大きい
+		//	m_modelMax.y = pParts->vtxMax.y;
+		//}
+		//if (pParts->vtxMax.z > m_modelMax.z)
+		//{// 比較対象が現在の頂点座標(Z)の最大値より大きい
+		//	m_modelMax.z = pParts->vtxMax.z;
+		//}
+
+		// 頂点バッファのアンロック
+		(m_parts + i)->pMesh->UnlockVertexBuffer();
+	}
 }
 
 //=============================================================================
@@ -135,18 +252,18 @@ void CMotion::SetParts(D3DXMATRIX mtxWorld,
 // Author : 唐﨑結斗
 // 概要 : 目的の位置まで特定のフレーム数で到着する処理をパーツごとに行う
 //=============================================================================
-bool CMotion::PlayMotion()
+bool CMotion::PlayMotion(const int nCntMotionSet)
 {
 	// 変数宣言
 	bool bMotion = true;
 
 	for (int nCntParts = 0; nCntParts < m_nMaxParts; nCntParts++)
 	{
-		if (m_motion->nCntFrame == 0)
+		if (m_motion[nCntMotionSet].nCntFrame == 0)
 		{// フレームカウントが0の時
 			// 目的の位置と向きの算出
-			(m_parts + nCntParts)->posDest = ((m_parts + nCntParts)->posOrigin + m_motion->keySet[m_motion->nCntKeySet].key[nCntParts].pos) - (m_parts + nCntParts)->pos;
-			(m_parts + nCntParts)->rotDest = ((m_parts + nCntParts)->rotOrigin + m_motion->keySet[m_motion->nCntKeySet].key[nCntParts].rot) - (m_parts + nCntParts)->rot;
+			(m_parts + nCntParts)->posDest = ((m_parts + nCntParts)->posOrigin + m_motion[nCntMotionSet].keySet[m_motion[nCntMotionSet].nCntKeySet].key[nCntParts].pos) - (m_parts + nCntParts)->pos;
+			(m_parts + nCntParts)->rotDest = ((m_parts + nCntParts)->rotOrigin + m_motion[nCntMotionSet].keySet[m_motion[nCntMotionSet].nCntKeySet].key[nCntParts].rot) - (m_parts + nCntParts)->rot;
 
 			// 角度の正規化
 			NormalizeAngle(&(m_parts + nCntParts)->rotDest.x);
@@ -155,8 +272,8 @@ bool CMotion::PlayMotion()
 		}
 
 		// 変数宣言
-		D3DXVECTOR3 addPos = D3DXVECTOR3((m_parts + nCntParts)->posDest / (float)(m_motion->keySet[m_motion->nCntKeySet].nFrame));
-		D3DXVECTOR3 addRot = D3DXVECTOR3((m_parts + nCntParts)->rotDest / (float)(m_motion->keySet[m_motion->nCntKeySet].nFrame));
+		D3DXVECTOR3 addPos = D3DXVECTOR3((m_parts + nCntParts)->posDest / (float)(m_motion[nCntMotionSet].keySet[m_motion[nCntMotionSet].nCntKeySet].nFrame));
+		D3DXVECTOR3 addRot = D3DXVECTOR3((m_parts + nCntParts)->rotDest / (float)(m_motion[nCntMotionSet].keySet[m_motion[nCntMotionSet].nCntKeySet].nFrame));
 
 		// 位置の加算
 		(m_parts + nCntParts)->pos += addPos;
@@ -171,25 +288,25 @@ bool CMotion::PlayMotion()
 	}
 
 	// フレームカウントの加算
-	m_motion->nCntFrame++;
+	m_motion[nCntMotionSet].nCntFrame++;
 
-	if (m_motion->nCntFrame >= m_motion->keySet[m_motion->nCntKeySet].nFrame)
+	if (m_motion[nCntMotionSet].nCntFrame >= m_motion[nCntMotionSet].keySet[m_motion[nCntMotionSet].nCntKeySet].nFrame)
 	{// フレームカウントが指定のフレーム数を超えた場合
 		// フレーム数の初期化
-		m_motion->nCntFrame = 0;
+		m_motion[nCntMotionSet].nCntFrame = 0;
 
 		// 再生中のキー番号数の加算
-		m_motion->nCntKeySet++;
+		m_motion[nCntMotionSet].nCntKeySet++;
 
-		if (m_motion->nCntKeySet >= m_motion->nNumKey && m_motion->bLoop)
+		if (m_motion[nCntMotionSet].nCntKeySet >= m_motion[nCntMotionSet].nNumKey && m_motion[nCntMotionSet].bLoop)
 		{// 再生中のキー数カウントがキー数の最大値を超えたとき、そのモーションがループを使用している
 			// 再生中のキー数カウントを初期化
-			m_motion->nCntKeySet = 0;
+			m_motion[nCntMotionSet].nCntKeySet = 0;
 
 		}
-		else if (m_motion->nCntKeySet >= m_motion->nNumKey)
+		else if (m_motion[nCntMotionSet].nCntKeySet >= m_motion[nCntMotionSet].nNumKey)
 		{
-			m_motion->nCntKeySet = 0;
+			m_motion[nCntMotionSet].nCntKeySet = 0;
 			bMotion = false;
 		}
 	}
@@ -202,7 +319,7 @@ bool CMotion::PlayMotion()
 // Author : 唐﨑結斗
 // 概要 : モーションとモーションのつなぎ目を調整する
 //=============================================================================
-bool CMotion::MotionBlend(int nCntMotionSet)
+bool CMotion::MotionBlend(const int nCntMotionSet)
 {
 	// 変数宣言
 	bool bMotionBlend = true;
@@ -266,6 +383,9 @@ void CMotion::LoodSetMotion(char * pFileName)
 	char g_aEqual[128] = {};		// ＝読み込み用変数
 	int	nCntKeySet = 0;				// KeySetカウント
 	int	nCntKey = 0;				// Keyカウント
+	int nCntFileName = 0;			// ファイル名
+	int nCntParts = 0;				// パーツ数のカウント
+	int nCntMotion = 0;				// モーション数のカウント
 
 	// ファイルポインタの宣言
 	FILE * pFile;
@@ -295,8 +415,8 @@ void CMotion::LoodSetMotion(char * pFileName)
 			if (strcmp(&aString[0], "MODEL_FILENAME") == 0)
 			{// ファイル名の読み込み
 				fscanf(pFile, "%s", &g_aEqual[0]);
-				fscanf(pFile, "%s", &partsFile->aName[0]);
-				partsFile++;
+				fscanf(pFile, "%s", &m_partsFile[nCntFileName].aName[0]);
+				nCntFileName++;
 			}
 
 			if (strcmp(&aString[0], "CHARACTERSET") == 0)
@@ -335,31 +455,31 @@ void CMotion::LoodSetMotion(char * pFileName)
 							if (strcmp(&aString[0], "INDEX") == 0)
 							{// タイプの読み込み
 								fscanf(pFile, "%s", &g_aEqual[0]);
-								fscanf(pFile, "%d", &m_parts->nType);
+								fscanf(pFile, "%d", &m_parts[nCntParts].nType);
 							}
 							if (strcmp(&aString[0], "PARENT") == 0)
 							{// 親の読み込み
 								fscanf(pFile, "%s", &g_aEqual[0]);
-								fscanf(pFile, "%d", &m_parts->nIdxModelParent);
+								fscanf(pFile, "%d", &m_parts[nCntParts].nIdxModelParent);
 							}
 							if (strcmp(&aString[0], "POS") == 0)
 							{// 位置の読み込み
 								fscanf(pFile, "%s", &g_aEqual[0]);
-								fscanf(pFile, "%f", &m_parts->pos.x);
-								fscanf(pFile, "%f", &m_parts->pos.y);
-								fscanf(pFile, "%f", &m_parts->pos.z);
+								fscanf(pFile, "%f", &m_parts[nCntParts].pos.x);
+								fscanf(pFile, "%f", &m_parts[nCntParts].pos.y);
+								fscanf(pFile, "%f", &m_parts[nCntParts].pos.z);
 							}
 							if (strcmp(&aString[0], "ROT") == 0)
 							{// 向きの読み込み
 								fscanf(pFile, "%s", &g_aEqual[0]);
-								fscanf(pFile, "%f", &m_parts->rot.x);
-								fscanf(pFile, "%f", &m_parts->rot.y);
-								fscanf(pFile, "%f", &m_parts->rot.z);
+								fscanf(pFile, "%f", &m_parts[nCntParts].rot.x);
+								fscanf(pFile, "%f", &m_parts[nCntParts].rot.y);
+								fscanf(pFile, "%f", &m_parts[nCntParts].rot.z);
 							}
 						}
 
 						// パーツカウントのインクリメント
-						m_parts++;
+						nCntParts++;
 					}
 				}
 			}
@@ -377,12 +497,12 @@ void CMotion::LoodSetMotion(char * pFileName)
 					if (strcmp(&aString[0], "LOOP") == 0)
 					{// ループ有無の読み込み
 						fscanf(pFile, "%s", &g_aEqual[0]);
-						fscanf(pFile, "%d", (int*)(&m_motion->bLoop));
+						fscanf(pFile, "%d", (int*)(&m_motion[nCntMotion].bLoop));
 					}
 					if (strcmp(&aString[0], "NUM_KEY") == 0)
 					{// キー数の読み込み
 						fscanf(pFile, "%s", &g_aEqual[0]);
-						fscanf(pFile, "%d", &m_motion->nNumKey);
+						fscanf(pFile, "%d", &m_motion[nCntMotion].nNumKey);
 					}
 					if (strcmp(&aString[0], "KEYSET") == 0)
 					{// キーセットの読み込み
@@ -398,7 +518,7 @@ void CMotion::LoodSetMotion(char * pFileName)
 							if (strcmp(&aString[0], "FRAME") == 0)
 							{// フレーム数の読み込み
 								fscanf(pFile, "%s", &g_aEqual[0]);
-								fscanf(pFile, "%d", &m_motion->keySet[nCntKeySet].nFrame);
+								fscanf(pFile, "%d", &m_motion[nCntMotion].keySet[nCntKeySet].nFrame);
 							}
 							if (strcmp(&aString[0], "KEY") == 0)
 							{// キーの読み込み
@@ -414,16 +534,16 @@ void CMotion::LoodSetMotion(char * pFileName)
 									if (strcmp(&aString[0], "POS") == 0)
 									{// 位置の読み込み
 										fscanf(pFile, "%s", &g_aEqual[0]);
-										fscanf(pFile, "%f", &m_motion->keySet[nCntKeySet].key[nCntKey].pos.x);
-										fscanf(pFile, "%f", &m_motion->keySet[nCntKeySet].key[nCntKey].pos.y);
-										fscanf(pFile, "%f", &m_motion->keySet[nCntKeySet].key[nCntKey].pos.z);
+										fscanf(pFile, "%f", &m_motion[nCntMotion].keySet[nCntKeySet].key[nCntKey].pos.x);
+										fscanf(pFile, "%f", &m_motion[nCntMotion].keySet[nCntKeySet].key[nCntKey].pos.y);
+										fscanf(pFile, "%f", &m_motion[nCntMotion].keySet[nCntKeySet].key[nCntKey].pos.z);
 									}
 									if (strcmp(&aString[0], "ROT") == 0)
 									{// 向きの読み込み
 										fscanf(pFile, "%s", &g_aEqual[0]);
-										fscanf(pFile, "%f", &m_motion->keySet[nCntKeySet].key[nCntKey].rot.x);
-										fscanf(pFile, "%f", &m_motion->keySet[nCntKeySet].key[nCntKey].rot.y);
-										fscanf(pFile, "%f", &m_motion->keySet[nCntKeySet].key[nCntKey].rot.z);
+										fscanf(pFile, "%f", &m_motion[nCntMotion].keySet[nCntKeySet].key[nCntKey].rot.x);
+										fscanf(pFile, "%f", &m_motion[nCntMotion].keySet[nCntKeySet].key[nCntKey].rot.y);
+										fscanf(pFile, "%f", &m_motion[nCntMotion].keySet[nCntKeySet].key[nCntKey].rot.z);
 									}
 								}
 
@@ -443,7 +563,7 @@ void CMotion::LoodSetMotion(char * pFileName)
 				nCntKeySet = 0;
 
 				// パーツ情報のインクリメント
-				m_motion++;
+				nCntMotion++;
 			}
 		}
 
@@ -454,6 +574,9 @@ void CMotion::LoodSetMotion(char * pFileName)
 	{//ファイルが開けない場合
 		assert(false);
 	}
+
+	// 初期化
+	Init();
 }
 
 //=============================================================================
@@ -463,14 +586,39 @@ void CMotion::LoodSetMotion(char * pFileName)
 //=============================================================================
 void CMotion::Uninit(void)
 {
+	for (int i = 0; i < m_nMaxParts; i++)
+	{
+		if (m_parts[i].pBuffer != NULL)
+		{// 頂点バッファーの解放
+			m_parts[i].pBuffer->Release();
+			m_parts[i].pBuffer = NULL;
+		}
+
+		if (m_parts[i].pMesh != NULL)
+		{// メッシュの解放
+			m_parts[i].pMesh->Release();
+			m_parts[i].pMesh = NULL;
+		}
+	}
+
 	if (m_parts != nullptr
 		&& m_motion != nullptr)
 	{// メモリの解放
 		delete[] m_parts;
 		delete[] m_motion;
 		m_parts = nullptr;
-		m_motion = nullptr;
 	}
+}
+
+//=============================================================================
+// カウントのリセット
+// Author : 唐﨑結斗
+// 概要 : カウントのリセット
+//=============================================================================
+void CMotion::CntReset(const int nNumMotionOld)
+{
+	m_motion[nNumMotionOld].nCntFrame = 0;
+	m_motion[nNumMotionOld].nCntKeySet = 0;
 }
 
 
