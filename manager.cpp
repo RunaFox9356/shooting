@@ -12,8 +12,11 @@
 #include "player.h"
 #include "renderer.h"
 #include "input.h"
+#include "file.h"
 
 CRenderer * CManeager::m_cRenderer = nullptr;
+static float s_fAngle = 20.0f;
+
 
 //=============================================================================
 // コンストラクト関数
@@ -50,7 +53,11 @@ HRESULT CManeager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 		return E_FAIL;
 	}
 
+	
+
 	CObject::AllCreate();
+
+
 
 	return S_OK;
 }
@@ -74,6 +81,7 @@ void CManeager::Uninit()
 	//入力処理の終了処理
 	m_Input->Uninit();
 
+	
 }
 
 //=============================================================================
@@ -86,6 +94,8 @@ void CManeager::Update()
 
 	// 更新処理
 	m_cRenderer->Update();
+
+
 }
 
 //=============================================================================
@@ -95,6 +105,7 @@ void CManeager::Draw()
 {
 	// 描画処理
 	m_cRenderer->Draw();
+
 }
 
 

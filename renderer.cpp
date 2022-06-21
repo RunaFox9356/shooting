@@ -10,10 +10,12 @@
 #include "object.h"
 #include "light.h"
 #include "player.h"
-
+#include "particle.h"
+#include "file.h"
 
 CCamera* pCamera;
 CLight* pLight;
+CParticle* particle;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
@@ -104,7 +106,12 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 	
 	pLight = new CLight;
 	pLight->Init();
-	
+
+	LoodJson("data/FILE/Effect.json");
+
+	particle = new CParticle;
+	particle->Init();	// パーティクル
+
 	return S_OK;
 }
 
@@ -113,6 +120,8 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 //=============================================================================
 void CRenderer::Uninit()
 {
+	particle->Uninit();	// パーティクル
+
 	
 	// ライト終了処理
 	if (pLight != nullptr)
@@ -164,8 +173,13 @@ void CRenderer::Update()
 
 	pCamera->Update();
 
+	particle->Update();	// パーティクル
+
+
 
 	pLight->Update();
+
+
 }
 
 //=============================================================================
@@ -191,7 +205,7 @@ void CRenderer::Draw()
 		// ポリゴンの描画処理
 		CObject::AllDraw();
 		pCamera->Set();
-	
+		particle->Draw();	// パーティクル
 		//DrawLight();
 
 #ifdef _DEBUG
