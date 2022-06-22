@@ -9,6 +9,7 @@
 #include "input.h"
 #include "inputkeyboard.h"
 #include "file.h"
+#include "bullet.h"
 //
 // Ã“Iƒƒ“ƒo[•Ï”
 //
@@ -129,6 +130,7 @@ void CParticle::Update()
 	if (CInputpInput->Press(CInput::KEY_UP))
 	{
 		DataParticle.pos.x += 3.0f;
+		bullet::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 	}
 
 	if (CInputpInput->Press(CInput::KEY_DOWN))

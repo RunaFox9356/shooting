@@ -9,7 +9,7 @@
 #include "object2d.h"
 #include "manager.h"
 #include "input.h"
-
+#include "bullet.h"
 
  const D3DXVECTOR3 CObject2d::m_Vtx[4] =
 {
@@ -51,9 +51,9 @@ HRESULT CObject2d::Init()
 		NULL);
 
 	//テクスチャ
-	D3DXCreateTextureFromFile(pDevice,
-		"data\\TEXTURE\\ken.png",
-		&m_pTexture);
+	//D3DXCreateTextureFromFile(pDevice,
+	//	"data\\TEXTURE\\ken.png",
+	//	&m_pTexture);
 
 
 	VERTEX_2D*pVtx;		//頂点情報へのポインタ
@@ -107,12 +107,7 @@ void CObject2d::Uninit()
 		m_pVtxBuff = nullptr;
 	}
 
-	// 破棄
-	if (m_pTexture != nullptr)
-	{
-		m_pTexture->Release();
-		m_pTexture = nullptr;
-	}
+
 
 }
 
@@ -168,14 +163,17 @@ void CObject2d::Draw()
 	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_2D);
 
+	LPDIRECT3DTEXTURE9 pTexture = bullet::Gettex();
+
 	//テクスチャの設定
-	pDevice->SetTexture(0, m_pTexture);
+	pDevice->SetTexture(0, pTexture);
 
 	//ポリゴンの描画
 
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP,		//プリミティブの種類
 		0,
 		2);						//プリミティブ(ポリゴン)数
+	pDevice->SetTexture(0, NULL);
 }
 
 //=============================================================================

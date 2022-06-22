@@ -13,7 +13,7 @@
 #include "renderer.h"
 #include "input.h"
 #include "file.h"
-
+#include "bullet.h"
 CRenderer * CManeager::m_cRenderer = nullptr;
 static float s_fAngle = 20.0f;
 
@@ -54,7 +54,7 @@ HRESULT CManeager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	}
 
 	
-
+	bullet::Lood();
 	CObject::AllCreate();
 
 

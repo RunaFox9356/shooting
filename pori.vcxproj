@@ -153,7 +153,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="character.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="file.cpp" />
     <ClCompile Include="input.cpp" />
@@ -165,13 +167,16 @@
     <ClCompile Include="motion.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="object2d.cpp" />
+    <ClCompile Include="object3d.cpp" />
     <ClCompile Include="particle.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="character.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="input.h" />
@@ -183,6 +188,7 @@
     <ClInclude Include="motion.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="object2d.h" />
+    <ClInclude Include="object3d.h" />
     <ClInclude Include="particle.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="renderer.h" />

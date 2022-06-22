@@ -82,7 +82,7 @@ public:
 	HRESULT Init(void)override;	// ‰Šú‰»
 	void Uninit(void)override;	// ”jŠü
 	void Update(void)override;	// XV
-	void Draw(void)override;	// •`‰æ
+	void Draw()override;	// •`‰æ
 
 	static CPlayer *CPlayer::Create();
 
