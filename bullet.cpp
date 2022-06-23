@@ -33,6 +33,8 @@ HRESULT bullet::Init()
 {
 	CObject2d::Init();
 
+	CObject2d::SetTexture(CTexture::TEXTURE_KEN);
+
 	return S_OK;
 }
 
@@ -78,9 +80,9 @@ bullet *bullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move)
 
 	if (pObject != nullptr)
 	{
-		pObject->Init();
 		pObject->SetMove(move);
 		pObject->SetPos(pos);
+		pObject->Init();
 	}
 
 	return pObject;

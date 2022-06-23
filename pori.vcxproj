@@ -158,6 +158,7 @@
     <ClCompile Include="character.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="file.cpp" />
+    <ClCompile Include="gon.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="inputkeyboard.cpp" />
     <ClCompile Include="letter.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="particle.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="texture.cpp" />
     <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +181,7 @@
     <ClInclude Include="character.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="file.h" />
+    <ClInclude Include="gon.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="inputkeyboard.h" />
     <ClInclude Include="letter.h" />
@@ -194,6 +197,7 @@
     <ClInclude Include="renderer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="resource1.h" />
+    <ClInclude Include="texture.h" />
     <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>

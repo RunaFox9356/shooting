@@ -20,8 +20,8 @@ class CTexture
 public: /* ’è‹` */
 	enum TEXTURE
 	{
-		TEXTURE_icon_122380_256 = 0,	// ‰¼‰æ‘œ1
-		TEXTURE_icon_122540_256,		// ‰¼‰æ‘œ2
+		TEXTURE_KEN = 0,	// Œ•
+		TEXTURE_GON,		// ‰Œ
 		TEXTURE_MAX,
 		TEXTURE_NONE,	// Žg—p‚µ‚È‚¢
 	};

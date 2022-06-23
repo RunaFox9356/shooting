@@ -8,7 +8,7 @@
 //==================================================
 // インクルード
 //==================================================
-#include "application.h"
+#include "manager.h"
 #include "texture.h"
 
 #include <assert.h>
@@ -18,8 +18,8 @@
 //==================================================
 const char* CTexture::s_FileName[] =
 {// テクスチャのパス
-	"data/TEXTURE/icon_122380_256.png",	// 仮画像1
-	"data/TEXTURE/icon_122540_256.png",	// 仮画像2
+	"data/TEXTURE/ken.png",	// 玉画像
+	"data/TEXTURE/gon.png",	//GON
 };
 
 static_assert(sizeof(CTexture::s_FileName) / sizeof(CTexture::s_FileName[0]) == CTexture::TEXTURE_MAX, "aho");
@@ -46,7 +46,7 @@ CTexture::~CTexture()
 void CTexture::LoadAll()
 {
 	// デバイスへのポインタの取得
-	LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstanse()->GetDevice();
+	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();
 	
 	for (int i = 0; i < TEXTURE_MAX; ++i)
 	{
@@ -75,7 +75,7 @@ void CTexture::Load(TEXTURE inTexture)
 	}
 
 	// デバイスへのポインタの取得
-	LPDIRECT3DDEVICE9 pDevice = CApplication::GetInstanse()->GetDevice();
+	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();
 
 	// テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,

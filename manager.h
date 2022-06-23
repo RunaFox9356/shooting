@@ -13,6 +13,7 @@
 
 class CRenderer;
 class CInput;
+class CTexture;
 
 class CManeager
 {
@@ -25,8 +26,9 @@ public:
 	void Draw();
 
 	static CRenderer *GetRenderer();
-
+	static CTexture* GetTexture();	// テクスチャの情報の取得
 private:
+	static CTexture *m_pTexture;
 	static CRenderer * m_cRenderer;
 	CInput *m_Input;
 };

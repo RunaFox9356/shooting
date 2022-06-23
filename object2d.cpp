@@ -42,6 +42,8 @@ HRESULT CObject2d::Init()
 
 	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();	//デバイスの取得
 
+	m_texture = CTexture::TEXTURE_NONE;
+
 	//頂点バッファの生成
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4,	//確保するバッファのサイズ
 		D3DUSAGE_WRITEONLY,
@@ -163,10 +165,10 @@ void CObject2d::Draw()
 	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_2D);
 
-	LPDIRECT3DTEXTURE9 pTexture = bullet::Gettex();
+	CTexture* pTexture = CManeager::GetTexture();
 
-	//テクスチャの設定
-	pDevice->SetTexture(0, pTexture);
+	// テクスチャの設定
+	pDevice->SetTexture(0, pTexture->GetTexture(m_texture));
 
 	//ポリゴンの描画
 
@@ -201,3 +203,31 @@ void CObject2d::SetPos(const D3DXVECTOR3 &pos)
 	m_pos = pos;
 }
 
+
+//--------------------------------------------------
+// テクスチャの設定
+//--------------------------------------------------
+void CObject2d::SetTexture(CTexture::TEXTURE texture)
+{
+	m_texture = texture;
+} 
+
+//---------------------------------------
+//セットテクスチャ(2d)
+//---------------------------------------
+void CObject2d::SetTex(TexVec4 Tex)
+{
+	VERTEX_2D *pVtx; //頂点へのポインタ
+
+	 //頂点バッファをロックし頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	//テクスチャの座標設定
+	pVtx[0].tex = D3DXVECTOR2(Tex.P0, Tex.P2);
+	pVtx[1].tex = D3DXVECTOR2(Tex.P1, Tex.P2);
+	pVtx[2].tex = D3DXVECTOR2(Tex.P0, Tex.P3);
+	pVtx[3].tex = D3DXVECTOR2(Tex.P1, Tex.P3);
+
+	//頂点バッファをアンロック
+	m_pVtxBuff->Unlock();
+}

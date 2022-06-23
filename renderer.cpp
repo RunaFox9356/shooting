@@ -111,7 +111,7 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 
 	particle = new CParticle;
 	particle->Init();	// パーティクル
-
+						// テクスチャの設定
 	return S_OK;
 }
 

@@ -14,9 +14,11 @@
 #include "input.h"
 #include "file.h"
 #include "bullet.h"
-CRenderer * CManeager::m_cRenderer = nullptr;
-static float s_fAngle = 20.0f;
+#include "texture.h"
 
+CRenderer * CManeager::m_cRenderer = nullptr; 
+CTexture * CManeager::m_pTexture = nullptr;
+static float s_fAngle = 20.0f;
 
 //=============================================================================
 // コンストラクト関数
@@ -53,6 +55,8 @@ HRESULT CManeager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 		return E_FAIL;
 	}
 
+	m_pTexture = nullptr;
+	m_pTexture = new CTexture;
 	
 	bullet::Lood();
 	CObject::AllCreate();
@@ -71,6 +75,13 @@ void CManeager::Uninit()
 	CObject::AllUninit();
 
 	
+	if (m_pTexture != nullptr)
+	{// 終了処理
+
+		m_pTexture->ReleaseAll();
+		delete m_pTexture;
+		m_pTexture = nullptr;
+	}
 	if (m_cRenderer != nullptr)
 	{// 終了処理
 
@@ -115,4 +126,13 @@ void CManeager::Draw()
 CRenderer *CManeager::GetRenderer()
 {
 	return m_cRenderer;
+}
+
+
+//=============================================================================
+// GetTexture
+//=============================================================================
+CTexture *CManeager::GetTexture()
+{
+	return m_pTexture;
 }

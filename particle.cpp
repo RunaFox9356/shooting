@@ -10,6 +10,7 @@
 #include "inputkeyboard.h"
 #include "file.h"
 #include "bullet.h"
+#include "gon.h"
 //
 // Ã“Iƒƒ“ƒo[•Ï”
 //
@@ -136,6 +137,7 @@ void CParticle::Update()
 	if (CInputpInput->Press(CInput::KEY_DOWN))
 	{
 		DataParticle.pos.x -= 3.0f;
+		CGon::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 	}
 	for (int i = 0; i < maxNumber; i++)
 	{
