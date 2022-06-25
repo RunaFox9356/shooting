@@ -77,7 +77,7 @@ void CGon::Update()
 	}
 	//アニメーション設定
 	m_CounterAnim++;
-	if ((m_CounterAnim % 50) == 0)//ここで速度調整
+	if ((m_CounterAnim % 10) == 0)//ここで速度調整
 	{
 		m_PatternAnim = (m_PatternAnim + 1) % m_DivisionMAX;
 		

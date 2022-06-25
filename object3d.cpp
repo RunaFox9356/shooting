@@ -1,205 +1,203 @@
-////=============================================================================
-////
-//// Object
-//// Author : 浜田琉雅
-////
-////=============================================================================
+//============================
 //
-//#include "object.h"
-//#include "object3d.h"
-//#include "manager.h"
-//#include "input.h"
+// プレイヤー設定
+// Author:hamada ryuuga
 //
-//
-//const D3DXVECTOR3 CObject3d::m_Vtx[4] =
-//{
-//	D3DXVECTOR3(-1.0f, -1.0f, 0.0f),
-//	D3DXVECTOR3(+1.0f, -1.0f, 0.0f),
-//	D3DXVECTOR3(-1.0f, +1.0f, 0.0f),
-//	D3DXVECTOR3(+1.0f, +1.0f, 0.0f),
-//};
-////=============================================================================
-//// コンストラクト関数
-////=============================================================================
-//CObject3d::CObject3d()
-//{
-//
-//}
-////=============================================================================
-//// デストラクト関数
-////=============================================================================
-//CObject3d::~CObject3d()
-//{
-//
-//}
-////=============================================================================
-//// ポリゴンの初期化
-////=============================================================================
-//HRESULT CObject3d::Init()
-//{
-//	float fSize = 50.0f;
-//	m_nScale = 10.0f;
-//
-//	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();	//デバイスの取得
-//
-//																		//頂点バッファの生成
-//	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4,	//確保するバッファのサイズ
-//		D3DUSAGE_WRITEONLY,
-//		FVF_VERTEX_2D,		//頂点フォーマット
-//		D3DPOOL_MANAGED,
-//		&m_pVtxBuff,
-//		NULL);
-//
-//	//テクスチャ
-//	D3DXCreateTextureFromFile(pDevice,
-//		"data\\TEXTURE\\ken.png",
-//		&m_pTexture);
-//
-//
-//	VERTEX_2D*pVtx;		//頂点情報へのポインタ
-//
-//						//頂点バッファをロックし、頂点情報へのポインタを取得
-//	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-//
-//	//------------------------
-//	// 頂点情報の設定
-//	//------------------------
-//	//頂点座標の設定
-//	pVtx[0].pos = D3DXVECTOR3(m_pos.x - 50.0f, m_pos.y - 50.0f, 0.0f);
-//	pVtx[1].pos = D3DXVECTOR3(m_pos.x + 50.0f, m_pos.y - 50.0f, 0.0f);
-//	pVtx[2].pos = D3DXVECTOR3(m_pos.x - 50.0f, m_pos.y + 50.0f, 0.0f);
-//	pVtx[3].pos = D3DXVECTOR3(m_pos.x + 50.0f, m_pos.y + 50.0f, 0.0f);
-//
-//	//rhwの設定
-//	pVtx[0].rhw = 1.0f;
-//	pVtx[1].rhw = 1.0f;
-//	pVtx[2].rhw = 1.0f;
-//	pVtx[3].rhw = 1.0f;
-//
-//	//頂点カラーの設定
-//	pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-//	pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-//	pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-//	pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-//
-//	//テクスチャ座標の設定
-//	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-//	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
-//	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
-//	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
-//
-//
-//	//頂点バッファをアンロックする
-//	m_pVtxBuff->Unlock();
-//
-//	return S_OK;
-//}
-//
-////=============================================================================
-//// ポリゴンの終了
-////=============================================================================
-//void CObject3d::Uninit()
-//{
-//	// 破棄
-//	if (m_pVtxBuff != nullptr)
-//	{
-//		m_pVtxBuff->Release();
-//		m_pVtxBuff = nullptr;
-//	}
-//
-//	// 破棄
-//	if (m_pTexture != nullptr)
-//	{
-//		m_pTexture->Release();
-//		m_pTexture = nullptr;
-//	}
-//
-//}
-//
-////=============================================================================
-//// ポリゴンの更新
-////=============================================================================
-//void CObject3d::Update()
-//{
-//	m_nTimer++;
-//	VERTEX_2D *pVtx; //頂点へのポインタ
-//
-//					 //頂点バッファをロックし頂点情報へのポインタを取得
-//	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-//
-//	D3DXVECTOR3 addPos[4];
-//	D3DXMATRIX mtx;	// 計算用マトリックス
-//
-//					//マトリックス作成
-//	D3DXMatrixIdentity(&mtx);
-//
-//	//回転行数作成
-//	D3DXMatrixRotationYawPitchRoll(&mtx, 0.0f, 0.0f, ((D3DX_PI * 2.0f) / 360.0f) * m_nTimer);
-//
-//	//サイズ変更
-//	float fSize;
-//	m_fSize += 0.01f;
-//	fSize = sinf(m_fSize);
-//
-//	//頂点座標
-//	for (int i = 0; i < 4; ++i)
-//	{
-//		D3DXVec3TransformCoord(&addPos[i], &m_Vtx[i], &mtx);
-//		pVtx[i].pos = m_pos + addPos[i] * (85.0f *fSize);//<-サイズ変更
-//	}
-//
-//	//頂点バッファをアンロック
-//	m_pVtxBuff->Unlock();
-//}
-//
-////=============================================================================
-//// ポリゴンの描画
-////=============================================================================
-//void CObject3d::Draw()
-//{
-//	LPDIRECT3DDEVICE9 pDevice;        //デバイスへのポインタ
-//
-//									  //デバイスの取得
-//	pDevice = CManeager::GetRenderer()->GetDevice();
-//
-//	//頂点バッファをデータストリームに設定
-//	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
-//
-//	//頂点フォーマットの設定
-//	pDevice->SetFVF(FVF_VERTEX_2D);
-//
-//	//テクスチャの設定
-//	pDevice->SetTexture(0, m_pTexture);
-//
-//	//ポリゴンの描画
-//
-//	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP,		//プリミティブの種類
-//		0,
-//		2);						//プリミティブ(ポリゴン)数
-//}
-//
-////=============================================================================
-//// create関数
-////=============================================================================
-//CObject3d *CObject3d::Create()
-//{
-//	CObject3d * pObject = nullptr;
-//	pObject = new CObject3d;
-//
-//	if (pObject != nullptr)
-//	{
-//		pObject->Init();
-//
-//	}
-//
-//	return pObject;
-//}
-//
-////=============================================================================
-//// SetPos関数
-////=============================================================================
-//void CObject3d::SetPos(const D3DXVECTOR3 &pos)
-//{
-//	m_pos = pos;
-//}
-//
+//============================
+
+#include <stdio.h>
+#include <assert.h>
+#include "object3d.h"
+#include "input.h"
+#include "camera.h"
+#include "motion.h"
+#include "manager.h"
+#include "motion.h"
+
+//------------------------------------
+// コンストラクタ
+//------------------------------------
+CObject3d::CObject3d() :
+	m_pos(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
+	m_posOld(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
+	m_move(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
+	m_rot(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
+	m_rotMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
+	m_modelMin(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
+	m_modelMax(D3DXVECTOR3(0.0f, 0.0f, 0.0f)),
+	m_motionType(ANIME_NORMAL),
+	m_motionTypeOld(ANIME_NORMAL),
+	m_nMaxModelType(0),
+	m_nMaxModelParts(0),
+	m_nMaxMotion(0),
+	m_type(0),
+	m_shadow(0),
+	m_invincible(0),
+	m_consumption(0.0f),
+	m_bMotionBlend(false),
+	m_bMotion(false),
+	m_isUse(false),
+	m_isLoop(false),
+	m_time(0),
+	m_nparts(0),
+	m_pow(0),
+	m_nMotion(0)
+{
+	//memset(&s_Player, NULL, sizeof(s_Player));
+	/*memset(&m_motion, 0, sizeof(m_motion));*/
+
+}
+
+//------------------------------------
+// デストラクタ
+//------------------------------------
+CObject3d::~CObject3d()
+{
+
+}
+
+//------------------------------------
+// 初期化
+//------------------------------------
+HRESULT CObject3d::Init(void)
+{
+	CAMERA *pCamera = GetCamera()->Get();
+
+	//カメラのデータ取得
+
+	m_rotMove = D3DXVECTOR3(D3DX_PI + pCamera->rot.y, D3DX_PI * 0.5f + pCamera->rot.y, 0.0f);
+
+	m_modelMin = D3DXVECTOR3(FLT_MAX, FLT_MAX, FLT_MAX);
+	m_modelMax = D3DXVECTOR3(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+
+
+
+
+	return S_OK;
+}
+
+//------------------------------------
+// 終了
+//------------------------------------
+void CObject3d::Uninit(void)
+{
+	m_pMotion->Uninit();
+}
+
+//------------------------------------
+// 更新
+//------------------------------------
+void CObject3d::Update(void)
+{
+	// 現在のモーション番号の保管
+	m_motionTypeOld = m_motionType;
+
+	if (!m_bMotion)
+	{// 使用してるモーションがない場合
+		m_motionType = ANIME_NORMAL;
+		m_isLoop = false;
+	}
+
+				//アニメーションや足音の設定
+	if (!m_isLoop)
+	{
+		m_motionType = ANIME_NORMAL;
+	}
+
+	if (m_motionTypeOld != m_motionType)
+	{// モーションタイプが変更された時
+		m_pMotion->CntReset((int)(m_motionTypeOld));
+		m_bMotionBlend = true;
+	}
+
+	if (m_bMotionBlend)
+	{// モーションブレンドを使用してる
+		m_bMotionBlend = m_pMotion->MotionBlend((int)(m_motionType));
+	}
+	else if (!m_bMotionBlend)
+	{// モーションブレンドを使用してない場合
+		m_bMotion = m_pMotion->PlayMotion((int)(m_motionType));
+	}
+}
+
+//------------------------------------
+// 描画
+//------------------------------------
+void CObject3d::Draw(void)
+{
+	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();
+	D3DXMATRIX mtxScale, mtxTrans, mtxRot;	// 計算用マトリックス
+	D3DMATERIAL9 marDef;
+	D3DXMATERIAL *pMat = {};
+	D3DXVECTOR3 scale(1.8f, 1.8f, 1.8f);
+
+	if (m_isUse)//使ってるやつ出す
+	{
+		// ワールドマトリックスの初期化
+		// 行列初期化関数(第1引数の行列を単位行列に初期化)
+		D3DXMatrixIdentity(&m_mtxWorld);
+
+		// 拡縮を反映
+		// 行列拡縮関数
+		D3DXMatrixScaling(&mtxScale, scale.x, scale.y, scale.z);
+		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
+		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxScale);
+
+		// 向きを反映
+		// 行列回転関数(第1引数にヨー(y)ピッチ(x)ロール(z)方向の回転行列を作成)
+		D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.y, m_rot.x, m_rot.z);
+		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
+		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
+
+		// 位置を反映
+		// 行列移動関数(第１引数にX,Y,Z方向の移動行列を作成)
+		D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
+		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
+		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+
+		// テクスチャの設定
+		pDevice->SetTexture(0, NULL);
+
+		// パーツの描画設定
+		m_pMotion->SetParts(m_mtxWorld,				// ワールドマトリックス
+			mtxRot,									// 計算用マトリックス
+			mtxTrans,								// 計算用マトリックス
+			&marDef,								// マテリアル保存変数
+			pMat);									// マテリアルデータ
+
+													// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
+		pDevice->SetMaterial(&marDef);
+	}
+}
+//------------------------------------
+// POSだけセット
+//------------------------------------
+void CObject3d::SetPos(const D3DXVECTOR3 &pos)
+{
+	m_pos = pos;
+}
+
+//------------------------------------
+// 設定
+//------------------------------------
+void CObject3d::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char * pFileName)
+{
+	// プレイヤー情報の初期化
+	m_pos = pos;											// 位置の初期化
+	m_posOld = m_pos;								// 過去位置の初期化
+	m_posOld = m_pos;								// 過去位置の初期化
+	m_rot = rot;											// 向きの初期化
+	m_modelMin = D3DXVECTOR3(100.0f, 100.0f, 100.0f);	// 頂点座標の最小値
+	m_modelMax = D3DXVECTOR3(-100.0f, -100.0f, -100.0f);	// 頂点座標の最大値
+	m_mtxWorld = {};										// ワールドマトリックス
+															//m_rotDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			// 目的の向き
+	m_motionType = ANIME_NORMAL;							// ニュートラルモーション
+	m_motionTypeOld = m_motionType;				// ニュートラルモーション
+	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);				// 移動量
+	m_bMotionBlend = false;								// モーションブレンドの使用状況
+	m_isUse = true;										// 使用状況
+
+														// モーション情報
+	m_pMotion = new CMotion(pFileName);
+	assert(m_pMotion != nullptr);
+}

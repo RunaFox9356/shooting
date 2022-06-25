@@ -10,11 +10,11 @@
 #include "main.h"
 #include "motion.h"
 #include "renderer.h"
-#include "object.h"
+#include "object3d.h"
 
 class  CMotion;
 
-class CPlayer : public CObject
+class CPlayer : public CObject3d
 {
 public:
 	typedef enum
@@ -86,51 +86,17 @@ public:
 
 	static CPlayer *CPlayer::Create();
 
-	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);	// セット引数座標と読み込むファイル名
-	void SetPos(const D3DXVECTOR3 &pos) override;
+	//void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);	// セット引数座標と読み込むファイル名
+	//void SetPos(const D3DXVECTOR3 &pos) override;
 	/*void SetCopy(char *pFileName, PartsFile *partsFile, Parts *parts, MyMotion *Motion, int *nMaxParts);*/
 
 private:
-	void Collision(void);	// 当たり判定まとめ
-	void Move(void);		// 移動
+	//void Collision(void);	// 当たり判定まとめ
+	//void Move(void);		// 移動
 
 private:
-	CMotion			*m_pMotion;					// モーション
-	D3DXVECTOR3		m_pos;						// 位置
-	D3DXVECTOR3		m_posOld;					// 位置過去
-	D3DXVECTOR3		m_move;						// ムーブ
-	D3DXVECTOR3		m_rot;						// 回転	
-	D3DXVECTOR3		m_rotMove;					// 回転ムーブ
-	D3DXVECTOR3		m_modelMin;					// サイズ最小
-	D3DXVECTOR3		m_modelMax;					// サイズ最大
-	D3DXMATRIX		m_mtxWorld;					// マトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
-
-	STATUS			m_status;					// 今のステータス
-	DAMEGE			m_damege;					// ダメージくらってるかくらってないか
-	COPY			m_copy;						// コピー
 
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
-	int				m_nMaxModelType;				// モデルのタイプ数
-	int				m_nMaxModelParts;				// 扱うモデルパーツ数
-	int				m_nMaxMotion;					// モーション数
-
-	int				m_type;						// タイプ
-	int				m_shadow;					// 影番号
-	int				m_invincible;				// 無敵時間
-	float			m_consumption;				// 計算用
-
-	bool			m_bMotionBlend;				// モーションブレンド
-	bool			m_bMotion;					// モーションを使用状況
-
-	bool			m_isUse;					// 使ってるか使ってないか
-	bool			m_isLoop;					// ループするかしないか
-
-	char			m_aFirename[256];//
-
-	int				m_time;		// タイムの最大数
-	int				m_nparts;	// パーツの最大数
-	int				m_pow;		// ジャンプパワー
-	int				m_nMotion;	// 
 };
 #endif
