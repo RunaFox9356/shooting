@@ -149,8 +149,7 @@ void CParticle::Update()
 		}
 
 		/* ↓使用しているなら↓ */
-
-		
+	
 		//エフェクトの移動
 		pParticle->pos += pParticle->move;
 
@@ -160,8 +159,6 @@ void CParticle::Update()
 		pParticle->move *= pParticle->fAttenuation;					// 移動量の推移
 		pParticle->fWeight += pParticle->fWeightTransition;			// 重さの推移
 																	//ゆっくり消えていく演出
-		
-
 		if (pParticle->color.bColTransition)
 		{// 色の推移
 			if (pParticle->color.nEndTime >= pParticle->color.nCntTransitionTime)
@@ -183,7 +180,7 @@ void CParticle::Update()
 
 		VERTEX_2D *pVtx = nullptr;		//頂点情報へのポインタ
 
-										//頂点バッファをロック
+		//頂点バッファをロック
 		s_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 		pVtx += i * 4;		//頂点データのポインタを4つ分集める

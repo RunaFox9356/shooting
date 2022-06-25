@@ -31,11 +31,8 @@ public:
 	static void Lood();
 	static void UnLood();
 
-
 private:
 	static LPDIRECT3DTEXTURE9	m_pTexture;
 	D3DXVECTOR3 m_move; //polygon�̈ʒu
-	
-
 };
 #endif

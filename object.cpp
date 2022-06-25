@@ -84,22 +84,16 @@ void CObject::AllUninit()
 	}
 	m_AllMember = 0;
 }
+//=============================================================================
+// AllCreateŠÖ”
+//=============================================================================
 void CObject::AllCreate()
 {
-	// ƒ|ƒŠƒSƒ“‚Ì‰Šú‰»ˆ—
-	CObject2d::Create();	
-	m_pObject[0]->SetPos(D3DXVECTOR3(D3DXVECTOR3(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, 0.0f)));
-	CObject2d::Create();
-	m_pObject[1]->SetPos(D3DXVECTOR3(D3DXVECTOR3(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 4, 0.0f)));
-	CObject2d::Create();
-	m_pObject[2]->SetPos(D3DXVECTOR3(D3DXVECTOR3(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 3, 0.0f)));
-	CObject2d::Create();
-	m_pObject[3]->SetPos(D3DXVECTOR3(D3DXVECTOR3(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 3, 0.0f)));
 	CPlayer::Create();
 	CEnemy::Create();
-	m_pObject[5]->SetPos(D3DXVECTOR3(D3DXVECTOR3(100.0f, 0.0f, 0.0f)));
+	m_pObject[1]->SetPos(D3DXVECTOR3(D3DXVECTOR3(100.0f, 0.0f, 0.0f)));
 	CEnemy::Create();
-	m_pObject[6]->SetPos(D3DXVECTOR3(D3DXVECTOR3(-100.0f, 0.0f, 0.0f)));
+	m_pObject[2]->SetPos(D3DXVECTOR3(D3DXVECTOR3(-100.0f, 0.0f, 0.0f)));
 }
 
 //=============================================================================

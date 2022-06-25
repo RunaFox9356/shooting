@@ -65,8 +65,6 @@ void CPlayer::Uninit(void)
 {
 	// Œ»Ý‚Ìƒ‚[ƒVƒ‡ƒ“”Ô†‚Ì•ÛŠÇ
 	CObject3d::Uninit();
-
-
 }
 
 //------------------------------------
@@ -91,7 +89,6 @@ void CPlayer::Draw(void)
 	CObject3d::Draw();
 }
 
-
 //------------------------------------
 // create
 //------------------------------------
@@ -105,6 +102,6 @@ CPlayer *CPlayer::Create()
 		pObject->Init();
 
 	}
-	return pObject;
 
+	return pObject;
 }

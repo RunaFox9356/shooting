@@ -85,11 +85,6 @@ public:
 	void Draw()override;	// 描画
 
 	static CEnemy *CEnemy::Create();
-
-	//void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);	// セット引数座標と読み込むファイル名
-	//void SetPos(const D3DXVECTOR3 &pos) override;
-	/*void SetCopy(char *pFileName, PartsFile *partsFile, Parts *parts, MyMotion *Motion, int *nMaxParts);*/
-
 private:
 	//void Collision(void);	// 当たり判定まとめ
 	//void Move(void);		// 移動

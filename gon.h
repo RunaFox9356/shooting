@@ -15,8 +15,6 @@
 class  CGon : public CObject2d
 {
 private:
-	//polygonの拡大サイズ
-	static const D3DXVECTOR3 m_Vtx[4];
 
 public:
 	CGon();
@@ -33,11 +31,11 @@ public:
 private:
 	int m_CounterAnim;
 	int m_PatternAnim;
+
 	int m_DivisionX;
 	int m_DivisionY;
 	int m_DivisionMAX;
-		
-	static LPDIRECT3DTEXTURE9	m_pTexture;
+
 	D3DXVECTOR3 m_move; //polygonの位置
 
 

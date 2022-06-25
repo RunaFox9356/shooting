@@ -53,7 +53,6 @@ CObject3d::CObject3d() :
 //------------------------------------
 CObject3d::~CObject3d()
 {
-
 }
 
 //------------------------------------
@@ -64,14 +63,10 @@ HRESULT CObject3d::Init(void)
 	CAMERA *pCamera = GetCamera()->Get();
 
 	//カメラのデータ取得
-
 	m_rotMove = D3DXVECTOR3(D3DX_PI + pCamera->rot.y, D3DX_PI * 0.5f + pCamera->rot.y, 0.0f);
 
 	m_modelMin = D3DXVECTOR3(FLT_MAX, FLT_MAX, FLT_MAX);
 	m_modelMax = D3DXVECTOR3(-FLT_MAX, -FLT_MAX, -FLT_MAX);
-
-
-
 
 	return S_OK;
 }
@@ -98,7 +93,7 @@ void CObject3d::Update(void)
 		m_isLoop = false;
 	}
 
-				//アニメーションや足音の設定
+	//アニメーションや足音の設定
 	if (!m_isLoop)
 	{
 		m_motionType = ANIME_NORMAL;
@@ -165,7 +160,7 @@ void CObject3d::Draw(void)
 			&marDef,								// マテリアル保存変数
 			pMat);									// マテリアルデータ
 
-													// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
+		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
 		pDevice->SetMaterial(&marDef);
 	}
 }
@@ -197,7 +192,7 @@ void CObject3d::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char * pFil
 	m_bMotionBlend = false;								// モーションブレンドの使用状況
 	m_isUse = true;										// 使用状況
 
-														// モーション情報
+	// モーション情報
 	m_pMotion = new CMotion(pFileName);
 	assert(m_pMotion != nullptr);
 }

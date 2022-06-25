@@ -19,7 +19,6 @@ class  CMotion;
 
 class CObject3d : public CObject
 {
-
 private:
 	//polygonの拡大サイズ
 	static const D3DXVECTOR3 m_Vtx[4];
@@ -59,8 +58,6 @@ private:
 	D3DXVECTOR3		m_modelMax;					// サイズ最大
 	D3DXMATRIX		m_mtxWorld;					// マトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
 
-
-
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
 	int				m_nMaxModelType;				// モデルのタイプ数
@@ -81,7 +78,6 @@ private:
 	int				m_time;		// タイムの最大数
 	int				m_nparts;	// パーツの最大数
 	int				m_pow;		// ジャンプパワー
-	int				m_nMotion;	// 
-
+	int				m_nMotion;	// モーション番号
 };
 #endif

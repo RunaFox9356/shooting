@@ -21,8 +21,6 @@ struct TexVec4
 
 };
 
-
-
 class CObject2d : public CObject
 {
 private:
@@ -30,7 +28,7 @@ private:
 	static const D3DXVECTOR3 m_Vtx[4];
 
 public:
-	CObject2d();
+	 CObject2d();
 	 ~CObject2d() override;
 	 HRESULT Init() override;
 	 void Uninit() override;
@@ -48,9 +46,6 @@ protected:
 private:
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 
-
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
-
-
 };
 #endif

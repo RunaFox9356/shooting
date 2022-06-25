@@ -13,7 +13,6 @@
 
 class CObject
 {
-
 public:
 	const static int MAX_OBJECT = 25600;
 

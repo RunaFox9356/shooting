@@ -95,7 +95,6 @@ private:
 	//void Move(void);		// 移動
 
 private:
-
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
 };
