@@ -10,6 +10,9 @@
 #include "player.h"
 #include "manager.h"
 #include "enemy.h"
+#include "gon.h"
+#include "bullet.h"
+
 CObject *CObject::m_pObject[MAX_OBJECT] = {};
 int CObject::m_AllMember = 0;
 
@@ -89,11 +92,43 @@ void CObject::AllUninit()
 //=============================================================================
 void CObject::AllCreate()
 {
-	CPlayer::Create();
-	CEnemy::Create();
-	m_pObject[1]->SetPos(D3DXVECTOR3(D3DXVECTOR3(100.0f, 0.0f, 0.0f)));
-	CEnemy::Create();
-	m_pObject[2]->SetPos(D3DXVECTOR3(D3DXVECTOR3(-100.0f, 0.0f, 0.0f)));
+
+	CPlayer::Create()->SetUp(PLAYER, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+}
+
+//=============================================================================
+// Setä÷êî
+//=============================================================================
+void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos, D3DXVECTOR3 move)
+{
+	switch (Type)
+	{
+	case EObjectType::ENEMY:
+		
+		m_pObject[m_nID]->SetPos(pos);
+		m_Type = ENEMY;
+		break;
+	case EObjectType::PLAYER:
+		m_pObject[m_nID]->SetPos(pos);
+		m_Type = PLAYER;
+		break;
+	case EObjectType::BULLET:
+		m_Type = BULLET;
+		break;
+	case EObjectType::GON:
+		m_Type = GON;
+		break;
+	default:
+		break;
+	}
+}
+
+CObject::EObjectType CObject::GetType()
+{
+	return m_Type;
 }
 
 //=============================================================================
@@ -109,4 +144,12 @@ void CObject::release()
 		m_pObject[nID] = nullptr;
 		m_AllMember--;
 	}
+}
+
+//=============================================================================
+// GetObjectDataä÷êî
+//=============================================================================
+CObject*CObject::GetObjectData(int nCount)
+{
+	return m_pObject[nCount];
 }

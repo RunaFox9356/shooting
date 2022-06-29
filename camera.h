@@ -41,6 +41,8 @@ public:
 	void Update(void);//更新
 	void Set(void);//画面設定
 	CAMERA *Get(void); //ゲット
+	D3DXMATRIX *GetMtxProje();
+	D3DXMATRIX *GetMtxView();
 private:
 	 float m_Speed = 1.0f;
 

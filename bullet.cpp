@@ -9,27 +9,31 @@
 #include "bullet.h"
 #include "manager.h"
 #include "input.h"
+#include "utility.h"
+#include "camera.h"
 
+int CBullet::m_AllMember;
+LPDIRECT3DTEXTURE9	CBullet::m_pTexture;
 
-LPDIRECT3DTEXTURE9	bullet::m_pTexture;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-bullet::bullet()
+CBullet::CBullet()
 {
-
+	m_AllMember++;
 }
+
 //=============================================================================
 // デストラクト関数
 //=============================================================================
-bullet::~bullet()
+CBullet::~CBullet()
 {
-
 }
+
 //=============================================================================
 // ポリゴンの初期化
 //=============================================================================
-HRESULT bullet::Init()
+HRESULT CBullet::Init()
 {
 	CObject2d::Init();
 
@@ -41,17 +45,15 @@ HRESULT bullet::Init()
 //=============================================================================
 // ポリゴンの終了
 //=============================================================================
-void bullet::Uninit()
+void CBullet::Uninit()
 {
 	CObject2d::Uninit();
-
-
 }
 
 //=============================================================================
 // ポリゴンの更新
 //=============================================================================
-void bullet::Update()
+void CBullet::Update()
 {
 	CObject2d::Update();
 	m_pos += m_move;
@@ -59,13 +61,43 @@ void bullet::Update()
 	{
 		CObject::release();
 	}
+	
+	for (int i = 0; i < MAX_OBJECT; i++)
+	{
+		CObject*pObject;
+		pObject = GetObjectData(i);
+		if (pObject != nullptr)
+		{
+			EObjectType Type = pObject->GetType();
+			if (Type == CObject::ENEMY)
+			{
+				//CAMERA *pCamera = GetCamera()->Get();
+
+				//Hitpos = WorldCastScreen(&m_pos,								// スクリーン座標
+				//	D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),			// スクリーンサイズ
+				//	GetCamera()->GetMtxView(),								// ビューマトリックス
+				//	GetCamera()->GetMtxProje());								// プロジェクションマトリックス
+
+			/*	D3DVECTOR *Object = pObject->GetPos();
+				float Sizetest = 100.0f;
+				if (Hitpos.x +Sizetest >= Object->x - Sizetest
+					&& Hitpos.x - Sizetest <= Object->x + Sizetest
+					&& Hitpos.y + Sizetest >= Object->y - Sizetest
+					&& Hitpos.y - Sizetest <= Object->y + Sizetest)
+				{
+					CObject::release();
+				}*/
+			}
+		}
+	}
+
 
 }
 
 //=============================================================================
 // ポリゴンの描画
 //=============================================================================
-void bullet::Draw()
+void CBullet::Draw()
 {
 	CObject2d::Draw();
 }
@@ -73,10 +105,10 @@ void bullet::Draw()
 //=============================================================================
 // create関数
 //=============================================================================
-bullet *bullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move)
+CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move)
 {
-	bullet * pObject = nullptr;
-	pObject = new bullet;
+	CBullet * pObject = nullptr;
+	pObject = new CBullet;
 
 	if (pObject != nullptr)
 	{
@@ -90,26 +122,28 @@ bullet *bullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move)
 //=============================================================================
 // Setmove関数
 //=============================================================================
-void bullet::SetMove(D3DXVECTOR3 move)
+void CBullet::SetMove(D3DXVECTOR3 move)
 {
 	m_move = move;
 }
+
 //=============================================================================
 // Lood関数
 //=============================================================================
-void bullet::Lood()
+void CBullet::Lood()
 {
-	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();	//デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 
 	//テクスチャ
 	D3DXCreateTextureFromFile(pDevice,
 		"data\\TEXTURE\\ken.png",
 		&m_pTexture);
 }
+
 //=============================================================================
 // UnLood関数
 //=============================================================================
-void bullet::UnLood()
+void CBullet::UnLood()
 {
 	// 破棄
 	if (m_pTexture != nullptr)
@@ -120,7 +154,10 @@ void bullet::UnLood()
 
 }
 
-LPDIRECT3DTEXTURE9 bullet::Gettex()
+//=============================================================================
+// Gettex関数
+//=============================================================================
+LPDIRECT3DTEXTURE9 CBullet::Gettex()
 {
 	return m_pTexture;
 }

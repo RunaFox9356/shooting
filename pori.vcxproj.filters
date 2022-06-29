@@ -116,9 +116,6 @@
     <ClInclude Include="camera.h">
       <Filter>システム</Filter>
     </ClInclude>
-    <ClInclude Include="character.h">
-      <Filter>システム</Filter>
-    </ClInclude>
     <ClInclude Include="file.h">
       <Filter>システム</Filter>
     </ClInclude>
@@ -137,16 +134,10 @@
     <ClInclude Include="manager.h">
       <Filter>システム</Filter>
     </ClInclude>
-    <ClInclude Include="motion.h">
-      <Filter>システム</Filter>
-    </ClInclude>
     <ClInclude Include="renderer.h">
       <Filter>システム</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>システム</Filter>
-    </ClInclude>
-    <ClInclude Include="resource1.h">
       <Filter>システム</Filter>
     </ClInclude>
     <ClInclude Include="texture.h">
@@ -157,6 +148,12 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>メイン</Filter>
+    </ClInclude>
+    <ClInclude Include="motion.h">
+      <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="character.h">
+      <Filter>オブジェクト</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

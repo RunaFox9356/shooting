@@ -70,7 +70,7 @@ void CMotion::Init(void)
 		// Xファイルの読み込み
 		D3DXLoadMeshFromX(m_partsFile[(m_parts + i)->nType].aName,
 			D3DXMESH_SYSTEMMEM,
-			CManeager::GetRenderer()->GetDevice(),
+			CManager::GetRenderer()->GetDevice(),
 			NULL,
 			&(m_parts + i)->pBuffer,
 			NULL,
@@ -91,7 +91,7 @@ void CMotion::SetParts(D3DXMATRIX mtxWorld,
 	D3DXMATERIAL *pMat)
 {
 	// デバイスの取得
-	LPDIRECT3DDEVICE9	pDevice = CManeager::GetRenderer()->GetDevice();
+	LPDIRECT3DDEVICE9	pDevice = CManager::GetRenderer()->GetDevice();
 
 	for (int i = 0; i < m_nMaxParts; i++)
 	{// ワールドマトリックスの初期化

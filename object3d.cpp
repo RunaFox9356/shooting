@@ -120,7 +120,7 @@ void CObject3d::Update(void)
 //------------------------------------
 void CObject3d::Draw(void)
 {
-	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 	D3DXMATRIX mtxScale, mtxTrans, mtxRot;	// 計算用マトリックス
 	D3DMATERIAL9 marDef;
 	D3DXMATERIAL *pMat = {};
@@ -177,7 +177,7 @@ void CObject3d::SetPos(const D3DXVECTOR3 &pos)
 //------------------------------------
 void CObject3d::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char * pFileName)
 {
-	// プレイヤー情報の初期化
+	// 情報の初期化
 	m_pos = pos;											// 位置の初期化
 	m_posOld = m_pos;								// 過去位置の初期化
 	m_posOld = m_pos;								// 過去位置の初期化
@@ -185,7 +185,7 @@ void CObject3d::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char * pFil
 	m_modelMin = D3DXVECTOR3(100.0f, 100.0f, 100.0f);	// 頂点座標の最小値
 	m_modelMax = D3DXVECTOR3(-100.0f, -100.0f, -100.0f);	// 頂点座標の最大値
 	m_mtxWorld = {};										// ワールドマトリックス
-															//m_rotDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			// 目的の向き
+	//m_rotDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			// 目的の向き
 	m_motionType = ANIME_NORMAL;							// ニュートラルモーション
 	m_motionTypeOld = m_motionType;				// ニュートラルモーション
 	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);				// 移動量
@@ -195,4 +195,12 @@ void CObject3d::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char * pFil
 	// モーション情報
 	m_pMotion = new CMotion(pFileName);
 	assert(m_pMotion != nullptr);
+}
+
+//------------------------------------
+// Set
+//------------------------------------
+D3DXVECTOR3 * CObject3d::GetPos()
+{
+	return &m_pos;
 }

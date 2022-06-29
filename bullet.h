@@ -12,20 +12,20 @@
 #include "renderer.h"
 #include "object2d.h"
 
-class  bullet : public CObject2d
+class  CBullet : public CObject2d
 {
 private:
 	//polygonの拡大サイズ
 	static const D3DXVECTOR3 m_Vtx[4];
 
 public:
-	bullet();
-	~bullet() override;
+	CBullet();
+	~CBullet() override;
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	static bullet *bullet::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move);
+	static CBullet *CBullet::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move);
 	void SetMove(D3DXVECTOR3 move);
 	static LPDIRECT3DTEXTURE9 Gettex();
 	static void Lood();
@@ -33,6 +33,8 @@ public:
 
 private:
 	static LPDIRECT3DTEXTURE9	m_pTexture;
+	static int m_AllMember;
 	D3DXVECTOR3 m_move; //polygonの位置
+	D3DXVECTOR3 Hitpos;
 };
 #endif

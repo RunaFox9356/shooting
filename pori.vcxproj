@@ -196,7 +196,6 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="resource1.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="utility.h" />
   </ItemGroup>

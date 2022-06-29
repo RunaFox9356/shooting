@@ -74,7 +74,7 @@ void CCamera::Update(void)
 //----------------------------
 void CCamera::Set(void)
 {
-	LPDIRECT3DDEVICE9  pDevice = CManeager::GetRenderer()->GetDevice();//デバイスのポインタ
+	LPDIRECT3DDEVICE9  pDevice = CManager::GetRenderer()->GetDevice();//デバイスのポインタ
 
 	//ビューマトリックスを初期化
 	D3DXMatrixIdentity(&m_aCamera.MtxView);
@@ -87,7 +87,6 @@ void CCamera::Set(void)
 
 	//適用
 	pDevice->SetTransform(D3DTS_VIEW, &m_aCamera.MtxView);
-
 
 	//プロジェクションマトリックスを初期化
 	D3DXMatrixIdentity(&m_aCamera.MtxProje);
@@ -118,3 +117,11 @@ CAMERA * CCamera::Get(void)
 	return &m_aCamera;
 }
 
+D3DXMATRIX  *CCamera::GetMtxProje()
+{
+	return &m_aCamera.MtxProje;
+}
+D3DXMATRIX *CCamera::GetMtxView()
+{
+	return &m_aCamera.MtxView;
+}

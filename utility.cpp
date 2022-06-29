@@ -87,3 +87,32 @@ float Curve(float fCurve, float fMax, float fMin)
 {
 	return (fCurve * (fMax - fMin)) + fMin;
 }
+
+//---------------------------------------------------------------------------
+// スクリーン座標をワールド座標へのキャスト
+//---------------------------------------------------------------------------
+D3DXVECTOR3 WorldCastScreen(D3DXVECTOR3 *screenPos,			// スクリーン座標
+	D3DXVECTOR3 screenSize,									// スクリーンサイズ
+	D3DXMATRIX* mtxView,									// ビューマトリックス
+	D3DXMATRIX* mtxProjection)								// プロジェクションマトリックス
+{
+	// 変数宣言
+	D3DXVECTOR3 ScreenPos;
+
+	// 計算用マトリックスの宣言
+	D3DXMATRIX InvView, InvPrj, VP, InvViewport;
+
+	// 各行列の逆行列を算出
+	D3DXMatrixInverse(&InvView, NULL, mtxView);
+	D3DXMatrixInverse(&InvPrj, NULL, mtxProjection);
+	D3DXMatrixIdentity(&VP);
+	VP._11 = screenSize.x / 2.0f; VP._22 = -screenSize.y / 2.0f;
+	VP._41 = screenSize.x / 2.0f; VP._42 = screenSize.y / 2.0f;
+	D3DXMatrixInverse(&InvViewport, NULL, &VP);
+
+	// ワールド座標へのキャスト
+	D3DXMATRIX mtxWorld = InvViewport * InvPrj * InvView;
+	D3DXVec3TransformCoord(&ScreenPos, screenPos, &mtxWorld);
+
+	return ScreenPos;
+}

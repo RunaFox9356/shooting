@@ -33,8 +33,6 @@ CEnemy::CEnemy() :
 	m_motionType(ANIME_NORMAL),
 	m_motionTypeOld(ANIME_NORMAL)
 {
-	//memset(&s_Player, NULL, sizeof(s_Player));
-	/*memset(&m_motion, 0, sizeof(m_motion));*/
 }
 
 //------------------------------------
@@ -51,9 +49,11 @@ HRESULT CEnemy::Init(void)
 {
 	// 現在のモーション番号の保管
 	CObject3d::Init();
+
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 				   D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
 		           "Data/system/enemy/FoxPoizun.txt");
+
 	m_motionTypeOld = m_motionType;
 
 	return S_OK;
@@ -75,11 +75,6 @@ void CEnemy::Update(void)
 {
 	// 現在のモーション番号の保管
 	CObject3d::Update();
-
-	//	Move();	//動きセット
-
-	//	Collision();//床
-
 }
 
 //------------------------------------
@@ -104,5 +99,5 @@ CEnemy *CEnemy::Create()
 
 	}
 	return pObject;
-
 }
+

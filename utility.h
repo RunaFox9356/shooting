@@ -81,4 +81,9 @@ float CosCurve(int nTime, float fCycle);
 //--------------------------------------------------
 float Curve(float fCurve, float fMax, float fMin);
 
+
+D3DXVECTOR3 WorldCastScreen(D3DXVECTOR3 *screenPos,			// スクリーン座標
+	D3DXVECTOR3 screenSize,									// スクリーンサイズ
+	D3DXMATRIX* mtxView,									// ビューマトリックス
+	D3DXMATRIX* mtxProjection);								// プロジェクションマトリックス
 #endif // !_UTILITY_H_

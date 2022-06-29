@@ -27,7 +27,7 @@ int g_nCountFPS;
 //CRenderer *cRenderer = nullptr;
 //CInput *p_Input;
 
-CManeager* pManeager;
+CManager* pManeager;
 
 //=============================================================================
 // メイン関数
@@ -70,7 +70,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 		hInstance,
 		NULL);
 
-	pManeager = new CManeager;
+	pManeager = new CManager;
 
 	if (FAILED(pManeager->Init(hWnd, TRUE, hInstance)))	//画面サイズ
 	{//初期化処理が失敗した場合
@@ -211,10 +211,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 #ifdef _DEBUG
 
+//=============================================================================
+// 時間
+//=============================================================================
 int Gettime(void)
 {
 	return g_nCountFPS;
 }
+
 #endif // _DEBUG
 
 

@@ -28,6 +28,8 @@ private:
 	static const D3DXVECTOR3 m_Vtx[4];
 
 public:
+
+	
 	 CObject2d();
 	 ~CObject2d() override;
 	 HRESULT Init() override;
@@ -36,6 +38,8 @@ public:
 	 void Draw() override;
 	 void SetTexture(CTexture::TEXTURE texture);
 	static CObject2d *CObject2d::Create();
+	D3DXVECTOR3 *GetPos()override;
+	 
 	 void SetPos(const D3DXVECTOR3 &pos) override;
 	 void SetTex(TexVec4 Tex);
 protected:

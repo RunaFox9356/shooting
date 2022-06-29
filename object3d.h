@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// ÉåÉìÉ_ÉâÅ[
+// OBJECT3D
 // Author : ïlìcóÆâÎ
 //
 //=============================================================================
@@ -13,7 +13,6 @@
 #include "object.h"
 #include "main.h"
 #include "motion.h"
-#include "renderer.h"
 
 class  CMotion;
 
@@ -41,6 +40,7 @@ public:
 	void Draw() override;
 	void SetPos(const D3DXVECTOR3 &pos) override;
 	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char *filename);
+	D3DXVECTOR3 *GetPos()override;
 private:
 	int  m_nTimer;
 	float m_nScale;

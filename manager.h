@@ -15,11 +15,11 @@ class CRenderer;
 class CInput;
 class CTexture;
 
-class CManeager
+class CManager
 {
 public:
-	CManeager();
-	~CManeager();
+	CManager();
+	~CManager();
 	HRESULT Init(HWND hWnd, bool bWindow, HINSTANCE hInstance);
 	void Uninit();
 	void Update();

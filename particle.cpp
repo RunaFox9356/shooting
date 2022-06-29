@@ -35,7 +35,7 @@ CParticle::~CParticle()
 //--------------------------------------------------
 HRESULT CParticle::Init()
 {
-	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();	//デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 
 	//テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
@@ -131,13 +131,13 @@ void CParticle::Update()
 	if (CInputpInput->Press(CInput::KEY_UP))
 	{
 		DataParticle.pos.x += 3.0f;
-		bullet::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+		CBullet::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f))->SetUp(CObject::BULLET, DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 	}
 
 	if (CInputpInput->Press(CInput::KEY_DOWN))
 	{
 		DataParticle.pos.x -= 3.0f;
-		CGon::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+		CGon::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f))->SetUp(CObject::GON, DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 	}
 	for (int i = 0; i < maxNumber; i++)
 	{
@@ -207,7 +207,7 @@ void CParticle::Update()
 //--------------------------------------------------
 void CParticle::Draw()
 {
-	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	// デバイスの取得
 
 	// 点に貼る(true)、ポリゴンに貼る(false)
 	//pDevice->SetRenderState(D3DRS_POINTSPRITEENABLE,true);
@@ -433,7 +433,7 @@ void CParticle::Create(Particle& inParticle)
 //--------------------------------------------------
 void CParticle::LoadTex()
 {
-	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 	//char ImFile[512];
 	//bool ImTex = TexUse();
 

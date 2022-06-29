@@ -41,7 +41,7 @@ HRESULT CObject2d::Init()
 	float fSize = 50.0f;
 	m_nScale = 10.0f;
 
-	LPDIRECT3DDEVICE9 pDevice = CManeager::GetRenderer()->GetDevice();	//デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 
 	m_texture = CTexture::TEXTURE_NONE;
 
@@ -155,7 +155,7 @@ void CObject2d::Draw()
 	LPDIRECT3DDEVICE9 pDevice;        //デバイスへのポインタ
 
 	 //デバイスの取得
-	pDevice = CManeager::GetRenderer()->GetDevice();
+	pDevice = CManager::GetRenderer()->GetDevice();
 
 	//頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
@@ -163,7 +163,7 @@ void CObject2d::Draw()
 	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_2D);
 
-	CTexture* pTexture = CManeager::GetTexture();
+	CTexture* pTexture = CManager::GetTexture();
 
 	// テクスチャの設定
 	pDevice->SetTexture(0, pTexture->GetTexture(m_texture));
@@ -190,6 +190,14 @@ CObject2d *CObject2d::Create()
 	}
 
 	return pObject;
+}
+
+//=============================================================================
+// GetPos関数
+//=============================================================================
+D3DXVECTOR3 * CObject2d::GetPos()
+{
+	return &m_pos;
 }
 
 //=============================================================================

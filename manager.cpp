@@ -16,21 +16,21 @@
 #include "bullet.h"
 #include "texture.h"
 
-CRenderer * CManeager::m_cRenderer = nullptr; 
-CTexture * CManeager::m_pTexture = nullptr;
+CRenderer * CManager::m_cRenderer = nullptr; 
+CTexture * CManager::m_pTexture = nullptr;
 static float s_fAngle = 20.0f;
 
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CManeager::CManeager()
+CManager::CManager()
 {
 
 }
 //=============================================================================
 // デストラクト関数
 //=============================================================================
-CManeager::~CManeager()
+CManager::~CManager()
 {
 
 }
@@ -38,7 +38,7 @@ CManeager::~CManeager()
 //=============================================================================
 // 初期化
 //=============================================================================
-HRESULT CManeager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
+HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 {
 	
 	m_cRenderer = new CRenderer;
@@ -58,7 +58,7 @@ HRESULT CManeager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
 	
-	bullet::Lood();
+	CBullet::Lood();
 	CObject::AllCreate();
 
 
@@ -69,7 +69,7 @@ HRESULT CManeager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 //=============================================================================
 // 終了
 //=============================================================================
-void CManeager::Uninit()
+void CManager::Uninit()
 {
 	// ポリゴンの終了処理
 	CObject::AllUninit();
@@ -98,7 +98,7 @@ void CManeager::Uninit()
 //=============================================================================
 // 更新
 //=============================================================================
-void CManeager::Update()
+void CManager::Update()
 {
 	//入力処理の更新処理
 	m_Input->Update();
@@ -112,7 +112,7 @@ void CManeager::Update()
 //=============================================================================
 // 描画
 //=============================================================================
-void CManeager::Draw()
+void CManager::Draw()
 {
 	// 描画処理
 	m_cRenderer->Draw();
@@ -123,7 +123,7 @@ void CManeager::Draw()
 //=============================================================================
 // GetRenderer
 //=============================================================================
-CRenderer *CManeager::GetRenderer()
+CRenderer *CManager::GetRenderer()
 {
 	return m_cRenderer;
 }
@@ -132,7 +132,7 @@ CRenderer *CManeager::GetRenderer()
 //=============================================================================
 // GetTexture
 //=============================================================================
-CTexture *CManeager::GetTexture()
+CTexture *CManager::GetTexture()
 {
 	return m_pTexture;
 }

@@ -75,7 +75,7 @@ void CGon::Update()
 	//アニメーション設定
 	m_CounterAnim++;
 	if ((m_CounterAnim % 10) == 0)//ここで速度調整
-	{
+	{							
 		m_PatternAnim = (m_PatternAnim + 1) % m_DivisionMAX;
 		
 		//表示座標を更新
@@ -112,6 +112,7 @@ CGon *CGon::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move)
 
 	return pObject;
 }
+
 //=============================================================================
 // Setmove関数
 //=============================================================================
