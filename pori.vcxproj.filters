@@ -87,6 +87,9 @@
     <ClCompile Include="main.cpp">
       <Filter>メイン</Filter>
     </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enemy.h">
@@ -153,6 +156,9 @@
       <Filter>オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="character.h">
+      <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
   </ItemGroup>

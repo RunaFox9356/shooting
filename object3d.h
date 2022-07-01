@@ -41,6 +41,12 @@ public:
 	void SetPos(const D3DXVECTOR3 &pos) override;
 	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char *filename);
 	D3DXVECTOR3 *GetPos()override;
+
+	protected:
+	D3DXVECTOR3		m_move;						// ムーブ
+	D3DXVECTOR3		m_pos;
+	D3DXVECTOR3		m_rot;						// 回転	
+	D3DXVECTOR3		m_rotMove;					// 回転ムーブ
 private:
 	int  m_nTimer;
 	float m_nScale;
@@ -49,11 +55,10 @@ private:
 	LPDIRECT3DTEXTURE9	m_pTexture = NULL;
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
 	CMotion			*m_pMotion;					// モーション
-	D3DXVECTOR3		m_pos;						// 位置
+						// 位置
 	D3DXVECTOR3		m_posOld;					// 位置過去
-	D3DXVECTOR3		m_move;						// ムーブ
-	D3DXVECTOR3		m_rot;						// 回転	
-	D3DXVECTOR3		m_rotMove;					// 回転ムーブ
+	//D3DXVECTOR3		m_move;						// ムーブ
+
 	D3DXVECTOR3		m_modelMin;					// サイズ最小
 	D3DXVECTOR3		m_modelMax;					// サイズ最大
 	D3DXMATRIX		m_mtxWorld;					// マトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ

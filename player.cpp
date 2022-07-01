@@ -55,6 +55,9 @@ HRESULT CPlayer::Init(void)
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), "Data/system/Gon/Fox.txt");
 	m_motionTypeOld = m_motionType;
 
+	m_MoveSpeed = 3.0f;
+	m_rot.y += (-D3DX_PI*0.5f);//目的の値-現在の値）＊減衰係数
+
 	return S_OK;
 }
 
@@ -75,9 +78,10 @@ void CPlayer::Update(void)
 	// 現在のモーション番号の保管
 	CObject3d::Update();
 
-//	Move();	//動きセット
-
-//	Collision();//床
+	Move();	//動きセット
+	
+	
+	//Collision();//床
 
 }
 
@@ -104,4 +108,70 @@ CPlayer *CPlayer::Create()
 	}
 
 	return pObject;
+}
+
+//------------------------------------
+// Move
+//------------------------------------
+void CPlayer::Move()	//動きセット
+{
+	CInput *CInputpInput = CInput::GetKey();
+	CAMERA *pCamera = GetCamera()->Get();
+	float consumption = 0.0f;
+	if (CInputpInput->Press(CInput::KEY_RIGHT))
+	{
+		m_move.x += sinf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
+		m_move.z += cosf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
+
+
+		consumption = m_rotMove.x + (D3DX_PI*0.5f) - m_rot.y + pCamera->rot.y;
+
+
+	}
+	if (CInputpInput->Press(CInput::KEY_LEFT))
+	{
+		m_move.x += sinf(-D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
+		m_move.z += cosf(-D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
+
+	}
+	if (CInputpInput->Press(CInput::KEY_DOWN))
+	{	
+		m_move.y -= m_MoveSpeed;
+	}
+	if (CInputpInput->Press(CInput::KEY_UP))
+	{	
+		m_move.y += m_MoveSpeed;
+	}
+
+	m_move.x += (0.0f - m_move.x)*ATTENUATION;//（目的の値-現在の値）＊減衰係数
+	m_move.z += (0.0f - m_move.z)*ATTENUATION;
+	m_move.y += (0.0f - m_move.y)*ATTENUATION;
+
+	m_pos += m_move;//移動を加算
+
+
+	//正規化
+	if ( consumption > D3DX_PI)
+	{
+		 consumption += D3DX_PI * 2.0f;
+	}
+	if ( consumption < -D3DX_PI)
+	{
+		 consumption += -D3DX_PI * 2.0f;
+	}
+
+	//減算設定（感性）
+	m_rot.y += (consumption)* ATTENUATION;//目的の値-現在の値）＊減衰係数
+
+														  //正規化
+	if (m_rot.y > D3DX_PI)
+	{
+		m_rot.y += -D3DX_PI * 2;
+	}
+	if (m_rot.y <= -D3DX_PI)
+	{
+		m_rot.y += D3DX_PI * 2;
+	}
+
+
 }

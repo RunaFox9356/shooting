@@ -128,17 +128,17 @@ void CParticle::Update()
 
 	CInput *CInputpInput = CInput::GetKey();
 
-	if (CInputpInput->Press(CInput::KEY_UP))
-	{
-		DataParticle.pos.x += 3.0f;
-		CBullet::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f))->SetUp(CObject::BULLET, DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
-	}
+	//if (CInputpInput->Press(CInput::KEY_UP))
+	//{
+	//	DataParticle.pos.x += 3.0f;
+	//	//CBullet::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f))->SetUp(CObject::BULLET, DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+	//}
 
-	if (CInputpInput->Press(CInput::KEY_DOWN))
-	{
-		DataParticle.pos.x -= 3.0f;
-		CGon::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f))->SetUp(CObject::GON, DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
-	}
+	//if (CInputpInput->Press(CInput::KEY_DOWN))
+	//{
+	//	DataParticle.pos.x -= 3.0f;
+	//	//CGon::Create(DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f))->SetUp(CObject::GON, DataParticle.pos, D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+	//}
 	for (int i = 0; i < maxNumber; i++)
 	{
 		Particle* pParticle = &g_aParticle[i];

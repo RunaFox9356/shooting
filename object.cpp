@@ -12,7 +12,7 @@
 #include "enemy.h"
 #include "gon.h"
 #include "bullet.h"
-
+#include "mesh.h"
 CObject *CObject::m_pObject[MAX_OBJECT] = {};
 int CObject::m_AllMember = 0;
 
@@ -96,7 +96,7 @@ void CObject::AllCreate()
 	CPlayer::Create()->SetUp(PLAYER, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-
+	CMesh::Create();
 }
 
 //=============================================================================

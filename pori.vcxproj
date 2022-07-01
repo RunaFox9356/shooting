@@ -156,6 +156,7 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="character.cpp" />
+    <ClCompile Include="mesh.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="file.cpp" />
     <ClCompile Include="gon.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="character.h" />
+    <ClInclude Include="mesh.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="gon.h" />

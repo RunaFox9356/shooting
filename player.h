@@ -74,7 +74,7 @@ public:
 	static const int INVINCIBLE;		// 無敵時間
 	static const int MAX_MODELPARTS = 9;
 	static const int MAX_COPY;
-
+	
 public:
 	CPlayer();
 	~CPlayer();
@@ -86,14 +86,11 @@ public:
 
 	static CPlayer *CPlayer::Create();
 
-	//void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);	// セット引数座標と読み込むファイル名
-	//void SetPos(const D3DXVECTOR3 &pos) override;
-	/*void SetCopy(char *pFileName, PartsFile *partsFile, Parts *parts, MyMotion *Motion, int *nMaxParts);*/
 
 private:
 	//void Collision(void);	// 当たり判定まとめ
-	//void Move(void);		// 移動
-
+	void Move(void);		// 移動
+	float m_MoveSpeed;
 private:
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
