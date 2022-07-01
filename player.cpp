@@ -14,7 +14,7 @@
 #include "manager.h"
 #include "motion.h"
 #include "object3d.h"
-
+#include "bullet.h"
 //------------------------------------
 // static変数
 //------------------------------------
@@ -56,7 +56,7 @@ HRESULT CPlayer::Init(void)
 	m_motionTypeOld = m_motionType;
 
 	m_MoveSpeed = 3.0f;
-	m_rot.y += (-D3DX_PI*0.5f);//目的の値-現在の値）＊減衰係数
+	m_rot.y += (-D3DX_PI*0.5f);
 
 	return S_OK;
 }
@@ -123,16 +123,14 @@ void CPlayer::Move()	//動きセット
 		m_move.x += sinf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
 		m_move.z += cosf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
 
-
 		consumption = m_rotMove.x + (D3DX_PI*0.5f) - m_rot.y + pCamera->rot.y;
-
 
 	}
 	if (CInputpInput->Press(CInput::KEY_LEFT))
 	{
 		m_move.x += sinf(-D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
 		m_move.z += cosf(-D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
-
+		CBullet::Create(m_pos, D3DXVECTOR3 (4.0f,0.0f,0.0f));
 	}
 	if (CInputpInput->Press(CInput::KEY_DOWN))
 	{	
@@ -163,7 +161,7 @@ void CPlayer::Move()	//動きセット
 	//減算設定（感性）
 	m_rot.y += (consumption)* ATTENUATION;//目的の値-現在の値）＊減衰係数
 
-														  //正規化
+	 //正規化
 	if (m_rot.y > D3DX_PI)
 	{
 		m_rot.y += -D3DX_PI * 2;
@@ -172,6 +170,4 @@ void CPlayer::Move()	//動きセット
 	{
 		m_rot.y += D3DX_PI * 2;
 	}
-
-
 }

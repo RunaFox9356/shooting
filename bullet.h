@@ -10,9 +10,9 @@
 #define _BULLET_H_			// 二重インクルード防止のマクロ定義
 
 #include "renderer.h"
-#include "object2d.h"
+#include "3dpolygon.h"
 
-class  CBullet : public CObject2d
+class  CBullet : public C3dpolygon
 {
 private:
 	//polygonの拡大サイズ

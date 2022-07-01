@@ -90,6 +90,9 @@
     <ClCompile Include="mesh.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
+    <ClCompile Include="3dpolygon.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enemy.h">
@@ -159,6 +162,9 @@
       <Filter>オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="mesh.h">
+      <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="3dpolygon.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
   </ItemGroup>

@@ -35,9 +35,9 @@ CBullet::~CBullet()
 //=============================================================================
 HRESULT CBullet::Init()
 {
-	CObject2d::Init();
+	C3dpolygon::Init();
 
-	CObject2d::SetTexture(CTexture::TEXTURE_KEN);
+	C3dpolygon::SetTexture(CTexture::TEXTURE_KEN);
 
 	return S_OK;
 }
@@ -47,7 +47,7 @@ HRESULT CBullet::Init()
 //=============================================================================
 void CBullet::Uninit()
 {
-	CObject2d::Uninit();
+	C3dpolygon::Uninit();
 }
 
 //=============================================================================
@@ -55,13 +55,16 @@ void CBullet::Uninit()
 //=============================================================================
 void CBullet::Update()
 {
-	CObject2d::Update();
+	C3dpolygon::Update();
 	m_pos += m_move;
 	if (m_pos.y >SCREEN_HEIGHT)
 	{
 		CObject::release();
 	}
-	
+	if (m_pos.x >SCREEN_WIDTH)
+	{
+		CObject::release();
+	}
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{
 		CObject*pObject;
@@ -99,7 +102,7 @@ void CBullet::Update()
 //=============================================================================
 void CBullet::Draw()
 {
-	CObject2d::Draw();
+	C3dpolygon::Draw();
 }
 
 //=============================================================================

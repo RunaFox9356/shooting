@@ -120,6 +120,7 @@ void CObject3d::Update(void)
 //------------------------------------
 void CObject3d::Draw(void)
 {
+
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 	D3DXMATRIX mtxScale, mtxTrans, mtxRot;	// 計算用マトリックス
 	D3DMATERIAL9 marDef;
