@@ -83,7 +83,7 @@ public:
 	void Uninit(void)override;	// ”jŠü
 	void Update(void)override;	// XV
 	void Draw()override;	// •`‰æ
-
+	static void  CEnemy::LoadEnemy(const char * pFdata);
 	static CEnemy *CEnemy::Create();
 private:
 	//void Collision(void);	// “–‚½‚è”»’è‚Ü‚Æ‚ß

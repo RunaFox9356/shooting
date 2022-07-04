@@ -133,7 +133,7 @@ void CObject3d::Draw(void)
 		// s—ñ‰Šú‰»ŠÖ”(‘æ1ˆø”‚Ìs—ñ‚ğ’PˆÊs—ñ‚É‰Šú‰»)
 		D3DXMatrixIdentity(&m_mtxWorld);
 
-		// Šgk‚ğ”½‰f
+		
 		// s—ñŠgkŠÖ”
 		D3DXMatrixScaling(&mtxScale, scale.x, scale.y, scale.z);
 		// s—ñŠ|‚¯ZŠÖ”(‘æ2ˆø”~‘æ3ˆø”‘æ‚ğ‚Pˆø”‚ÉŠi”[)
@@ -171,6 +171,14 @@ void CObject3d::Draw(void)
 void CObject3d::SetPos(const D3DXVECTOR3 &pos)
 {
 	m_pos = pos;
+}
+
+//=============================================================================
+// SetMoveŠÖ”
+//=============================================================================
+void CObject3d::SetMove(const D3DXVECTOR3 &move)
+{
+	m_move = move;
 }
 
 //------------------------------------

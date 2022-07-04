@@ -45,7 +45,8 @@ public:
 	//bool Collision(D3DXVECTOR3 *pPos, D3DXVECTOR3 *pPosOld, D3DXVECTOR3 Siz);
 	//EMESH *Get();
 	static CMesh* Create();
-	void SetPos(const D3DXVECTOR3 &pos); 
+	void SetMove(const D3DXVECTOR3 &move)override;
+	void SetPos(const D3DXVECTOR3 &pos)override;
 	D3DXVECTOR3 * CMesh::GetPos();
 	
 };

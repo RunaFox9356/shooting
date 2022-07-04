@@ -39,9 +39,9 @@ public:
 	 void SetTexture(CTexture::TEXTURE texture);
 	static CObject2d *CObject2d::Create();
 	D3DXVECTOR3 *GetPos()override;
-	 
-	 void SetPos(const D3DXVECTOR3 &pos) override;
-	 void SetTex(TexVec4 Tex);
+	void SetMove(const D3DXVECTOR3 &move)override;
+	void SetPos(const D3DXVECTOR3 &pos) override;
+	void SetTex(TexVec4 Tex);
 protected:
 	int  m_nTimer;
 	float m_nScale;

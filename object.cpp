@@ -25,7 +25,7 @@ CObject::CObject()
 	{
 		if (m_pObject[i] == nullptr)
 		{
-
+			m_Type = NONE;
 			m_nID = i;
 			m_pObject[i] = this;
 			m_AllMember++;
@@ -94,20 +94,21 @@ void CObject::AllCreate()
 {
 
 	CPlayer::Create()->SetUp(PLAYER, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CEnemy::LoadEnemy("Data/datatest.json");
+	/*CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));*/
 	CMesh::Create();
 }
 
 //=============================================================================
 // Setä÷êî
 //=============================================================================
-void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos, D3DXVECTOR3 move)
+void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos,D3DXVECTOR3 move)
 {
 	switch (Type)
 	{
 	case EObjectType::ENEMY:
-		
+		m_pObject[m_nID]->SetMove(move);
 		m_pObject[m_nID]->SetPos(pos);
 		m_Type = ENEMY;
 		break;
@@ -121,6 +122,7 @@ void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos, D3DXVECTOR3 move)
 	case EObjectType::GON:
 		m_Type = GON;
 		break;
+
 	default:
 		break;
 	}
@@ -134,7 +136,7 @@ CObject::EObjectType CObject::GetType()
 //=============================================================================
 // releaseä÷êî
 //=============================================================================
-void CObject::release()
+void CObject::Release()
 {
 	if (m_pObject[m_nID] != nullptr)
 	{

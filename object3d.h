@@ -39,6 +39,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	void SetPos(const D3DXVECTOR3 &pos) override;
+	void SetMove(const D3DXVECTOR3 &move)override;
 	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char *filename);
 	D3DXVECTOR3 *GetPos()override;
 

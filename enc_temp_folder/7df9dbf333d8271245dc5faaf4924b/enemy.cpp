@@ -8,9 +8,11 @@
 #include <stdio.h>
 #include <assert.h>
 #include "enemy.h"
+#include "input.h"
 #include "camera.h"
 #include "motion.h"
 #include "manager.h"
+#include "motion.h"
 #include "object3d.h"
 
 

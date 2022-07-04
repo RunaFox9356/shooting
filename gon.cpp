@@ -69,7 +69,7 @@ void CGon::Update()
 	m_pos += m_move;
 	if (m_pos.y >SCREEN_HEIGHT)
 	{
-		CObject::release();
+		CObject::Release();
 	}
 
 	//アニメーション設定

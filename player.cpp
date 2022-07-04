@@ -15,6 +15,7 @@
 #include "motion.h"
 #include "object3d.h"
 #include "bullet.h"
+#include "enemy.h"	
 //------------------------------------
 // static変数
 //------------------------------------
@@ -25,7 +26,7 @@ const int CPlayer::MAX_PRAYER = 16;			// 最大数
 const int CPlayer::MAX_MOVE = 9;			// アニメーションの最大数
 const int CPlayer::INVINCIBLE = 300;		// 無敵時間
 const int CPlayer::MAX_COPY = 4;			// 最大コピー数
-
+int DATA = 0;
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -122,7 +123,8 @@ void CPlayer::Move()	//動きセット
 	{
 		m_move.x += sinf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
 		m_move.z += cosf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
-
+		//CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+		//CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		consumption = m_rotMove.x + (D3DX_PI*0.5f) - m_rot.y + pCamera->rot.y;
 
 	}
@@ -130,7 +132,8 @@ void CPlayer::Move()	//動きセット
 	{
 		m_move.x += sinf(-D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
 		m_move.z += cosf(-D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
-		CBullet::Create(m_pos, D3DXVECTOR3 (4.0f,0.0f,0.0f));
+		
+	
 	}
 	if (CInputpInput->Press(CInput::KEY_DOWN))
 	{	
@@ -140,7 +143,16 @@ void CPlayer::Move()	//動きセット
 	{	
 		m_move.y += m_MoveSpeed;
 	}
-
+	if (CInputpInput->Press(CInput::KEY_SHOT))
+	{
+		DATA++;
+		if (DATA == 20)
+		{
+			DATA = 0;
+			CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f));
+		}
+	}
+	
 	m_move.x += (0.0f - m_move.x)*ATTENUATION;//（目的の値-現在の値）＊減衰係数
 	m_move.z += (0.0f - m_move.z)*ATTENUATION;
 	m_move.y += (0.0f - m_move.y)*ATTENUATION;

@@ -518,13 +518,7 @@ void CMotion::Uninit(void)
 		}
 	}
 
-	if (m_parts != nullptr
-		&& m_motion != nullptr)
-	{// ƒƒ‚ƒŠ‚Ì‰ğ•ú
-		delete[] m_parts;
-		delete[] m_motion;
-		m_parts = nullptr;
-	}
+	
 }
 
 //=============================================================================

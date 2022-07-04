@@ -59,11 +59,11 @@ void CBullet::Update()
 	m_pos += m_move;
 	if (m_pos.y >SCREEN_HEIGHT)
 	{
-		CObject::release();
+		CObject::Release();
 	}
 	if (m_pos.x >SCREEN_WIDTH)
 	{
-		CObject::release();
+		CObject::Release();
 	}
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{
@@ -74,22 +74,22 @@ void CBullet::Update()
 			EObjectType Type = pObject->GetType();
 			if (Type == CObject::ENEMY)
 			{
-				//CAMERA *pCamera = GetCamera()->Get();
+				D3DXVECTOR3 *enemyPos = pObject->GetPos();
+				float enemySize = 20.0f;
+				float size = 50.0f;
 
-				//Hitpos = WorldCastScreen(&m_pos,								// スクリーン座標
-				//	D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),			// スクリーンサイズ
-				//	GetCamera()->GetMtxView(),								// ビューマトリックス
-				//	GetCamera()->GetMtxProje());								// プロジェクションマトリックス
+				if (((m_pos.y - size) <= (enemyPos->y + enemySize)) &&
+					((m_pos.y + size) >= (enemyPos->y - enemySize)) &&
+					((m_pos.x - size) <= (enemyPos->x + enemySize)) &&
+					((m_pos.x + size) >= (enemyPos->x - enemySize)))
+				{  
+					// 当たり判定
+					pObject->Release();
 
-			/*	D3DVECTOR *Object = pObject->GetPos();
-				float Sizetest = 100.0f;
-				if (Hitpos.x +Sizetest >= Object->x - Sizetest
-					&& Hitpos.x - Sizetest <= Object->x + Sizetest
-					&& Hitpos.y + Sizetest >= Object->y - Sizetest
-					&& Hitpos.y - Sizetest <= Object->y + Sizetest)
-				{
-					CObject::release();
-				}*/
+				    // 解放
+					CObject::Release();
+					return;
+				}
 			}
 		}
 	}
@@ -102,7 +102,10 @@ void CBullet::Update()
 //=============================================================================
 void CBullet::Draw()
 {
+
 	C3dpolygon::Draw();
+	//加算合成初期化
+
 }
 
 //=============================================================================
@@ -125,7 +128,7 @@ CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move)
 //=============================================================================
 // Setmove関数
 //=============================================================================
-void CBullet::SetMove(D3DXVECTOR3 move)
+void CBullet::SetMove(const D3DXVECTOR3 &move)
 {
 	m_move = move;
 }

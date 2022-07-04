@@ -61,7 +61,7 @@ HRESULT CObject2d::Init()
 
 	VERTEX_2D*pVtx;		//頂点情報へのポインタ
 
-						//頂点バッファをロックし、頂点情報へのポインタを取得
+	//頂点バッファをロックし、頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	//------------------------
@@ -172,7 +172,8 @@ void CObject2d::Draw()
 
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP,		//プリミティブの種類
 		0,
-		2);						//プリミティブ(ポリゴン)数
+		2);
+	//プリミティブ(ポリゴン)数
 	pDevice->SetTexture(0, NULL);
 }
 
@@ -207,7 +208,13 @@ void CObject2d::SetPos(const D3DXVECTOR3 &pos)
 {
 	m_pos = pos;
 }
-
+//=============================================================================
+// SetPos関数
+//=============================================================================
+void CObject2d::SetMove(const D3DXVECTOR3 &move)
+{
+	m_pos = move;
+}
 
 //--------------------------------------------------
 // テクスチャの設定

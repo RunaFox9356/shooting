@@ -120,7 +120,7 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 //=============================================================================
 void CRenderer::Uninit()
 {
-	//particle->Uninit();	// パーティクル
+	particle->Uninit();	// パーティクル
 
 	
 	// ライト終了処理
