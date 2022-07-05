@@ -126,6 +126,7 @@ void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos,D3DXVECTOR3 move)
 	default:
 		break;
 	}
+	
 }
 
 CObject::EObjectType CObject::GetType()

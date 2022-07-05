@@ -135,7 +135,7 @@ void CObject3d::Draw(void)
 
 		
 		// s—ñŠgkŠÖ”
-		D3DXMatrixScaling(&mtxScale, scale.x, scale.y, scale.z);
+		D3DXMatrixScaling(&mtxScale, m_nScale.x, m_nScale.y, m_nScale.z);
 		// s—ñŠ|‚¯ZŠÖ”(‘æ2ˆø”~‘æ3ˆø”‘æ‚ğ‚Pˆø”‚ÉŠi”[)
 		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxScale);
 
@@ -209,7 +209,27 @@ void CObject3d::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char * pFil
 //------------------------------------
 // Set
 //------------------------------------
-D3DXVECTOR3 * CObject3d::GetPos()
+const D3DXVECTOR3 * CObject3d::GetPos() const
 {
 	return &m_pos;
+}
+
+const D3DXVECTOR3 * CObject3d::GetSize() const
+{
+	return nullptr;
+}
+
+const D3DXVECTOR3 * CObject3d::GetRot() const
+{
+	return nullptr;
+}
+
+void CObject3d::SetSize(D3DXVECTOR3 &Size)
+{
+	m_nScale = Size;
+}
+
+void CObject3d::SetRot(D3DXVECTOR3 &Rot)
+{
+	m_rot = Rot;
 }

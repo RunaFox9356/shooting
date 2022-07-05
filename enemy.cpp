@@ -139,8 +139,17 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 			size = D3DXVECTOR3(j[name]["SIZE"]["X"], j[name]["SIZE"]["Y"], j[name]["SIZE"]["Z"]);
 			rot = D3DXVECTOR3(j[name]["ROT"]["X"], j[name]["ROT"]["Y"], j[name]["ROT"]["Z"]);
 			
-			CEnemy::Create()->SetUp(ENEMY, pos, D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-			
+
+			CEnemy * Enemy = CEnemy::Create();
+			Enemy->SetUp(ENEMY, pos, D3DXVECTOR3(-5.0f, 0.0f, 0.0f)); 
+			Enemy->Setdata(size, rot); 
 		}
 	}
 }
+
+void CEnemy::Setdata(D3DXVECTOR3 size, D3DXVECTOR3 rot)
+{
+	CObject3d::SetSize(size);
+	CObject3d::SetRot(rot);
+}
+

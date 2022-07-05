@@ -27,9 +27,9 @@ public:
 	void Draw() override;
 	static CBullet *CBullet::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move);
 	void SetMove(const D3DXVECTOR3 &move)override;
-	static LPDIRECT3DTEXTURE9 Gettex();
-	static void Lood();
-	static void UnLood();
+	static LPDIRECT3DTEXTURE9 GetTex();
+	static void Load();
+	static void UnLoad();
 
 private:
 	static LPDIRECT3DTEXTURE9	m_pTexture;

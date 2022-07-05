@@ -40,17 +40,22 @@ public:
 	void Draw() override;
 	void SetPos(const D3DXVECTOR3 &pos) override;
 	void SetMove(const D3DXVECTOR3 &move)override;
-	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char *filename);
-	D3DXVECTOR3 *GetPos()override;
+	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, char *filename);
+	const D3DXVECTOR3 *GetPos() const override;
+	const D3DXVECTOR3 *GetRot() const;
+	void SetRot(D3DXVECTOR3 &Rot);
+	void SetSize(D3DXVECTOR3 &Size);
+	const D3DXVECTOR3 *GetSize() const;
 
-	protected:
+protected:
 	D3DXVECTOR3		m_move;						// ムーブ
 	D3DXVECTOR3		m_pos;
 	D3DXVECTOR3		m_rot;						// 回転	
 	D3DXVECTOR3		m_rotMove;					// 回転ムーブ
+
 private:
 	int  m_nTimer;
-	float m_nScale;
+	D3DXVECTOR3 m_nScale;
 	float m_fSize;
 
 	LPDIRECT3DTEXTURE9	m_pTexture = NULL;

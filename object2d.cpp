@@ -196,7 +196,7 @@ CObject2d *CObject2d::Create()
 //=============================================================================
 // GetPosä÷êî
 //=============================================================================
-D3DXVECTOR3 * CObject2d::GetPos()
+const D3DXVECTOR3 * CObject2d::GetPos() const
 {
 	return &m_pos;
 }

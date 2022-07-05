@@ -185,7 +185,8 @@ void CMesh::Draw(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 	D3DXMATRIX mtxRot, mtxTrans;	// 計算用マトリックス
-									//ライト設定falseにするとライトと食らわない
+	
+	//ライト設定falseにするとライトと食らわない
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 	// ワールドマトリックスの初期化
 	// 行列初期化関数(第1引数の行列を単位行列に初期化)
@@ -329,9 +330,9 @@ void CMesh::Draw(void)
 //=============================================================================
 // GetPos関数
 //=============================================================================
-D3DXVECTOR3 * CMesh::GetPos()
+const D3DXVECTOR3 *CMesh::GetPos() const
 {
-	return NULL;
+	return nullptr;
 }
 
 //=============================================================================

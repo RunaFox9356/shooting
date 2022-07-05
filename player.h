@@ -90,6 +90,7 @@ public:
 private:
 	//void Collision(void);	// 当たり判定まとめ
 	void Move(void);		// 移動
+	int m_Pow;
 	float m_MoveSpeed;
 private:
 	ANIME			m_motionType;					// モーションタイプ(現在)

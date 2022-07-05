@@ -15,10 +15,10 @@
 
 const D3DXVECTOR3 C3dpolygon::m_Vtx[4] =
 {
-	D3DXVECTOR3(-1.0f, +2.0f, 0.0f),
-	D3DXVECTOR3(+1.0f, +2.0f, 0.0f),
-	D3DXVECTOR3(-1.0f, -2.0f, 0.0f),
-	D3DXVECTOR3(+1.0f, -2.0f, 0.0f),
+	D3DXVECTOR3(-1.0f, +1.0f, 0.0f),
+	D3DXVECTOR3(+1.0f, +1.0f, 0.0f),
+	D3DXVECTOR3(-1.0f, -1.0f, 0.0f),
+	D3DXVECTOR3(+1.0f, -1.0f, 0.0f),
 };
 
 //=============================================================================
@@ -41,9 +41,9 @@ C3dpolygon::~C3dpolygon()
 //=============================================================================
 HRESULT C3dpolygon::Init()
 {
-
-	float fSize = 50.0f;
+	//float fSize = 50.0f;
 	m_nScale = 10.0f;
+	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 
@@ -65,11 +65,13 @@ HRESULT C3dpolygon::Init()
 	//------------------------
 	// 頂点情報の設定
 	//------------------------
-	//頂点座標の設定
-	pVtx[0].pos = D3DXVECTOR3(- 50.0f, + 50.0f, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(+ 50.0f, + 50.0f, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(- 50.0f, - 50.0f, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(+ 50.0f, - 50.0f, 0.0f);
+	//頂点座標
+	for (int i = 0; i < 4; ++i)
+	{
+		pVtx[i].pos.x = m_Vtx[i].x * 45.0f; // TODO: これなおす。
+		pVtx[i].pos.y = m_Vtx[i].y * 90.0f; // TODO: これなおす。
+		pVtx[i].pos.z = 0.0f;
+	}
 
 	//rhwの設定
 	pVtx[0].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
@@ -89,12 +91,10 @@ HRESULT C3dpolygon::Init()
 	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
 	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
 
-
 	//頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();
 
 	return S_OK;
-
 }
 
 //=============================================================================
@@ -116,33 +116,7 @@ void C3dpolygon::Uninit()
 void C3dpolygon::Update()
 {
 	m_nTimer++;
-	VERTEX_3D *pVtx; //頂点へのポインタ
-
-	//頂点バッファをロックし頂点情報へのポインタを取得
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	D3DXVECTOR3 addPos[4];
-	D3DXMATRIX mtx;	// 計算用マトリックス
-
-	//マトリックス作成
-	D3DXMatrixIdentity(&mtx);
-
-	//回転行数作成
-	D3DXMatrixRotationYawPitchRoll(&mtx, 0.0f, 0.0f, (-(D3DX_PI * 2.0f) / 360.0f) * m_nTimer);
-
-	//サイズ変更
-
-
-	//頂点座標
-	for (int i = 0; i < 4; ++i)
-	{
-		D3DXVec3TransformCoord(&addPos[i], &m_Vtx[i], &mtx);
-		pVtx[i].pos =  +addPos[i] * (45.0f);//<-サイズ変更]
-		pVtx[i].pos.z = 0.0f;
-	}
-
-	//頂点バッファをアンロック
-	m_pVtxBuff->Unlock();
+	m_rot.z = -D3DXToRadian(m_nTimer + 90); // TODO: これなおす。
 }
 
 //=============================================================================
@@ -150,26 +124,32 @@ void C3dpolygon::Update()
 //=============================================================================
 void C3dpolygon::Draw()
 {
-	LPDIRECT3DDEVICE9 pDevice;        //デバイスへのポインタ
-	D3DXMATRIX mtxRot, mtxTrans;	// 計算用マトリックス
-									  //デバイスの取得
-	pDevice = CManager::GetRenderer()->GetDevice();
+	//デバイスへのポインタ
+	//デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	pDevice->SetRenderState(D3DRS_ALPHAREF, 0);
 	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 
-	// ワールドマトリックスの初期化
-	// 行列初期化関数(第1引数の行列を単位行列に初期化)
-	D3DXMatrixIdentity(&m_mtxWorld);
-	D3DXMATRIX mtxView;
-	pDevice->GetTransform(D3DTS_VIEW, &mtxView);
+	{// TODO: 関数化する
+		// 計算用マトリックス
+		D3DXMATRIX mtxRot, mtxTrans;
+	
+		// ワールドマトリックスの初期化
+		// 行列初期化関数(第1引数の行列を単位行列に初期化)
+		D3DXMatrixIdentity(&m_mtxWorld);
 
-	// 位置を反映
-	// 行列移動関数(第１引数にX,Y,Z方向の移動行列を作成)
-	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
-	// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
-	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+		D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.x, m_rot.y, m_rot.z);
+		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
+		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
+
+		// 位置を反映
+		// 行列移動関数(第１引数にX,Y,Z方向の移動行列を作成)
+		D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
+		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
+		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+	}
 
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
@@ -182,21 +162,20 @@ void C3dpolygon::Draw()
 	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
-	CTexture* pTexture = CManager::GetTexture();
-
 	// テクスチャの設定
-	pDevice->SetTexture(0, pTexture->GetTexture(m_texture));
+	pDevice->SetTexture(0, CManager::GetTexture()->GetTexture(m_texture));
 
 	//ポリゴンの描画
-
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP,		//プリミティブの種類
 		0,
 		2);						//プリミティブ(ポリゴン)数
+
 	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 
 	pDevice->SetTexture(0, NULL);
 
-	pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);        // 新規深度値 <= Zバッファ深度値 (初期設定)
+	// 新規深度値 <= Zバッファ深度値 (初期設定)
+	pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 
 	// αテストを無効に戻す
@@ -207,7 +186,7 @@ void C3dpolygon::Draw()
 //=============================================================================
 // GetPos関数
 //=============================================================================
-D3DXVECTOR3 * C3dpolygon::GetPos()
+const D3DXVECTOR3 *C3dpolygon::GetPos() const
 {
 	return &m_pos;
 }
@@ -247,4 +226,3 @@ void C3dpolygon::SetTex(TexVec4 Tex)
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
 }
-

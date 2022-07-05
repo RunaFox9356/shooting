@@ -58,7 +58,7 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
 	
-	CBullet::Lood();
+	CBullet::Load();
 	CObject::AllCreate();
 
 

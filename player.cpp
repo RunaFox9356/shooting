@@ -26,7 +26,7 @@ const int CPlayer::MAX_PRAYER = 16;			// 最大数
 const int CPlayer::MAX_MOVE = 9;			// アニメーションの最大数
 const int CPlayer::INVINCIBLE = 300;		// 無敵時間
 const int CPlayer::MAX_COPY = 4;			// 最大コピー数
-int DATA = 0;
+
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -58,7 +58,7 @@ HRESULT CPlayer::Init(void)
 
 	m_MoveSpeed = 3.0f;
 	m_rot.y += (-D3DX_PI*0.5f);
-
+	SetSize(D3DXVECTOR3(2.0f,2.0f,2.0f));
 	return S_OK;
 }
 
@@ -145,14 +145,17 @@ void CPlayer::Move()	//動きセット
 	}
 	if (CInputpInput->Press(CInput::KEY_SHOT))
 	{
-		DATA++;
-		if (DATA == 20)
+		m_Pow++;
+		if (m_Pow >= 20)
 		{
-			DATA = 0;
+			m_Pow = 0;
 			CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f));
 		}
 	}
-	
+	else
+	{
+		m_Pow = 20;
+	}
 	m_move.x += (0.0f - m_move.x)*ATTENUATION;//（目的の値-現在の値）＊減衰係数
 	m_move.z += (0.0f - m_move.z)*ATTENUATION;
 	m_move.y += (0.0f - m_move.y)*ATTENUATION;

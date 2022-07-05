@@ -34,13 +34,14 @@ public:
 	virtual void Draw() = 0;
 	virtual	void SetPos(const D3DXVECTOR3 &pos) = 0;
 	virtual void SetMove(const D3DXVECTOR3 &move) = 0;
-	virtual D3DXVECTOR3 *GetPos() = 0;
+	virtual const D3DXVECTOR3 *GetPos() const = 0;
 	static void AllUpdate();
 	static void AllDraw();
 	static void AllUninit();
 	static void AllCreate();
 	CObject * GetObjectData(int nCount);
 	void SetUp(EObjectType Type, D3DXVECTOR3 pos, D3DXVECTOR3 move);
+	
 	EObjectType GetType();
 	void Release();
 protected:

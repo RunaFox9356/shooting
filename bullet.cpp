@@ -74,7 +74,7 @@ void CBullet::Update()
 			EObjectType Type = pObject->GetType();
 			if (Type == CObject::ENEMY)
 			{
-				D3DXVECTOR3 *enemyPos = pObject->GetPos();
+				const D3DXVECTOR3 *enemyPos = pObject->GetPos();
 				float enemySize = 20.0f;
 				float size = 50.0f;
 
@@ -136,7 +136,7 @@ void CBullet::SetMove(const D3DXVECTOR3 &move)
 //=============================================================================
 // Lood関数
 //=============================================================================
-void CBullet::Lood()
+void CBullet::Load()
 {
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 
@@ -149,7 +149,7 @@ void CBullet::Lood()
 //=============================================================================
 // UnLood関数
 //=============================================================================
-void CBullet::UnLood()
+void CBullet::UnLoad()
 {
 	// 破棄
 	if (m_pTexture != nullptr)
@@ -163,7 +163,7 @@ void CBullet::UnLood()
 //=============================================================================
 // Gettex関数
 //=============================================================================
-LPDIRECT3DTEXTURE9 CBullet::Gettex()
+LPDIRECT3DTEXTURE9 CBullet::GetTex()
 {
 	return m_pTexture;
 }

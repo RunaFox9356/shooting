@@ -15,33 +15,35 @@
 
 class  C3dpolygon : public CObject
 {
+private:
+	//polygonの基準サイズ
+	static const D3DXVECTOR3 m_Vtx[4];
 
-	private:
-		//polygonの拡大サイズ
-		static const D3DXVECTOR3 m_Vtx[4];
+public:
+	C3dpolygon();
+	~C3dpolygon() override;
+	HRESULT Init() override;
+	void Uninit() override;
+	void Update() override;
+	void Draw() override;
+	const D3DXVECTOR3 *GetPos() const override;
+	void SetPos(const D3DXVECTOR3 &pos) override;
 
-	public:
-		C3dpolygon();
-		~C3dpolygon() override;
-		HRESULT Init() override;
-		void Uninit() override;
-		void Update() override;
-		void Draw() override;
-		void SetTexture(CTexture::TEXTURE texture);
-		D3DXVECTOR3 *GetPos()override;
+	void SetTexture(CTexture::TEXTURE texture);
+	void SetTex(TexVec4 Tex);
 
-		void SetPos(const D3DXVECTOR3 &pos) override;
-		void SetTex(TexVec4 Tex);
-	protected:
-		int  m_nTimer;
-		float m_nScale;
-		float m_fSize;
-		D3DXVECTOR3 m_pos; //polygonの位置
-		D3DXMATRIX		m_mtxWorld;					// マトリックス
-	private:
-		CTexture::TEXTURE m_texture;	// テクスチャの列挙型
+protected:
+	float m_nScale;
+	D3DXVECTOR3 m_rot;
+	D3DXVECTOR3 m_pos; //polygonの位置
 
-		LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
+	int  m_nTimer; // TODO: これなおす。
+	float m_fSize; // TODO: これなおす。
+
+private:
+	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = nullptr;
+	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
+	D3DXMATRIX m_mtxWorld;					// マトリックス
 };
-#endif
 
+#endif
