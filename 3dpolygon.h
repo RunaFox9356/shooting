@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// レンダラー
+// 3dpolygon
 // Author : 浜田琉雅
 //
 //=============================================================================
@@ -12,6 +12,10 @@
 #include "renderer.h"
 #include "texture.h"
 #include "object2d.h"
+
+#define SIZEX (45.0f)
+#define SIZEY (90.0f)
+#define TIMER (m_nTimer + 90)
 
 class  C3dpolygon : public CObject
 {
@@ -31,19 +35,20 @@ public:
 
 	void SetTexture(CTexture::TEXTURE texture);
 	void SetTex(TexVec4 Tex);
+	
+	void SetSize(const D3DXVECTOR3 &size);
 
 protected:
 	float m_nScale;
 	D3DXVECTOR3 m_rot;
 	D3DXVECTOR3 m_pos; //polygonの位置
 
-	int  m_nTimer; // TODO: これなおす。
-	float m_fSize; // TODO: これなおす。
-
 private:
+	int  m_nTimer; // TODO: これなおす
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = nullptr;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 	D3DXMATRIX m_mtxWorld;					// マトリックス
+	D3DXVECTOR3 m_Size;
 };
 
 #endif

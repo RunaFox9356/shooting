@@ -22,7 +22,11 @@ public: /* ’è‹` */
 	{
 		TEXTURE_KEN = 0,	// Œ•
 		TEXTURE_GON,		// ‰Œ
-		TEXTURE_MAX,
+		TEXTURE_FIRE,		// ‰Î
+		TEXTURE_ICE,		// •X
+		TEXTURE_STORM,		// •—
+		TEXTURE_SUN,		// —‹
+		TEXTURE_MAX,		
 		TEXTURE_NONE,	// Žg—p‚µ‚È‚¢
 	};
 

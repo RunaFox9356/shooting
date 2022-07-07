@@ -101,11 +101,7 @@ public:
 	void Init(void);
 
 	// パーツの設定
-	void SetParts(D3DXMATRIX mtxWorld,						// ワールドマトリックス
-		D3DXMATRIX mtxRot,									// 計算用マトリックス
-		D3DXMATRIX mtxTrans,								// 計算用マトリックス
-		D3DMATERIAL9 *matDef,								// マテリアル保存変数
-		D3DXMATERIAL *pMat);								// マテリアルデータ
+	void SetParts(D3DXMATRIX mtxWorld);							// マテリアルデータ
 
 	// モーションの再生
 	bool PlayMotion(const int nCntMotionSet);

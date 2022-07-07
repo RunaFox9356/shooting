@@ -19,8 +19,6 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <locale.h>
-#include <string>
-#include <iostream>
 #include <windows.h>
 #include <sstream>
 

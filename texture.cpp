@@ -20,6 +20,11 @@ const char* CTexture::s_FileName[] =
 {// テクスチャのパス
 	"data/TEXTURE/ken.png",	// 玉画像
 	"data/TEXTURE/gon.png",	//GON
+	"data/TEXTURE/fire.png",
+	"data/TEXTURE/ice.png",
+	"data/TEXTURE/storm.png",
+	"data/TEXTURE/sun.png",
+
 };
 
 static_assert(sizeof(CTexture::s_FileName) / sizeof(CTexture::s_FileName[0]) == CTexture::TEXTURE_MAX, "aho");

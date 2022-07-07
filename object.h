@@ -20,6 +20,7 @@ public:
 		PLAYER,
 		BULLET,
 		GON,
+		MAGIC,
 		MAX,
 		NONE
 	};
@@ -39,6 +40,7 @@ public:
 	static void AllDraw();
 	static void AllUninit();
 	static void AllCreate();
+	int * GetId();
 	CObject * GetObjectData(int nCount);
 	void SetUp(EObjectType Type, D3DXVECTOR3 pos, D3DXVECTOR3 move);
 	
@@ -46,8 +48,9 @@ public:
 	void Release();
 protected:
 	static CObject *m_pObject[MAX_OBJECT]; 
-private:
 	int	m_nID;
+private:
+	//int	m_nID;
 	static int m_AllMember;
 	EObjectType m_Type;
 };

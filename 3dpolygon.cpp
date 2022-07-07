@@ -11,6 +11,7 @@
 #include "input.h"
 #include "utility.h"
 #include "camera.h"
+#include "hamada.h"
 
 
 const D3DXVECTOR3 C3dpolygon::m_Vtx[4] =
@@ -20,6 +21,8 @@ const D3DXVECTOR3 C3dpolygon::m_Vtx[4] =
 	D3DXVECTOR3(-1.0f, -1.0f, 0.0f),
 	D3DXVECTOR3(+1.0f, -1.0f, 0.0f),
 };
+
+
 
 //=============================================================================
 // コンストラクト関数
@@ -41,7 +44,7 @@ C3dpolygon::~C3dpolygon()
 //=============================================================================
 HRESULT C3dpolygon::Init()
 {
-	//float fSize = 50.0f;
+	m_Size = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
 	m_nScale = 10.0f;
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
@@ -57,43 +60,7 @@ HRESULT C3dpolygon::Init()
 		&m_pVtxBuff,
 		NULL);
 
-	VERTEX_3D*pVtx;		//頂点情報へのポインタ
-
-	//頂点バッファをロックし、頂点情報へのポインタを取得
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	//------------------------
-	// 頂点情報の設定
-	//------------------------
-	//頂点座標
-	for (int i = 0; i < 4; ++i)
-	{
-		pVtx[i].pos.x = m_Vtx[i].x * 45.0f; // TODO: これなおす。
-		pVtx[i].pos.y = m_Vtx[i].y * 90.0f; // TODO: これなおす。
-		pVtx[i].pos.z = 0.0f;
-	}
-
-	//rhwの設定
-	pVtx[0].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-	pVtx[1].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-	pVtx[2].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-	pVtx[3].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-
-	//頂点カラーの設定
-	pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-
-	//テクスチャ座標の設定
-	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
-	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
-	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
-
-	//頂点バッファをアンロックする
-	m_pVtxBuff->Unlock();
-
+	
 	return S_OK;
 }
 
@@ -116,7 +83,7 @@ void C3dpolygon::Uninit()
 void C3dpolygon::Update()
 {
 	m_nTimer++;
-	m_rot.z = -D3DXToRadian(m_nTimer + 90); // TODO: これなおす。
+	m_rot.z = -D3DXToRadian(TIMER);
 }
 
 //=============================================================================
@@ -132,24 +99,7 @@ void C3dpolygon::Draw()
 	pDevice->SetRenderState(D3DRS_ALPHAREF, 0);
 	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 
-	{// TODO: 関数化する
-		// 計算用マトリックス
-		D3DXMATRIX mtxRot, mtxTrans;
-	
-		// ワールドマトリックスの初期化
-		// 行列初期化関数(第1引数の行列を単位行列に初期化)
-		D3DXMatrixIdentity(&m_mtxWorld);
-
-		D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.x, m_rot.y, m_rot.z);
-		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
-		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
-
-		// 位置を反映
-		// 行列移動関数(第１引数にX,Y,Z方向の移動行列を作成)
-		D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
-		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
-		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
-	}
+	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, m_rot);
 
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
@@ -225,4 +175,50 @@ void C3dpolygon::SetTex(TexVec4 Tex)
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
+}
+
+//---------------------------------------
+//セットサイズ
+//---------------------------------------
+void  C3dpolygon::SetSize(const D3DXVECTOR3 &size)
+{
+	m_Size = size;
+
+	VERTEX_3D*pVtx;		//頂点情報へのポインタ
+
+	//頂点バッファをロックし、頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	//------------------------
+	// 頂点情報の設定
+	//------------------------
+	//頂点座標
+	for (int i = 0; i < 4; ++i)
+	{
+		pVtx[i].pos.x = m_Vtx[i].x * m_Size.x; // TODO: これなおす。
+		pVtx[i].pos.y = m_Vtx[i].y * m_Size.y; // TODO: これなおす。
+		pVtx[i].pos.z = 0.0f;
+	}
+
+	//rhwの設定
+	pVtx[0].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+	pVtx[1].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+	pVtx[2].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+	pVtx[3].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+
+	//頂点カラーの設定
+	pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+
+	//テクスチャ座標の設定
+	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
+	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
+	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
+	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
+
+	//頂点バッファをアンロックする
+	m_pVtxBuff->Unlock();
+
 }

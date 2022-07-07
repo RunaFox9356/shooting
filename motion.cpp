@@ -84,12 +84,13 @@ void CMotion::Init(void)
 // Author : 唐﨑結斗
 // 概要 : 行列を利用して、パーツの親子関係と描画設定を行う
 //=============================================================================
-void CMotion::SetParts(D3DXMATRIX mtxWorld,
-	D3DXMATRIX mtxRot,									
-	D3DXMATRIX mtxTrans,								
-	D3DMATERIAL9 *matDef,								
-	D3DXMATERIAL *pMat)
+void CMotion::SetParts(D3DXMATRIX mtxWorld)
 {
+
+		D3DXMATRIX mtxRot;
+		D3DXMATRIX mtxTrans;
+		D3DMATERIAL9 matDef;
+		D3DXMATERIAL *pMat;
 	// デバイスの取得
 	LPDIRECT3DDEVICE9	pDevice = CManager::GetRenderer()->GetDevice();
 
@@ -142,7 +143,7 @@ void CMotion::SetParts(D3DXMATRIX mtxWorld,
 		pDevice->SetTransform(D3DTS_WORLD, &(m_parts + i)->mtxWorld);
 
 		// 現在のマテリアルを保持
-		pDevice->GetMaterial(&*matDef);
+		pDevice->GetMaterial(&matDef);
 
 		// マテリアルデータへのポインタを取得
 		pMat = (D3DXMATERIAL*)(m_parts + i)->pBuffer->GetBufferPointer();
@@ -157,7 +158,7 @@ void CMotion::SetParts(D3DXMATRIX mtxWorld,
 		}
 
 		// 保していたマテリアルを戻す
-		pDevice->SetMaterial(&*matDef);
+		pDevice->SetMaterial(&matDef);
 	}
 
 	// 新規深度値とZバッファの深度値が同じ値ならテスト成功にする

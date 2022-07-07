@@ -181,7 +181,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
-		// TODO: HDC を使用する描画コードをここに追加してください...
+		
 		EndPaint(hWnd, &ps);
 	}
 	break;

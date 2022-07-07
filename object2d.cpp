@@ -38,7 +38,7 @@ CObject2d::~CObject2d()
 //=============================================================================
 HRESULT CObject2d::Init()
 {
-	float fSize = 50.0f;
+	float fSize = 30.0f;
 	m_nScale = 10.0f;
 
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
@@ -53,25 +53,24 @@ HRESULT CObject2d::Init()
 		&m_pVtxBuff,
 		NULL);
 
-	//テクスチャ
-	//D3DXCreateTextureFromFile(pDevice,
-	//	"data\\TEXTURE\\ken.png",
-	//	&m_pTexture);
-
-
 	VERTEX_2D*pVtx;		//頂点情報へのポインタ
 
 	//頂点バッファをロックし、頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
-	//------------------------
+	//------------------------ 
 	// 頂点情報の設定
 	//------------------------
 	//頂点座標の設定
-	pVtx[0].pos = D3DXVECTOR3(m_pos.x - 50.0f, m_pos.y - 50.0f, 0.0f);
+	/*pVtx[0].pos = D3DXVECTOR3(m_pos.x - 50.0f, m_pos.y - 50.0f, 0.0f);
 	pVtx[1].pos = D3DXVECTOR3(m_pos.x + 50.0f, m_pos.y - 50.0f, 0.0f);
 	pVtx[2].pos = D3DXVECTOR3(m_pos.x - 50.0f, m_pos.y + 50.0f, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_pos.x + 50.0f, m_pos.y + 50.0f, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(m_pos.x + 50.0f, m_pos.y + 50.0f, 0.0f);*/
+
+	pVtx[0].pos = D3DXVECTOR3(-50.0f, -50.0f, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(+50.0f, -50.0f, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(-50.0f, +50.0f, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(+50.0f, +50.0f, 0.0f);
 
 	//rhwの設定
 	pVtx[0].rhw = 1.0f;
@@ -125,22 +124,16 @@ void CObject2d::Update()
 	D3DXVECTOR3 addPos[4];
 	D3DXMATRIX mtx;	// 計算用マトリックス
 
-	//マトリックス作成
+
+					//マトリックス作成
 	D3DXMatrixIdentity(&mtx);
-
-	//回転行数作成
-	D3DXMatrixRotationYawPitchRoll(&mtx, 0.0f, 0.0f, ((D3DX_PI * 2.0f) / 360.0f) * m_nTimer);
-
-	//サイズ変更
-	float fSize;
-	m_fSize += 0.01f;
-	fSize = sinf(m_fSize);
 
 	//頂点座標
 	for (int i = 0; i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&addPos[i], &m_Vtx[i], &mtx);
-		pVtx[i].pos = m_pos + addPos[i] * (85.0f *fSize);//<-サイズ変更
+		pVtx[i].pos = m_pos + (addPos[i] * 85.0f);//<-サイズ変更
+		pVtx[i].pos.z = 0.0f;
 	}
 
 	//頂点バッファをアンロック
@@ -157,6 +150,9 @@ void CObject2d::Draw()
 	 //デバイスの取得
 	pDevice = CManager::GetRenderer()->GetDevice();
 
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	pDevice->SetRenderState(D3DRS_ALPHAREF, 0);
+	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 	//頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
 
@@ -167,7 +163,7 @@ void CObject2d::Draw()
 
 	// テクスチャの設定
 	pDevice->SetTexture(0, pTexture->GetTexture(m_texture));
-
+	//pDevice->SetTexture(0, NULL);
 	//ポリゴンの描画
 
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP,		//プリミティブの種類
@@ -175,6 +171,14 @@ void CObject2d::Draw()
 		2);
 	//プリミティブ(ポリゴン)数
 	pDevice->SetTexture(0, NULL);
+
+	// 新規深度値 <= Zバッファ深度値 (初期設定)
+	pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
+	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+
+	// αテストを無効に戻す
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
 }
 
 //=============================================================================

@@ -155,11 +155,7 @@ void CObject3d::Draw(void)
 		pDevice->SetTexture(0, NULL);
 
 		// パーツの描画設定
-		m_pMotion->SetParts(m_mtxWorld,				// ワールドマトリックス
-			mtxRot,									// 計算用マトリックス
-			mtxTrans,								// 計算用マトリックス
-			&marDef,								// マテリアル保存変数
-			pMat);									// マテリアルデータ
+		m_pMotion->SetParts(m_mtxWorld);
 
 		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
 		pDevice->SetMaterial(&marDef);

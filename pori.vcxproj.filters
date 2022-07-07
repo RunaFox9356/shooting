@@ -22,6 +22,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="オブジェクト\便利なやーつ">
+      <UniqueIdentifier>{edcbadc0-3807-48ab-b433-99b91d2c70d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="enemy.cpp">
@@ -91,6 +94,12 @@
       <Filter>オブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="3dpolygon.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="hamada.cpp">
+      <Filter>オブジェクト\便利なやーつ</Filter>
+    </ClCompile>
+    <ClCompile Include="magic.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
   </ItemGroup>
@@ -165,6 +174,12 @@
       <Filter>オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="3dpolygon.h">
+      <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="hamada.h">
+      <Filter>オブジェクト\便利なやーつ</Filter>
+    </ClInclude>
+    <ClInclude Include="magic.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
   </ItemGroup>
