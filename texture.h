@@ -25,7 +25,8 @@ public: /* ’è‹` */
 		TEXTURE_FIRE,		// ‰Î
 		TEXTURE_ICE,		// •X
 		TEXTURE_STORM,		// •—
-		TEXTURE_SUN,		// —‹
+		TEXTURE_SUN,		// —‹[
+		TEXTURE_CRYSTAL,	// CRYSTAL
 		TEXTURE_MAX,		
 		TEXTURE_NONE,	// Žg—p‚µ‚È‚¢
 	};

@@ -6,34 +6,35 @@
 //=============================================================================
 
 
-#ifndef _BULLET_H_			// このマクロ定義がされてなかったら
-#define _BULLET_H_			// 二重インクルード防止のマクロ定義
+#ifndef _CRYSTAL_H_			// このマクロ定義がされてなかったら
+#define _CRYSTAL_H_			// 二重インクルード防止のマクロ定義
 
 #include "renderer.h"
 #include "3dpolygon.h"
 
-class  CBullet : public C3dpolygon
+class  CCrystal : public C3dpolygon
 {
-private:
-	//polygonの拡大サイズ
-	static const D3DXVECTOR3 m_Vtx[4];
+
 
 public:
-	CBullet();
-	~CBullet() override;
+	CCrystal();
+	~CCrystal() override;
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	static CBullet *CBullet::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move);
+	static CCrystal *CCrystal::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move);
 	void SetMove(const D3DXVECTOR3 &move)override;
+	void SetType(const int&myType);
 	static LPDIRECT3DTEXTURE9 GetTex();
-
 
 private:
 	static LPDIRECT3DTEXTURE9	m_pTexture;
 	static int m_AllMember;
-	D3DXVECTOR3 m_move; //polygonの位置
+	static int m_popType;
+	int m_myType;
+	D3DXVECTOR3 m_move;
 	D3DXVECTOR3 Hitpos;
 };
 #endif
+

@@ -18,7 +18,6 @@
 //*****************************************************************************
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-
 #ifdef _DEBUG
 // FPSƒJƒEƒ“ƒ^
 int g_nCountFPS;

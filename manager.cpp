@@ -15,10 +15,15 @@
 #include "file.h"
 #include "bullet.h"
 #include "texture.h"
+#include "magic.h"
+#include "game.h"
+#include "title.h"
+#include "result.h"
 
 CRenderer * CManager::m_cRenderer = nullptr; 
 CTexture * CManager::m_pTexture = nullptr;
-static float s_fAngle = 20.0f;
+CMagicBox* CManager::m_MagicBox = nullptr;
+CObject*CManager::m_Game = nullptr;
 
 //=============================================================================
 // コンストラクト関数
@@ -58,10 +63,19 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
 	
-	CBullet::Load();
+	m_mode = CManager::MODE_TITLE;	//現在のモード
+
+	//モードの設定
+	SetMode(m_mode);
+
 	CObject::AllCreate();
 
 
+	
+	CObject::AllCreate();
+	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(100.0f, 650.0f, 0.0f));
+
+	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_NONE);
 
 	return S_OK;
 }
@@ -74,7 +88,6 @@ void CManager::Uninit()
 	// ポリゴンの終了処理
 	CObject::AllUninit();
 
-	
 	if (m_pTexture != nullptr)
 	{// 終了処理
 
@@ -91,8 +104,6 @@ void CManager::Uninit()
 	}
 	//入力処理の終了処理
 	m_Input->Uninit();
-
-	
 }
 
 //=============================================================================
@@ -136,3 +147,42 @@ CTexture *CManager::GetTexture()
 {
 	return m_pTexture;
 }
+
+CMagicBox* CManager::GetMagicBox()
+{
+	return m_MagicBox;
+}
+
+//========================
+// モードの設定
+//========================
+void CManager::SetMode(MODE mode)
+{
+	if (m_Game != nullptr)
+	{
+		m_Game->Uninit();
+		delete m_Game;
+		m_Game = nullptr;
+	}
+
+	switch (mode)
+	{
+	case CManager::MODE_TITLE:
+		m_Game = new CTitle;
+		break;
+	case CManager::MODE_GAME:
+		m_Game = new CGame;
+		break;
+	case CManager::MODE_RESULT:
+		m_Game = new CResult;
+		break;
+	default:
+		break;
+	}
+
+	if (FAILED(m_Game->Init()))
+	{
+		return;
+	}
+}
+

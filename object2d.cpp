@@ -108,6 +108,7 @@ void CObject2d::Uninit()
 		m_pVtxBuff->Release();
 		m_pVtxBuff = nullptr;
 	}
+
 }
 
 //=============================================================================
@@ -151,7 +152,7 @@ void CObject2d::Draw()
 	pDevice = CManager::GetRenderer()->GetDevice();
 
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_ALPHAREF, 0);
+	pDevice->SetRenderState(D3DRS_ALPHAREF, 100);
 	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 	//頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
@@ -163,7 +164,7 @@ void CObject2d::Draw()
 
 	// テクスチャの設定
 	pDevice->SetTexture(0, pTexture->GetTexture(m_texture));
-	//pDevice->SetTexture(0, NULL);
+	
 	//ポリゴンの描画
 
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP,		//プリミティブの種類
@@ -228,6 +229,14 @@ void CObject2d::SetTexture(CTexture::TEXTURE texture)
 	m_texture = texture;
 } 
 
+//--------------------------------------------------
+// テクスチャの設定
+//--------------------------------------------------
+CTexture::TEXTURE CObject2d::GetTexture()
+{
+	return m_texture;
+}
+
 //---------------------------------------
 //セットテクスチャ(2d)
 //---------------------------------------
@@ -246,4 +255,24 @@ void CObject2d::SetTex(TexVec4 Tex)
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
+}
+
+void CObject2d::SetCollar(TexVec4 Collar)
+{
+	VERTEX_2D *pVtx; //頂点へのポインタ
+
+					 //頂点バッファをロックし頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	//テクスチャの座標設定
+	//頂点カラーの設定
+	pVtx[0].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
+	pVtx[1].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
+	pVtx[2].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
+	pVtx[3].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
+
+
+	//頂点バッファをアンロック
+	m_pVtxBuff->Unlock();
+
 }

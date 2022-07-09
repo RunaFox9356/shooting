@@ -120,9 +120,7 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 //=============================================================================
 void CRenderer::Uninit()
 {
-	//particle->Uninit();	// パーティクル
-
-	
+	CObject::AllUninit();
 	// ライト終了処理
 	if (pLight != nullptr)
 	{
@@ -173,9 +171,6 @@ void CRenderer::Update()
 
 	pCamera->Update();
 
-	//particle->Update();	// パーティクル
-
-
 
 	pLight->Update();
 
@@ -205,8 +200,6 @@ void CRenderer::Draw()
 		// ポリゴンの描画処理
 		CObject::AllDraw();
 		pCamera->Set();
-		//particle->Draw();	// パーティクル
-		//DrawLight();
 
 #ifdef _DEBUG
 		// FPS表示

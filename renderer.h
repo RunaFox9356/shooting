@@ -74,8 +74,6 @@ struct VERTEX_2D
 	D3DXVECTOR2 tex;	// テクスチャ座標(レベル1)
 };
 
-
-
 class CRenderer
 {
 public:

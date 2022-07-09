@@ -71,9 +71,9 @@ void OutputStatus()
 
 void LoodJson(const char* cUrl)
 {
-	std::ifstream ifs(cUrl);
+	std::ifstream ifs(cUrl);//開くやつ
 
-	if (ifs)
+	if (ifs)//成功したとき
 	{
 		//StringToWString(UTF8toSjis(j["name"]));
 		//DataSet.unionsname = StringToWString(UTF8toSjis(j["unions"] ["name"]));

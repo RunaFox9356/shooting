@@ -61,6 +61,8 @@ HRESULT CPlayer::Init(void)
 	m_MoveSpeed = 3.0f;
 	m_rot.y += (-D3DX_PI*0.5f);
 	SetSize(D3DXVECTOR3(2.0f,2.0f,2.0f));
+
+
 	return S_OK;
 }
 
@@ -152,16 +154,14 @@ void CPlayer::Move()	//動きセット
 		{
 			m_Pow = 0;
 			CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f))->SetSize(D3DXVECTOR3(50.0f, 90.0f, 0.0f));
-			CMagic * Enemy = CMagic::Create(D3DXVECTOR3(100.0f, 650.0f, 0.0f));
-			Enemy->CObject::SetUp(CObject::MAGIC, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-			Enemy->SelectTex(CTexture::TEXTURE_ICE);
-			//CGon::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f));
 		}
 	}
 	else
 	{
 		m_Pow = 20;
 	}
+
+
 	m_move.x += (0.0f - m_move.x)*ATTENUATION;//（目的の値-現在の値）＊減衰係数
 	m_move.z += (0.0f - m_move.z)*ATTENUATION;
 	m_move.y += (0.0f - m_move.y)*ATTENUATION;
@@ -192,3 +192,4 @@ void CPlayer::Move()	//動きセット
 		m_rot.y += D3DX_PI * 2;
 	}
 }
+

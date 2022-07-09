@@ -7,28 +7,27 @@
 
 #include "magic.h"
 
-int CMagic::MagicCount = 0;			// 最大数
 
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CMagic::CMagic()
+CMagicBox::CMagic::CMagic()
 {
-	m_MagicId = MagicCount;
-	MagicCount++;
+
+
 }
 
 //=============================================================================
 // デスストラクト関数
 //=============================================================================
-CMagic::~CMagic()
+CMagicBox::CMagic::~CMagic()
 {
 }
 
 //=============================================================================
 // 初期化関数
 //=============================================================================
-HRESULT CMagic::Init()
+HRESULT CMagicBox::CMagic::Init()
 {
 	CObject2d::Init();
 
@@ -44,13 +43,6 @@ HRESULT CMagic::Init()
 		, 1.0f / m_DivisionY * (m_PatternAnim / (m_DivisionY))
 		, 1.0f / m_DivisionY * (m_PatternAnim / (m_DivisionY)+1.0f / m_DivisionY* m_DivisionY)));
 
-	//CObject2d::SetTexture(CTexture::TEXTURE_FIRE);
-
-	if (MagicCount >= 4)
-	{
-		MagicCount = 3;
-		CObject::Release();
-	}
 
 	return S_OK;
 }
@@ -58,7 +50,7 @@ HRESULT CMagic::Init()
 //=============================================================================
 // 破棄関数
 //=============================================================================
-void CMagic::Uninit()
+void CMagicBox::CMagic::Uninit()
 {
 	CObject2d::Uninit();
 }
@@ -66,15 +58,10 @@ void CMagic::Uninit()
 //=============================================================================
 // 更新関数
 //=============================================================================
-void CMagic::Update()
+void CMagicBox::CMagic::Update()
 {
 
 	CObject2d::Update();
-
-	if (m_pos.y >SCREEN_HEIGHT)
-	{
-		CObject::Release();
-	}
 
 	//アニメーション設定
 	m_CounterAnim++;
@@ -89,39 +76,13 @@ void CMagic::Update()
 			, 1.0f / m_DivisionY * (m_PatternAnim / (m_DivisionY))
 			, 1.0f / m_DivisionY * (m_PatternAnim / (m_DivisionY)+1.0f / m_DivisionY* m_DivisionY)));
 	}
-	for (int i = 0; i < MAX_OBJECT; i++)
-	{
-		CObject*pObject;
-		pObject = GetObjectData(i);
-		if (pObject != nullptr)
-		{
-			EObjectType Type = pObject->GetType();
-			if (this->m_nID != *pObject->GetId())
-			{
-				if (Type == CObject::MAGIC)
-				{
-					const D3DXVECTOR3 *MagicPos = pObject->GetPos();
-
-					float size = 20.0f;
-
-					if (((m_pos.y - size) <= (MagicPos->y + size)) &&
-						((m_pos.y + size) >= (MagicPos->y - size)) &&
-						((m_pos.x - size) <= (MagicPos->x + size)) &&
-						((m_pos.x + size) >= (MagicPos->x - size)))
-					{
-						m_pos.x += 100.0f;
-						return;
-					}
-				}
-			}
-		}
-	}
+	
 }
 
 //=============================================================================
 // 描画関数
 //=============================================================================
-void CMagic::Draw()
+void CMagicBox::CMagic::Draw()
 {
 	CObject2d::Draw();
 }
@@ -129,25 +90,32 @@ void CMagic::Draw()
 //=============================================================================
 // 生成関数
 //=============================================================================
-CMagic * CMagic::Create(D3DXVECTOR3 pos)
+CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 {
-	CMagic * pObject = nullptr;
-	pObject = new CMagic;
 
-	if (pObject != nullptr)
+	CMagicBox*object = nullptr;
+	object = new CMagicBox;
+
+	for (int i = 0; i < 3; i++)
 	{
-		pObject->SetPos(pos);
-		pObject->Init();
+		object->cMagic[i] = nullptr;
+		object->cMagic[i] = new CMagic;
+		float posX = pos.x + 100 * i;
+		if (object->cMagic[i] != nullptr)
+		{
+			object->cMagic[i]->SetPos(D3DXVECTOR3(posX, pos.y, pos.z));
+			object->cMagic[i]->Init();
+			object->cMagic[i]->SelectTex(CTexture::TEXTURE_NONE);
+		}
 	}
-
-	return pObject;
+	return object;
 }
 
 
 //=============================================================================
 // 生成関数
 //=============================================================================
-void CMagic::SelectTex(CTexture::TEXTURE tex)
+void CMagicBox::CMagic::SelectTex(CTexture::TEXTURE tex)
 {
 	CObject2d::SetTexture(tex);
 }
@@ -155,30 +123,32 @@ void CMagic::SelectTex(CTexture::TEXTURE tex)
 //=============================================================================
 // 入れ替え
 //=============================================================================
-void CMagic::Magicplay()
+void CMagicBox::Magicplay(CTexture::TEXTURE TEX)
 {
-	for (int i = 0; i < MAX_OBJECT; i++)
+	bool bHave = false;
+  	for (int i = 0; i < 3; i++)
 	{
-		CObject*pObject;
-		pObject = GetObjectData(i);
-		if (pObject != nullptr)
+		if (CTexture::TEXTURE_NONE == cMagic[i]->GetTexture())
 		{
-			EObjectType Type = pObject->GetType();
-			if (Type == CObject::MAGIC)
-			{
-				if (this->m_MagicId != *pObject->m_MagicId)
-				{
-
-					m_MagicId
-				}
-			}
+			
+			bHave = true;
+			cMagic[i]->SelectTex(TEX);
+			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			i = 2;
+		}
+		
+	}
+	if (!bHave)
+	{
+		cMagic[2]->SelectTex(cMagic[1]->GetTexture());
+		cMagic[1]->SelectTex(cMagic[0]->GetTexture());
+		cMagic[0]->SelectTex(TEX);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		if (CTexture::TEXTURE_NONE == cMagic[i]->GetTexture())
+		{
+			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		}
 	}
-}
-//=============================================================================
-// Get（MagicId）
-//=============================================================================
-int CMagic::GetMagicId()
-{
-	return m_MagicId;
 }

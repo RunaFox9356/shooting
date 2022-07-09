@@ -25,6 +25,9 @@
     <Filter Include="オブジェクト\便利なやーつ">
       <UniqueIdentifier>{edcbadc0-3807-48ab-b433-99b91d2c70d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="メイン\画面遷移">
+      <UniqueIdentifier>{50f5e731-fd3b-4941-af9e-ece487b9fa44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="enemy.cpp">
@@ -69,9 +72,6 @@
     <ClCompile Include="light.cpp">
       <Filter>システム</Filter>
     </ClCompile>
-    <ClCompile Include="manager.cpp">
-      <Filter>システム</Filter>
-    </ClCompile>
     <ClCompile Include="texture.cpp">
       <Filter>システム</Filter>
     </ClCompile>
@@ -101,6 +101,21 @@
     </ClCompile>
     <ClCompile Include="magic.cpp">
       <Filter>オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="crystal.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>メイン</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +161,6 @@
     <ClInclude Include="light.h">
       <Filter>システム</Filter>
     </ClInclude>
-    <ClInclude Include="manager.h">
-      <Filter>システム</Filter>
-    </ClInclude>
     <ClInclude Include="renderer.h">
       <Filter>システム</Filter>
     </ClInclude>
@@ -181,6 +193,21 @@
     </ClInclude>
     <ClInclude Include="magic.h">
       <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="crystal.h">
+      <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>メイン\画面遷移</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>メイン\画面遷移</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>メイン\画面遷移</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>メイン</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

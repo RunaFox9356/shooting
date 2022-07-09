@@ -13,7 +13,7 @@
 #include "object3d.h"
 
 class  CMotion;
-
+class CMagicBox;
 class CPlayer : public CObject3d
 {
 public:
@@ -92,6 +92,9 @@ private:
 	void Move(void);		// 移動
 	int m_Pow;
 	float m_MoveSpeed;
+
+
+
 private:
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)

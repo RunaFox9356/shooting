@@ -93,7 +93,7 @@ void C3dpolygon::Draw()
 {
 	//デバイスへのポインタ
 	//デバイスの取得
-	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
+ 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	pDevice->SetRenderState(D3DRS_ALPHAREF, 0);
@@ -219,6 +219,26 @@ void  C3dpolygon::SetSize(const D3DXVECTOR3 &size)
 	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
 
 	//頂点バッファをアンロックする
+	m_pVtxBuff->Unlock();
+
+}
+
+void C3dpolygon::SetCollar(TexVec4 Collar)
+{
+	VERTEX_3D *pVtx; //頂点へのポインタ
+
+					 //頂点バッファをロックし頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	//テクスチャの座標設定
+	//頂点カラーの設定
+	pVtx[0].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
+	pVtx[1].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
+	pVtx[2].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
+	pVtx[3].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
+
+
+	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
 
 }

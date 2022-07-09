@@ -98,7 +98,7 @@ void CObject::AllCreate()
 	CEnemy::LoadEnemy("Data/datatest.json");
 	/*CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));*/
-	//CMesh::Create();
+	CMesh::Create();
 }
 
 int * CObject::GetId()
@@ -130,7 +130,9 @@ void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos,D3DXVECTOR3 move)
 		break;
 	case EObjectType::MAGIC:
 		m_Type = MAGIC;
-		//CMagic::Create(D3DXVECTOR3(pos))->SelectTex(CTexture::TEXTURE_ICE);
+		break;
+	case EObjectType::CRYSTAL:
+		m_Type = CRYSTAL;
 		break;
 	default:
 		break;

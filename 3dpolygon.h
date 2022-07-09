@@ -37,18 +37,18 @@ public:
 	void SetTex(TexVec4 Tex);
 	
 	void SetSize(const D3DXVECTOR3 &size);
-
+	void SetCollar(TexVec4 Collar);
 protected:
 	float m_nScale;
 	D3DXVECTOR3 m_rot;
 	D3DXVECTOR3 m_pos; //polygonの位置
+	D3DXVECTOR3 m_Size;
 
 private:
 	int  m_nTimer; // TODO: これなおす
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = nullptr;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 	D3DXMATRIX m_mtxWorld;					// マトリックス
-	D3DXVECTOR3 m_Size;
 };
 
 #endif

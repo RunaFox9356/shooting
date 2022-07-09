@@ -157,6 +157,8 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="character.cpp" />
+    <ClCompile Include="crystal.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="hamada.cpp" />
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -176,7 +178,9 @@
     <ClCompile Include="particle.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="result.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="title.cpp" />
     <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +188,8 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="character.h" />
+    <ClInclude Include="crystal.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="hamada.h" />
     <ClInclude Include="magic.h" />
     <ClInclude Include="mesh.h" />
@@ -204,7 +210,9 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="result.h" />
     <ClInclude Include="texture.h" />
+    <ClInclude Include="title.h" />
     <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>

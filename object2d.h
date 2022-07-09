@@ -41,7 +41,8 @@ public:
 
 	void SetTexture(CTexture::TEXTURE texture);
 	void SetTex(TexVec4 Tex);
-
+	CTexture::TEXTURE GetTexture(); 
+	void SetCollar(TexVec4 Collar);
 protected:
 	int  m_nTimer;
 	float m_nScale;
@@ -49,9 +50,9 @@ protected:
 	D3DXVECTOR3 m_pos; //polygonの位置
 
 private:
+	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 
-	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
 };
 
 #endif

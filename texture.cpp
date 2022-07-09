@@ -24,6 +24,7 @@ const char* CTexture::s_FileName[] =
 	"data/TEXTURE/ice.png",
 	"data/TEXTURE/storm.png",
 	"data/TEXTURE/sun.png",
+	"data/TEXTURE/daia.png"
 
 };
 
