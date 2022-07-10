@@ -103,7 +103,7 @@ public:
 	void LoadTex();
 	void Delete(const int data);
 	void DeleteAll();
-	void RemoveAngle(void);
+	void RemoveAngle();
 	DWORD FloattoDword(float fVal);
 
 private:

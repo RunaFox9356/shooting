@@ -27,8 +27,7 @@ const float CPlayer::WIDTH = 10.0f;			// モデルの半径
 const int CPlayer::MAX_PRAYER = 16;			// 最大数
 const int CPlayer::MAX_MOVE = 9;			// アニメーションの最大数
 const int CPlayer::INVINCIBLE = 300;		// 無敵時間
-const int CPlayer::MAX_COPY = 4;			// 最大コピー数
-
+CPlayer::NOWMAGIC CPlayer::m_NowMagic = NOW_NON;		// 無敵時間
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -127,8 +126,6 @@ void CPlayer::Move()	//動きセット
 	{
 		m_move.x += sinf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
 		m_move.z += cosf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
-		//CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-		//CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		consumption = m_rotMove.x + (D3DX_PI*0.5f) - m_rot.y + pCamera->rot.y;
 
 	}
@@ -153,14 +150,41 @@ void CPlayer::Move()	//動きセット
 		if (m_Pow >= 20)
 		{
 			m_Pow = 0;
-			CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f))->SetSize(D3DXVECTOR3(50.0f, 90.0f, 0.0f));
+			//CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f))->SetSize(D3DXVECTOR3(50.0f, 90.0f, 0.0f));
+			switch (m_NowMagic)
+			{
+			case CPlayer::NOW_FIRE:
+				CBullet::Create(m_pos, D3DXVECTOR3(3.0f, 0.0f, 0.0f));
+				break;
+			case CPlayer::NOW_ICE:
+
+				CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f));
+				break;
+			case CPlayer::NOW_STORM:
+				CBullet::Create(m_pos, D3DXVECTOR3(3.0f, 3.0f, 0.0f));
+				CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f));
+				CBullet::Create(m_pos, D3DXVECTOR3(3.0f, -3.0f, 0.0f));
+				break;
+			case CPlayer::NOW_SUN:
+				CBullet::Create(m_pos, D3DXVECTOR3(10.0f, 0.0f, 0.0f));
+
+				break;
+			case CPlayer::NOW_NON:
+				CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f));
+				break;
+			default:
+				break;
+			}
 		}
 	}
-	else
+ 	else
 	{
 		m_Pow = 20;
 	}
-
+	if (CInputpInput->Trigger(CInput::KEY_DECISION))
+	{
+		CManager::GetMagicBox()->CMagicBox::MagicRelease();
+	}
 
 	m_move.x += (0.0f - m_move.x)*ATTENUATION;//（目的の値-現在の値）＊減衰係数
 	m_move.z += (0.0f - m_move.z)*ATTENUATION;
@@ -193,3 +217,25 @@ void CPlayer::Move()	//動きセット
 	}
 }
 
+//------------------------------------
+// GetMagic 
+//------------------------------------
+CPlayer::NOWMAGIC * CPlayer::GetMagic()
+{
+	return &m_NowMagic;
+}
+
+//------------------------------------
+// SetMagic
+//------------------------------------
+void CPlayer::SetMagic(CPlayer::NOWMAGIC NextMagic)
+{
+	if (NOW_MAX >= NextMagic)
+	{
+ 		m_NowMagic = NextMagic;
+	}
+	else
+	{
+		m_NowMagic = NOW_NON;
+	}
+}

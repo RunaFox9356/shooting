@@ -6,7 +6,7 @@
 //=============================================================================
 
 #include "magic.h"
-
+#include "player.h"
 
 //=============================================================================
 // コンストラクト関数
@@ -118,6 +118,7 @@ CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 void CMagicBox::CMagic::SelectTex(CTexture::TEXTURE tex)
 {
 	CObject2d::SetTexture(tex);
+	
 }
 
 //=============================================================================
@@ -132,7 +133,10 @@ void CMagicBox::Magicplay(CTexture::TEXTURE TEX)
 		{
 			
 			bHave = true;
-			cMagic[i]->SelectTex(TEX);
+			cMagic[2]->SelectTex(cMagic[1]->GetTexture());
+			cMagic[1]->SelectTex(cMagic[0]->GetTexture());
+			cMagic[0]->SelectTex(TEX);
+			CPlayer::SetMagic((CPlayer::NOWMAGIC)TEX);
 			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 1.0f));
 			i = 2;
 		}
@@ -143,6 +147,44 @@ void CMagicBox::Magicplay(CTexture::TEXTURE TEX)
 		cMagic[2]->SelectTex(cMagic[1]->GetTexture());
 		cMagic[1]->SelectTex(cMagic[0]->GetTexture());
 		cMagic[0]->SelectTex(TEX);
+		CPlayer::SetMagic((CPlayer::NOWMAGIC)TEX);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		if (CTexture::TEXTURE_NONE == cMagic[i]->GetTexture())
+		{
+			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.0f));
+		}
+	}
+}
+//=============================================================================
+// はきだし
+//=============================================================================
+void CMagicBox::MagicRelease(void)
+{
+	bool bHave = false;
+	for (int i = 0; i < 3; i++)
+	{
+		if (CTexture::TEXTURE_NONE == cMagic[i]->GetTexture())
+		{
+
+			bHave = true;
+			cMagic[0]->SelectTex(cMagic[1]->GetTexture());
+			cMagic[1]->SelectTex(cMagic[2]->GetTexture());
+			cMagic[2]->SelectTex(CTexture::TEXTURE_NONE);
+			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			CPlayer::SetMagic((CPlayer::NOWMAGIC)cMagic[0]->GetTexture());
+			i = 2;
+		}
+
+	}
+	if (!bHave)
+	{
+		cMagic[0]->SelectTex(cMagic[1]->GetTexture());
+		cMagic[1]->SelectTex(cMagic[2]->GetTexture());
+		cMagic[2]->SelectTex(CTexture::TEXTURE_NONE);
+		CPlayer::SetMagic((CPlayer::NOWMAGIC)cMagic[0]->GetTexture());
+
 	}
 	for (int i = 0; i < 3; i++)
 	{

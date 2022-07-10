@@ -12,6 +12,7 @@
 #include "utility.h"
 #include "camera.h"
 #include "magic.h"
+#include "hamada.h"
 
 int CCrystal::m_popType = 2;
 LPDIRECT3DTEXTURE9	CCrystal::m_pTexture;
@@ -59,13 +60,14 @@ void CCrystal::Update()
 	m_move.y-=0.1f;
 	if (m_move.y <= -5.0f)
 	{
-		m_move.y = -5.0f;
+		//m_move.y = 5.0f;
 	}
 	m_pos += m_move;
 
 	if (m_pos.y <-SCREEN_HEIGHT)
 	{
-		CObject::Release();
+		m_move.y = 13.0f;
+		//CObject::Release();
 	}
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{	// “–‚½‚è”»’è
@@ -85,6 +87,7 @@ void CCrystal::Update()
 					((m_pos.x + m_Size.x) >= (PlayerPos->x - Size)))
 				{
 					CManager::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
+				
 					CObject::Release();
 
 					return;
@@ -101,7 +104,7 @@ void CCrystal::Update()
 					((m_pos.x - m_Size.x) <= (BulletPos->x + Size)) &&
 					((m_pos.x + m_Size.x) >= (BulletPos->x - Size)))
 				{
-					m_move.y += 5.0f;
+					//m_move.y += 5.0f;
 					return;
 				}
 			}
@@ -114,6 +117,8 @@ void CCrystal::Update()
 //=============================================================================
 void CCrystal::Draw()
 {
+	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, m_rot);
+
 	C3dpolygon::Draw();
 }
 

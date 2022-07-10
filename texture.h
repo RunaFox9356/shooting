@@ -20,12 +20,12 @@ class CTexture
 public: /* 定義 */
 	enum TEXTURE
 	{
-		TEXTURE_KEN = 0,	// 剣
+		TEXTURE_BULLET = 0,	// メテオ
 		TEXTURE_GON,		// 煙
 		TEXTURE_FIRE,		// 火
 		TEXTURE_ICE,		// 氷
 		TEXTURE_STORM,		// 風
-		TEXTURE_SUN,		// 雷[
+		TEXTURE_SUN,		// 雷
 		TEXTURE_CRYSTAL,	// CRYSTAL
 		TEXTURE_MAX,		
 		TEXTURE_NONE,	// 使用しない

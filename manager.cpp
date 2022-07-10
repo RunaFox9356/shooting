@@ -63,19 +63,17 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
 	
-	m_mode = CManager::MODE_TITLE;	//現在のモード
+	m_mode = CManager::MODE_GAME;	//現在のモード
 
 	//モードの設定
 	SetMode(m_mode);
 
 	CObject::AllCreate();
 
-
-	
-	CObject::AllCreate();
 	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(100.0f, 650.0f, 0.0f));
 
 	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_NONE);
+
 
 	return S_OK;
 }
@@ -104,6 +102,7 @@ void CManager::Uninit()
 	}
 	//入力処理の終了処理
 	m_Input->Uninit();
+
 }
 
 //=============================================================================
@@ -113,11 +112,8 @@ void CManager::Update()
 {
 	//入力処理の更新処理
 	m_Input->Update();
-
-	// 更新処理
 	m_cRenderer->Update();
-
-
+	//m_Game->Update();
 }
 
 //=============================================================================
@@ -127,6 +123,7 @@ void CManager::Draw()
 {
 	// 描画処理
 	m_cRenderer->Draw();
+	//m_Game->Draw();
 
 }
 

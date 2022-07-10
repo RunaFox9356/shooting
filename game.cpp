@@ -10,6 +10,7 @@
 //------------------------
 #include "game.h"
 #include "input.h"
+#include "manager.h"
 
 //========================
 // コンストラクター
@@ -45,7 +46,8 @@ void CGame::Uninit(void)
 //========================
 void CGame::Update(void)
 {
-	
+	// 更新処理
+	//CManager::GetRenderer()->Update();
 }
 
 //========================
@@ -53,5 +55,6 @@ void CGame::Update(void)
 //========================
 void CGame::Draw(void)
 {
-	
+	// 更新処理
+	//CManager::GetRenderer()->Draw();
 }

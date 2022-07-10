@@ -47,13 +47,13 @@ public:
 
 	typedef enum
 	{
-		COPY_NORMAL = 0,	// ニュートラル
-		COPY_SWORD,			// ソード
-		COPY_FIRE,			// ファイア
-		COPY_LASER,			// レーザー
-		COPY_CUTTER,		// カッター
-		COPY_MAX
-	}COPY;
+		NOW_FIRE = 2,		// 火
+		NOW_ICE,			// 氷
+		NOW_STORM,			// 風
+		NOW_SUN,			// 雷
+		NOW_NON,
+		NOW_MAX
+	}NOWMAGIC;
 
 	//modelデータの構造体//
 	typedef struct
@@ -73,7 +73,6 @@ public:
 	static const int MAX_MOVE;			// アニメーションの最大数
 	static const int INVINCIBLE;		// 無敵時間
 	static const int MAX_MODELPARTS = 9;
-	static const int MAX_COPY;
 	
 public:
 	CPlayer();
@@ -84,16 +83,16 @@ public:
 	void Update(void)override;	// 更新
 	void Draw()override;	// 描画
 
-	static CPlayer *CPlayer::Create();
-
-
+	static CPlayer *Create();
+	static NOWMAGIC *GetMagic();
+	static void SetMagic(CPlayer::NOWMAGIC NextMagic);
+	
 private:
-	//void Collision(void);	// 当たり判定まとめ
-	void Move(void);		// 移動
+	
+	void Move();		// 移動
 	int m_Pow;
 	float m_MoveSpeed;
-
-
+	static NOWMAGIC m_NowMagic;			//現在の魔法
 
 private:
 	ANIME			m_motionType;					// モーションタイプ(現在)

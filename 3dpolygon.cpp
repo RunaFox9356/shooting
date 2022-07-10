@@ -99,7 +99,7 @@ void C3dpolygon::Draw()
 	pDevice->SetRenderState(D3DRS_ALPHAREF, 0);
 	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 
-	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, m_rot);
+	
 
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
@@ -205,12 +205,6 @@ void  C3dpolygon::SetSize(const D3DXVECTOR3 &size)
 	pVtx[1].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 	pVtx[2].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 	pVtx[3].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-
-	//頂点カラーの設定
-	pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 
 	//テクスチャ座標の設定
 	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);

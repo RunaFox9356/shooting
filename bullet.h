@@ -28,11 +28,16 @@ public:
 	static CBullet *CBullet::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move);
 	void SetMove(const D3DXVECTOR3 &move)override;
 	static LPDIRECT3DTEXTURE9 GetTex();
-
+	void SetType(int Type);
 
 private:
+	void Move();
 	static LPDIRECT3DTEXTURE9	m_pTexture;
 	static int m_AllMember;
+	int m_Type;
+	D3DXVECTOR3 m_VecLengt;
+	float m_Dist;
+
 	D3DXVECTOR3 m_move; //polygon�̈ʒu
 	D3DXVECTOR3 Hitpos;
 };

@@ -24,6 +24,7 @@ public:
 	void Update() override {}
 	void Draw() override {}
 	void Magicplay(CTexture::TEXTURE TEX);
+	void MagicRelease(void);
 	static CMagicBox* Create(D3DXVECTOR3 pos);
 
 private:

@@ -14,8 +14,6 @@
 
 class  CCrystal : public C3dpolygon
 {
-
-
 public:
 	CCrystal();
 	~CCrystal() override;
