@@ -108,7 +108,7 @@ CPlayer *CPlayer::Create()
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-
+		pObject->SetLife(5);
 	}
 
 	return pObject;

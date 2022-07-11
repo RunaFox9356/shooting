@@ -79,7 +79,7 @@ void CCrystal::Update()
 			if (Type == CObject::PLAYER)
 			{	// Playerとの当たり判定
 				const D3DXVECTOR3 *PlayerPos = pObject->GetPos();
-				float Size = 20.0f;
+				float Size = 50.0f;
 				
 				if (((m_pos.y - m_Size.y) <= (PlayerPos->y + Size)) &&
 					((m_pos.y + m_Size.y) >= (PlayerPos->y - Size)) &&
@@ -97,7 +97,7 @@ void CCrystal::Update()
 			{	// たまとの当たり判定
 				const D3DXVECTOR3 *BulletPos = pObject->GetPos();
 		
-				float Size = 20.0f;
+				float Size = 40.0f;
 
 				if (((m_pos.y - m_Size.y) <= (BulletPos->y + Size)) &&
 					((m_pos.y + m_Size.y) >= (BulletPos->y - Size)) &&
@@ -117,9 +117,20 @@ void CCrystal::Update()
 //=============================================================================
 void CCrystal::Draw()
 {
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
+	//アルファブレンディングを加算合成に設定
+	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, m_rot);
 
 	C3dpolygon::Draw();
+
+	//αブレンディングを元に戻す
+	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 }
 
 //=============================================================================

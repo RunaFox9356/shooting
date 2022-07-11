@@ -13,7 +13,7 @@
 #include "motion.h"
 #include "manager.h"
 #include "motion.h"
-
+#include "crystal.h"
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -132,10 +132,10 @@ void CObject3d::Draw(void)
 		// ワールドマトリックスの初期化
 		// 行列初期化関数(第1引数の行列を単位行列に初期化)
 		D3DXMatrixIdentity(&m_mtxWorld);
-
 		
 		// 行列拡縮関数
 		D3DXMatrixScaling(&mtxScale, m_nScale.x, m_nScale.y, m_nScale.z);
+	
 		// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
 		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxScale);
 
@@ -169,9 +169,9 @@ void CObject3d::SetPos(const D3DXVECTOR3 &pos)
 	m_pos = pos;
 }
 
-//=============================================================================
+//------------------------------------
 // SetMove関数
-//=============================================================================
+//------------------------------------
 void CObject3d::SetMove(const D3DXVECTOR3 &move)
 {
 	m_move = move;
@@ -203,28 +203,58 @@ void CObject3d::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char * pFil
 }
 
 //------------------------------------
-// Set
+// GetPos
 //------------------------------------
 const D3DXVECTOR3 * CObject3d::GetPos() const
 {
 	return &m_pos;
 }
-
+//------------------------------------
+// GetSize
+//------------------------------------
 const D3DXVECTOR3 * CObject3d::GetSize() const
 {
-	return nullptr;
+	return &m_nScale;
 }
-
+//------------------------------------
+//GetRot
+//------------------------------------
 const D3DXVECTOR3 * CObject3d::GetRot() const
 {
 	return nullptr;
 }
 
+//------------------------------------
+// SetSize
+//------------------------------------
 void CObject3d::SetSize(D3DXVECTOR3 &Size)
 {
 	m_nScale = Size;
 }
 
+//------------------------------------
+// SetLife
+//------------------------------------
+void CObject3d::SetLife(int Life)
+{
+	m_Life = Life;
+}
+
+void CObject3d::HitLife(int Damage)
+{
+	m_Life -= Damage;
+
+	if (m_Life <= 0)
+	{
+		CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
+		// 解放
+		CObject::Release();
+	}
+}
+
+//------------------------------------
+// SetRot
+//------------------------------------
 void CObject3d::SetRot(D3DXVECTOR3 &Rot)
 {
 	m_rot = Rot;

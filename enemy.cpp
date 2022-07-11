@@ -89,7 +89,8 @@ void CEnemy::Update(void)
 
 	if (m_pos.x <= -SCREEN_WIDTH)
 	{
-		m_pos.x = SCREEN_WIDTH;
+		CObject::Release();
+		//m_pos.x = SCREEN_WIDTH;
 	}
 }
 
@@ -129,6 +130,7 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 		D3DXVECTOR3 pos;
 		D3DXVECTOR3 size;
 		D3DXVECTOR3 rot;
+		int Life;
 		for (int nCntEnemy = 0; nCntEnemy < nIndex; nCntEnemy++)
 		{
 			std::string name = "ENEMY";
@@ -138,18 +140,14 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 			pos = D3DXVECTOR3(j[name]["POS"]["X"], j[name]["POS"]["Y"], j[name]["POS"]["Z"]);
 			size = D3DXVECTOR3(j[name]["SIZE"]["X"], j[name]["SIZE"]["Y"], j[name]["SIZE"]["Z"]);
 			rot = D3DXVECTOR3(j[name]["ROT"]["X"], j[name]["ROT"]["Y"], j[name]["ROT"]["Z"]);
-			
+			Life = j[name]["LIFE"];
 
 			CEnemy * Enemy = CEnemy::Create();
 			Enemy->SetUp(ENEMY, pos, D3DXVECTOR3(-5.0f, 0.0f, 0.0f)); 
-			Enemy->Setdata(size, rot); 
+			Enemy->SetSize(size);
+			Enemy->SetRot(rot);
+			Enemy->SetLife(Life);
 		}
 	}
-}
-
-void CEnemy::Setdata(D3DXVECTOR3 size, D3DXVECTOR3 rot)
-{
-	CObject3d::SetSize(size);
-	CObject3d::SetRot(rot);
 }
 

@@ -45,6 +45,8 @@ public:
 	const D3DXVECTOR3 *GetRot() const;
 	void SetRot(D3DXVECTOR3 &Rot);
 	void SetSize(D3DXVECTOR3 &Size);
+	void SetLife(int Life);
+	void HitLife(int Damage);
 	const D3DXVECTOR3 *GetSize() const;
 
 protected:
@@ -90,5 +92,7 @@ private:
 	int				m_nparts;	// パーツの最大数
 	int				m_pow;		// ジャンプパワー
 	int				m_nMotion;	// モーション番号
+	int				m_Life;
+
 };
 #endif

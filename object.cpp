@@ -94,11 +94,11 @@ void CObject::AllUninit()
 void CObject::AllCreate()
 {
 
+	CMesh::Create();
 	CPlayer::Create()->SetUp(PLAYER, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CEnemy::LoadEnemy("Data/datatest.json");
 	/*CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));*/
-	CMesh::Create();
 }
 
 int * CObject::GetId()

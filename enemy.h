@@ -85,7 +85,7 @@ public:
 	void Draw()override;	// •`‰æ
 	static void  CEnemy::LoadEnemy(const char * pFdata);
 	static CEnemy *CEnemy::Create();
-	void Setdata(D3DXVECTOR3 size, D3DXVECTOR3 rot);
+
 
 private:
 	//void Collision(void);	// “–‚½‚è”»’è‚Ü‚Æ‚ß

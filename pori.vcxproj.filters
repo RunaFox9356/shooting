@@ -48,9 +48,6 @@
     <ClCompile Include="particle.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="character.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
@@ -117,6 +114,15 @@
     <ClCompile Include="manager.cpp">
       <Filter>メイン</Filter>
     </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="number.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enemy.h">
@@ -179,9 +185,6 @@
     <ClInclude Include="motion.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
-    <ClInclude Include="character.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
     <ClInclude Include="mesh.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
@@ -208,6 +211,15 @@
     </ClInclude>
     <ClInclude Include="manager.h">
       <Filter>メイン</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
+      <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="number.h">
+      <Filter>オブジェクト</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

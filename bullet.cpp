@@ -11,9 +11,12 @@
 #include "input.h"
 #include "utility.h"
 #include "camera.h"
-#include"crystal.h"
+#include "crystal.h"
 #include "player.h"
 #include "hamada.h"
+#include "enemy.h"
+#include <assert.h>
+
 int CBullet::m_AllMember;
 LPDIRECT3DTEXTURE9	CBullet::m_pTexture;
 
@@ -41,8 +44,8 @@ HRESULT CBullet::Init()
 
 	C3dpolygon::SetTexture(CTexture::TEXTURE_BULLET);
 
-	m_VecLengt = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	m_Dist = 0.0f;
+	m_VecLength = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_Length = 0.0f;
 	return S_OK;
 }
 
@@ -80,19 +83,45 @@ void CBullet::Update()
 			EObjectType Type = pObject->GetType();
 			if (Type == CObject::ENEMY)
 			{
-				const D3DXVECTOR3 *enemyPos = pObject->GetPos();
+				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
+				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
+				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
 				float enemySize = 20.0f;
+				*pEnemySize*enemySize;
 				float size = 50.0f;
 
-				if (((m_pos.y - size) <= (enemyPos->y + enemySize)) &&
-					((m_pos.y + size) >= (enemyPos->y - enemySize)) &&
-					((m_pos.x - size) <= (enemyPos->x + enemySize)) &&
-					((m_pos.x + size) >= (enemyPos->x - enemySize)))
+				if (((m_pos.y - size) <= (enemyPos->y + pEnemySize->y)) &&
+					((m_pos.y + size) >= (enemyPos->y - pEnemySize->y)) &&
+					((m_pos.x - size) <= (enemyPos->x + pEnemySize->x)) &&
+					((m_pos.x + size) >= (enemyPos->x - pEnemySize->x)))
 				{  
 
-					CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
+				
 					// 当たり判定
-					pObject->Release();
+					CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
+					assert(pObject3d != nullptr);
+					CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
+					switch (NouPlayer)
+					{
+					case CPlayer::NOW_FIRE:
+						pObject3d->HitLife(5);
+						break;
+					case CPlayer::NOW_ICE:
+						pObject3d->HitLife(5);
+						break;
+					case CPlayer::NOW_STORM:
+						pObject3d->HitLife(5);
+						break;
+					case CPlayer::NOW_SUN:
+						pObject3d->HitLife(3);
+						break;
+					case CPlayer::NOW_NON:
+						pObject3d->HitLife(3);
+						break;
+					default:
+						pObject3d->HitLife(5);
+						break;
+					}
 
 				    // 解放
 					CObject::Release();
@@ -116,7 +145,8 @@ void CBullet::Draw()
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, m_rot);
+
+	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
  	C3dpolygon::Draw();
 
@@ -189,14 +219,15 @@ LPDIRECT3DTEXTURE9 CBullet::GetTex()
 //=============================================================================
 void CBullet::Move()
 {
-
 	switch ((CPlayer::NOWMAGIC)m_Type)
 	{
 	case CPlayer::NOW_FIRE:
 		m_pos += m_move;
 		break;
 	case CPlayer::NOW_ICE:
-		
+	{
+		bool homing = false;
+
 		for (int i = 0; i < MAX_OBJECT; i++)
 		{
 			CObject*pObject;
@@ -207,29 +238,39 @@ void CBullet::Move()
 				EObjectType Type = pObject->GetType();
 				if (Type == CObject::ENEMY)
 				{
-					D3DXVECTOR3 vecDist = m_pos - *pObject->GetPos();
+					/*D3DXVECTOR3 vec = *pObject->GetPos() - m_pos;
+					float length = D3DXVec3Length(&vec);
 
-					if (m_VecLengt.x <= vecDist.x)
+					if (m_Length >= length)
 					{
-						m_VecLengt = vecDist;
-					}
-					if (m_VecLengt == D3DXVECTOR3(0.0f, 0.0f, 0.0f))
-					{
-						m_VecLengt = vecDist;
-					}
+						m_Length = length;
+						m_VecLength = vec;
+					}*/
+
+					D3DXVECTOR3 vecDiff = *pObject->GetPos() - m_pos;
+					float fLength = D3DXVec3Length(&vecDiff);
+					m_pos = m_pos + ((vecDiff / fLength) * 10.0f);
+					homing = true;
+					break;
 				}
 			}
 		}
 
-		m_Dist = D3DXVec3Length(&m_VecLengt);
-		if (m_Dist <= 300.0f)
-		{
-			m_pos += m_VecLengt / m_Dist * 2.0f;
-		}
-		else
+		if (!homing)
 		{
 			m_pos += m_move;
 		}
+	}
+
+		/*if (m_Length <= 300.0f)
+		{
+			m_pos += m_VecLength / m_Length * 2.0f;
+		}
+		else
+		{
+			m_pos += m_VecLength / m_Length * 2.0f;
+		}*/
+		
 		break;
 	case CPlayer::NOW_STORM:
 		m_pos += m_move;

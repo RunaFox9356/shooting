@@ -35,8 +35,8 @@ private:
 	static LPDIRECT3DTEXTURE9	m_pTexture;
 	static int m_AllMember;
 	int m_Type;
-	D3DXVECTOR3 m_VecLengt;
-	float m_Dist;
+	D3DXVECTOR3 m_VecLength;
+	float m_Length;
 
 	D3DXVECTOR3 m_move; //polygon�̈ʒu
 	D3DXVECTOR3 Hitpos;
