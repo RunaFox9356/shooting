@@ -1,6 +1,6 @@
 //============================
 //
-// スコア設定ヘッター
+// NUMBER
 // Author:hamada ryuuga
 //
 //============================
@@ -21,19 +21,11 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	void Set(int nScore);
-	void Add(int nValue);
-	int Get();
+	static CNumber* Create();
+
 private:
 
 };
 
-CNumber::CNumber()
-{
-}
-
-CNumber::~CNumber()
-{
-}
 
 #endif

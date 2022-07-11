@@ -159,7 +159,6 @@
     <ClCompile Include="crystal.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="hamada.cpp" />
-    <ClCompile Include="item.cpp" />
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="enemy.cpp" />
@@ -192,7 +191,6 @@
     <ClInclude Include="crystal.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="hamada.h" />
-    <ClInclude Include="item.h" />
     <ClInclude Include="magic.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="enemy.h" />

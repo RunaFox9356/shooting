@@ -114,9 +114,6 @@
     <ClCompile Include="manager.cpp">
       <Filter>メイン</Filter>
     </ClCompile>
-    <ClCompile Include="item.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="score.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
@@ -211,9 +208,6 @@
     </ClInclude>
     <ClInclude Include="manager.h">
       <Filter>メイン</Filter>
-    </ClInclude>
-    <ClInclude Include="item.h">
-      <Filter>オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="score.h">
       <Filter>オブジェクト</Filter>
