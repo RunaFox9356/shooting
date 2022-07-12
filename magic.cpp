@@ -36,6 +36,7 @@ HRESULT CMagicBox::CMagic::Init()
 	m_DivisionMAX = m_DivisionY*m_DivisionX;
 	m_CounterAnim = 0;
 	m_PatternAnim = 0;
+
 	//表示座標を更新
 	SetTex(TexVec4(
 		1.0f / m_DivisionX * (m_PatternAnim % (m_DivisionX))
@@ -106,6 +107,7 @@ CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 			object->cMagic[i]->SetPos(D3DXVECTOR3(posX, pos.y, pos.z));
 			object->cMagic[i]->Init();
 			object->cMagic[i]->SelectTex(CTexture::TEXTURE_NONE);
+			object->cMagic[i]->SetSize(80);
 		}
 	}
 	return object;

@@ -11,6 +11,9 @@
 
 #include "renderer.h"
 
+class CScore;
+
+
 class CObject
 {
 public:
@@ -49,7 +52,7 @@ public:
 	
 	void Release();
 	EObjectType GetType();
-
+	CScore*GetScore();
 protected:
 	static CObject *m_pObject[MAX_OBJECT]; 
 	int	m_nID;

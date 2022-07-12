@@ -68,11 +68,13 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	//ƒ‚[ƒh‚ÌÝ’è
 	SetMode(m_mode);
 
+
 	CObject::AllCreate();
 
 	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(100.0f, 650.0f, 0.0f));
 
 	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_NONE);
+
 
 
 	return S_OK;

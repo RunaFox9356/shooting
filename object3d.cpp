@@ -14,6 +14,8 @@
 #include "manager.h"
 #include "motion.h"
 #include "crystal.h"
+#include "score.h"
+
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -246,6 +248,7 @@ void CObject3d::HitLife(int Damage)
 
 	if (m_Life <= 0)
 	{
+		GetScore()->Add(50);
 		CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
 		// 解放
 		CObject::Release();

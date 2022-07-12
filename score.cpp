@@ -5,7 +5,6 @@
 //
 //============================
 #include "score.h"
-#include "game.h"
 #include "manager.h"
 #include "number.h"
 
@@ -28,7 +27,7 @@ CScore::~CScore()
 //===================
 HRESULT CScore::Init()
 {
-	m_posScore = D3DXVECTOR3(900.0f, 50.0f, 0.0f);
+	m_posScore = D3DXVECTOR3(30.0f, 50.0f, 0.0f);
 
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (int nCntScore = 0; nCntScore < MAX_SCORE; nCntScore++)
@@ -36,7 +35,7 @@ HRESULT CScore::Init()
 		m_pNumber[nCntScore] = CNumber::Create();
 
 		m_pNumber[nCntScore]->SetPos(m_posScore);
-		
+		m_pNumber[nCntScore]->SetSize(30);
 		m_posScore += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
 	}
 	return S_OK;
@@ -47,6 +46,16 @@ HRESULT CScore::Init()
 //===================
 void  CScore::Uninit(void)
 {
+	for (int i = 0; i < MAX_SCORE; i++)
+	{
+		if (pNumber[i] != nullptr)
+		{
+			pNumber[i]->Uninit();
+			delete pNumber[i];
+			pNumber[i] = nullptr;
+		}
+	}
+
 }
 
 //===================
@@ -114,6 +123,7 @@ CScore *CScore::Create()
 	if (pObject != nullptr)
 	{
 		pObject->Init();
+
 	}
 
 	return pObject;

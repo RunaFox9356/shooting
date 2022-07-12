@@ -86,7 +86,7 @@ void CBullet::Update()
 				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
-				float enemySize = 20.0f;
+				float enemySize = 50.0f;
 				*pEnemySize*enemySize;
 				float size = 50.0f;
 
@@ -116,7 +116,7 @@ void CBullet::Update()
 						pObject3d->HitLife(3);
 						break;
 					case CPlayer::NOW_NON:
-						pObject3d->HitLife(3);
+						pObject3d->HitLife(5);
 						break;
 					default:
 						pObject3d->HitLife(5);

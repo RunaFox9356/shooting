@@ -14,9 +14,12 @@
 #include "bullet.h"
 #include "mesh.h"
 #include "magic.h"
+#include "score.h"
+
+
 CObject *CObject::m_pObject[MAX_OBJECT] = {};
 int CObject::m_AllMember = 0;
-
+CScore * pScore;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
@@ -97,13 +100,11 @@ void CObject::AllCreate()
 	CMesh::Create();
 	CPlayer::Create()->SetUp(PLAYER, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CEnemy::LoadEnemy("Data/datatest.json");
+	pScore = CScore::Create();
+	pScore->Set(0);
+	pScore-> Add(20);
 	/*CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(-100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CEnemy::Create()->SetUp(ENEMY, D3DXVECTOR3(100.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));*/
-}
-
-int * CObject::GetId()
-{
-	return &m_nID;
 }
 
 //=============================================================================
@@ -140,10 +141,6 @@ void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos,D3DXVECTOR3 move)
 	
 }
 
-CObject::EObjectType CObject::GetType()
-{
-	return m_Type;
-}
 
 //=============================================================================
 // release関数
@@ -161,9 +158,24 @@ void CObject::Release()
 }
 
 //=============================================================================
-// GetObjectData関数
+// objectのデータを取得する関数
 //=============================================================================
 CObject*CObject::GetObjectData(int nCount)
 {
 	return m_pObject[nCount];
+}
+
+CScore*CObject::GetScore()
+{
+	return pScore;
+}
+
+int * CObject::GetId()
+{
+	return &m_nID;
+}
+
+CObject::EObjectType CObject::GetType()
+{
+	return m_Type;
 }

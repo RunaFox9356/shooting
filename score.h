@@ -8,7 +8,6 @@
 #ifndef _SCORE_H_
 #define _SCORE_H_
 
-#include "main.h"
 #include "object.h"
 
 #define	MAX_SCORE	(8)
@@ -28,10 +27,10 @@ public:
 	void Set(int nScore);
 	void Add(int nValue);
 	int Get();
-	CScore*Create();
+	static CScore*Create();
 	void SetPos(const D3DXVECTOR3 &pos) {} ;
 	void SetMove(const D3DXVECTOR3 &move) {};
-	const D3DXVECTOR3 *GetPos() const {};
+	const D3DXVECTOR3 *GetPos() const { return &m_posScore; };
 
 private:
 

@@ -43,7 +43,8 @@ public:
 	void SetTex(TexVec4 Tex);
 	CTexture::TEXTURE GetTexture(); 
 	void SetCollar(TexVec4 Collar);
-	float GetSize();
+	float GetSize() { return m_fSize; };
+	void SetSize(float Size) { m_fSize = Size; };
 protected:
 	int  m_nTimer;
 	float m_nScale;

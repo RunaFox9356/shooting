@@ -116,7 +116,7 @@ void CObject2d::Uninit()
 //=============================================================================
 void CObject2d::Update()
 {
-	m_nTimer++;
+	
 	VERTEX_2D *pVtx; //頂点へのポインタ
 
 	 //頂点バッファをロックし頂点情報へのポインタを取得
@@ -133,7 +133,7 @@ void CObject2d::Update()
 	for (int i = 0; i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&addPos[i], &m_Vtx[i], &mtx);
-		pVtx[i].pos = m_pos + (addPos[i] * 85.0f);//<-サイズ変更
+		pVtx[i].pos = m_pos + (addPos[i] * m_fSize);//<-サイズ変更
 		pVtx[i].pos.z = 0.0f;
 	}
 
