@@ -19,9 +19,8 @@ void CMultiply::set(int Number, int Digits, D3DXVECTOR3 Pos)
 	{
 		test[i] = nullptr;
 	}
-	
 
-	for (int i = Digits; i >= 0; i--)
+	for (int i = Digits-1; i >= 0; i--)
 	{
 		
 		aPosTexU[i] = (nModScore % 10);
