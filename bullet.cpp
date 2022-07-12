@@ -95,7 +95,6 @@ void CBullet::Update()
 					((m_pos.x - size) <= (enemyPos->x + pEnemySize->x)) &&
 					((m_pos.x + size) >= (enemyPos->x - pEnemySize->x)))
 				{  
-
 				
 					// 当たり判定
 					CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
