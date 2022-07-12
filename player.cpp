@@ -18,6 +18,7 @@
 #include "enemy.h"	
 #include "magic.h"
 #include "gon.h"
+#include "multiply.h"
 //------------------------------------
 // static変数
 //------------------------------------
@@ -184,6 +185,7 @@ void CPlayer::Move()	//動きセット
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
 		CManager::GetMagicBox()->CMagicBox::MagicRelease();
+		CMultiply::list(100, 3, m_pos);
 	}
 
 	m_move.x += (0.0f - m_move.x)*ATTENUATION;//（目的の値-現在の値）＊減衰係数

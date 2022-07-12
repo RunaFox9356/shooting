@@ -114,16 +114,5 @@ private:
 	float g_fAngle = 0.0f;
 };
 
-//プロトタイプ宣言
-//void InitParticle(void);
-//void UninitParticle(void);
-//void UpdateParticle(void);
-//void DrawParticle(void);
-//void SetParticleImgui(Particle& inParticle);
-//void LoadTex(void);
-//void DeleteParticle(int nDelete);
-//void DeleteParticleAll();
-//void RemoveAngle(void);
-//Particle *GetParticle(void);
-//DWORD FloattoDword(float f);
+
 #endif

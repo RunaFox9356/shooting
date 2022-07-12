@@ -33,11 +33,11 @@ HRESULT CScore::Init()
 	for (int nCntScore = 0; nCntScore < MAX_SCORE; nCntScore++)
 	{	
 		m_pNumber[nCntScore] = CNumber::Create();
-
 		m_pNumber[nCntScore]->SetPos(m_posScore);
 		m_pNumber[nCntScore]->SetSize(30);
 		m_posScore += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
 	}
+
 	return S_OK;
 }
 

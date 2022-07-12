@@ -35,6 +35,7 @@ public:
 private:
 
 	 CNumber* m_pNumber[MAX_SCORE];
+	 CNumber * test[MAX_SCORE];
 	 int m_nScore;
 	 D3DXVECTOR3 m_posScore; //スコアの位置
 };

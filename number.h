@@ -15,6 +15,8 @@
 class CNumber : public CObject2d
 {
 public:
+
+	
 	CNumber();
 	~CNumber();
 	HRESULT Init() override;
@@ -22,9 +24,15 @@ public:
 	void Update() override;
 	void Draw() override;
 	static CNumber* Create();
-
+	
+	
+	void Releasetimer(int nTimar);
 private:
-
+	TexVec4 col;
+	int m_DesTimarMax;
+	int m_DesTimar;
+	bool isRelease;
+	
 };
 
 
