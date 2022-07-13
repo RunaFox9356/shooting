@@ -176,9 +176,6 @@
     <ClInclude Include="texture.h">
       <Filter>システム</Filter>
     </ClInclude>
-    <ClInclude Include="utility.h">
-      <Filter>システム</Filter>
-    </ClInclude>
     <ClInclude Include="main.h">
       <Filter>メイン</Filter>
     </ClInclude>
@@ -220,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="multiply.h">
       <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>システム</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

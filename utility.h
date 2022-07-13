@@ -86,4 +86,7 @@ D3DXVECTOR3 WorldCastScreen(D3DXVECTOR3 *screenPos,			// スクリーン座標
 	D3DXVECTOR3 screenSize,									// スクリーンサイズ
 	D3DXMATRIX* mtxView,									// ビューマトリックス
 	D3DXMATRIX* mtxProjection);								// プロジェクションマトリックス
+
+D3DXVECTOR3 ScreenCastWorld(D3DXVECTOR3 *screenPos,			// スクリーン座標
+	D3DXVECTOR3 screenSize);
 #endif // !_UTILITY_H_

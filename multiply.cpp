@@ -7,6 +7,7 @@
 
 #include "multiply.h"
 #include "number.h"
+#include "utility.h"
 
 //=============================================================================
 // セット関数
@@ -27,13 +28,24 @@ void CMultiply::set(int Number, int Digits, D3DXVECTOR3 Pos)
 		nModScore /= 10;
 	}
 	D3DXVECTOR3 testpos = Pos;
+
+	testpos = ScreenCastWorld(&testpos,			// スクリーン座標
+		D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));									// スクリーンサイズ
+	testpos += D3DXVECTOR3(0.0f, -50.0f, 0.0f);
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (int nCntScore = 0; nCntScore < Digits; nCntScore++)
 	{
+
+		CAMERA *pCamera = GetCamera()->Get();
+
+	
+	
+		
+
 		test[nCntScore] = CNumber::Create();
 		test[nCntScore]->SetPos(testpos);
-		test[nCntScore]->SetSize(30);
 		testpos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
+		test[nCntScore]->SetSize(30);
 		test[nCntScore]->SetTex(TexVec4(
 			0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
 		test[nCntScore]->Releasetimer(360);

@@ -11,6 +11,7 @@
 #include "main.h"
 #include "renderer.h"
 #include "utility.h"
+#include "camera.h"
 
 //--------------------------------------------------
 // 角度の正規化
@@ -116,3 +117,28 @@ D3DXVECTOR3 WorldCastScreen(D3DXVECTOR3 *screenPos,			// スクリーン座標
 
 	return ScreenPos;
 }
+
+//---------------------------------------------------------------------------
+// スクリーン座標をワールド座標へのキャスト
+//---------------------------------------------------------------------------
+D3DXVECTOR3 ScreenCastWorld(D3DXVECTOR3 *screenPos,			// スクリーン座標
+	D3DXVECTOR3 screenSize									// スクリーンサイズ
+)								// プロジェクションマトリックス
+{
+	// 変数宣言
+
+	D3DXVECTOR3 pos = *screenPos;
+
+	CAMERA *pCamera = GetCamera()->Get();
+
+	D3DXVECTOR3 Camerapos = pCamera->posV;
+
+	pos.y *= -1;
+
+	pos -= (Camerapos - D3DXVECTOR3(screenSize.x / 2, screenSize.y / 2, 0.0f));
+
+	
+	return pos;
+}
+
+

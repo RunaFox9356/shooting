@@ -112,6 +112,14 @@ CAMERA * CCamera::Get(void)
 	return &m_aCamera;
 }
 
+//----------------------------
+//Get
+//----------------------------
+D3DXVECTOR3 *CCamera::GetPos()
+{
+	return &m_aCamera.posV;
+}
+
 D3DXMATRIX  *CCamera::GetMtxProje()
 {
 	return &m_aCamera.MtxProje;
