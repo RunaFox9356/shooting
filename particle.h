@@ -108,7 +108,7 @@ public:
 
 private:
 	LPDIRECT3DTEXTURE9 s_pTexture[numType] = {};	//テクスチャへのポインタ
-	LPDIRECT3DVERTEXBUFFER9	s_pVtxBuff = NULL;	//頂点バッファへのポインタ
+	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;	//頂点バッファへのポインタ
 	Particle data;
 	static Particle g_aParticle[maxNumber];
 	float g_fAngle = 0.0f;

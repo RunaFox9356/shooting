@@ -107,7 +107,7 @@ void CCamera::Set(void)
 //----------------------------
 //Get
 //----------------------------
-CAMERA * CCamera::Get(void)
+CCamera::CAMERA * CCamera::Get(void)
 {
 	return &m_aCamera;
 }

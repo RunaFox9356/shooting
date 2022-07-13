@@ -22,7 +22,7 @@ private:
 	//polygonの拡大サイズ
 	static const D3DXVECTOR3 m_Vtx[4];
 
-	typedef enum
+	enum ANIME
 	{
 		ANIME_NORMAL = 0,	// ニュートラル
 		ANIME_RUN,			// 歩き
@@ -30,7 +30,8 @@ private:
 		ANIME_JUMP,			// ジャンプ
 		ANIME_LANDING,		// 着地
 		ANIME_MAX
-	}ANIME;
+	};
+
 public:
 	CObject3d();
 	~CObject3d() override;
@@ -56,9 +57,7 @@ protected:
 	D3DXVECTOR3		m_rotMove;					// 回転ムーブ
 
 private:
-	int  m_nTimer;
 	D3DXVECTOR3 m_nScale;
-	float m_fSize;
 
 	LPDIRECT3DTEXTURE9	m_pTexture = NULL;
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;

@@ -25,7 +25,7 @@ class CManager
 public:
 
 	//画面(モード)の種類
-	typedef enum
+	enum MODE
 	{
 		MODE_TITLE = 0,		//タイトル画面
 		MODE_GAME,			//ゲーム画面
@@ -35,7 +35,7 @@ public:
 		MODE_GAMEOVER,
 		MODE_TUTORIAL,
 		MODE_MAX
-	}MODE;
+	};
 
 	CManager();
 	~CManager();
@@ -54,10 +54,8 @@ private:
 	CInput *m_Input;
 	static CMagicBox* m_MagicBox;
 
-
 	static CObject*m_Game;
 	
-
 	MODE m_mode;
 };
 

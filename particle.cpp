@@ -50,13 +50,13 @@ HRESULT CParticle::Init()
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_2D,			//頂点フォーマット
 		D3DPOOL_MANAGED,
-		&s_pVtxBuff,
+		&m_pVtxBuff,
 		NULL);
 
 	VERTEX_2D *pVtx = NULL;		//頂点情報へのポインタ
 
 	//頂点バッファをロックし、頂点情報へのポインタを取得
-	s_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	DataParticle = GetStatus();
 
@@ -90,7 +90,7 @@ HRESULT CParticle::Init()
 	}
 
 	//頂点バッファをアンロックする
-	s_pVtxBuff->Unlock();
+	m_pVtxBuff->Unlock();
 
 	return S_OK;
 }
@@ -111,10 +111,10 @@ void CParticle::Uninit()
 	}
 
 	//頂点バッファの破壊
-	if (s_pVtxBuff != NULL)
+	if (m_pVtxBuff != NULL)
 	{
-		s_pVtxBuff->Release();
-		s_pVtxBuff = NULL;
+		m_pVtxBuff->Release();
+		m_pVtxBuff = NULL;
 	}
 }
 
@@ -181,7 +181,7 @@ void CParticle::Update()
 		VERTEX_2D *pVtx = nullptr;		//頂点情報へのポインタ
 
 		//頂点バッファをロック
-		s_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+		m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 		pVtx += i * 4;		//頂点データのポインタを4つ分集める
 
@@ -198,7 +198,7 @@ void CParticle::Update()
 		pVtx[3].col = pParticle->color.col;
 
 		//頂点バッファをアンロックする
-		s_pVtxBuff->Unlock();
+		m_pVtxBuff->Unlock();
 	}
 }
 
@@ -258,7 +258,7 @@ void CParticle::Draw()
 		}
 
 		//頂点バッファをデータストリームに設定
-		pDevice->SetStreamSource(0, s_pVtxBuff, 0, sizeof(VERTEX_2D));
+		pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_2D));
 
 		//頂点フォーマットの設定
 		pDevice->SetFVF(FVF_VERTEX_2D);
@@ -350,7 +350,7 @@ void CParticle::Create(Particle& inParticle)
 		VERTEX_2D*pVtx;	// 頂点情報へのポインタ
 
 						// 頂点バッファをロックし、頂点情報へのポインタを取得
-		s_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+		m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 		pVtx += i * 4;	// 頂点データのポインタを4つ分集める
 
@@ -367,7 +367,7 @@ void CParticle::Create(Particle& inParticle)
 		pVtx[3].col = pParticle->color.col;
 
 		// 頂点バッファをアンロックする
-		s_pVtxBuff->Unlock();
+		m_pVtxBuff->Unlock();
 
 		float ImAngle = 20.0f;
 		float fRad = 0.0f;

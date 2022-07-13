@@ -17,7 +17,9 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos)
 	int aPosTexU[100];
 	int nModScore = Number;
 	int nDigits;
+
 	nDigits = log10f(nModScore);
+
 	for (int i = 0; i < 10; i++)
 	{
 		test[i] = nullptr;
@@ -38,7 +40,7 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos)
 	for (int nCntScore = 0; nCntScore <= nDigits; nCntScore++)
 	{
 
-		CAMERA *pCamera = GetCamera()->Get();
+		CCamera::CAMERA *pCamera = GetCamera()->Get();
 
 
 		test[nCntScore] = CNumber::Create();

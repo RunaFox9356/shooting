@@ -17,7 +17,7 @@ class  CMotion;
 class CEnemy : public CObject3d
 {
 public:
-	typedef enum
+	enum ANIME
 	{
 		ANIME_NORMAL = 0,	// ニュートラル
 		ANIME_RUN,			// 歩き
@@ -25,45 +25,26 @@ public:
 		ANIME_JUMP,			// ジャンプ
 		ANIME_LANDING,		// 着地
 		ANIME_MAX
-	}ANIME;
+	};
 
-	typedef enum
-	{
-		STATUS_NORMAL = 0,	// ニュートラル
-		STATUS_RUN,			// 歩き
-		STATUS_ATTACK,		// 攻撃
-		STATUS_JUMPUP,		// ジャンプ
-		STATUS_JUMPDOWN,	// ジャンプ
-		STATUS_LANDING,		// 着地
-		STATUS_MAX
-	}STATUS;
 
-	typedef enum
+	enum DAMEGE
 	{
 		DAMEGE_NORMAL = 0,	// ニュートラル
 		DAMEGE_NOU,			// ダメージくらってる
 		DAMEGE_MAX
-	}DAMEGE;
+	};
 
-	typedef enum
-	{
-		COPY_NORMAL = 0,	// ニュートラル
-		COPY_SWORD,			// ソード
-		COPY_FIRE,			// ファイア
-		COPY_LASER,			// レーザー
-		COPY_CUTTER,		// カッター
-		COPY_MAX
-	}COPY;
-
+	
 	//modelデータの構造体//
-	typedef struct
+	struct MODELDATAPLAYER
 	{
 		int key;		// 時間管理
 		int nowKey;		// 今のキー
 		int loop;		// ループするかどうか[0:ループしない / 1 : ループする]
 		int num_key;  	// キー数
 						/*MyKeySet KeySet[MAX_KEY];*/
-	}MODELDATAPLAYER;
+	};
 
 public:
 	static const float ATTENUATION;		// 減衰係数

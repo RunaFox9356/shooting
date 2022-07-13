@@ -62,7 +62,7 @@ CObject3d::~CObject3d()
 //------------------------------------
 HRESULT CObject3d::Init(void)
 {
-	CAMERA *pCamera = GetCamera()->Get();
+	CCamera::CAMERA *pCamera = GetCamera()->Get();
 
 	//カメラのデータ取得
 	m_rotMove = D3DXVECTOR3(D3DX_PI + pCamera->rot.y, D3DX_PI * 0.5f + pCamera->rot.y, 0.0f);

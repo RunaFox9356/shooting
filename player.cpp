@@ -121,7 +121,7 @@ CPlayer *CPlayer::Create()
 void CPlayer::Move()	//“®‚«ƒZƒbƒg
 {
 	CInput *CInputpInput = CInput::GetKey();
-	CAMERA *pCamera = GetCamera()->Get();
+	CCamera::CAMERA *pCamera = GetCamera()->Get();
 	float consumption = 0.0f;
 	if (CInputpInput->Press(CInput::KEY_RIGHT))
 	{

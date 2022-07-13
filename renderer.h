@@ -48,14 +48,14 @@ const DWORD FVF_VERTEX_3D(D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_T
 
 
 //頂点情報「3ｄ」の構造体を定義
-typedef struct
+struct VERTEX_3D
 {
 	D3DXVECTOR3 pos;//頂点座標
 	D3DXVECTOR3 nor;//ベクトル
 	D3DCOLOR col;//カラー
 	D3DXVECTOR2 tex;//テクスチャ
 
-}VERTEX_3D;
+};
 
 int Gettime(void);
 

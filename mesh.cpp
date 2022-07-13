@@ -8,14 +8,7 @@
 
 #include "mesh.h"
 #include "manager.h"
-#define EMESHMAX (12800)
-//------------------------------------
-// static変数
-//------------------------------------
-static LPDIRECT3DVERTEXBUFFER9 s_pVtxBuff = NULL;	// 頂点バッファーへのポインタ
-static LPDIRECT3DTEXTURE9 s_pTextureEmesh = {}; //テクスチャのポインタ
-static LPDIRECT3DINDEXBUFFER9 s_pIdxBuff = {};  //インデックスバッファ
-static EMESH s_Emesh;								// ポリゴンの構造体
+
 
 
 
@@ -36,59 +29,59 @@ HRESULT CMesh:: Init(void)
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	// 初期化処理
-	s_Emesh.pos = D3DXVECTOR3(-580.0f, 590.0f, 10.0f);
-	s_Emesh.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// 回転座標
+	m_Mesh.pos = D3DXVECTOR3(-580.0f, 590.0f, 10.0f);
+	m_Mesh.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// 回転座標
 
 													//テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
 		"Data/TEXTURE/rand.png",
-		&s_pTextureEmesh);
+		&m_pTextureEmesh);
 
 
 	//初期化
-	s_Emesh.xsiz = MAX_EMESH;
-	s_Emesh.zsiz = MAX_EMESH;
+	m_Mesh.xsiz = MAX_EMESH;
+	m_Mesh.zsiz = MAX_EMESH;
 
 	//辺の頂点数
-	s_Emesh.X = s_Emesh.xsiz + 1;//1多い数字
-	s_Emesh.Z = s_Emesh.zsiz + 1;//1多い数字
+	m_Mesh.X = m_Mesh.xsiz + 1;//1多い数字
+	m_Mesh.Z = m_Mesh.zsiz + 1;//1多い数字
 
 								 //頂点数
-	s_Emesh.nVtx = s_Emesh.X* s_Emesh.Z;//頂点数を使ってるよ
+	m_Mesh.nVtx = m_Mesh.X* m_Mesh.Z;//頂点数を使ってるよ
 
 										//インデックス数
-	s_Emesh.Index = (2 * s_Emesh.X * s_Emesh.zsiz + 2 * (s_Emesh.zsiz - 1));
+	m_Mesh.Index = (2 * m_Mesh.X * m_Mesh.zsiz + 2 * (m_Mesh.zsiz - 1));
 
-	s_Emesh.por = s_Emesh.Index - 2;
+	m_Mesh.por = m_Mesh.Index - 2;
 	// 頂点バッファの生成
-	pDevice->CreateVertexBuffer(sizeof(VERTEX_3D) * s_Emesh.nVtx,
+	pDevice->CreateVertexBuffer(sizeof(VERTEX_3D) * m_Mesh.nVtx,
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_3D,
 		D3DPOOL_MANAGED,
-		&s_pVtxBuff,
+		&m_pVtxBuff,
 		NULL);
 
 	//インデックスバッファ生成
-	pDevice->CreateIndexBuffer(sizeof(WORD) * s_Emesh.Index,
+	pDevice->CreateIndexBuffer(sizeof(WORD) * m_Mesh.Index,
 		D3DUSAGE_WRITEONLY,
 		D3DFMT_INDEX16,
 		D3DPOOL_MANAGED,
-		&s_pIdxBuff,
+		&m_pIdxBuff,
 		NULL);
 
 	VERTEX_3D* pVtx = NULL;
 
 	// 頂点座標をロック
-	s_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	// 頂点座標の設定
-	for (int i = 0; i < s_Emesh.nVtx; i++)
+	for (int i = 0; i < m_Mesh.nVtx; i++)
 	{
-		float posx = ((i % s_Emesh.X) - 1.0f);
-		float posz = ((i / s_Emesh.Z) - 1.0f)*-1.0f;
+		float posx = ((i % m_Mesh.X) - 1.0f);
+		float posz = ((i / m_Mesh.Z) - 1.0f)*-1.0f;
 
-		float texU = 1.0f / s_Emesh.xsiz*(i % s_Emesh.X);
-		float texV = 1.0f / s_Emesh.zsiz*(i / s_Emesh.Z);
+		float texU = 1.0f / m_Mesh.xsiz*(i % m_Mesh.X);
+		float texV = 1.0f / m_Mesh.zsiz*(i / m_Mesh.Z);
 
 
 		pVtx[i].pos += D3DXVECTOR3(posx*MAX_SIZEMESH, posz * MAX_SIZEMESH, 0.0f / D3DX_PI);
@@ -104,30 +97,30 @@ HRESULT CMesh:: Init(void)
 	}
 
 	// 頂点座標をアンロック
-	s_pVtxBuff->Unlock();
+	m_pVtxBuff->Unlock();
 
 	//インデックスバッファのロック
 	WORD* pIdx;
-	s_pIdxBuff->Lock(0, 0, (void**)&pIdx, 0);
-	for (int z = 0; z < s_Emesh.zsiz; z++)
+	m_pIdxBuff->Lock(0, 0, (void**)&pIdx, 0);
+	for (int z = 0; z < m_Mesh.zsiz; z++)
 	{
-		int linetop = z * (s_Emesh.X * 2 + 2);
-		for (int x = 0; x < s_Emesh.X; x++)
+		int linetop = z * (m_Mesh.X * 2 + 2);
+		for (int x = 0; x < m_Mesh.X; x++)
 		{
 			int nIdxData = x * 2 + linetop;
-			pIdx[nIdxData + 1] = (WORD)(x + (z * s_Emesh.X));
-			pIdx[nIdxData] = (WORD)(pIdx[nIdxData + 1] + s_Emesh.X);
+			pIdx[nIdxData + 1] = (WORD)(x + (z * m_Mesh.X));
+			pIdx[nIdxData] = (WORD)(pIdx[nIdxData + 1] + m_Mesh.X);
 		}
 		//縮退ポリゴン設定
-		if (z < s_Emesh.xsiz - 1)
+		if (z < m_Mesh.xsiz - 1)
 		{
-			pIdx[s_Emesh.X * 2 + 0 + linetop] = (WORD)(s_Emesh.xsiz + s_Emesh.X*z);
-			pIdx[s_Emesh.X * 2 + 1 + linetop] = (WORD)(s_Emesh.X * 2 + s_Emesh.X * z);
+			pIdx[m_Mesh.X * 2 + 0 + linetop] = (WORD)(m_Mesh.xsiz + m_Mesh.X*z);
+			pIdx[m_Mesh.X * 2 + 1 + linetop] = (WORD)(m_Mesh.X * 2 + m_Mesh.X * z);
 		}
 	}
 
 	// 頂点座標をアンロック
-	s_pIdxBuff->Unlock();
+	m_pIdxBuff->Unlock();
 
 	return S_OK;
 }
@@ -138,20 +131,20 @@ HRESULT CMesh:: Init(void)
 void CMesh::Uninit(void)
 {
 	// 頂点バッファーの解放
-	if (s_pVtxBuff != NULL)
+	if (m_pVtxBuff != NULL)
 	{
-		s_pVtxBuff->Release();
-		s_pVtxBuff = NULL;
+		m_pVtxBuff->Release();
+		m_pVtxBuff = NULL;
 	}
-	if (s_pTextureEmesh != NULL)
+	if (m_pTextureEmesh != NULL)
 	{
-		s_pTextureEmesh->Release();
-		s_pTextureEmesh = NULL;
+		m_pTextureEmesh->Release();
+		m_pTextureEmesh = NULL;
 	}
-	if (s_pIdxBuff != NULL)
+	if (m_pIdxBuff != NULL)
 	{
-		s_pIdxBuff->Release();
-		s_pIdxBuff = NULL;
+		m_pIdxBuff->Release();
+		m_pIdxBuff = NULL;
 	}
 }
 
@@ -190,35 +183,35 @@ void CMesh::Draw(void)
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 	// ワールドマトリックスの初期化
 	// 行列初期化関数(第1引数の行列を単位行列に初期化)
-	D3DXMatrixIdentity(&s_Emesh.mtxWorld);
+	D3DXMatrixIdentity(&m_Mesh.mtxWorld);
 
 	// 向きを反映
 	// 行列回転関数(第1引数にヨー(y)ピッチ(x)ロール(z)方向の回転行列を作成)
-	D3DXMatrixRotationYawPitchRoll(&mtxRot, s_Emesh.rot.y, s_Emesh.rot.x, s_Emesh.rot.z);
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, m_Mesh.rot.y, m_Mesh.rot.x, m_Mesh.rot.z);
 	// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
-	D3DXMatrixMultiply(&s_Emesh.mtxWorld, &s_Emesh.mtxWorld, &mtxRot);
+	D3DXMatrixMultiply(&m_Mesh.mtxWorld, &m_Mesh.mtxWorld, &mtxRot);
 
 	// 位置を反映
 	// 行列移動関数(第１引数にX,Y,Z方向の移動行列を作成)
-	D3DXMatrixTranslation(&mtxTrans, s_Emesh.pos.x, s_Emesh.pos.y, s_Emesh.pos.z);
+	D3DXMatrixTranslation(&mtxTrans, m_Mesh.pos.x, m_Mesh.pos.y, m_Mesh.pos.z);
 	// 行列掛け算関数(第2引数×第3引数第を１引数に格納)
-	D3DXMatrixMultiply(&s_Emesh.mtxWorld, &s_Emesh.mtxWorld, &mtxTrans);
+	D3DXMatrixMultiply(&m_Mesh.mtxWorld, &m_Mesh.mtxWorld, &mtxTrans);
 
 	// ワールド座標行列の設定
-	pDevice->SetTransform(D3DTS_WORLD, &s_Emesh.mtxWorld);
+	pDevice->SetTransform(D3DTS_WORLD, &m_Mesh.mtxWorld);
 
 	// 頂点バッファをデバイスのデータストリームに設定
-	pDevice->SetStreamSource(0, s_pVtxBuff, 0, sizeof(VERTEX_3D));
+	pDevice->SetStreamSource(0, m_pVtxBuff, 0, sizeof(VERTEX_3D));
 
 	//インデックスバッファ設定
-	pDevice->SetIndices(s_pIdxBuff);
+	pDevice->SetIndices(m_pIdxBuff);
 	// 頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 	//テクスチャの設定
-	pDevice->SetTexture(0, s_pTextureEmesh);
+	pDevice->SetTexture(0, m_pTextureEmesh);
 
 	// ポリゴンの描画
-	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, s_Emesh.nVtx, 0, s_Emesh.por);
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, m_Mesh.nVtx, 0, m_Mesh.por);
 
 	//テクスチャの設定
 	pDevice->SetTexture(0, NULL);

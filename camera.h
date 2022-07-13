@@ -10,28 +10,27 @@
 
 #include "renderer.h"
 
-//構造体
-typedef struct
-{
-	D3DXVECTOR3 posV;	//位置
-	D3DXVECTOR3 posR;	//注視点
-	D3DXVECTOR3 vecU;	//ベクトル
-	D3DXVECTOR3 directionV; //回転の向き位置
-	D3DXVECTOR3 directionR;//回転の向き注視点
-	D3DXVECTOR3 rot;//位置回転
-	float fDistance;//距離
-	float fDistanceY;
-	bool bBool;
-	D3DVIEWPORT9 viewport;
-	D3DXVECTOR3 posVDest, posRDest;
-	D3DXMATRIX MtxProje; //プロジェクションマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
-	D3DXMATRIX MtxView; //ビューマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
-}CAMERA;
-
-
-
 class CCamera
 {
+public:
+	//構造体
+	struct CAMERA
+	{
+		D3DXVECTOR3 posV;	//位置
+		D3DXVECTOR3 posR;	//注視点
+		D3DXVECTOR3 vecU;	//ベクトル
+		D3DXVECTOR3 directionV; //回転の向き位置
+		D3DXVECTOR3 directionR;//回転の向き注視点
+		D3DXVECTOR3 rot;//位置回転
+		float fDistance;//距離
+		float fDistanceY;
+		bool bBool;
+		D3DVIEWPORT9 viewport;
+		D3DXVECTOR3 posVDest, posRDest;
+		D3DXMATRIX MtxProje; //プロジェクションマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
+		D3DXMATRIX MtxView; //ビューマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
+	};
+
 public:
 	CCamera();
 	~CCamera();
@@ -45,6 +44,7 @@ public:
 	D3DXMATRIX *GetMtxView();
 	D3DXVECTOR3 *GetPos();
 private:
+
 	 float m_Speed = 1.0f;
 
 	 float m_rotSpeed = 0.05f;
@@ -53,6 +53,8 @@ private:
 	//スタティック変数
 	 CAMERA m_aCamera;
 	 float m_rot;
+
+
 };
 #endif
 
