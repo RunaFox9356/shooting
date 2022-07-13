@@ -27,7 +27,7 @@ public:
 	static CMultiply* list(int Number, D3DXVECTOR3 Pos);
 
 private:
-	CNumber * test[10];
+	CNumber * ratio[10];
 };
 
 #endif

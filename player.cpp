@@ -121,19 +121,19 @@ CPlayer *CPlayer::Create()
 void CPlayer::Move()	//“®‚«ƒZƒbƒg
 {
 	CInput *CInputpInput = CInput::GetKey();
-	CCamera::CAMERA *pCamera = GetCamera()->Get();
+	D3DXVECTOR3 *Camerarot = GetCamera()->GetRot();
 	float consumption = 0.0f;
 	if (CInputpInput->Press(CInput::KEY_RIGHT))
 	{
-		m_move.x += sinf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
-		m_move.z += cosf(D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
-		consumption = m_rotMove.x + (D3DX_PI*0.5f) - m_rot.y + pCamera->rot.y;
+		m_move.x += sinf(D3DX_PI *0.5f + Camerarot->y) * SPEED * m_MoveSpeed;
+		m_move.z += cosf(D3DX_PI *0.5f + Camerarot->y) * SPEED * m_MoveSpeed;
+		consumption = m_rotMove.x + (D3DX_PI*0.5f) - m_rot.y + Camerarot->y;
 
 	}
 	if (CInputpInput->Press(CInput::KEY_LEFT))
 	{
-		m_move.x += sinf(-D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
-		m_move.z += cosf(-D3DX_PI *0.5f + pCamera->rot.y) * SPEED * m_MoveSpeed;
+		m_move.x += sinf(-D3DX_PI *0.5f + Camerarot->y) * SPEED * m_MoveSpeed;
+		m_move.z += cosf(-D3DX_PI *0.5f + Camerarot->y) * SPEED * m_MoveSpeed;
 		
 	
 	}

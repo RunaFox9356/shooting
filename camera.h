@@ -12,24 +12,7 @@
 
 class CCamera
 {
-public:
-	//構造体
-	struct CAMERA
-	{
-		D3DXVECTOR3 posV;	//位置
-		D3DXVECTOR3 posR;	//注視点
-		D3DXVECTOR3 vecU;	//ベクトル
-		D3DXVECTOR3 directionV; //回転の向き位置
-		D3DXVECTOR3 directionR;//回転の向き注視点
-		D3DXVECTOR3 rot;//位置回転
-		float fDistance;//距離
-		float fDistanceY;
-		bool bBool;
-		D3DVIEWPORT9 viewport;
-		D3DXVECTOR3 posVDest, posRDest;
-		D3DXMATRIX MtxProje; //プロジェクションマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
-		D3DXMATRIX MtxView; //ビューマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
-	};
+
 
 public:
 	CCamera();
@@ -39,10 +22,10 @@ public:
 	void Uninit(void);//破棄
 	void Update(void);//更新
 	void Set(void);//画面設定
-	CAMERA *Get(void); //ゲット
 	D3DXMATRIX *GetMtxProje();
 	D3DXMATRIX *GetMtxView();
 	D3DXVECTOR3 *GetPos();
+	D3DXVECTOR3 *GetRot();
 private:
 
 	 float m_Speed = 1.0f;
@@ -50,9 +33,20 @@ private:
 	 float m_rotSpeed = 0.05f;
 	 float m_rotSpeed2 = D3DX_PI / 2;
 
-	//スタティック変数
-	 CAMERA m_aCamera;
-	 float m_rot;
+
+
+	 D3DXVECTOR3 m_posV;	//位置
+	 D3DXVECTOR3 m_posR;	//注視点
+	 D3DXVECTOR3 m_vecU;	//ベクトル
+	 D3DXVECTOR3 m_directionV; //回転の向き位置
+	 D3DXVECTOR3 m_directionR;//回転の向き注視点
+	 D3DXVECTOR3 m_rot;//位置回転
+	 float m_fDistance;//距離
+	 float m_fDistanceY;
+	 D3DVIEWPORT9 m_viewport;
+	 D3DXVECTOR3 posVDest, m_posRDest;
+	 D3DXMATRIX m_MtxProje; //プロジェクションマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
+	 D3DXMATRIX m_MtxView; //ビューマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
 
 
 };

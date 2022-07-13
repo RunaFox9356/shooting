@@ -62,10 +62,10 @@ CObject3d::~CObject3d()
 //------------------------------------
 HRESULT CObject3d::Init(void)
 {
-	CCamera::CAMERA *pCamera = GetCamera()->Get();
+	D3DXVECTOR3 *Camerarot = GetCamera()->GetRot();
 
 	//カメラのデータ取得
-	m_rotMove = D3DXVECTOR3(D3DX_PI + pCamera->rot.y, D3DX_PI * 0.5f + pCamera->rot.y, 0.0f);
+	m_rotMove = D3DXVECTOR3(D3DX_PI + Camerarot->y, D3DX_PI * 0.5f + Camerarot->y, 0.0f);
 
 	m_modelMin = D3DXVECTOR3(FLT_MAX, FLT_MAX, FLT_MAX);
 	m_modelMax = D3DXVECTOR3(-FLT_MAX, -FLT_MAX, -FLT_MAX);

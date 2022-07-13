@@ -22,7 +22,7 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos)
 
 	for (int i = 0; i < 10; i++)
 	{
-		test[i] = nullptr;
+		ratio[i] = nullptr;
 	}
 
 	for (int i = nDigits; i >= 0; i--)
@@ -31,25 +31,21 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos)
 		aPosTexU[i] = (nModScore % 10);
 		nModScore /= 10;
 	}
-	D3DXVECTOR3 testpos = Pos;
+	D3DXVECTOR3 ratiopos = Pos;
 
-	testpos = ScreenCastWorld(&testpos,			// スクリーン座標
+	ratiopos = ScreenCastWorld(&ratiopos,			// スクリーン座標
 		D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));									// スクリーンサイズ
-	testpos += D3DXVECTOR3(0.0f, -50.0f, 0.0f);
+	ratiopos += D3DXVECTOR3(0.0f, -50.0f, 0.0f);
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (int nCntScore = 0; nCntScore <= nDigits; nCntScore++)
 	{
-
-		CCamera::CAMERA *pCamera = GetCamera()->Get();
-
-
-		test[nCntScore] = CNumber::Create();
-		test[nCntScore]->SetPos(testpos);
-		testpos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
-		test[nCntScore]->SetSize(30);
-		test[nCntScore]->SetTex(TexVec4(
+		ratio[nCntScore] = CNumber::Create();
+		ratio[nCntScore]->SetPos(ratiopos);
+		ratiopos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
+		ratio[nCntScore]->SetSize(30);
+		ratio[nCntScore]->SetTex(TexVec4(
 			0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
-		test[nCntScore]->Releasetimer(360);
+		ratio[nCntScore]->Releasetimer(360);
 	}
 }
 
@@ -81,11 +77,11 @@ void CMultiply::Uninit()
 {
 	for (int i = 0; i < 10; i++)
 	{
-		if (test[i] != nullptr)
+		if (ratio[i] != nullptr)
 		{
-			//test[i]->Uninit();
-			//delete test[i];
-			//test[i] = nullptr;
+			//ratio[i]->Uninit();
+			//delete ratio[i];
+			//ratio[i] = nullptr;
 		}
 	}
 }

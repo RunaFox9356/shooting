@@ -27,26 +27,25 @@ CCamera::~CCamera()
 //----------------------------
 void CCamera::Init(void)
 {
-	m_aCamera.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	//視点　注視点　上方向　設定
-	m_aCamera.posV = D3DXVECTOR3(0.0f, 0.0f, -150.0f);
-	m_aCamera.posR = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	m_aCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	m_aCamera.directionR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	m_aCamera.directionV = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	m_aCamera.bBool = true;
+	m_posV = D3DXVECTOR3(0.0f, 0.0f, -150.0f);
+	m_posR = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+	m_vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+	m_directionR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_directionV = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
-	m_aCamera.fDistance = sqrtf((m_aCamera.posR.x - m_aCamera.posV.x) *
-		(m_aCamera.posR.x - m_aCamera.posV.x) +
-		(m_aCamera.posR.z - m_aCamera.posV.z) *
-		(m_aCamera.posR.z - m_aCamera.posV.z));
+	m_fDistance = sqrtf((m_posR.x - m_posV.x) *
+		(m_posR.x - m_posV.x) +
+		(m_posR.z - m_posV.z) *
+		(m_posR.z - m_posV.z));
 
-	m_aCamera.fDistance = sqrtf((m_aCamera.posR.y - m_aCamera.posV.y)*
-		(m_aCamera.posR.y - m_aCamera.posV.y) +
-		(m_aCamera.fDistance*m_aCamera.fDistance));
+	m_fDistance = sqrtf((m_posR.y - m_posV.y)*
+		(m_posR.y - m_posV.y) +
+		(m_fDistance*m_fDistance));
 
-	m_aCamera.rot.x = atan2f((m_aCamera.posR.z - m_aCamera.posV.z),
-		(m_aCamera.posR.y - m_aCamera.posV.y));
+	m_rot.x = atan2f((m_posR.z - m_posV.z),
+		(m_posR.y - m_posV.y));
 }
 
 //----------------------------
@@ -72,59 +71,57 @@ void CCamera::Set(void)
 	LPDIRECT3DDEVICE9  pDevice = CManager::GetRenderer()->GetDevice();//デバイスのポインタ
 
 	//ビューマトリックスを初期化
-	D3DXMatrixIdentity(&m_aCamera.MtxView);
+	D3DXMatrixIdentity(&m_MtxView);
 
 	//ビューマトリックスの作成
-	D3DXMatrixLookAtLH(&m_aCamera.MtxView,
-		&m_aCamera.posV,
-		&m_aCamera.posR,
-		&m_aCamera.vecU);
+	D3DXMatrixLookAtLH(&m_MtxView,
+		&m_posV,
+		&m_posR,
+		&m_vecU);
 
 	//適用
-	pDevice->SetTransform(D3DTS_VIEW, &m_aCamera.MtxView);
+	pDevice->SetTransform(D3DTS_VIEW, &m_MtxView);
 
 	//プロジェクションマトリックスを初期化
-	D3DXMatrixIdentity(&m_aCamera.MtxProje);
+	D3DXMatrixIdentity(&m_MtxProje);
 
 	////プロジェクションマトリックス作成
-	//D3DXMatrixPerspectiveFovLH(&m_aCamera.MtxProje,
+	//D3DXMatrixPerspectiveFovLH(&m_MtxProje,
 	//	D3DXToRadian(90.0f),
 	//	(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,
 	//	10.0f,
 	//	10000.0f);
 
 	// プロジェクションマトリックスの作成(平行投影)
-	D3DXMatrixOrthoLH(&m_aCamera.MtxProje,					// プロジェクションマトリックス
+	D3DXMatrixOrthoLH(&m_MtxProje,					// プロジェクションマトリックス
 		(float)SCREEN_WIDTH,								// 幅
 		(float)SCREEN_HEIGHT,								// 高さ
 		10.0f,												// ニア
 		1000.0f);											// ファー
 
 	//適用
-	pDevice->SetTransform(D3DTS_PROJECTION, &m_aCamera.MtxProje);
+	pDevice->SetTransform(D3DTS_PROJECTION, &m_MtxProje);
 }
 
-//----------------------------
-//Get
-//----------------------------
-CCamera::CAMERA * CCamera::Get(void)
-{
-	return &m_aCamera;
-}
 
 //----------------------------
 //Get
 //----------------------------
 D3DXVECTOR3 *CCamera::GetPos()
 {
-	return &m_aCamera.posV;
+	return &m_posV;
+}
+
+D3DXVECTOR3 * CCamera::GetRot()
+{
+	return &m_rot;
 }
 
 D3DXMATRIX  *CCamera::GetMtxProje()
 {
-	return &m_aCamera.MtxProje;
+	return &m_MtxProje;
 }
 D3DXMATRIX *CCamera::GetMtxView()
 {
-	return &m_aCamera.MtxView;
+	return &m_MtxView;
 }
