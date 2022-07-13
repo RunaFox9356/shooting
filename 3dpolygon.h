@@ -30,9 +30,9 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	const D3DXVECTOR3 *GetPos() const override;
-	void SetPos(const D3DXVECTOR3 &pos) override;
-
+	virtual const D3DXVECTOR3 *GetPos() const;
+	virtual void SetPos(const D3DXVECTOR3 &pos);
+	virtual void SetMove(const D3DXVECTOR3 &move) = 0;
 	void SetTexture(CTexture::TEXTURE texture);
 	void SetTex(TexVec4 Tex);
 	

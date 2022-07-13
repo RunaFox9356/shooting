@@ -229,7 +229,7 @@ void CBullet::Move()
 
 		for (int i = 0; i < MAX_OBJECT; i++)
 		{
-			CObject*pObject;
+			CObject*pObject = nullptr;
 			pObject = GetObjectData(i);
 
 			if (pObject != nullptr)
@@ -245,8 +245,9 @@ void CBullet::Move()
 						m_Length = length;
 						m_VecLength = vec;
 					}*/
+					CEnemy* Enemy = dynamic_cast<CEnemy*>(pObject);  // ダウンキャスト
 
-					D3DXVECTOR3 vecDiff = *pObject->GetPos() - m_pos;
+					D3DXVECTOR3 vecDiff = *Enemy->GetPos() - m_pos;
 					float fLength = D3DXVec3Length(&vecDiff);
 					m_pos = m_pos + ((vecDiff / fLength) * 10.0f);
 					homing = true;

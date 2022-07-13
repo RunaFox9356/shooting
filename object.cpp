@@ -114,14 +114,21 @@ void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos,D3DXVECTOR3 move)
 	switch (Type)
 	{
 	case EObjectType::ENEMY:
-		m_pObject[m_nID]->SetMove(move);
-		m_pObject[m_nID]->SetPos(pos);
+	{
+		CEnemy* cEnemy = dynamic_cast<CEnemy*>(m_pObject[m_nID]);  // ダウンキャスト
+		cEnemy->SetMove(move);
+		cEnemy->SetPos(pos);
 		m_Type = ENEMY;
+
 		break;
+	}
 	case EObjectType::PLAYER:
-		m_pObject[m_nID]->SetPos(pos);
+	{
+		CPlayer* cPlayer = dynamic_cast<CPlayer*>(m_pObject[m_nID]);  // ダウンキャスト
+		cPlayer->SetPos(pos);
 		m_Type = PLAYER;
 		break;
+	}
 	case EObjectType::BULLET:
 		m_Type = BULLET;
 		break;

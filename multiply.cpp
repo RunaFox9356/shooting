@@ -12,16 +12,18 @@
 //=============================================================================
 // セット関数
 //=============================================================================
-void CMultiply::set(int Number, int Digits, D3DXVECTOR3 Pos)
+void CMultiply::set(int Number, D3DXVECTOR3 Pos)
 {
 	int aPosTexU[100];
 	int nModScore = Number;
+	int nDigits;
+	nDigits = log10f(nModScore);
 	for (int i = 0; i < 10; i++)
 	{
 		test[i] = nullptr;
 	}
 
-	for (int i = Digits-1; i >= 0; i--)
+	for (int i = nDigits; i >= 0; i--)
 	{
 		
 		aPosTexU[i] = (nModScore % 10);
@@ -33,14 +35,11 @@ void CMultiply::set(int Number, int Digits, D3DXVECTOR3 Pos)
 		D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));									// スクリーンサイズ
 	testpos += D3DXVECTOR3(0.0f, -50.0f, 0.0f);
 	//頂点バッファをロックし頂点情報へのポインタを取得
-	for (int nCntScore = 0; nCntScore < Digits; nCntScore++)
+	for (int nCntScore = 0; nCntScore <= nDigits; nCntScore++)
 	{
 
 		CAMERA *pCamera = GetCamera()->Get();
 
-	
-	
-		
 
 		test[nCntScore] = CNumber::Create();
 		test[nCntScore]->SetPos(testpos);
@@ -55,14 +54,14 @@ void CMultiply::set(int Number, int Digits, D3DXVECTOR3 Pos)
 //=============================================================================
 // 数字を表示する関数
 //=============================================================================
-CMultiply* CMultiply::list(int Number, int Digits, D3DXVECTOR3 Pos)
+CMultiply* CMultiply::list(int Number, D3DXVECTOR3 Pos)
 {
 	CMultiply * pObject = nullptr;
 	pObject = new CMultiply;
 
 	if (pObject != nullptr)
 	{
-		pObject->set(Number,Digits, Pos);
+		pObject->set(Number, Pos);
 	}
 
 	return pObject;

@@ -38,10 +38,10 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	void SetPos(const D3DXVECTOR3 &pos) override;
-	void SetMove(const D3DXVECTOR3 &move)override;
+	virtual void SetPos(const D3DXVECTOR3 &pos) ;
+	virtual void SetMove(const D3DXVECTOR3 &move);
+	virtual const D3DXVECTOR3 *GetPos() const ;
 	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, char *filename);
-	const D3DXVECTOR3 *GetPos() const override;
 	const D3DXVECTOR3 *GetRot() const;
 	void SetRot(D3DXVECTOR3 &Rot);
 	void SetSize(D3DXVECTOR3 &Size);

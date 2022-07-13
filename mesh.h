@@ -44,9 +44,9 @@ public:
 	void Draw()override;//•`‰æ
 
 	static CMesh* Create();
-	void SetMove(const D3DXVECTOR3 &move) override;
-	void SetPos(const D3DXVECTOR3 &pos) override;
-	const D3DXVECTOR3 * CMesh::GetPos() const override;
+	void SetMove(const D3DXVECTOR3 &move);
+	void SetPos(const D3DXVECTOR3 &pos);
+	const D3DXVECTOR3 * CMesh::GetPos() const;
 	
 };
 #endif

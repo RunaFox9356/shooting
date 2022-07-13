@@ -13,7 +13,8 @@
 #include "camera.h"
 #include "magic.h"
 #include "hamada.h"
-
+#include "player.h"
+#include "bullet.h"
 int CCrystal::m_popType = 2;
 LPDIRECT3DTEXTURE9	CCrystal::m_pTexture;
 
@@ -78,7 +79,8 @@ void CCrystal::Update()
 			EObjectType Type = pObject->GetType();
 			if (Type == CObject::PLAYER)
 			{	// Playerとの当たり判定
-				const D3DXVECTOR3 *PlayerPos = pObject->GetPos();
+				CPlayer* cPlayer = dynamic_cast<CPlayer*>(pObject);  // ダウンキャスト
+				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 				float Size = 50.0f;
 				
 				if (((m_pos.y - m_Size.y) <= (PlayerPos->y + Size)) &&
@@ -95,7 +97,8 @@ void CCrystal::Update()
 			}
 			if (Type == CObject::BULLET)
 			{	// たまとの当たり判定
-				const D3DXVECTOR3 *BulletPos = pObject->GetPos();
+				CBullet* bullet = dynamic_cast<CBullet*>(pObject);  // ダウンキャスト
+				const D3DXVECTOR3 *BulletPos = bullet->GetPos();
 		
 				float Size = 40.0f;
 
