@@ -103,7 +103,7 @@ void CBullet::Update()
 					switch (NouPlayer)
 					{
 					case CPlayer::NOW_FIRE:
-						pObject3d->HitLife(5);
+						pObject3d->HitLife(30);
 						break;
 					case CPlayer::NOW_ICE:
 						pObject3d->HitLife(5);
@@ -112,7 +112,7 @@ void CBullet::Update()
 						pObject3d->HitLife(5);
 						break;
 					case CPlayer::NOW_SUN:
-						pObject3d->HitLife(3);
+						pObject3d->HitLife(5);
 						break;
 					case CPlayer::NOW_NON:
 						pObject3d->HitLife(5);

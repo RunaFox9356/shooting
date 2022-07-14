@@ -143,7 +143,9 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 			Life = j[name]["LIFE"];
 
 			CEnemy * Enemy = CEnemy::Create();
-			Enemy->SetUp(ENEMY, pos, D3DXVECTOR3(-5.0f, 0.0f, 0.0f)); 
+			Enemy->SetUp(ENEMY); 
+			Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+			Enemy->SetPos(pos);
 			Enemy->SetSize(size);
 			Enemy->SetRot(rot);
 			Enemy->SetLife(Life);

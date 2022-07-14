@@ -129,8 +129,8 @@ void CObject::AllUninit()
 void CObject::AllCreate()
 {
 
-	CMesh::Create()->SetUp(BG, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	CPlayer::Create()->SetUp(PLAYER, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CMesh::Create()->SetUp(BG);
+	CPlayer::Create()->SetUp(PLAYER);
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create();
 	pScore->Set(0);
@@ -141,23 +141,17 @@ void CObject::AllCreate()
 //=============================================================================
 // Set関数
 //=============================================================================
-void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos,D3DXVECTOR3 move)
+void CObject::SetUp(EObjectType Type)
 {
 	switch (Type)
 	{
 	case EObjectType::ENEMY:
 	{
-		CEnemy* cEnemy = dynamic_cast<CEnemy*>(m_pObject[m_nID]);  // ダウンキャスト
-		cEnemy->SetMove(move);
-		cEnemy->SetPos(pos);
 		m_Type = ENEMY;
-
 		break;
 	}
 	case EObjectType::PLAYER:
 	{
-		CPlayer* cPlayer = dynamic_cast<CPlayer*>(m_pObject[m_nID]);  // ダウンキャスト
-		cPlayer->SetPos(pos);
 		m_Type = PLAYER;
 		break;
 	}

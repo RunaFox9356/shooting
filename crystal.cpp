@@ -15,6 +15,7 @@
 #include "hamada.h"
 #include "player.h"
 #include "bullet.h"
+#include "score.h"
 int CCrystal::m_popType = 2;
 LPDIRECT3DTEXTURE9	CCrystal::m_pTexture;
 
@@ -88,8 +89,15 @@ void CCrystal::Update()
 					((m_pos.x - m_Size.x) <= (PlayerPos->x + Size)) &&
 					((m_pos.x + m_Size.x) >= (PlayerPos->x - Size)))
 				{
-					CManager::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
-				
+					if (m_Hit <= 30)
+					{
+						CManager::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
+						GetScore()->Add(200);
+					}
+					else
+					{
+						GetScore()->Add(1000);
+					}
 					CObject::Release();
 
 					return;
@@ -107,7 +115,44 @@ void CCrystal::Update()
 					((m_pos.x - m_Size.x) <= (BulletPos->x + Size)) &&
 					((m_pos.x + m_Size.x) >= (BulletPos->x - Size)))
 				{
-					//m_move.y += 5.0f;
+					m_move.y = 5.0f;
+					m_Hit++;
+				if(m_Hit <= 30)
+					{//出てくるタイプの設定
+					m_myType++;
+					
+					if (m_myType >= 6)
+					{
+						m_myType = 2;
+					}
+
+					SetType(m_myType);
+
+					//色の設定
+					switch (m_myType)
+					{
+					case 2:
+						SetCollar(TexVec4(1.0f, 0.0f, 0.0f, 0.8f));
+						break;
+					case 3:
+						SetCollar(TexVec4(0.0f, 0.0f, 1.0f, 0.8f));
+						break;
+					case 4:
+						SetCollar(TexVec4(0.0f, 1.0f, 0.0f, 0.8f));
+						break;
+					case 5:
+						SetCollar(TexVec4(1.0f, 1.0f, 0.0f, 0.8f));
+						break;
+					default:
+						SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
+						break;
+					}
+				}
+				else
+				{
+					SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
+				}
+					pObject->Release();
 					return;
 				}
 			}

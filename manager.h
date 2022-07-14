@@ -56,6 +56,7 @@ private:
 
 	static CObject*m_Game;
 	
+
 	MODE m_mode;
 };
 

@@ -33,6 +33,7 @@ private:
 	int m_myType;
 	D3DXVECTOR3 m_move;
 	D3DXVECTOR3 Hitpos;
+	int m_Hit;
 };
 #endif
 
