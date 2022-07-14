@@ -48,6 +48,8 @@ public:
 	static CTexture* GetTexture();	// テクスチャの情報の取得
 	static CMagicBox*GetMagicBox();
 	static void SetMode(CManager::MODE mode);
+
+
 private:
 	static CTexture *m_pTexture;
 	static CRenderer * m_cRenderer;
@@ -56,8 +58,8 @@ private:
 
 	static CObject*m_Game;
 	
-
 	MODE m_mode;
+
 };
 
 

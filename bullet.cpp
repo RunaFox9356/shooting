@@ -17,6 +17,7 @@
 #include "enemy.h"
 #include <assert.h>
 
+
 int CBullet::m_AllMember;
 LPDIRECT3DTEXTURE9	CBullet::m_pTexture;
 
@@ -121,7 +122,7 @@ void CBullet::Update()
 						pObject3d->HitLife(5);
 						break;
 					}
-
+				
 				    // ‰ð•ú
 					CObject::Release();
 					return;

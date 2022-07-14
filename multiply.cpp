@@ -9,10 +9,14 @@
 #include "number.h"
 #include "utility.h"
 
+
+int CMultiply::m_Rate = 0;
+int CMultiply::m_RateWait = 0;
+CNumber * CMultiply::Fastratio[10] = {};
 //=============================================================================
 // セット関数
 //=============================================================================
-void CMultiply::set(int Number, D3DXVECTOR3 Pos)
+void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 {
 	int aPosTexU[100];
 	int nModScore = Number;
@@ -45,24 +49,83 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos)
 		ratio[nCntScore]->SetSize(30);
 		ratio[nCntScore]->SetTex(TexVec4(
 			0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
-		ratio[nCntScore]->Releasetimer(360);
+		if (extinction)
+		{
+			ratio[nCntScore]->Releasetimer(360);
+		}
 	}
+ 	
 }
 
+CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
+{
+	int aPosTexU[100];
+	int nModScore = Number;
+	int nDigits;
+
+	nDigits = log10f(nModScore);
+	for (int i = 10; i >= 0; i--)
+	{
+		aPosTexU[i] = 0;
+	}
+	for (int i = nDigits; i >= 0; i--)
+	{
+
+		aPosTexU[i] = (nModScore % 10);
+   		nModScore /= 10;
+	}
+	D3DXVECTOR3 ratiopos = Pos;
+	bool digits  = false;
+							// スクリーンサイズ
+	ratiopos += D3DXVECTOR3(0.0f, -50.0f, 0.0f);
+	//頂点バッファをロックし頂点情報へのポインタを取得
+	for (int nCntScore = 0; nCntScore <= 10; nCntScore++)
+	{
+		if (Fastratio[nCntScore] == nullptr)
+		{
+			Fastratio[nCntScore] = CNumber::Create();
+		}
+		Fastratio[nCntScore]->SetPos(ratiopos);
+		ratiopos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
+		Fastratio[nCntScore]->SetSize(30);
+		if (aPosTexU[nCntScore] == 0&& digits)
+		{
+			Fastratio[nCntScore]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.0f));
+		}
+		else
+		{
+			Fastratio[nCntScore]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			digits = true;
+		}
+		Fastratio[nCntScore]->SetTex(TexVec4(
+			0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
+	}
+	return nullptr;
+}
 //=============================================================================
 // 数字を表示する関数
 //=============================================================================
-CMultiply* CMultiply::list(int Number, D3DXVECTOR3 Pos)
+CMultiply* CMultiply::list(int Number, D3DXVECTOR3 Pos, bool extinction)
 {
 	CMultiply * pObject = nullptr;
 	pObject = new CMultiply;
 
 	if (pObject != nullptr)
 	{
-		pObject->set(Number, Pos);
+		pObject->set(Number, Pos, extinction);
 	}
 
 	return pObject;
+}
+
+void CMultiply::SetRate(int Rete)
+{
+	if (m_Rate <= 256)
+	{
+		m_Rate = Rete;
+		CMultiply::FastSet(m_Rate, D3DXVECTOR3(100.0f, 200.0f, 0.0f));
+	}
+	m_RateWait = 6000;
 }
 
 CMultiply::CMultiply()
@@ -82,6 +145,21 @@ void CMultiply::Uninit()
 			//ratio[i]->Uninit();
 			//delete ratio[i];
 			//ratio[i] = nullptr;
+		}
+	}
+}
+
+void CMultiply::Update()
+{
+ 	m_RateWait--; 
+
+	if (m_RateWait <= 0)
+	{
+		m_RateWait = 20;
+		if (m_Rate >= 0)
+		{
+			m_Rate--;
+			CMultiply::FastSet(m_Rate, D3DXVECTOR3(100.0f, 200.0f, 0.0f));
 		}
 	}
 }

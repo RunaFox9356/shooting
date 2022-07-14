@@ -15,6 +15,7 @@
 #include "motion.h"
 #include "crystal.h"
 #include "score.h"
+#include "multiply.h"
 
 //------------------------------------
 // コンストラクタ
@@ -248,7 +249,9 @@ void CObject3d::HitLife(int Damage)
 
 	if (m_Life <= 0)
 	{
+		CMultiply::SetRate((1 + *CMultiply::GetRate()));
 
+		CMultiply::list(*CMultiply::GetRate(), m_pos,true);
 		GetScore()->Add(50);
 		CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
 		// 解放

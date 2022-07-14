@@ -19,6 +19,7 @@
 #include "game.h"
 #include "title.h"
 #include "result.h"
+#include "multiply.h"
 
 CRenderer * CManager::m_cRenderer = nullptr; 
 CTexture * CManager::m_pTexture = nullptr;
@@ -75,7 +76,7 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 
 	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_NONE);
 
-
+	CMultiply::FastSet(0, D3DXVECTOR3(100.0f, 200.0f, 0.0f));
 
 	return S_OK;
 }
@@ -123,6 +124,9 @@ void CManager::Update()
 //=============================================================================
 void CManager::Draw()
 {
+
+
+
 	// •`‰æˆ—	
 	m_cRenderer->Draw();
 	//m_cRenderer->DrawBG();

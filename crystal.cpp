@@ -59,14 +59,14 @@ void CCrystal::Uninit()
 void CCrystal::Update()
 {
 	C3dpolygon::Update();
-	m_move.y-=0.1f;
+	m_move.y -= 0.1f;
 	if (m_move.y <= -5.0f)
 	{
 		//m_move.y = 5.0f;
 	}
 	m_pos += m_move;
 
-	if (m_pos.y <-SCREEN_HEIGHT)
+	if (m_pos.y < -SCREEN_HEIGHT)
 	{
 		m_move.y = 13.0f;
 		//CObject::Release();
@@ -83,7 +83,7 @@ void CCrystal::Update()
 				CPlayer* cPlayer = dynamic_cast<CPlayer*>(pObject);  // ダウンキャスト
 				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 				float Size = 50.0f;
-				
+
 				if (((m_pos.y - m_Size.y) <= (PlayerPos->y + Size)) &&
 					((m_pos.y + m_Size.y) >= (PlayerPos->y - Size)) &&
 					((m_pos.x - m_Size.x) <= (PlayerPos->x + Size)) &&
@@ -107,7 +107,7 @@ void CCrystal::Update()
 			{	// たまとの当たり判定
 				CBullet* bullet = dynamic_cast<CBullet*>(pObject);  // ダウンキャスト
 				const D3DXVECTOR3 *BulletPos = bullet->GetPos();
-		
+
 				float Size = 40.0f;
 
 				if (((m_pos.y - m_Size.y) <= (BulletPos->y + Size)) &&
@@ -117,41 +117,39 @@ void CCrystal::Update()
 				{
 					m_move.y = 5.0f;
 					m_Hit++;
-				if(m_Hit <= 30)
+					if (m_Hit <= 30)
 					{//出てくるタイプの設定
-					m_myType++;
-					
-					if (m_myType >= 6)
-					{
-						m_myType = 2;
+						m_myType++;
+
+						if (m_myType >= 6)
+						{
+							m_myType = 2;
+						}
+
+						//色の設定
+						switch (m_myType)
+						{
+						case 2:
+							SetCollar(TexVec4(1.0f, 0.0f, 0.0f, 0.8f));
+							break;
+						case 3:
+							SetCollar(TexVec4(0.0f, 0.0f, 1.0f, 0.8f));
+							break;
+						case 4:
+							SetCollar(TexVec4(0.0f, 1.0f, 0.0f, 0.8f));
+							break;
+						case 5:
+							SetCollar(TexVec4(1.0f, 1.0f, 0.0f, 0.8f));
+							break;
+						default:
+							SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
+							break;
+						}
 					}
-
-					SetType(m_myType);
-
-					//色の設定
-					switch (m_myType)
+					else
 					{
-					case 2:
-						SetCollar(TexVec4(1.0f, 0.0f, 0.0f, 0.8f));
-						break;
-					case 3:
-						SetCollar(TexVec4(0.0f, 0.0f, 1.0f, 0.8f));
-						break;
-					case 4:
-						SetCollar(TexVec4(0.0f, 1.0f, 0.0f, 0.8f));
-						break;
-					case 5:
-						SetCollar(TexVec4(1.0f, 1.0f, 0.0f, 0.8f));
-						break;
-					default:
 						SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
-						break;
 					}
-				}
-				else
-				{
-					SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
-				}
 					pObject->Release();
 					return;
 				}
