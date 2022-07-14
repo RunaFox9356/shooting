@@ -62,7 +62,7 @@ CObject3d::~CObject3d()
 //------------------------------------
 HRESULT CObject3d::Init(void)
 {
-	D3DXVECTOR3 *Camerarot = GetCamera()->GetRot();
+	D3DXVECTOR3 *Camerarot = CRenderer::GetCamera()->GetRot();
 
 	//カメラのデータ取得
 	m_rotMove = D3DXVECTOR3(D3DX_PI + Camerarot->y, D3DX_PI * 0.5f + Camerarot->y, 0.0f);

@@ -12,10 +12,12 @@
 #include "player.h"
 #include "particle.h"
 #include "file.h"
+#include "camera.h"
 
-CCamera* pCamera;
-CLight* pLight;
-CParticle* particle;
+ CCamera* CRenderer::pCamera[2];
+ CLight*  CRenderer::pLight;
+ CParticle*  CRenderer::particle;
+
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
@@ -101,9 +103,12 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 	D3DXCreateFont(m_pD3DDevice, 18, 0, 0, 0, FALSE, SHIFTJIS_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("Terminal"), &m_pFont);
 #endif
-	pCamera = new CCamera;
-	pCamera->Init();
+	pCamera[0] = new CCamera;
+	pCamera[0]->Init();
 	
+	pCamera[1] = new CCamera;
+	pCamera[1]->Init();
+
 	pLight = new CLight;
 	pLight->Init();
 
@@ -130,13 +135,19 @@ void CRenderer::Uninit()
 	}
 
 	// カメラ終了処理
-	if (pCamera != nullptr)
+	if (pCamera[0] != nullptr)
 	{
-		pCamera->Uninit();
-		delete pCamera;
-		pCamera = nullptr;
+		pCamera[0]->Uninit();
+		delete pCamera[0];
+		pCamera[0] = nullptr;
 	}
-
+	// カメラ終了処理
+	if (pCamera[0] != nullptr)
+	{
+		pCamera[1]->Uninit();
+		delete pCamera[1];
+		pCamera[1] = nullptr;
+	}
 #ifdef _DEBUG
 	// デバッグ情報表示用フォントの破棄
 	if (m_pFont != nullptr)
@@ -167,9 +178,10 @@ void CRenderer::Uninit()
 void CRenderer::Update()
 {
 	// ポリゴンの更新処理
-	CObject::AllUpdate();
+	pCamera[0]->Update();
 
-	pCamera->Update();
+	CObject::AllUpdate();
+	pCamera[1]->Update();
 
 
 	pLight->Update();
@@ -197,9 +209,14 @@ void CRenderer::Draw()
 	// Direct3Dによる描画の開始
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
 	{
-		// ポリゴンの描画処理
-		CObject::AllDraw();
-		pCamera->Set();
+
+
+		pCamera[0]->Set(0);
+		CObject::TypeDraw(CObject::BG);
+
+		pCamera[1]->Set(1);
+		CObject::TypeDraw(CObject::NONE);
+
 
 #ifdef _DEBUG
 		// FPS表示
@@ -214,6 +231,7 @@ void CRenderer::Draw()
 	// バックバッファとフロントバッファの入れ替え
 	m_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 }
+
 
 #ifdef _DEBUG
 //=============================================================================
@@ -236,7 +254,7 @@ void  CRenderer::DrawFPS()
 //=============================================================================
 // GetCamera関数
 //=============================================================================
-CCamera *GetCamera()
+CCamera *CRenderer::GetCamera()
 {
-	return pCamera;
+	return pCamera[1];
 }

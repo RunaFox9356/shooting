@@ -60,14 +60,19 @@ void CCamera::Uninit(void)
 //----------------------------
 void CCamera::Update(void)
 {
-	
+	if (m_Type == 0)
+	{
+		m_posV.x += 1.1f;
+		m_posR.x += 1.1f;
+	}
 }
 
 //----------------------------
 //描画処理
 //----------------------------
-void CCamera::Set(void)
+void CCamera::Set(int Type)
 {
+	m_Type = Type;
 	LPDIRECT3DDEVICE9  pDevice = CManager::GetRenderer()->GetDevice();//デバイスのポインタ
 
 	//ビューマトリックスを初期化
@@ -85,33 +90,40 @@ void CCamera::Set(void)
 	//プロジェクションマトリックスを初期化
 	D3DXMatrixIdentity(&m_MtxProje);
 
-	////プロジェクションマトリックス作成
-	//D3DXMatrixPerspectiveFovLH(&m_MtxProje,
-	//	D3DXToRadian(90.0f),
-	//	(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,
-	//	10.0f,
-	//	10000.0f);
-
-	// プロジェクションマトリックスの作成(平行投影)
-	D3DXMatrixOrthoLH(&m_MtxProje,					// プロジェクションマトリックス
-		(float)SCREEN_WIDTH,								// 幅
-		(float)SCREEN_HEIGHT,								// 高さ
-		10.0f,												// ニア
-		1000.0f);											// ファー
-
+	//if (Type == 0)
+	//{
+	//	//プロジェクションマトリックス作成
+	//	D3DXMatrixPerspectiveFovLH(&m_MtxProje,
+	//		D3DXToRadian(90.0f),
+	//		(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,
+	//		10.0f,
+	//		10000.0f);
+	//}
+	//else
+	{
+		// プロジェクションマトリックスの作成(平行投影)
+		D3DXMatrixOrthoLH(&m_MtxProje,					// プロジェクションマトリックス
+			(float)SCREEN_WIDTH,								// 幅
+			(float)SCREEN_HEIGHT,								// 高さ
+			10.0f,												// ニア
+			1000.0f);											// ファー
+	}
 	//適用
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_MtxProje);
 }
 
 
 //----------------------------
-//Get
+//GetPos
 //----------------------------
 D3DXVECTOR3 *CCamera::GetPos()
 {
 	return &m_posV;
 }
 
+//----------------------------
+//GetRot
+//----------------------------
 D3DXVECTOR3 * CCamera::GetRot()
 {
 	return &m_rot;

@@ -121,7 +121,7 @@ CPlayer *CPlayer::Create()
 void CPlayer::Move()	//“®‚«ƒZƒbƒg
 {
 	CInput *CInputpInput = CInput::GetKey();
-	D3DXVECTOR3 *Camerarot = GetCamera()->GetRot();
+	D3DXVECTOR3 *Camerarot = CRenderer::GetCamera()->GetRot();
 	float consumption = 0.0f;
 	if (CInputpInput->Press(CInput::KEY_RIGHT))
 	{

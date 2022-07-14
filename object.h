@@ -25,6 +25,7 @@ public:
 		GON,
 		MAGIC,
 		CRYSTAL,
+		BG,
 		MAX,
 		NONE
 	};
@@ -44,6 +45,8 @@ public:
 	static void AllUninit();
 	static void AllCreate();
 
+	static void TypeDraw(EObjectType Type);
+
 	int * GetId();
 	CObject * GetObjectData(int nCount);
 	void SetUp(EObjectType Type, D3DXVECTOR3 pos, D3DXVECTOR3 move);
@@ -51,6 +54,7 @@ public:
 	void Release();
 	EObjectType GetType();
 	CScore*GetScore();
+
 protected:
 	static CObject *m_pObject[MAX_OBJECT]; 
 	int	m_nID;
@@ -58,5 +62,6 @@ private:
 	//int	m_nID;
 	static int m_AllMember;
 	EObjectType m_Type;
+
 };
 #endif

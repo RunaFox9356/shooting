@@ -129,7 +129,7 @@ D3DXVECTOR3 ScreenCastWorld(D3DXVECTOR3 *screenPos,			// スクリーン座標
 
 	D3DXVECTOR3 pos = *screenPos;
 
-	D3DXVECTOR3 Camerapos = *(GetCamera()->GetPos());
+	D3DXVECTOR3 Camerapos = *(CRenderer::GetCamera()->GetPos());
 
 	pos.y *= -1;
 

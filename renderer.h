@@ -24,7 +24,7 @@
 #include <tchar.h> // _T
 #include <d3dx9.h>
 #include <string>
-#include "camera.h"
+
 
 //*****************************************************************************
 // 定数定義
@@ -60,8 +60,10 @@ struct VERTEX_3D
 int Gettime(void);
 
 class CCamera;
+class CLight;
+class CParticle;
 
-CCamera *GetCamera();
+
 //*****************************************************************************
 // 構造体定義
 //*****************************************************************************
@@ -83,11 +85,13 @@ public:
 	void Uninit();
 	void Update();
 	void Draw();
-
 	LPDIRECT3DDEVICE9	GetDevice(void)
 	{
 		return m_pD3DDevice;
 	};
+
+	static CCamera *GetCamera();
+
 private:
 
 #ifdef _DEBUG
@@ -105,6 +109,11 @@ private:
 	// フォント
 	LPD3DXFONT m_pFont = nullptr;
 #endif // _DEBUG
+
+	
+	static CCamera* pCamera[2];
+	static CLight* pLight;
+	static CParticle* particle;
 
 
 };

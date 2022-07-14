@@ -150,6 +150,7 @@ void CMotion::SetParts(D3DXMATRIX mtxWorld)
 
 		for (int nCntMat = 0; nCntMat < (int)(m_parts + i)->nNumMat; nCntMat++)
 		{
+			pMat[nCntMat].MatD3D.Ambient = pMat[nCntMat].MatD3D.Diffuse;
 			// ƒ}ƒeƒŠƒAƒ‹‚ÌÝ’è
 			pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 

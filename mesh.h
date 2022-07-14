@@ -11,7 +11,7 @@
 #include "object.h"
 #define	EMESHX	(1)
 #define	EMESHY	(5)
-#define MAX_SIZEMESH (70.0f)
+#define MAX_SIZEMESH (100.0f)
 #define MAX_EMESH (20)
 
 
@@ -43,25 +43,25 @@ private:
 	struct MESH
 	{
 
-		D3DXVECTOR3 pos;	// 頂点座標
-		D3DXVECTOR3 rot;	// 回転座標
-		D3DXMATRIX mtxWorld;// ワールドマトリックス
-		int xsiz;//面数
-		int zsiz;//面数
-		int X;//辺の頂点数
-		int Z;//辺の頂点数
-		int nVtx;//頂点数
-		int Index; //インデックス
-		int por;
+	
 	};
 
 	//------------------------------------
 	// static変数
 	//------------------------------------
-	 LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	// 頂点バッファーへのポインタ
-	 LPDIRECT3DTEXTURE9 m_pTextureEmesh; //テクスチャのポインタ
-	 LPDIRECT3DINDEXBUFFER9 m_pIdxBuff;  //インデックスバッファ
-	 MESH m_Mesh;								// ポリゴンの構造体
-	
+	 LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	    // 頂点バッファーへのポインタ
+	 LPDIRECT3DTEXTURE9 m_pTextureEmesh;        //テクスチャのポインタ
+	 LPDIRECT3DINDEXBUFFER9 m_pIdxBuff;         //インデックスバッファ
+
+	 D3DXVECTOR3 m_pos;	// 頂点座標
+	 D3DXVECTOR3 m_rot;	// 回転座標
+	 D3DXMATRIX m_mtxWorld;// ワールドマトリックス
+	 int m_xsiz;//面数
+	 int m_zsiz;//面数
+	 int m_X;//辺の頂点数
+	 int m_Z;//辺の頂点数
+	 int m_nVtx;//頂点数
+	 int m_Index; //インデックス
+	 int m_por;
 };
 #endif

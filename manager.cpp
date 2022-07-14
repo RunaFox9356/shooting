@@ -123,8 +123,10 @@ void CManager::Update()
 //=============================================================================
 void CManager::Draw()
 {
-	// •`‰æˆ—
+	// •`‰æˆ—	
 	m_cRenderer->Draw();
+	//m_cRenderer->DrawBG();
+	//m_cRenderer->DrawNotBG();
 	//m_Game->Draw();
 
 }

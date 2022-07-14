@@ -21,7 +21,7 @@ public:
 	void Init(void);//初期化
 	void Uninit(void);//破棄
 	void Update(void);//更新
-	void Set(void);//画面設定
+	void Set(int Type);//画面設定
 	D3DXMATRIX *GetMtxProje();
 	D3DXMATRIX *GetMtxView();
 	D3DXVECTOR3 *GetPos();
@@ -32,8 +32,6 @@ private:
 
 	 float m_rotSpeed = 0.05f;
 	 float m_rotSpeed2 = D3DX_PI / 2;
-
-
 
 	 D3DXVECTOR3 m_posV;	//位置
 	 D3DXVECTOR3 m_posR;	//注視点
@@ -47,7 +45,7 @@ private:
 	 D3DXVECTOR3 posVDest, m_posRDest;
 	 D3DXMATRIX m_MtxProje; //プロジェクションマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
 	 D3DXMATRIX m_MtxView; //ビューマトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
-
+	 int m_Type;
 
 };
 #endif

@@ -87,11 +87,11 @@ void CBullet::Update()
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
 				float enemySize = 50.0f;
-				*pEnemySize*enemySize;
+				 enemySize *= pEnemySize->y;
 				float size = 50.0f;
 
-				if (((m_pos.y - size) <= (enemyPos->y + pEnemySize->y)) &&
-					((m_pos.y + size) >= (enemyPos->y - pEnemySize->y)) &&
+				if (((m_pos.y - size) <= (enemyPos->y + enemySize)) &&
+					((m_pos.y + size) >= (enemyPos->y - enemySize)) &&
 					((m_pos.x - size) <= (enemyPos->x + pEnemySize->x)) &&
 					((m_pos.x + size) >= (enemyPos->x - pEnemySize->x)))
 				{  

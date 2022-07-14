@@ -59,7 +59,6 @@ void CObject::AllUpdate()
 		}
 	}
 }
-
 //=============================================================================
 // AllDrawä÷êî
 //=============================================================================
@@ -71,8 +70,41 @@ void CObject::AllDraw()
 		{
 			m_pObject[i]->Draw();
 		}
+
 	}
 }
+
+//=============================================================================
+// NotBGDrawä÷êî
+//=============================================================================
+void CObject::TypeDraw(EObjectType Type)
+{
+	
+	for (int i = 0; i < MAX_OBJECT; i++)
+	{
+		if (Type == BG)
+		{
+			if (m_pObject[i] != nullptr)
+			{
+				if (m_pObject[i]->m_Type == BG)
+				{
+					m_pObject[i]->Draw();
+				}
+			}
+		}
+		else
+		{
+			if (m_pObject[i] != nullptr)
+			{
+				if (m_pObject[i]->m_Type != BG)
+				{
+					m_pObject[i]->Draw();
+				}
+			}
+		}
+	}
+}
+
 
 //=============================================================================
 // AllUninitä÷êî
@@ -97,7 +129,7 @@ void CObject::AllUninit()
 void CObject::AllCreate()
 {
 
-	CMesh::Create();
+	CMesh::Create()->SetUp(BG, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CPlayer::Create()->SetUp(PLAYER, D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create();
@@ -140,6 +172,10 @@ void CObject::SetUp(EObjectType Type, D3DXVECTOR3 pos,D3DXVECTOR3 move)
 		break;
 	case EObjectType::CRYSTAL:
 		m_Type = CRYSTAL;
+		break;
+	case EObjectType::BG:
+		m_Type = BG;
+		
 		break;
 	default:
 		break;
