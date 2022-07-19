@@ -240,7 +240,7 @@ CTexture::TEXTURE CObject2d::GetTexture()
 //---------------------------------------
 //セットテクスチャ(2d)
 //---------------------------------------
-void CObject2d::SetTex(TexVec4 Tex)
+void CObject2d::SetTex(PositionVec4 Tex)
 {
 	VERTEX_2D *pVtx; //頂点へのポインタ
 
@@ -257,7 +257,7 @@ void CObject2d::SetTex(TexVec4 Tex)
 	m_pVtxBuff->Unlock();
 }
 
-void CObject2d::SetCollar(TexVec4 Collar)
+void CObject2d::SetCollar(PositionVec4 Collar)
 {
 	VERTEX_2D *pVtx; //頂点へのポインタ
 

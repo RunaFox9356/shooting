@@ -93,7 +93,7 @@ void  CScore::Set(int nScore)
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (nCntScore = 0; nCntScore < MAX_SCORE; nCntScore++)
 	{
-		m_pNumber[nCntScore]->SetTex(TexVec4(
+		m_pNumber[nCntScore]->SetTex(PositionVec4(
 	 	0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
 	}
 }

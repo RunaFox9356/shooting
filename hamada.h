@@ -13,6 +13,7 @@
 
 namespace hmd
 {
+
 	D3DXMATRIX *giftmtx(D3DXMATRIX *pOut,D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 }
 

@@ -26,6 +26,7 @@ public:
 		MAGIC,
 		CRYSTAL,
 		BG,
+		SORCERY,
 		MAX,
 		NONE
 	};

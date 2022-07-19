@@ -13,11 +13,11 @@
 #include "object.h"
 #include "texture.h"
 
-struct TexVec4
+struct PositionVec4
 {
 	float     P0, P1, P2, P3;
-	constexpr TexVec4() : P0(0.0f), P1(0.0f), P2(0.0f), P3(0.0f) { }
-	constexpr TexVec4(float _P0, float _P1, float _P2, float _P3) : P0(_P0), P1(_P1), P2(_P2), P3(_P3) { }
+	constexpr PositionVec4() : P0(0.0f), P1(0.0f), P2(0.0f), P3(0.0f) { }
+	constexpr PositionVec4(float _P0, float _P1, float _P2, float _P3) : P0(_P0), P1(_P1), P2(_P2), P3(_P3) { }
 };
 
 class CObject2d : public CObject
@@ -40,9 +40,9 @@ public:
 	virtual void SetMove(const D3DXVECTOR3 &move);
 
 	void SetTexture(CTexture::TEXTURE texture);
-	void SetTex(TexVec4 Tex);
+	void SetTex(PositionVec4 Tex);
 	CTexture::TEXTURE GetTexture(); 
-	void SetCollar(TexVec4 Collar);
+	void SetCollar(PositionVec4 Collar);
 	float GetSize() { return m_fSize; };
 	void SetSize(float Size) { m_fSize = Size; };
 protected:

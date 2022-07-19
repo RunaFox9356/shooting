@@ -106,7 +106,7 @@ void CCrystal::Update()
 			if (Type == CObject::BULLET)
 			{	// たまとの当たり判定
 				CBullet* bullet = dynamic_cast<CBullet*>(pObject);  // ダウンキャスト
-				const D3DXVECTOR3 *BulletPos = bullet->GetPos();
+ 				const D3DXVECTOR3 *BulletPos = bullet->GetPos();
 
 				float Size = 40.0f;
 
@@ -130,25 +130,25 @@ void CCrystal::Update()
 						switch (m_myType)
 						{
 						case 2:
-							SetCollar(TexVec4(1.0f, 0.0f, 0.0f, 0.8f));
+							SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
 							break;
 						case 3:
-							SetCollar(TexVec4(0.0f, 0.0f, 1.0f, 0.8f));
+							SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
 							break;
 						case 4:
-							SetCollar(TexVec4(0.0f, 1.0f, 0.0f, 0.8f));
+							SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
 							break;
 						case 5:
-							SetCollar(TexVec4(1.0f, 1.0f, 0.0f, 0.8f));
+							SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
 							break;
 						default:
-							SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
+							SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 							break;
 						}
 					}
 					else
 					{
-						SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
+						SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 					}
 					pObject->Release();
 					return;
@@ -208,19 +208,19 @@ CCrystal *CCrystal::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move)
 		switch (m_popType)
 		{
 		case 2:
-  			pObject->SetCollar(TexVec4(1.0f,0.0f,0.0f,0.8f));
+  			pObject->SetCollar(PositionVec4(1.0f,0.0f,0.0f,0.8f));
 			break;
 		case 3:
-			pObject->SetCollar(TexVec4(0.0f, 0.0f, 1.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
 			break;
 		case 4:
-			pObject->SetCollar(TexVec4(0.0f, 1.0f, 0.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		case 5:
-			pObject->SetCollar(TexVec4(1.0f, 1.0f, 0.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		default:
-			pObject->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			break;
 		}
 		

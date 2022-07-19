@@ -123,6 +123,9 @@
     <ClCompile Include="multiply.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
+    <ClCompile Include="sorcery.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enemy.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="utility.h">
       <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="sorcery.h">
+      <Filter>オブジェクト</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

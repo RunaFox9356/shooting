@@ -28,7 +28,7 @@ public:
 	
 	void Releasetimer(int nTimar);
 private:
-	TexVec4 col;
+	PositionVec4 col;
 	int m_DesTimarMax;
 	int m_DesTimar;
 	bool isRelease;

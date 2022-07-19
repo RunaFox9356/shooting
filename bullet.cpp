@@ -178,19 +178,19 @@ CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move)
 		switch (NouPlayer)
 		{
 		case CPlayer::NOW_FIRE:
-			pObject->SetCollar(TexVec4(1.0f, 0.0f, 0.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
 			break;
 		case CPlayer::NOW_ICE:
-			pObject->SetCollar(TexVec4(0.0f, 0.0f, 1.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
 			break;
 		case CPlayer::NOW_STORM:
-			pObject->SetCollar(TexVec4(0.0f, 1.0f, 0.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		case CPlayer::NOW_SUN:
-			pObject->SetCollar(TexVec4(1.0f, 1.0f, 0.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		case CPlayer::NOW_NON:
-			pObject->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.8f));
+			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			break;
 		default:
 			break;

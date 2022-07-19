@@ -38,7 +38,7 @@ HRESULT CMagicBox::CMagic::Init()
 	m_PatternAnim = 0;
 
 	//表示座標を更新
-	SetTex(TexVec4(
+	SetTex(PositionVec4(
 		1.0f / m_DivisionX * (m_PatternAnim % (m_DivisionX))
 		, 1.0f / m_DivisionX *(m_PatternAnim % (m_DivisionX)) + 1.0f / m_DivisionX
 		, 1.0f / m_DivisionY * (m_PatternAnim / (m_DivisionY))
@@ -71,7 +71,7 @@ void CMagicBox::CMagic::Update()
 		m_PatternAnim = (m_PatternAnim + 1) % m_DivisionMAX;
 
 		//表示座標を更新
-		SetTex(TexVec4(
+		SetTex(PositionVec4(
 			1.0f / m_DivisionX * (m_PatternAnim % (m_DivisionX))
 			, 1.0f / m_DivisionX *(m_PatternAnim % (m_DivisionX)) + 1.0f / m_DivisionX
 			, 1.0f / m_DivisionY * (m_PatternAnim / (m_DivisionY))
@@ -139,7 +139,7 @@ void CMagicBox::Magicplay(CTexture::TEXTURE TEX)
 			cMagic[1]->SelectTex(cMagic[0]->GetTexture());
 			cMagic[0]->SelectTex(TEX);
 			CPlayer::SetMagic((CPlayer::NOWMAGIC)TEX);
-			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 			i = 2;
 		}
 		
@@ -155,7 +155,7 @@ void CMagicBox::Magicplay(CTexture::TEXTURE TEX)
 	{
 		if (CTexture::TEXTURE_NONE == cMagic[i]->GetTexture())
 		{
-			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.0f));
+			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		}
 	}
 }
@@ -174,7 +174,7 @@ void CMagicBox::MagicRelease(void)
 			cMagic[0]->SelectTex(cMagic[1]->GetTexture());
 			cMagic[1]->SelectTex(cMagic[2]->GetTexture());
 			cMagic[2]->SelectTex(CTexture::TEXTURE_NONE);
-			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 			CPlayer::SetMagic((CPlayer::NOWMAGIC)cMagic[0]->GetTexture());
 			i = 2;
 		}
@@ -192,7 +192,7 @@ void CMagicBox::MagicRelease(void)
 	{
 		if (CTexture::TEXTURE_NONE == cMagic[i]->GetTexture())
 		{
-			cMagic[i]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.0f));
+			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		}
 	}
 }

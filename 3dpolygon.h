@@ -19,7 +19,7 @@
 
 class  C3dpolygon : public CObject
 {
-private:
+protected:
 	//polygonの基準サイズ
 	static const D3DXVECTOR3 m_Vtx[4];
 
@@ -33,11 +33,13 @@ public:
 	virtual const D3DXVECTOR3 *GetPos() const;
 	virtual void SetPos(const D3DXVECTOR3 &pos);
 	virtual void SetMove(const D3DXVECTOR3 &move) = 0;
-	void SetTexture(CTexture::TEXTURE texture);
-	void SetTex(TexVec4 Tex);
 	
+	void SetTexture(CTexture::TEXTURE texture);
+	void SetTex(PositionVec4 Tex);
 	void SetSize(const D3DXVECTOR3 &size);
-	void SetCollar(TexVec4 Collar);
+	void SetCollar(PositionVec4 Collar);
+	LPDIRECT3DVERTEXBUFFER9 &GetVtx();
+
 protected:
 	float m_nScale;
 	D3DXVECTOR3 m_rot;
@@ -45,7 +47,7 @@ protected:
 	D3DXVECTOR3 m_Size;
 	D3DXMATRIX m_mtxWorld;					// マトリックス
 private:
-	int  m_nTimer; // TODO: これなおす
+	int  m_nTimer;
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = nullptr;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 

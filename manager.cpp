@@ -74,7 +74,9 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 
 	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(100.0f, 650.0f, 0.0f));
 
-	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_NONE);
+	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_SUN);
+	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_ICE);
+	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_FIRE);
 
 	CMultiply::FastSet(0, D3DXVECTOR3(100.0f, 200.0f, 0.0f));
 

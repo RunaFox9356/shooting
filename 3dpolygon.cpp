@@ -22,8 +22,6 @@ const D3DXVECTOR3 C3dpolygon::m_Vtx[4] =
 	D3DXVECTOR3(+1.0f, -1.0f, 0.0f),
 };
 
-
-
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
@@ -60,7 +58,26 @@ HRESULT C3dpolygon::Init()
 		&m_pVtxBuff,
 		NULL);
 
-	
+
+	VERTEX_3D*pVtx;		//頂点情報へのポインタ
+
+						//頂点バッファをロックし、頂点情報へのポインタを取得
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	//rhwの設定
+	pVtx[0].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+	pVtx[1].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+	pVtx[2].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+	pVtx[3].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+
+	//テクスチャ座標の設定
+	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
+	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
+	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
+	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
+
+	//頂点バッファをアンロックする
+	m_pVtxBuff->Unlock();
 	return S_OK;
 }
 
@@ -158,7 +175,7 @@ void C3dpolygon::SetTexture(CTexture::TEXTURE texture)
 //---------------------------------------
 //セットテクスチャ(2d)
 //---------------------------------------
-void C3dpolygon::SetTex(TexVec4 Tex)
+void C3dpolygon::SetTex(PositionVec4 Tex)
 {
 	VERTEX_3D *pVtx; //頂点へのポインタ
 
@@ -198,24 +215,14 @@ void  C3dpolygon::SetSize(const D3DXVECTOR3 &size)
 		pVtx[i].pos.z = 0.0f;
 	}
 
-	//rhwの設定
-	pVtx[0].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-	pVtx[1].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-	pVtx[2].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-	pVtx[3].nor = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-
-	//テクスチャ座標の設定
-	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
-	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
-	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
-
 	//頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();
 
 }
-
-void C3dpolygon::SetCollar(TexVec4 Collar)
+//---------------------------------------
+//頂点Collarの設定
+//---------------------------------------
+void C3dpolygon::SetCollar(PositionVec4 Collar)
 {
 	VERTEX_3D *pVtx; //頂点へのポインタ
 
@@ -233,4 +240,12 @@ void C3dpolygon::SetCollar(TexVec4 Collar)
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
 
+}
+
+//---------------------------------------
+//Vtxの取得
+//---------------------------------------
+LPDIRECT3DVERTEXBUFFER9 &C3dpolygon::GetVtx()
+{
+	return m_pVtxBuff;
 }

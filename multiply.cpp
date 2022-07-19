@@ -40,6 +40,7 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 	ratiopos = ScreenCastWorld(&ratiopos,			// スクリーン座標
 		D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));									// スクリーンサイズ
 	ratiopos += D3DXVECTOR3(0.0f, -50.0f, 0.0f);
+
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (int nCntScore = 0; nCntScore <= nDigits; nCntScore++)
 	{
@@ -47,7 +48,7 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 		ratio[nCntScore]->SetPos(ratiopos);
 		ratiopos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
 		ratio[nCntScore]->SetSize(30);
-		ratio[nCntScore]->SetTex(TexVec4(
+		ratio[nCntScore]->SetTex(PositionVec4(
 			0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
 		if (extinction)
 		{
@@ -66,7 +67,12 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	nDigits = log10f(nModScore);
 	for (int i = 10; i >= 0; i--)
 	{
+		if (Fastratio[i] == nullptr)
+		{
+			Fastratio[i] = CNumber::Create();
+		}
 		aPosTexU[i] = 0;
+		Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 	}
 	for (int i = nDigits; i >= 0; i--)
 	{
@@ -75,29 +81,20 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
    		nModScore /= 10;
 	}
 	D3DXVECTOR3 ratiopos = Pos;
-	bool digits  = false;
+
 							// スクリーンサイズ
 	ratiopos += D3DXVECTOR3(0.0f, -50.0f, 0.0f);
 	//頂点バッファをロックし頂点情報へのポインタを取得
-	for (int nCntScore = 0; nCntScore <= 10; nCntScore++)
+	for (int nCntScore = 0; nCntScore <= nDigits; nCntScore++)
 	{
-		if (Fastratio[nCntScore] == nullptr)
-		{
-			Fastratio[nCntScore] = CNumber::Create();
-		}
+		
 		Fastratio[nCntScore]->SetPos(ratiopos);
 		ratiopos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
 		Fastratio[nCntScore]->SetSize(30);
-		if (aPosTexU[nCntScore] == 0&& digits)
-		{
-			Fastratio[nCntScore]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 0.0f));
-		}
-		else
-		{
-			Fastratio[nCntScore]->SetCollar(TexVec4(1.0f, 1.0f, 1.0f, 1.0f));
-			digits = true;
-		}
-		Fastratio[nCntScore]->SetTex(TexVec4(
+	
+		Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		
+		Fastratio[nCntScore]->SetTex(PositionVec4(
 			0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
 	}
 	return nullptr;
@@ -118,6 +115,10 @@ CMultiply* CMultiply::list(int Number, D3DXVECTOR3 Pos, bool extinction)
 	return pObject;
 }
 
+
+//=============================================================================
+// スコアを表示する関数
+//=============================================================================
 void CMultiply::SetRate(int Rete)
 {
 	if (m_Rate <= 256)
@@ -136,6 +137,9 @@ CMultiply::~CMultiply()
 {
 }
 
+//=============================================================================
+// 破棄関数
+//=============================================================================
 void CMultiply::Uninit()
 {
 	for (int i = 0; i < 10; i++)
@@ -149,6 +153,9 @@ void CMultiply::Uninit()
 	}
 }
 
+//=============================================================================
+// 更新関数
+//=============================================================================
 void CMultiply::Update()
 {
  	m_RateWait--; 
@@ -156,7 +163,7 @@ void CMultiply::Update()
 	if (m_RateWait <= 0)
 	{
 		m_RateWait = 20;
-		if (m_Rate >= 0)
+		if (m_Rate >= 1)
 		{
 			m_Rate--;
 			CMultiply::FastSet(m_Rate, D3DXVECTOR3(100.0f, 200.0f, 0.0f));

@@ -28,7 +28,11 @@ public: /* 定義 */
 		TEXTURE_SUN,		// 雷
 		TEXTURE_CRYSTAL,	// CRYSTAL
 		TEXTURE_SCORE,		//スコア
-		TEXTURE_MAX,		
+		TEXTURE_METEO,		//爆炎
+		TEXTURE_ICEAREA,	//氷結
+		TEXTURE_TEMPEST,	//暴風
+		TEXTURE_RAIN,		//雷雨
+		TEXTURE_MAX,
 		TEXTURE_NONE,	// 使用しない
 	};
 

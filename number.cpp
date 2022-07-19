@@ -31,9 +31,9 @@ HRESULT CNumber::Init()
 {
 	CObject2d::Init();
 	CObject2d::SetTexture(CTexture::TEXTURE_SCORE);
-	col = TexVec4(1.0f, 1.0f, 1.0f, 1.0f);
+	col = PositionVec4(1.0f, 1.0f, 1.0f, 1.0f);
 	
-	SetTex(TexVec4(
+	SetTex(PositionVec4(
 		0.0f, 0.1f, 0.0f, 1.0f));
 	isRelease = false;
 	m_DesTimar = 0;

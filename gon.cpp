@@ -41,7 +41,7 @@ HRESULT CGon::Init()
 	m_DivisionMAX = m_DivisionY*m_DivisionX;
 
 	//表示座標を更新
-	SetTex(TexVec4(
+	SetTex(PositionVec4(
 		1.0f / m_DivisionX * (m_PatternAnim / (m_DivisionX))
 		, 1.0f / m_DivisionX *(m_PatternAnim / (m_DivisionX)) + 1.0f / m_DivisionX
 		, 1.0f / m_DivisionY * (m_PatternAnim % (m_DivisionY))
@@ -79,7 +79,7 @@ void CGon::Update()
 		m_PatternAnim = (m_PatternAnim + 1) % m_DivisionMAX;
 		
 		//表示座標を更新
-		SetTex(TexVec4(
+		SetTex(PositionVec4(
 			  1.0f / m_DivisionX * (m_PatternAnim / (m_DivisionX))
 			, 1.0f / m_DivisionX *(m_PatternAnim / (m_DivisionX)) + 1.0f / m_DivisionX
 			, 1.0f / m_DivisionY * (m_PatternAnim % (m_DivisionY))

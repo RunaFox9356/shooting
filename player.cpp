@@ -19,6 +19,7 @@
 #include "magic.h"
 #include "gon.h"
 #include "multiply.h"
+#include "sorcery.h"
 //------------------------------------
 // static•Ï”
 //------------------------------------
@@ -186,6 +187,7 @@ void CPlayer::Move()	//“®‚«ƒZƒbƒg
 	}
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
+		CSorcey::Create(m_pos, m_NowMagic)->SetUp(EObjectType::SORCERY);
 		CManager::GetMagicBox()->CMagicBox::MagicRelease();
 	}
 
