@@ -20,11 +20,19 @@
 #include "title.h"
 #include "result.h"
 #include "multiply.h"
+#include "particle_manager.h"
 
+
+//-----------------------------------------------------------------------------
+// 静的メンバー変数の初期化
+//-----------------------------------------------------------------------------
 CRenderer * CManager::m_cRenderer = nullptr; 
 CTexture * CManager::m_pTexture = nullptr;
 CMagicBox* CManager::m_MagicBox = nullptr;
 CObject*CManager::m_Game = nullptr;
+CManager* CManager::application = nullptr;
+CParticleManager*CManager::paticleManager = nullptr;
+
 
 //=============================================================================
 // コンストラクト関数
@@ -60,6 +68,15 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	{
 		return E_FAIL;
 	}
+
+	paticleManager = new CParticleManager;
+	// パーティクル
+	if (FAILED(paticleManager->Init()))
+	{
+		return E_FAIL;
+	}
+
+	paticleManager->Create(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f), 0);
 
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
@@ -105,6 +122,16 @@ void CManager::Uninit()
 		delete m_cRenderer;
 		m_cRenderer = nullptr;
 	}
+
+	// パーティクルマネジャーの解放
+	if (paticleManager != nullptr)
+	{
+		paticleManager->Uninit();
+
+		delete paticleManager;
+		paticleManager = nullptr;
+	}
+
 	//入力処理の終了処理
 	m_Input->Uninit();
 
@@ -118,6 +145,7 @@ void CManager::Update()
 	//入力処理の更新処理
 	m_Input->Update();
 	m_cRenderer->Update();
+	paticleManager->Update();
 	//m_Game->Update();
 }
 
@@ -131,6 +159,7 @@ void CManager::Draw()
 
 	// 描画処理	
 	m_cRenderer->Draw();
+
 	//m_cRenderer->DrawBG();
 	//m_cRenderer->DrawNotBG();
 	//m_Game->Draw();

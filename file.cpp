@@ -8,28 +8,23 @@
 #include "file.h"
 #include "letter.h"
 #include "particle.h"
+#include "manager.h"
+#include "texture.h"
+#include "particle_manager.h"
 
-
-CParticle::Particle DataEffect;
 namespace nl = nlohmann;
 
 nl::json j;//リストの生成
 
 
-//============================
-//ゲット関数
-//============================
-CParticle::Particle GetStatus(void)
-{
-	return DataEffect;
-}
+
 
 //============================
 // 全部出力（置くだけ）
 //============================
 void OutputStatus()
 {
-	//DataEffect = GetImguiParticle();
+	/*DataEffect = GetImguiParticle();
 
 	j["POS"] = {{ "X", DataEffect.pos.x} ,{ "Y", DataEffect.pos.y} ,{ "Z", DataEffect.pos.z } };
 	j["POSMAX"] = {{ "X", DataEffect.maxPopPos.x } ,{ "Y", DataEffect.maxPopPos.y } ,{ "Z", DataEffect.maxPopPos.z } };
@@ -66,49 +61,62 @@ void OutputStatus()
 	const std::string pathToJSON = "data/FILE/DataEffectOutput.json";
 	writing_file.open(pathToJSON, std::ios::out);
 	writing_file << jobj << std::endl;
-	writing_file.close();
+	writing_file.close();*/
 }
 
-void LoodJson(const char* cUrl)
+void LoadJson(const char* cUrl)
 {
-	std::ifstream ifs(cUrl);//開くやつ
+	std::ifstream ifs(cUrl);
 
-	if (ifs)//成功したとき
+	if (ifs)
 	{
+		CParticleManager::BundledData loadData = {};
+		CParticle::Info& particleInfo = loadData.particleData;
+
 		//StringToWString(UTF8toSjis(j["name"]));
 		//DataSet.unionsname = StringToWString(UTF8toSjis(j["unions"] ["name"]));
 		ifs >> j;
 
 		//こっちで構造体にデータを入れてます//文字は変換つけないとばぐるぞ＾＾これ-＞UTF8toSjis()
-		DataEffect.pos = D3DXVECTOR3(j["POS"]["X"], j["POS"]["Y"], j["POS"]["Z"]);
-		DataEffect.move = D3DXVECTOR3(j["MOVE"]["X"], j["MOVE"]["Y"], j["MOVE"]["Z"]);
-		DataEffect.rot = D3DXVECTOR3(j["ROT"] ["X"], j["ROT"] ["Y"], j["ROT"] ["Z"]);
-		DataEffect.moveTransition = D3DXVECTOR3(j["MOVETRANSITION"]["X"], j["MOVETRANSITION"]["Y"], j["MOVETRANSITION"]["Z"]);;
-		
-		DataEffect.color.col = D3DXCOLOR(j["COL"] ["R"], j["COL"] ["G"], j["COL"] ["B"], j["COL"] ["A"]);
-		DataEffect.color.colRandamMax = D3DXCOLOR(j["COLRANDAMMAX"]["R"], j["COLRANDAMMAX"]["G"], j["COLRANDAMMAX"]["B"], j["COLRANDAMMAX"]["A"]);
-		DataEffect.color.colRandamMin = D3DXCOLOR(j["COLRANDAMMIN"]["R"], j["COLRANDAMMIN"]["G"], j["COLRANDAMMIN"]["B"], j["COLRANDAMMIN"]["A"]);
-		DataEffect.color.colTransition = D3DXCOLOR(j["COLTRANSITION"]["R"], j["COLTRANSITION"]["G"], j["COLTRANSITION"]["B"], j["COLTRANSITION"]["A"]);
-		DataEffect.color.destCol = D3DXCOLOR(j["DESTCOL"]["R"], j["DESTCOL"]["G"], j["DESTCOL"]["B"], j["DESTCOL"]["A"]);
-		DataEffect.color.nEndTime = j["ENDTIME"];
-		DataEffect.color.nCntTransitionTime = j["CNTTRANSITIONTIME"];
-		DataEffect.color.bColTransition = j["BCOLTRANSITION"];
-		DataEffect.color.bColRandom = j["COLRANDOM"];
-		DataEffect.color.bRandomTransitionTime = j["RANDOMTRANSITIONTIME"];
-		
-		DataEffect.type = j["TYPE"];
-		DataEffect.fWidth = j["WIDTH"];
-		DataEffect.fHeight = j["HEIGHT"];
-		DataEffect.fRadius = j["RADIUS"];
-		DataEffect.fAngle = j["ANGLE"];
-		DataEffect.fWeight = j["WEIGHT"];
-		DataEffect.nLife = j["LIFE"];
-		DataEffect.fAttenuation = j["ATTENUATION"];
-		DataEffect.fWeightTransition = j["WEIGHTTRANSITION"];
-		DataEffect.nLife = j["LIFE"];
-		DataEffect.bBackrot = j["BACKROT"];
-		DataEffect.fScale = j["SCALE"];
+		particleInfo.move = D3DXVECTOR3(j["MOVE"]["X"], j["MOVE"]["Y"], j["MOVE"]["Z"]);
+		particleInfo.rot = D3DXVECTOR3(j["ROT"]["X"], j["ROT"]["Y"], j["ROT"]["Z"]);
+		particleInfo.moveTransition = D3DXVECTOR3(j["MOVETRANSITION"]["X"], j["MOVETRANSITION"]["Y"], j["MOVETRANSITION"]["Z"]);;
 
+		particleInfo.color.colBigin = D3DXCOLOR(j["COL"]["R"], j["COL"]["G"], j["COL"]["B"], j["COL"]["A"]);
+		particleInfo.color.colRandamMax = D3DXCOLOR(j["COLRANDAMMAX"]["R"], j["COLRANDAMMAX"]["G"], j["COLRANDAMMAX"]["B"], j["COLRANDAMMAX"]["A"]);
+		particleInfo.color.colRandamMin = D3DXCOLOR(j["COLRANDAMMIN"]["R"], j["COLRANDAMMIN"]["G"], j["COLRANDAMMIN"]["B"], j["COLRANDAMMIN"]["A"]);
+		particleInfo.color.colTransition = D3DXCOLOR(j["COLTRANSITION"]["R"], j["COLTRANSITION"]["G"], j["COLTRANSITION"]["B"], j["COLTRANSITION"]["A"]);
+		particleInfo.color.destCol = D3DXCOLOR(j["DESTCOL"]["R"], j["DESTCOL"]["G"], j["DESTCOL"]["B"], j["DESTCOL"]["A"]);
+		particleInfo.color.nEndTime = j["ENDTIME"];
+		particleInfo.color.nCntTransitionTime = j["CNTTRANSITIONTIME"];
+		particleInfo.color.bColTransition = j["BCOLTRANSITION"];
+		particleInfo.color.bColRandom = j["COLRANDOM"];
+		particleInfo.color.bRandomTransitionTime = j["RANDOMTRANSITIONTIME"];
+
+		particleInfo.type = j["TYPE"];
+		particleInfo.fWidth = j["WIDTH"];
+		particleInfo.fHeight = j["HEIGHT"];
+		particleInfo.fRadius = j["RADIUS"];
+		particleInfo.fAngle = j["ANGLE"];
+		particleInfo.fWeight = j["WEIGHT"];
+		particleInfo.nLife = j["LIFE"];
+		particleInfo.fAttenuation = j["ATTENUATION"];
+		particleInfo.fWeightTransition = j["WEIGHTTRANSITION"];
+		particleInfo.nLife = j["LIFE"];
+		particleInfo.bBackrot = j["BACKROT"];
+		particleInfo.fScale = j["SCALE"];
+
+		static bool chack = true;
+
+		if (chack)
+		{
+			CManager::GetParticleManager()->SetBundledData(loadData);
+			chack = false;
+		}
+		else
+		{
+			CManager::GetParticleManager()->ChangeBundledData(0, loadData);
+		}
 	}
 
 }

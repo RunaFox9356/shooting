@@ -18,7 +18,7 @@ class CMagicBox;
 class CObject;
 class CResult;
 class CTitle;
-
+class CParticleManager;
 
 class CManager
 {
@@ -48,16 +48,18 @@ public:
 	static CTexture* GetTexture();	// テクスチャの情報の取得
 	static CMagicBox*GetMagicBox();
 	static void SetMode(CManager::MODE mode);
+	static CParticleManager* GetParticleManager() { return paticleManager; }
 
-
+//	static CManager* GetInstance();
 private:
+	static CManager* application;
 	static CTexture *m_pTexture;
 	static CRenderer * m_cRenderer;
 	CInput *m_Input;
 	static CMagicBox* m_MagicBox;
 
 	static CObject*m_Game;
-	
+	static CParticleManager* paticleManager;	// パーティクルマネジャー
 	MODE m_mode;
 
 };

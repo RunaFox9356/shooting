@@ -31,8 +31,8 @@
 //=====================================
 // êßå‰ä÷êî
 
-CParticle::Particle GetStatus(void);//ÉQÉbÉg
+
 void OutputStatus();
-void LoodJson(const char* cUrl);
+void LoadJson(const char* cUrl);
 
 #endif

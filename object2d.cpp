@@ -62,15 +62,11 @@ HRESULT CObject2d::Init()
 	// 頂点情報の設定
 	//------------------------
 	//頂点座標の設定
-	/*pVtx[0].pos = D3DXVECTOR3(m_pos.x - 50.0f, m_pos.y - 50.0f, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(m_pos.x + 50.0f, m_pos.y - 50.0f, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(m_pos.x - 50.0f, m_pos.y + 50.0f, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(m_pos.x + 50.0f, m_pos.y + 50.0f, 0.0f);*/
+	pVtx[0].pos = D3DXVECTOR3(m_pos.x, m_pos.y, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(m_pos.x, m_pos.y, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(m_pos.x, m_pos.y, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(m_pos.x, m_pos.y, 0.0f);
 
-	pVtx[0].pos = D3DXVECTOR3(-50.0f, -50.0f, 0.0f);
-	pVtx[1].pos = D3DXVECTOR3(+50.0f, -50.0f, 0.0f);
-	pVtx[2].pos = D3DXVECTOR3(-50.0f, +50.0f, 0.0f);
-	pVtx[3].pos = D3DXVECTOR3(+50.0f, +50.0f, 0.0f);
 
 	//rhwの設定
 	pVtx[0].rhw = 1.0f;
@@ -125,8 +121,7 @@ void CObject2d::Update()
 	D3DXVECTOR3 addPos[4];
 	D3DXMATRIX mtx;	// 計算用マトリックス
 
-
-					//マトリックス作成
+	//マトリックス作成
 	D3DXMatrixIdentity(&mtx);
 
 	//頂点座標
@@ -218,7 +213,7 @@ void CObject2d::SetPos(const D3DXVECTOR3 &pos)
 //=============================================================================
 void CObject2d::SetMove(const D3DXVECTOR3 &move)
 {
-	m_pos = move;
+	m_move = move;
 }
 
 //--------------------------------------------------
@@ -271,7 +266,7 @@ void CObject2d::SetCollar(PositionVec4 Collar)
 	pVtx[2].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
 	pVtx[3].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
 
-
+	m_col = Collar;
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
 

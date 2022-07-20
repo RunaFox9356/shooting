@@ -32,7 +32,7 @@ HRESULT CNumber::Init()
 	CObject2d::Init();
 	CObject2d::SetTexture(CTexture::TEXTURE_SCORE);
 	col = PositionVec4(1.0f, 1.0f, 1.0f, 1.0f);
-	
+
 	SetTex(PositionVec4(
 		0.0f, 0.1f, 0.0f, 1.0f));
 	isRelease = false;
@@ -62,6 +62,7 @@ void CNumber::Update()
 
 		col.P3 -= 1.0f / m_DesTimarMax;
 
+		
 		CObject2d::SetCollar(col);
 
 		if (m_DesTimar<=0)

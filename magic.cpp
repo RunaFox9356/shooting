@@ -104,8 +104,8 @@ CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 		float posX = pos.x + 100 * i;
 		if (object->cMagic[i] != nullptr)
 		{
-			object->cMagic[i]->SetPos(D3DXVECTOR3(posX, pos.y, pos.z));
 			object->cMagic[i]->Init();
+			object->cMagic[i]->SetPos(D3DXVECTOR3(posX, pos.y, pos.z));
 			object->cMagic[i]->SelectTex(CTexture::TEXTURE_NONE);
 			object->cMagic[i]->SetSize(80);
 		}
