@@ -112,8 +112,8 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 	pLight = new CLight;
 	pLight->Init();
 
-	LoodJson("data/FILE/Effect.json");
-
+	//LoodJson("data/FILE/Effect.json");
+	//
 	//particle = new CParticle;
 	//particle->Init();	// パーティクル
 						// テクスチャの設定
@@ -148,6 +148,13 @@ void CRenderer::Uninit()
 		delete pCamera[1];
 		pCamera[1] = nullptr;
 	}
+	// カメラ終了処理
+	//if (particle != nullptr)
+	//{
+	//	particle->Uninit();	// パーティクル
+	//	delete particle;
+	//	particle = nullptr;
+	//}
 #ifdef _DEBUG
 	// デバッグ情報表示用フォントの破棄
 	if (m_pFont != nullptr)
@@ -183,7 +190,7 @@ void CRenderer::Update()
 	CObject::AllUpdate();
 	pCamera[1]->Update();
 
-
+	//particle->Update();	// パーティクル
 	pLight->Update();
 
 
@@ -216,7 +223,7 @@ void CRenderer::Draw()
 
 		pCamera[1]->Set(1);
 		CObject::TypeDraw(CObject::NONE);
-
+		//particle->Draw();	// パーティクル
 
 #ifdef _DEBUG
 		// FPS表示

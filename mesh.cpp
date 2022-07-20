@@ -10,8 +10,6 @@
 #include "manager.h"
 
 
-
-
 CMesh::CMesh()
 {
 

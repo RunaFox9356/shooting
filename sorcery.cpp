@@ -32,8 +32,6 @@ HRESULT CSorcey::Init()
 {
 	C3dpolygon::Init();
 
-
-
 	return S_OK;
 }
 
@@ -81,6 +79,7 @@ void CSorcey::Update()
 			, V * (m_PatternAnimY)+ V));
 
 	}
+
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{
 		CObject*pObject;
@@ -94,7 +93,7 @@ void CSorcey::Update()
 				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
-				if (enemyPos->x <= 1280.0f)
+				if (enemyPos->x < 1280.0f - pEnemySize->x)
 				{
 				float enemySize = 50.0f;
 				enemySize *= pEnemySize->y;
@@ -113,19 +112,19 @@ void CSorcey::Update()
 						switch (NouPlayer)
 						{
 						case CPlayer::NOW_FIRE:
-							pObject3d->HitLife(30);
+							pObject3d->HitLife(10);
 							break;
 						case CPlayer::NOW_ICE:
-							pObject3d->HitLife(5);
+							pObject3d->HitLife(1);
 							break;
 						case CPlayer::NOW_STORM:
-							pObject3d->HitLife(5);
+							pObject3d->HitLife(1);
 							break;
 						case CPlayer::NOW_SUN:
-							pObject3d->HitLife(5);
+							pObject3d->HitLife(1);
 							break;
 						case CPlayer::NOW_NON:
-							pObject3d->HitLife(5);
+							pObject3d->HitLife(1);
 							break;
 						default:
 							pObject3d->HitLife(5);
@@ -201,9 +200,6 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 		default:
 			break;
 		}
-	
-
-
 	}
 
 	return pObject;

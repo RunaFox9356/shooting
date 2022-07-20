@@ -1,6 +1,6 @@
 //============================
 //
-// プレイヤー設定
+// object3d設定
 // Author:hamada ryuuga
 //
 //============================
@@ -17,6 +17,7 @@
 #include "score.h"
 #include "multiply.h"
 
+int CObject3d::m_drop = 0;
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -250,10 +251,16 @@ void CObject3d::HitLife(int Damage)
 	if (m_Life <= 0)
 	{
 		CMultiply::SetRate((1 + *CMultiply::GetRate()));
-
 		CMultiply::list(*CMultiply::GetRate(), m_pos,true);
+
 		GetScore()->Add(50);
-		CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
+
+		m_drop++;
+		if (m_drop >=5)
+		{
+			m_drop = 0;
+			CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
+		}
 		// 解放
 		CObject::Release();
 	}

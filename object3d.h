@@ -21,7 +21,7 @@ class CObject3d : public CObject
 private:
 	//polygonの拡大サイズ
 	static const D3DXVECTOR3 m_Vtx[4];
-
+	static int m_drop;
 	enum ANIME
 	{
 		ANIME_NORMAL = 0,	// ニュートラル
@@ -48,6 +48,7 @@ public:
 	void SetSize(D3DXVECTOR3 &Size);
 	void SetLife(int Life);
 	void HitLife(int Damage);
+
 	const D3DXVECTOR3 *GetSize() const;
 
 protected:
