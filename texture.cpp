@@ -29,7 +29,8 @@ const char* CTexture::s_FileName[] =
 	"data/TEXTURE/impact.png",
 	"data/TEXTURE/Iceburst.png",
 	"data/TEXTURE/tempest.png",
-	"data/TEXTURE/rain.png"
+	"data/TEXTURE/rain.png",
+	"data/TEXTURE/smoke.jpg"
 };
 
 static_assert(sizeof(CTexture::s_FileName) / sizeof(CTexture::s_FileName[0]) == CTexture::TEXTURE_MAX, "aho");

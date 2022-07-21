@@ -60,7 +60,11 @@ void CSorcey::Update()
 	{
 		Imguipos = particleManager->GetEmitter()[0]->GetPos();
 	}
-	
+	if (Imguipos.x >=1280.0f) 
+	{
+		particleManager->Release(0);
+		return;
+	}
 	switch (m_NouPlayer)
 	{
 	case CPlayer::NOW_FIRE:
@@ -68,8 +72,11 @@ void CSorcey::Update()
 	case CPlayer::NOW_ICE:
 		break;
 	case CPlayer::NOW_STORM:
-		Imguipos.x += 15.0f;
-		particleManager->GetEmitter()[0]->SetPos(Imguipos);
+		if (particleManager->GetEmitter().size() != 0)
+		{
+			Imguipos.x += 15.0f;
+			particleManager->GetEmitter()[0]->SetPos(Imguipos);
+		}
 		break;
 	case CPlayer::NOW_SUN:
 		break;
@@ -78,6 +85,7 @@ void CSorcey::Update()
 	default:
 		break;
 	}
+
 	//アニメーション設定
 	m_CounterAnim++;
 	if ((m_CounterAnim % 5) == 0)//ここで速度調整

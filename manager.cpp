@@ -97,6 +97,8 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 
 	CMultiply::FastSet(0, D3DXVECTOR3(100.0f, 200.0f, 0.0f));
 
+	
+
 	return S_OK;
 }
 

@@ -17,10 +17,11 @@
 #include "bullet.h"
 #include "enemy.h"	
 #include "magic.h"
-#include "gon.h"
 #include "multiply.h"
 #include "sorcery.h"
 #include "particle_manager.h"
+#include "utility.h"
+
 //------------------------------------
 // static変数
 //------------------------------------
@@ -192,32 +193,43 @@ void CPlayer::Move()	//動きセット
 	}
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
-		m_CastMagic = m_NowMagic;
 		CParticleManager* particleManager = CManager::GetParticleManager();
-		switch (m_NowMagic)
-		{
-		case CPlayer::NOW_FIRE:
-		
-			break;
-		case CPlayer::NOW_ICE:
 
-			break;
-		case CPlayer::NOW_STORM:
-			particleManager->Create(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f), 0);
-			break;
-		case CPlayer::NOW_SUN:
+		if (particleManager->GetEmitter().size() == 0)
+		{
 		
-			break;
-		case CPlayer::NOW_NON:
-		
-			break;
-		default:
-			break;
+			D3DXVECTOR3 Pos = ScreenCastWorld(
+				&m_pos,			// スクリーン座標
+				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
+			m_CastMagic = m_NowMagic;
+			CParticleManager* particleManager = CManager::GetParticleManager();
+			switch (m_NowMagic)
+			{
+				
+			case CPlayer::NOW_FIRE:
+
+				break;
+			case CPlayer::NOW_ICE:
+
+				break;
+			case CPlayer::NOW_STORM:
+
+				particleManager->Create(Pos, 0);
+				break;
+			case CPlayer::NOW_SUN:
+
+				break;
+			case CPlayer::NOW_NON:
+
+				break;
+			default:
+				break;
+			}
+
+
+			CSorcey::Create(m_pos, m_NowMagic)->SetUp(EObjectType::SORCERY);
+			CManager::GetMagicBox()->CMagicBox::MagicRelease();
 		}
-	
-		
-		CSorcey::Create(m_pos, m_NowMagic)->SetUp(EObjectType::SORCERY);
-		CManager::GetMagicBox()->CMagicBox::MagicRelease();
 	}
 
 	m_move.x += (0.0f - m_move.x)*ATTENUATION;//（目的の値-現在の値）＊減衰係数

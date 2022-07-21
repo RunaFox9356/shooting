@@ -52,7 +52,8 @@ void CParticleEmitter::Uninit()
 //-----------------------------------------
 void CParticleEmitter::Update()
 {
-	for (int i = 0; i < 1; i++)
+	int popNumber = 5;
+	for (int i = 0; i < popNumber; i++)
 	{
 		PopParticle();
 	}
@@ -78,7 +79,6 @@ void CParticleEmitter::PopParticle(void)
 	popInfo.type = CParticle::PARTICLETYPE_NORMAL;
 
 	D3DXVECTOR3 myPos = m_pos;
-
 	// ¶¬ˆÊ’u‚ÌŽZo
 	myPos.x += FloatRandam(popInfo.maxPopPos.x, -popInfo.minPopPos.x);
 	myPos.y += FloatRandam(popInfo.maxPopPos.y, -popInfo.minPopPos.y);

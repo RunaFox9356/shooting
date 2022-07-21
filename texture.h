@@ -21,7 +21,7 @@ public: /* 定義 */
 	enum TEXTURE
 	{
 		TEXTURE_BULLET = 0,	// メテオ
-		TEXTURE_GON,		// 煙
+		TEXTURE_GON,		// gon
 		TEXTURE_FIRE,		// 火
 		TEXTURE_ICE,		// 氷
 		TEXTURE_STORM,		// 風
@@ -32,6 +32,7 @@ public: /* 定義 */
 		TEXTURE_ICEAREA,	//氷結
 		TEXTURE_TEMPEST,	//暴風
 		TEXTURE_RAIN,		//雷雨
+		TEXTURE_SMOKE,
 		TEXTURE_MAX,
 		TEXTURE_NONE,	// 使用しない
 	};
