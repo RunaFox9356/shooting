@@ -98,6 +98,7 @@ void CCrystal::Update()
 					{
 						GetScore()->Add(1000);
 					}
+
 					CObject::Release();
 
 					return;

@@ -12,12 +12,10 @@
 #include "texture.h"
 #include "particle_manager.h"
 
+static int index = 0;
 namespace nl = nlohmann;
 
 nl::json j;//リストの生成
-
-
-
 
 //============================
 // 全部出力（置くだけ）
@@ -77,6 +75,8 @@ void LoadJson(const char* cUrl)
 		//DataSet.unionsname = StringToWString(UTF8toSjis(j["unions"] ["name"]));
 		ifs >> j;
 
+		particleInfo.maxPopPos = D3DXVECTOR3(j["POSMAX"]["X"], j["POSMAX"]["Y"], j["POSMAX"]["Z"]);
+		particleInfo.minPopPos = D3DXVECTOR3(j["POSMIN"]["X"], j["POSMIN"]["Y"], j["POSMIN"]["Z"]);
 		//こっちで構造体にデータを入れてます//文字は変換つけないとばぐるぞ＾＾これ-＞UTF8toSjis()
 		particleInfo.move = D3DXVECTOR3(j["MOVE"]["X"], j["MOVE"]["Y"], j["MOVE"]["Z"]);
 		particleInfo.rot = D3DXVECTOR3(j["ROT"]["X"], j["ROT"]["Y"], j["ROT"]["Z"]);
@@ -110,8 +110,8 @@ void LoadJson(const char* cUrl)
 
 		if (chack)
 		{
-			CManager::GetParticleManager()->SetBundledData(loadData);
-			chack = false;
+			CManager::GetParticleManager()->SetBundledData(loadData, index);
+			index++;
 		}
 		else
 		{

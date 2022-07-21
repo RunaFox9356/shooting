@@ -207,17 +207,17 @@ void CPlayer::Move()	//“®‚«ƒZƒbƒg
 			{
 				
 			case CPlayer::NOW_FIRE:
-
+				particleManager->Create(Pos, 0, 2);
 				break;
 			case CPlayer::NOW_ICE:
-
+				particleManager->Create(Pos, 0, 3);
 				break;
 			case CPlayer::NOW_STORM:
 
-				particleManager->Create(Pos, 0);
+				particleManager->Create(Pos, 0,0);
 				break;
 			case CPlayer::NOW_SUN:
-
+				particleManager->Create(Pos, 0, 1);
 				break;
 			case CPlayer::NOW_NON:
 

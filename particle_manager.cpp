@@ -12,14 +12,15 @@
 
 #include <assert.h>
 
+int CParticleManager::m_MaxIndex = 0;
 //-----------------------------------------
 // コンストラクタ
 //-----------------------------------------
 CParticleManager::CParticleManager() :
 	m_numAll(0),
-	m_bundledData({}),
 	m_particleEmitter({})
 {
+
 }
 
 //-----------------------------------------
@@ -35,6 +36,9 @@ CParticleManager::~CParticleManager()
 HRESULT CParticleManager::Init()
 {
 	LoadJson("data/FILE/Effect.json");
+	LoadJson("data/FILE/Sand.json");
+	LoadJson("data/FILE/Flare.json");
+	LoadJson("data/FILE/ice.json");
 	return S_OK;
 }
 
@@ -73,7 +77,7 @@ void CParticleManager::Update()
 //-----------------------------------------
 // 生成
 //-----------------------------------------
-int CParticleManager::Create(const D3DXVECTOR3& pos, const int& index)
+int CParticleManager::Create(const D3DXVECTOR3& pos, const int& index,int Type)
 {
 	int idx = m_numAll;
 	CParticleEmitter* emitter = new CParticleEmitter();
@@ -81,14 +85,14 @@ int CParticleManager::Create(const D3DXVECTOR3& pos, const int& index)
 	emitter->Init();		// 初期化
 	emitter->SetPos(pos);	// 位置の更新
 
-	if (m_bundledData.size() <= index)
+	if (m_bundledData[Type].size() <= index)
 	{
 		assert(false);
 		return 0;
 	}
 
-	emitter->SetParticle(m_bundledData.at(index).particleData);	// 指定されてたパーティクルデータの挿入
-	emitter->SetEmitter(m_bundledData.at(index).emitterData);
+	emitter->SetParticle(m_bundledData[Type].at(index).particleData);	// 指定されてたパーティクルデータの挿入
+	emitter->SetEmitter(m_bundledData[Type].at(index).emitterData);
 
 	m_numAll++;
 	m_particleEmitter.push_back(emitter);
@@ -105,9 +109,9 @@ void CParticleManager::Release(const int idx)
 //-----------------------------------------
 // 設定
 //-----------------------------------------
-void CParticleManager::SetBundledData(const BundledData& inData)
+void CParticleManager::SetBundledData(const BundledData& inData,int Data)
 {
-	m_bundledData.push_back(inData);
+	m_bundledData[Data].push_back(inData);
 }
 
 //-----------------------------------------
@@ -115,7 +119,7 @@ void CParticleManager::SetBundledData(const BundledData& inData)
 //-----------------------------------------
 void CParticleManager::ChangeBundledData(const int idx, const BundledData& inData)
 {
-	m_bundledData.at(idx) = inData;
+	m_bundledData[m_Index].at(idx) = inData;
 }
 
 //-----------------------------------------

@@ -77,7 +77,10 @@ void CParticle::Update()
 		if (m_data.color.nEndTime >= m_data.color.nCntTransitionTime)
 		{
 			m_data.color.nCntTransitionTime++;
-			myColor += m_data.color.colTransition;
+			myColor.r += m_data.color.colTransition.r;
+			myColor.g += m_data.color.colTransition.g;
+			myColor.b += m_data.color.colTransition.b;
+			//myColor.a += m_data.color.colTransition.a;
 		}
 	}
 	myColor.a -= 1.0f / m_data.nMaxLife;
@@ -151,6 +154,7 @@ CParticle* CParticle::Create(const Info& inParticle, const D3DXVECTOR3& inPos)
 		particle->m_data = inParticle;
 		//particle->SetTexture(particle->m_data.nIdxTex);
 		particle->SetCollar(PositionVec4(particle->m_data.color.colBigin.r, particle->m_data.color.colBigin.g, particle->m_data.color.colBigin.b, particle->m_data.color.colBigin.a));
+		
 		particle->CObject2d::SetTexture(CTexture::TEXTURE_SMOKE);
 
 		return particle;

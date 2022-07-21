@@ -62,7 +62,7 @@ void CSorcey::Update()
 	}
 	if (Imguipos.x >=1280.0f) 
 	{
-		particleManager->Release(0);
+		//particleManager->Release(0);
 		return;
 	}
 	switch (m_NouPlayer)
@@ -99,6 +99,10 @@ void CSorcey::Update()
 			{
 				m_PatternAnimY = 0;
 				CObject::Release();
+				if (particleManager->GetEmitter().size() != 0)
+				{
+					particleManager->Release(0);
+				}
 				return;
 			}
 		}
