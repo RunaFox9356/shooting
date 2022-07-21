@@ -75,14 +75,14 @@ public:
 	static CPlayer *Create();
 	static NOWMAGIC *GetMagic();
 	static void SetMagic(CPlayer::NOWMAGIC NextMagic);
-	
+	static CPlayer::NOWMAGIC * GetCastMagic();
 private:
 	
 	void Move();		// 移動
 	int m_Pow;
 	float m_MoveSpeed;
 	static NOWMAGIC m_NowMagic;			//現在の魔法
-
+	static NOWMAGIC m_CastMagic;		//唱えた魔法
 private:
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)

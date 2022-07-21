@@ -20,6 +20,7 @@
 #include "gon.h"
 #include "multiply.h"
 #include "sorcery.h"
+#include "particle_manager.h"
 //------------------------------------
 // static変数
 //------------------------------------
@@ -30,6 +31,9 @@ const int CPlayer::MAX_PRAYER = 16;			// 最大数
 const int CPlayer::MAX_MOVE = 9;			// アニメーションの最大数
 const int CPlayer::INVINCIBLE = 300;		// 無敵時間
 CPlayer::NOWMAGIC CPlayer::m_NowMagic = NOW_NON;		// 無敵時間
+CPlayer::NOWMAGIC CPlayer::m_CastMagic = NOW_NON;		// 無敵時間
+
+
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -155,6 +159,7 @@ void CPlayer::Move()	//動きセット
 			//CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f))->SetSize(D3DXVECTOR3(50.0f, 90.0f, 0.0f));
 			switch (m_NowMagic)
 			{
+
 			case CPlayer::NOW_FIRE:
 				CBullet::Create(m_pos, D3DXVECTOR3(3.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
 				break;
@@ -187,6 +192,30 @@ void CPlayer::Move()	//動きセット
 	}
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
+		m_CastMagic = m_NowMagic;
+		CParticleManager* particleManager = CManager::GetParticleManager();
+		switch (m_NowMagic)
+		{
+		case CPlayer::NOW_FIRE:
+		
+			break;
+		case CPlayer::NOW_ICE:
+
+			break;
+		case CPlayer::NOW_STORM:
+			particleManager->Create(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f), 0);
+			break;
+		case CPlayer::NOW_SUN:
+		
+			break;
+		case CPlayer::NOW_NON:
+		
+			break;
+		default:
+			break;
+		}
+	
+		
 		CSorcey::Create(m_pos, m_NowMagic)->SetUp(EObjectType::SORCERY);
 		CManager::GetMagicBox()->CMagicBox::MagicRelease();
 	}
@@ -222,13 +251,6 @@ void CPlayer::Move()	//動きセット
 	}
 }
 
-//------------------------------------
-// GetMagic 
-//------------------------------------
-CPlayer::NOWMAGIC * CPlayer::GetMagic()
-{
-	return &m_NowMagic;
-}
 
 //------------------------------------
 // SetMagic
@@ -243,4 +265,21 @@ void CPlayer::SetMagic(CPlayer::NOWMAGIC NextMagic)
 	{
 		m_NowMagic = NOW_NON;
 	}
+}
+
+//------------------------------------
+// GetMagic 
+//------------------------------------
+CPlayer::NOWMAGIC * CPlayer::GetMagic()
+{
+	return &m_NowMagic;
+}
+
+
+//------------------------------------
+// GetMagic 
+//------------------------------------
+CPlayer::NOWMAGIC * CPlayer::GetCastMagic()
+{
+	return &m_CastMagic;
 }

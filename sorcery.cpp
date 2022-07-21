@@ -8,6 +8,7 @@
 #include "sorcery.h"
 #include "hamada.h"
 #include "manager.h"
+#include "particle_manager.h"
 #include <assert.h>
 
 //=============================================================================
@@ -31,7 +32,7 @@ CSorcey::~CSorcey()
 HRESULT CSorcey::Init()
 {
 	C3dpolygon::Init();
-
+	m_NouPlayer  = *CPlayer::GetCastMagic();
 	return S_OK;
 }
 
@@ -50,6 +51,33 @@ void CSorcey::Update()
 {
 	C3dpolygon::Update();
 
+	// パーティクルのデータ
+	
+	D3DXVECTOR3 Imguipos;
+	CParticleManager* particleManager = CManager::GetParticleManager();
+	
+	if (particleManager->GetEmitter().size() !=0)
+	{
+		Imguipos = particleManager->GetEmitter()[0]->GetPos();
+	}
+	
+	switch (m_NouPlayer)
+	{
+	case CPlayer::NOW_FIRE:
+		break;
+	case CPlayer::NOW_ICE:
+		break;
+	case CPlayer::NOW_STORM:
+		Imguipos.x += 15.0f;
+		particleManager->GetEmitter()[0]->SetPos(Imguipos);
+		break;
+	case CPlayer::NOW_SUN:
+		break;
+	case CPlayer::NOW_NON:
+		break;
+	default:
+		break;
+	}
 	//アニメーション設定
 	m_CounterAnim++;
 	if ((m_CounterAnim % 5) == 0)//ここで速度調整
@@ -79,7 +107,7 @@ void CSorcey::Update()
 			, V * (m_PatternAnimY)+ V));
 
 	}
-
+	
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{
 		CObject*pObject;
