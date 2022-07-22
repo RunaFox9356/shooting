@@ -90,9 +90,6 @@ void CPlayer::Update(void)
 	CObject3d::Update();
 
 	Move();	//“®‚«ƒZƒbƒg
-	
-	
-	//Collision();//°
 
 }
 

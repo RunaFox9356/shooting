@@ -130,7 +130,6 @@ void CObject::AllCreate()
 {
 
 	CMesh::Create()->SetUp(BG);
-	CPlayer::Create()->SetUp(PLAYER);
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create();
 	pScore->Set(0);

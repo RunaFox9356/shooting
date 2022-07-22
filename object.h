@@ -51,7 +51,7 @@ public:
 	int * GetId();
 	CObject * GetObjectData(int nCount);
 	void SetUp(EObjectType Type);
-	
+
 	void Release();
 	EObjectType GetType();
 	CScore*GetScore();

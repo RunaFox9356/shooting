@@ -32,7 +32,7 @@ CMagicBox* CManager::m_MagicBox = nullptr;
 CObject*CManager::m_Game = nullptr;
 CManager* CManager::application = nullptr;
 CParticleManager*CManager::paticleManager = nullptr;
-
+CPlayer*CManager::m_Player = nullptr;
 
 //=============================================================================
 // コンストラクト関数
@@ -96,9 +96,9 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_FIRE);
 
 	CMultiply::FastSet(0, D3DXVECTOR3(100.0f, 200.0f, 0.0f));
-
 	
-
+	m_Player = CPlayer::Create();
+	m_Player->SetUp(CObject::PLAYER);
 	return S_OK;
 }
 

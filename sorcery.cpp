@@ -10,6 +10,7 @@
 #include "manager.h"
 #include "particle_manager.h"
 #include <assert.h>
+#include "utility.h"
 
 //=============================================================================
 // コンストラクト関数
@@ -53,130 +54,146 @@ void CSorcey::Update()
 
 	// パーティクルのデータ
 	
-	D3DXVECTOR3 Imguipos;
+	D3DXVECTOR3 Imguipos, PlayerPos;
 	CParticleManager* particleManager = CManager::GetParticleManager();
-	
-	if (particleManager->GetEmitter().size() !=0)
+	CPlayer *Data  = CManager::GetPlayer();
+
+	if (particleManager->GetEmitter().size() != 0)
 	{
 		Imguipos = particleManager->GetEmitter()[0]->GetPos();
-	}
-	if (Imguipos.x >=1280.0f) 
-	{
-		//particleManager->Release(0);
-		return;
-	}
-	switch (m_NouPlayer)
-	{
-	case CPlayer::NOW_FIRE:
-		break;
-	case CPlayer::NOW_ICE:
-		break;
-	case CPlayer::NOW_STORM:
-		if (particleManager->GetEmitter().size() != 0)
+		PlayerPos = *Data->GetPos();
+		PlayerPos.x += 640.0f;
+	
+	
+		switch (m_NouPlayer)
 		{
+		case CPlayer::NOW_FIRE:
+		{
+			
+			m_pos = PlayerPos;
+			PlayerPos.x -= 640.0f;
+			D3DXVECTOR3 Pos = ScreenCastWorld(
+				&PlayerPos,			// スクリーン座標
+				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
+			//particleManager->GetEmitter()[0]->SetPos(Imguipos);
+			Imguipos = Pos;
+		
+			break;
+		}
+		case CPlayer::NOW_ICE:
+		{ //じわじわ出したい
+			m_pos = PlayerPos;
+			PlayerPos.x -= 640.0f;
+			D3DXVECTOR3 Pos = ScreenCastWorld(
+				&PlayerPos,			// スクリーン座標
+				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
+			//particleManager->GetEmitter()[0]->SetPos(Imguipos);
+			Imguipos = Pos;
+			
+			break;
+		}
+		case CPlayer::NOW_STORM:
 			Imguipos.x += 15.0f;
-			particleManager->GetEmitter()[0]->SetPos(Imguipos);
+			PlayerPos.x -= 640.0f;
+			break;
+		case CPlayer::NOW_SUN:
+			PlayerPos.x -= 640.0f;
+			break;
+		case CPlayer::NOW_NON:
+			break;
+		default:
+			break;
 		}
-		break;
-	case CPlayer::NOW_SUN:
-		break;
-	case CPlayer::NOW_NON:
-		break;
-	default:
-		break;
-	}
 
-	//アニメーション設定
-	m_CounterAnim++;
-	if ((m_CounterAnim % 5) == 0)//ここで速度調整
-	{
-		m_PatternAnimX++;
-		if (m_PatternAnimX > m_DivisionX)
-		{
-			m_PatternAnimX = 0;
-			m_PatternAnimY++;
-			if (m_PatternAnimY >= m_DivisionY)
-			{
-				m_PatternAnimY = 0;
-				CObject::Release();
-				if (particleManager->GetEmitter().size() != 0)
-				{
-					particleManager->Release(0);
-				}
-				return;
-			}
-		}
+		particleManager->GetEmitter()[0]->SetPos(Imguipos);
 	
-		float U = 1.0f  / (m_DivisionX);
-
-		float V = 1.0f  / (m_DivisionY);
-
-		//表示座標を更新
-		SetTex(PositionVec4(
-			U * (m_PatternAnimX)
-			, U *(m_PatternAnimX) + U
-			, V * (m_PatternAnimY)
-			, V * (m_PatternAnimY)+ V));
-
-	}
-	
-	for (int i = 0; i < MAX_OBJECT; i++)
-	{
-		CObject*pObject;
-		pObject = GetObjectData(i);
-		if (pObject != nullptr)
+		//アニメーション設定
+		m_CounterAnim++;
+		if ((m_CounterAnim % 5) == 0)//ここで速度調整
 		{
-			EObjectType Type = pObject->GetType();
-			if (Type == CObject::ENEMY)
+			m_PatternAnimX++;
+			if (m_PatternAnimX > m_DivisionX)
 			{
-				
-				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
-				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
-				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
-				if (enemyPos->x < 1280.0f - pEnemySize->x)
+				m_PatternAnimX = 0;
+				m_PatternAnimY++;
+				if (m_PatternAnimY >= m_DivisionY)
 				{
-				float enemySize = 50.0f;
-				enemySize *= pEnemySize->y;
-				float size = 50.0f;
-				
-					if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
-						((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
-						((m_pos.x - m_Size.x) <= (enemyPos->x + pEnemySize->x)) &&
-						((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
+					m_PatternAnimY = 0;
+					CObject::Release();
+					if (particleManager->GetEmitter().size() != 0)
 					{
-
-						// 当たり判定
-						CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
-						assert(pObject3d != nullptr);
-						CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
-						switch (NouPlayer)
-						{
-						case CPlayer::NOW_FIRE:
-							pObject3d->HitLife(10);
-							break;
-						case CPlayer::NOW_ICE:
-							pObject3d->HitLife(1);
-							break;
-						case CPlayer::NOW_STORM:
-							pObject3d->HitLife(1);
-							break;
-						case CPlayer::NOW_SUN:
-							pObject3d->HitLife(1);
-							break;
-						case CPlayer::NOW_NON:
-							pObject3d->HitLife(1);
-							break;
-						default:
-							pObject3d->HitLife(5);
-							break;
-						}
+						particleManager->Release(0);
 						return;
+					}
+					return;
+				}
+			}
+
+			float U = 1.0f / (m_DivisionX);
+
+			float V = 1.0f / (m_DivisionY);
+
+			//表示座標を更新
+			SetTex(PositionVec4(
+				U * (m_PatternAnimX)
+				, U *(m_PatternAnimX)+U
+				, V * (m_PatternAnimY)
+				, V * (m_PatternAnimY)+V));
+
+		}
+		}
+		for (int i = 0; i < MAX_OBJECT; i++)
+		{
+			CObject*pObject;
+			pObject = GetObjectData(i);
+			if (pObject != nullptr)
+			{
+				EObjectType Type = pObject->GetType();
+				if (Type == CObject::ENEMY)
+				{
+
+					CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
+					const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
+					const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
+					if (enemyPos->x < 1280.0f - pEnemySize->x)
+					{
+						float enemySize = 50.0f;
+						enemySize *= pEnemySize->y;
+						float size = 50.0f;
+
+						if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
+							((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
+							((m_pos.x - m_Size.x) <= (enemyPos->x + pEnemySize->x)) &&
+							((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
+						{
+
+							// 当たり判定
+							CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
+							assert(pObject3d != nullptr);
+							switch (m_NouPlayer)
+							{
+							case CPlayer::NOW_FIRE:
+								pObject3d->HitLife(2);
+								break;
+							case CPlayer::NOW_ICE:
+								pObject3d->HitLife(5);
+								break;
+							case CPlayer::NOW_STORM:
+								pObject3d->HitLife(15);
+								break;
+							case CPlayer::NOW_SUN:
+								pObject3d->HitLife(2);
+								break;
+							default:
+								break;
+							}
+							return;
+						}
 					}
 				}
 			}
-		}
+		
 	}
-
 }
 
 //=============================================================================
