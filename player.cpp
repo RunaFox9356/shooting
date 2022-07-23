@@ -201,8 +201,7 @@ void CPlayer::Move()	//動きセット
 			m_CastMagic = m_NowMagic;
 			CParticleManager* particleManager = CManager::GetParticleManager();
 			switch (m_NowMagic)
-			{
-				
+			{	
 			case CPlayer::NOW_FIRE:
 				particleManager->Create(Pos, 0, 2);
 				break;
@@ -222,8 +221,6 @@ void CPlayer::Move()	//動きセット
 			default:
 				break;
 			}
-
-
 			CSorcey::Create(m_pos, m_NowMagic)->SetUp(EObjectType::SORCERY);
 			CManager::GetMagicBox()->CMagicBox::MagicRelease();
 		}

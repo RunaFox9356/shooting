@@ -2,7 +2,7 @@
 // 
 // パーティクルエミッタ
 // Author YudaKaito
-// 
+// Author HamadaRyuuga
 //=========================================
 #ifndef _PARTICLE_MANAGER_H_
 #define _PARTICLE_MANAGER_H_

@@ -1,7 +1,7 @@
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //particle.h
 // Author : Tanaka Kouta
-// Author ; hamada
+// Author : HamadaRyuuga
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 #ifndef _PARTICLE_H_		//このマクロが定義されてなかったら
 #define _PARTICLE_H_		//2重インクルード防止のマクロ定義

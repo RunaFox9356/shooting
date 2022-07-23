@@ -2,7 +2,7 @@
 // 
 // パーティクルエミッタ
 // Author YudaKaito
-// 
+// Author HamadaRyuuga
 //=========================================
 //=========================================
 // include
@@ -20,7 +20,6 @@ CParticleManager::CParticleManager() :
 	m_numAll(0),
 	m_particleEmitter({})
 {
-
 }
 
 //-----------------------------------------
@@ -100,6 +99,9 @@ int CParticleManager::Create(const D3DXVECTOR3& pos, const int& index,int Type)
 	return m_particleEmitter.size();
 }
 
+//-----------------------------------------
+// リリース
+//-----------------------------------------
 void CParticleManager::Release(const int idx)
 {
 	delete m_particleEmitter.at(idx);

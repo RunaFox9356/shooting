@@ -25,7 +25,10 @@ public:
 	void SetMove(const D3DXVECTOR3 &move)override;
 	static CSorcey *Create(D3DXVECTOR3 pos, CPlayer::NOWMAGIC type);
 	void SetAnimation(const int U, const int V);
-
+	void SetSpeed(const int &Speed);
+	void PlayAnimation(const int &m_CounterAnim);
+	void Move();
+	void Collision();
 private:
 
 	int m_CounterAnim;
@@ -35,6 +38,7 @@ private:
 	int m_DivisionX;
 	int m_DivisionY;
 	int m_DivisionMAX;
+	int m_AnimationSpeed;
 	CPlayer::NOWMAGIC  m_NouPlayer;
 	D3DXVECTOR3 m_move;
 };
