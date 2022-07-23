@@ -31,6 +31,16 @@ public:	// ç\ë¢ëÃ
 		CParticle::Info particleData;
 		CParticleEmitter::Info emitterData;
 	};
+
+	enum NOWMAGIC
+	{
+		NOW_STORM = 0,		// ïó
+		NOW_SUN,			// óã
+		NOW_FIRE,		    // âŒ
+		NOW_ICE,			// ïX
+		NOW_NON,
+		NOW_MAX
+	};
 public:
 	CParticleManager();
 	~CParticleManager();

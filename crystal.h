@@ -14,6 +14,17 @@
 
 class  CCrystal : public C3dpolygon
 {
+
+
+	enum NOWMAGIC
+	{
+		NOW_FIRE = 2,		// ‰Î
+		NOW_ICE,			// •X
+		NOW_STORM,			// •—
+		NOW_SUN,			// —‹
+		NOW_NON,
+		NOW_MAX
+	};
 public:
 	CCrystal();
 	~CCrystal() override;

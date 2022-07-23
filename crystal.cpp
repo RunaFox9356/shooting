@@ -130,16 +130,16 @@ void CCrystal::Update()
 						//F‚ÌÝ’è
 						switch (m_myType)
 						{
-						case 2:
+						case NOW_FIRE:
 							SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
 							break;
-						case 3:
+						case NOW_ICE:
 							SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
 							break;
-						case 4:
+						case NOW_STORM:
 							SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
 							break;
-						case 5:
+						case NOW_SUN:
 							SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
 							break;
 						default:
@@ -208,16 +208,16 @@ CCrystal *CCrystal::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move)
 		//F‚ÌÝ’è
 		switch (m_popType)
 		{
-		case 2:
-  			pObject->SetCollar(PositionVec4(1.0f,0.0f,0.0f,0.8f));
+		case NOW_FIRE:
+			pObject->SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
 			break;
-		case 3:
+		case NOW_ICE:
 			pObject->SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
 			break;
-		case 4:
+		case NOW_STORM:
 			pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
 			break;
-		case 5:
+		case NOW_SUN:
 			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		default:

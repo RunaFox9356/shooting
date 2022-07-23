@@ -154,7 +154,6 @@ void CPlayer::Move()	//動きセット
 		if (m_Pow >=20)
 		{
 			m_Pow = 0;
-			//CBullet::Create(m_pos, D3DXVECTOR3(5.0f, 0.0f, 0.0f))->SetSize(D3DXVECTOR3(50.0f, 90.0f, 0.0f));
 			switch (m_NowMagic)
 			{
 
@@ -200,20 +199,21 @@ void CPlayer::Move()	//動きセット
 				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
 			m_CastMagic = m_NowMagic;
 			CParticleManager* particleManager = CManager::GetParticleManager();
+
 			switch (m_NowMagic)
 			{	
 			case CPlayer::NOW_FIRE:
-				particleManager->Create(Pos, 0, 2);
+				particleManager->Create(Pos, 0, CParticleManager::NOW_FIRE);
 				break;
 			case CPlayer::NOW_ICE:
-				particleManager->Create(Pos, 0, 3);
+				particleManager->Create(Pos, 0, CParticleManager::NOW_ICE);
 				break;
 			case CPlayer::NOW_STORM:
 
-				particleManager->Create(Pos, 0,0);
+				particleManager->Create(Pos, 0, CParticleManager::NOW_STORM);
 				break;
 			case CPlayer::NOW_SUN:
-				particleManager->Create(Pos, 0, 1);
+				particleManager->Create(Pos, 0, CParticleManager::NOW_SUN);
 				break;
 			case CPlayer::NOW_NON:
 
