@@ -20,8 +20,6 @@ CScore::~CScore()
 {
 }
 
-
-
 //===================
 //‰Šú‰»ˆ—
 //===================
@@ -123,7 +121,6 @@ CScore *CScore::Create()
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-
 	}
 
 	return pObject;

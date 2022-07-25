@@ -88,20 +88,9 @@ void CObject3d::Uninit(void)
 //------------------------------------
 void CObject3d::Update(void)
 {
+
 	// 現在のモーション番号の保管
 	m_motionTypeOld = m_motionType;
-
-	if (!m_bMotion)
-	{// 使用してるモーションがない場合
-		m_motionType = ANIME_NORMAL;
-		m_isLoop = false;
-	}
-
-	//アニメーションや足音の設定
-	if (!m_isLoop)
-	{
-		m_motionType = ANIME_NORMAL;
-	}
 
 	if (m_motionTypeOld != m_motionType)
 	{// モーションタイプが変更された時
@@ -116,6 +105,20 @@ void CObject3d::Update(void)
 	else if (!m_bMotionBlend)
 	{// モーションブレンドを使用してない場合
 		m_bMotion = m_pMotion->PlayMotion((int)(m_motionType));
+	}
+
+
+
+	if (!m_bMotion)
+	{// 使用してるモーションがない場合
+		m_motionType = ANIME_NORMAL;
+		m_isLoop = false;
+	}
+
+	//アニメーションや足音の設定
+	if (!m_isLoop)
+	{
+		m_motionType = ANIME_NORMAL;
 	}
 }
 

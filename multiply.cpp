@@ -22,7 +22,7 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 	int nModScore = Number;
 	int nDigits;
 
-	nDigits = log10f(nModScore);
+	nDigits = (int)log10f((float)nModScore);
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -64,7 +64,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	int nModScore = Number;
 	int nDigits;
 
-	nDigits = log10f(nModScore);
+	nDigits = (int)log10f((float)nModScore);
 	for (int i = 10; i >= 0; i--)
 	{
 		if (Fastratio[i] == nullptr)

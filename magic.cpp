@@ -120,7 +120,6 @@ CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 void CMagicBox::CMagic::SelectTex(CTexture::TEXTURE tex)
 {
 	CObject2d::SetTexture(tex);
-	
 }
 
 //=============================================================================

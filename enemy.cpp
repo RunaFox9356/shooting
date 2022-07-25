@@ -13,13 +13,9 @@
 #include "manager.h"
 #include "object3d.h"
 
-
-
 #include "file.h"
 #include "letter.h"
 
-
-//Particle DataEffect;
 namespace nl = nlohmann;
 
 static nl::json j;//ƒŠƒXƒg‚Ì¶¬
@@ -117,6 +113,10 @@ CEnemy *CEnemy::Create()
 	}
 	return pObject;
 }
+
+//------------------------------------
+// Load
+//------------------------------------
 void  CEnemy::LoadEnemy(const char * pFdata)
 {
 	std::ifstream ifs(pFdata);

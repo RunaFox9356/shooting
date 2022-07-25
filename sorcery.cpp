@@ -100,6 +100,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		pObject->SetSpeed(5);
 		pObject->m_NouPlayer = type;
+
 		switch (type)
 		{
 		case CPlayer::NOW_FIRE:	
@@ -306,6 +307,9 @@ void CSorcey::SetAnimation(const int U, const int V)
 	m_DivisionX = U;
 	m_DivisionY = V;
 	m_DivisionMAX = m_DivisionY*m_DivisionX;
+
+	m_PatternAnimX = 0;
+	m_PatternAnimY = 0;
 
 	//表示座標を更新
 	SetTex(PositionVec4(

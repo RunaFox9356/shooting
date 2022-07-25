@@ -28,11 +28,17 @@
     <Filter Include="メイン\画面遷移">
       <UniqueIdentifier>{50f5e731-fd3b-4941-af9e-ece487b9fa44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="オブジェクト\魔法系">
+      <UniqueIdentifier>{2bbde2d8-12d3-436a-8e56-d004ae5bbc93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="オブジェクト\モデル系">
+      <UniqueIdentifier>{a769b689-bec5-49cb-b2fa-c4d659f98e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="オブジェクト\数字">
+      <UniqueIdentifier>{893ba109-c22b-4607-bdee-b9db01165e51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="enemy.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="object.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
@@ -40,15 +46,6 @@
       <Filter>オブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="object3d.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="motion.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="particle.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="bullet.cpp">
@@ -96,12 +93,6 @@
     <ClCompile Include="hamada.cpp">
       <Filter>オブジェクト\便利なやーつ</Filter>
     </ClCompile>
-    <ClCompile Include="magic.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="crystal.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>メイン\画面遷移</Filter>
     </ClCompile>
@@ -114,29 +105,47 @@
     <ClCompile Include="manager.cpp">
       <Filter>メイン</Filter>
     </ClCompile>
-    <ClCompile Include="number.cpp">
-      <Filter>オブジェクト</Filter>
+    <ClCompile Include="crystal.cpp">
+      <Filter>オブジェクト\魔法系</Filter>
     </ClCompile>
-    <ClCompile Include="score.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="multiply.cpp">
-      <Filter>オブジェクト</Filter>
+    <ClCompile Include="magic.cpp">
+      <Filter>オブジェクト\魔法系</Filter>
     </ClCompile>
     <ClCompile Include="sorcery.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="particle_emitter.cpp">
-      <Filter>オブジェクト</Filter>
+      <Filter>オブジェクト\魔法系</Filter>
     </ClCompile>
     <ClCompile Include="particle_manager.cpp">
-      <Filter>オブジェクト</Filter>
+      <Filter>オブジェクト\魔法系</Filter>
+    </ClCompile>
+    <ClCompile Include="particle_emitter.cpp">
+      <Filter>オブジェクト\魔法系</Filter>
+    </ClCompile>
+    <ClCompile Include="particle.cpp">
+      <Filter>オブジェクト\魔法系</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>オブジェクト\モデル系</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>オブジェクト\モデル系</Filter>
+    </ClCompile>
+    <ClCompile Include="motion.cpp">
+      <Filter>オブジェクト\モデル系</Filter>
+    </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>オブジェクト\数字</Filter>
+    </ClCompile>
+    <ClCompile Include="number.cpp">
+      <Filter>オブジェクト\数字</Filter>
+    </ClCompile>
+    <ClCompile Include="multiply.cpp">
+      <Filter>オブジェクト\数字</Filter>
+    </ClCompile>
+    <ClCompile Include="hit.cpp">
+      <Filter>オブジェクト\魔法系</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="enemy.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
     <ClInclude Include="gon.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
@@ -147,12 +156,6 @@
       <Filter>オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="object3d.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="particle.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="bullet.h">
@@ -188,9 +191,6 @@
     <ClInclude Include="main.h">
       <Filter>メイン</Filter>
     </ClInclude>
-    <ClInclude Include="motion.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
     <ClInclude Include="mesh.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
@@ -199,12 +199,6 @@
     </ClInclude>
     <ClInclude Include="hamada.h">
       <Filter>オブジェクト\便利なやーつ</Filter>
-    </ClInclude>
-    <ClInclude Include="magic.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="crystal.h">
-      <Filter>オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
       <Filter>メイン\画面遷移</Filter>
@@ -218,26 +212,47 @@
     <ClInclude Include="manager.h">
       <Filter>メイン</Filter>
     </ClInclude>
-    <ClInclude Include="score.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="number.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="multiply.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
     <ClInclude Include="utility.h">
       <Filter>システム</Filter>
     </ClInclude>
-    <ClInclude Include="sorcery.h">
-      <Filter>オブジェクト</Filter>
+    <ClInclude Include="crystal.h">
+      <Filter>オブジェクト\魔法系</Filter>
     </ClInclude>
-    <ClInclude Include="particle_emitter.h">
-      <Filter>オブジェクト</Filter>
+    <ClInclude Include="magic.h">
+      <Filter>オブジェクト\魔法系</Filter>
+    </ClInclude>
+    <ClInclude Include="sorcery.h">
+      <Filter>オブジェクト\魔法系</Filter>
     </ClInclude>
     <ClInclude Include="particle_manager.h">
-      <Filter>オブジェクト</Filter>
+      <Filter>オブジェクト\魔法系</Filter>
+    </ClInclude>
+    <ClInclude Include="particle_emitter.h">
+      <Filter>オブジェクト\魔法系</Filter>
+    </ClInclude>
+    <ClInclude Include="particle.h">
+      <Filter>オブジェクト\魔法系</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>オブジェクト\モデル系</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>オブジェクト\モデル系</Filter>
+    </ClInclude>
+    <ClInclude Include="motion.h">
+      <Filter>オブジェクト\モデル系</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
+      <Filter>オブジェクト\数字</Filter>
+    </ClInclude>
+    <ClInclude Include="number.h">
+      <Filter>オブジェクト\数字</Filter>
+    </ClInclude>
+    <ClInclude Include="multiply.h">
+      <Filter>オブジェクト\数字</Filter>
+    </ClInclude>
+    <ClInclude Include="hit.h">
+      <Filter>オブジェクト\魔法系</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

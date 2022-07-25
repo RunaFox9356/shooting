@@ -42,8 +42,6 @@ CPlayer::CPlayer() :
 	m_motionType(ANIME_NORMAL),
 	m_motionTypeOld(ANIME_NORMAL)
 {
-	//memset(&s_Player, NULL, sizeof(s_Player));
-	/*memset(&m_motion, 0, sizeof(m_motion));*/
 }
 
 //------------------------------------
@@ -86,11 +84,11 @@ void CPlayer::Uninit(void)
 //------------------------------------
 void CPlayer::Update(void)
 {
-	// 現在のモーション番号の保管
-	CObject3d::Update();
 
 	Move();	//動きセット
 
+	// 現在のモーション番号の保管
+	CObject3d::Update();
 }
 
 //------------------------------------
@@ -153,10 +151,11 @@ void CPlayer::Move()	//動きセット
 		m_Pow++;
 		if (m_Pow >=20)
 		{
+ 			m_motionType = ANIME_ATTACK;
 			m_Pow = 0;
 			switch (m_NowMagic)
 			{
-
+				
 			case CPlayer::NOW_FIRE:
 				CBullet::Create(m_pos, D3DXVECTOR3(3.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
 				break;
@@ -255,6 +254,7 @@ void CPlayer::Move()	//動きセット
 	{
 		m_rot.y += D3DX_PI * 2;
 	}
+
 }
 
 

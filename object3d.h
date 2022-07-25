@@ -94,5 +94,6 @@ private:
 	int				m_nMotion;	// ƒ‚[ƒVƒ‡ƒ“”Ô†
 	int				m_Life;
 
+	int             m_HitCount;
 };
 #endif

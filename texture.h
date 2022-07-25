@@ -25,7 +25,7 @@ public: /* 定義 */
 		TEXTURE_FIRE,		// 火
 		TEXTURE_ICE,		// 氷
 		TEXTURE_STORM,		// 風
-		TEXTURE_SUN,		// 雷
+		TEXTURE_THUNDER,	// 雷
 		TEXTURE_CRYSTAL,	// CRYSTAL
 		TEXTURE_SCORE,		//スコア
 		TEXTURE_METEO,		//爆炎

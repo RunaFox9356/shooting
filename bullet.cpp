@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// Object
+// たま
 // Author : 浜田琉雅
 //
 //=============================================================================
@@ -15,6 +15,7 @@
 #include "player.h"
 #include "hamada.h"
 #include "enemy.h"
+#include "hit.h"
 #include <assert.h>
 
 
@@ -97,6 +98,7 @@ void CBullet::Update()
 					((m_pos.x + size) >= (enemyPos->x - pEnemySize->x)))
 				{  
 				
+					CHit::Create(*enemyPos);
 					// 当たり判定
 					CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
 					assert(pObject3d != nullptr);
@@ -122,7 +124,8 @@ void CBullet::Update()
 						pObject3d->HitLife(5);
 						break;
 					}
-				
+					
+
 				    // 解放
 					CObject::Release();
 					return;

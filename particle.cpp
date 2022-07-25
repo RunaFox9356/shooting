@@ -52,13 +52,7 @@ void CParticle::Uninit()
 void CParticle::Update()
 {
 	CObject2d::Update();
-	/* (ImGui)
-	bool *bTex = TexUse();
 
-	if (bTex)
-	{
-		LoadTex();
-	}*/
 
 	/* «g—p‚µ‚Ä‚¢‚é‚È‚ç« */
 
