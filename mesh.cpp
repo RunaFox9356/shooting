@@ -30,7 +30,7 @@ HRESULT CMesh:: Init(void)
 	m_pos = D3DXVECTOR3(-580.0f, 590.0f, 10.0f);
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// 回転座標
 
-													//テクスチャの読み込み
+	//テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
 		"Data/TEXTURE/rand.png",
 		&m_pTextureEmesh);
@@ -151,6 +151,22 @@ void CMesh::Uninit(void)
 //=========================================
 void CMesh:: Update(void)
 {
+	VERTEX_3D* pVtx = NULL;
+
+	// 頂点座標をロック
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+	m_move += 0.001f;
+	// 頂点座標の設定
+	for (int i = 0; i < m_nVtx; i++)
+	{
+		float texU = 1.0f / m_xsiz*(i % m_X)+ m_move;
+		float texV = 1.0f / m_zsiz*(i / m_Z);
+	
+		// テクスチャ座標の設定
+		pVtx[i].tex = D3DXVECTOR2(texU, texV);
+	}
+	// 頂点座標をアンロック
+	m_pIdxBuff->Unlock();
 
 }
 
@@ -217,14 +233,7 @@ const D3DXVECTOR3 *CMesh::GetPos() const
 //=============================================================================
 void CMesh::SetPos(const D3DXVECTOR3 &pos)
 {
-	//m_pos = pos;
-}
-//=============================================================================
-// SetPos関数
-//=============================================================================
-void CMesh::SetMove(const D3DXVECTOR3 &move)
-{
-	//m_pos = pos;
+	m_pos = pos;
 }
 //=============================================================================
 // Create関数

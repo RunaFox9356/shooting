@@ -28,7 +28,7 @@ public:
 	void SelectTex(CTexture::TEXTURE tex);
 	void SetAnimation(const int U, const int V);
 
-	void PlayAnimation(const int &m_CounterAnim);
+	void PlayAnimation();
 private:
 	int m_CounterAnim;
 	int m_PatternAnimX;

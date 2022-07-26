@@ -128,5 +128,14 @@ private:
 	int			m_nMaxParts;						// パーツ数
 };
 
+class CMotionmanager
+{
+	int				nType;					// パーツのタイプ
+	LPD3DXMESH		pMesh;					// メッシュ情報へのポインタ
+	LPD3DXBUFFER	pBuffer;				// マテリアル情報へのポインタ
+	DWORD			nNumMat;				// マテリアル情報の数
+};
+
+
 #endif
 

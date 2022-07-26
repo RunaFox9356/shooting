@@ -57,7 +57,7 @@ void CSorcey::Update()
 	m_CounterAnim++;
 	if ((m_CounterAnim % m_AnimationSpeed) == 0)//ここで速度調整
 	{
-		PlayAnimation(m_CounterAnim);
+		PlayAnimation();
 	}
 
 	//当たり判定
@@ -153,11 +153,11 @@ void CSorcey::SetSpeed(const int &Speed)
 //=============================================================================
 // Animationの再生関数
 //=============================================================================
-void CSorcey::PlayAnimation(const int & m_CounterAnim)
+void CSorcey::PlayAnimation()
 {
 	CParticleManager* particleManager = CManager::GetParticleManager();
 
-	m_PatternAnimX++;
+
 	if (m_PatternAnimX > m_DivisionX)
 	{
 		if (m_NouPlayer == CPlayer::NOW_ICE&&m_PatternAnimY == 0)
@@ -257,13 +257,14 @@ void CSorcey::Collision()
 			if (Type == CObject::ENEMY)
 			{
 				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
+				assert(pObject3d != nullptr);
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
 				if (enemyPos->x < 1280.0f - pEnemySize->x)
 				{
 					float enemySize = 50.0f;
 					enemySize *= pEnemySize->y;
-					float size = 50.0f;
+					
 
 					if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
 						((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
@@ -271,9 +272,8 @@ void CSorcey::Collision()
 						((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
 					{
 
-						// 当たり判定
-						CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
-						assert(pObject3d != nullptr);
+						
+
 						switch (m_NouPlayer)
 						{
 						case CPlayer::NOW_FIRE:

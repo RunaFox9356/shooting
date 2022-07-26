@@ -26,7 +26,7 @@ public:
 	static CSorcey *Create(D3DXVECTOR3 pos, CPlayer::NOWMAGIC type);
 	void SetAnimation(const int U, const int V);
 	void SetSpeed(const int &Speed);
-	void PlayAnimation(const int &m_CounterAnim);
+	void PlayAnimation();
 	void Move();
 	void Collision();
 private:

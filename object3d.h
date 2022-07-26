@@ -22,6 +22,9 @@ private:
 	//polygonの拡大サイズ
 	static const D3DXVECTOR3 m_Vtx[4];
 	static int m_drop;
+	
+
+public:
 	enum ANIME
 	{
 		ANIME_NORMAL = 0,	// ニュートラル
@@ -31,8 +34,6 @@ private:
 		ANIME_LANDING,		// 着地
 		ANIME_MAX
 	};
-
-public:
 	CObject3d();
 	~CObject3d() override;
 	HRESULT Init() override;
@@ -56,6 +57,8 @@ protected:
 	D3DXVECTOR3		m_pos;
 	D3DXVECTOR3		m_rot;						// 回転	
 	D3DXVECTOR3		m_rotMove;					// 回転ムーブ
+	ANIME			m_motionType;					// モーションタイプ(現在)
+	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
 
 private:
 	D3DXVECTOR3 m_nScale;
@@ -71,8 +74,7 @@ private:
 	D3DXVECTOR3		m_modelMax;					// サイズ最大
 	D3DXMATRIX		m_mtxWorld;					// マトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
 
-	ANIME			m_motionType;					// モーションタイプ(現在)
-	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
+
 	int				m_nMaxModelType;				// モデルのタイプ数
 	int				m_nMaxModelParts;				// 扱うモデルパーツ数
 	int				m_nMaxMotion;					// モーション数

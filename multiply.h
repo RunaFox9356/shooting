@@ -23,12 +23,14 @@ class CMultiply : public CObject
 public:
 	CMultiply();
 	 ~CMultiply();
-	 HRESULT Init() override {
+	 HRESULT Init() override
+	 {
 		 for (int i = 0; i < 10; i++)
 		 {
 			 Fastratio[i] = nullptr;
 		 }
-		 return S_OK; };
+		 return S_OK;
+	 };
 	 void Uninit()override;
 	 void Update() override ;
 	 void Draw() override {};

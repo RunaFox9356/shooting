@@ -38,7 +38,7 @@ CObject2d::~CObject2d()
 //=============================================================================
 HRESULT CObject2d::Init()
 {
-	float fSize = 30.0f;
+
 	m_nScale = 10.0f;
 
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得

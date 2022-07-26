@@ -38,9 +38,7 @@ CPlayer::NOWMAGIC CPlayer::m_CastMagic = NOW_NON;		// 無敵時間
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CPlayer::CPlayer() :
-	m_motionType(ANIME_NORMAL),
-	m_motionTypeOld(ANIME_NORMAL)
+CPlayer::CPlayer()
 {
 }
 
@@ -151,7 +149,7 @@ void CPlayer::Move()	//動きセット
 		m_Pow++;
 		if (m_Pow >=20)
 		{
- 			m_motionType = ANIME_ATTACK;
+			m_motionType = CObject3d::ANIME_ATTACK;
 			m_Pow = 0;
 			switch (m_NowMagic)
 			{
@@ -197,7 +195,7 @@ void CPlayer::Move()	//動きセット
 				&m_pos,			// スクリーン座標
 				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
 			m_CastMagic = m_NowMagic;
-			CParticleManager* particleManager = CManager::GetParticleManager();
+		
 
 			switch (m_NowMagic)
 			{	

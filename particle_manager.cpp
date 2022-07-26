@@ -78,7 +78,7 @@ void CParticleManager::Update()
 //-----------------------------------------
 int CParticleManager::Create(const D3DXVECTOR3& pos, const int& index,int Type)
 {
-	int idx = m_numAll;
+	
 	CParticleEmitter* emitter = new CParticleEmitter();
 
 	emitter->Init();		// ‰Šú‰»

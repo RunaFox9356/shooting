@@ -84,7 +84,5 @@ private:
 	static NOWMAGIC m_NowMagic;			//現在の魔法
 	static NOWMAGIC m_CastMagic;		//唱えた魔法
 private:
-	ANIME			m_motionType;					// モーションタイプ(現在)
-	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
 };
 #endif

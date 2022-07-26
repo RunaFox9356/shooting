@@ -86,6 +86,7 @@ void CBullet::Update()
 			if (Type == CObject::ENEMY)
 			{
 				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
+				assert(pObject3d != nullptr);
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
 				float enemySize = 50.0f;
@@ -97,12 +98,8 @@ void CBullet::Update()
 					((m_pos.x - size) <= (enemyPos->x + pEnemySize->x)) &&
 					((m_pos.x + size) >= (enemyPos->x - pEnemySize->x)))
 				{  
-				
-					CHit::Create(*enemyPos);
-					// 当たり判定
-					CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
-					assert(pObject3d != nullptr);
 					CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
+					
 					switch (NouPlayer)
 					{
 					case CPlayer::NOW_FIRE:

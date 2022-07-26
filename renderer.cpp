@@ -192,10 +192,7 @@ void CRenderer::Update()
 void CRenderer::Draw()
 {
 	// バックバッファ＆Ｚバッファのクリア
-
-	LPDIRECT3DDEVICE9 pDevice = GetDevice();		//デバイスの取得
-
-													//画面クリア(バックバッファ&Zバッファのクリア)
+	//画面クリア(バックバッファ&Zバッファのクリア)
 	m_pD3DDevice->Clear(0,
 		NULL,
 		(D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER),

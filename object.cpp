@@ -129,7 +129,7 @@ void CObject::AllUninit()
 void CObject::AllCreate()
 {
 
-	CMesh::Create()->SetUp(BG);
+	CMesh::Create();
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create();
 	pScore->Set(0);

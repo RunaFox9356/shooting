@@ -15,6 +15,7 @@
 #include "motion.h"
 #include "crystal.h"
 #include "score.h"
+#include "hit.h"
 #include "multiply.h"
 
 int CObject3d::m_drop = 0;
@@ -131,7 +132,6 @@ void CObject3d::Draw(void)
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 	D3DXMATRIX mtxScale, mtxTrans, mtxRot;	// 計算用マトリックス
 	D3DMATERIAL9 marDef;
-	D3DXMATERIAL *pMat = {};
 	D3DXVECTOR3 scale(1.8f, 1.8f, 1.8f);
 
 	if (m_isUse)//使ってるやつ出す
@@ -247,10 +247,13 @@ void CObject3d::SetLife(int Life)
 	m_Life = Life;
 }
 
+//------------------------------------
+// HitLife
+//------------------------------------
 void CObject3d::HitLife(int Damage)
 {
 	m_Life -= Damage;
-
+	CHit::Create(m_pos);
 	if (m_Life <= 0)
 	{
 		CMultiply::SetRate((1 + *CMultiply::GetRate()));

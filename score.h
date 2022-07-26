@@ -28,8 +28,7 @@ public:
 	void Add(int nValue);
 	int Get();
 	static CScore*Create();
-	void SetPos(const D3DXVECTOR3 &pos) {} ;
-	void SetMove(const D3DXVECTOR3 &move) {};
+	void SetPos(const D3DXVECTOR3 &pos) { m_posScore = pos; };
 	const D3DXVECTOR3 *GetPos() const { return &m_posScore; };
 
 private:

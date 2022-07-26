@@ -59,7 +59,7 @@ void CHit::Update()
 	m_CounterAnim++;
 	if ((m_CounterAnim % 5) == 0)//Ç±Ç±Ç≈ë¨ìxí≤êÆ
 	{
-		PlayAnimation(m_CounterAnim);
+		PlayAnimation();
 	}
 
 }
@@ -125,7 +125,7 @@ void CHit::SelectTex(CTexture::TEXTURE tex)
 //=============================================================================
 // AnimationÇÃçƒê∂ä÷êî
 //=============================================================================
-void CHit::PlayAnimation(const int & m_CounterAnim)
+void CHit::PlayAnimation()
 {
 
 	m_PatternAnimX++;

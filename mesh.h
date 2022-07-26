@@ -31,20 +31,11 @@ public:
 
 
 	static CMesh* Create();
-	void SetMove(const D3DXVECTOR3 &move);
 	void SetPos(const D3DXVECTOR3 &pos);
 	const D3DXVECTOR3 * CMesh::GetPos() const;
 
 private:
 
-	//------------------------------------
-	// ポリゴンの構造体を定義
-	//------------------------------------
-	struct MESH
-	{
-
-	
-	};
 
 	//------------------------------------
 	// static変数
@@ -63,5 +54,6 @@ private:
 	 int m_nVtx;//頂点数
 	 int m_Index; //インデックス
 	 int m_por;
+	 float m_move;
 };
 #endif

@@ -144,6 +144,9 @@
     <ClCompile Include="hit.cpp">
       <Filter>オブジェクト\魔法系</Filter>
     </ClCompile>
+    <ClCompile Include="bg.cpp">
+      <Filter>オブジェクト\モデル系</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gon.h">
@@ -253,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="hit.h">
       <Filter>オブジェクト\魔法系</Filter>
+    </ClInclude>
+    <ClInclude Include="bg.h">
+      <Filter>オブジェクト\モデル系</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
