@@ -128,13 +128,49 @@ private:
 	int			m_nMaxParts;						// パーツ数
 };
 
-class CMotionmanager
+class CModel
 {
+public: /* 定義 */
+
+	CModel();
+	~CModel();
 	int				nType;					// パーツのタイプ
 	LPD3DXMESH		pMesh;					// メッシュ情報へのポインタ
 	LPD3DXBUFFER	pBuffer;				// マテリアル情報へのポインタ
 	DWORD			nNumMat;				// マテリアル情報の数
+	char		    m_xFilename[256];
 };
+
+//=============================================================================
+// モーションクラス
+// Author : 唐﨑結斗
+// 概要 : モーション設定を行うクラス
+//=============================================================================
+class CModelManager
+{
+public: /* 定義 */
+	static const int MODEL_MAX = 100;
+
+private:
+	static CModelManager * ms_ModelManager;
+
+public:
+	CModelManager();		// デフォルトコンストラクタ
+	~CModelManager();	// デストラクタ
+
+public: /* メンバ関数 */
+	static CModelManager *GetManager();
+	CModel* Load(const char *pXFileName);					// 指定の読み込み
+	void Release(const char *pXFileName);					// 指定の破棄
+	void ReleaseAll ();					                    // 指定の破棄
+private: /* メンバ変数 */
+
+	CModel* m_apModel[MODEL_MAX];
+
+};
+
+
+
 
 
 #endif

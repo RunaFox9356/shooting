@@ -156,7 +156,7 @@ void CSorcey::SetSpeed(const int &Speed)
 void CSorcey::PlayAnimation()
 {
 	CParticleManager* particleManager = CManager::GetParticleManager();
-
+	m_PatternAnimX++;
 
 	if (m_PatternAnimX > m_DivisionX)
 	{

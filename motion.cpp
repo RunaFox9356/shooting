@@ -14,6 +14,9 @@
 #include "motion.h"
 #include "utility.h"	
 
+
+CModelManager * CModelManager::ms_ModelManager;
+
 //=============================================================================
 // コンストラクタ
 // Author : 唐﨑結斗
@@ -66,16 +69,25 @@ void CMotion::Init(void)
 
 		// パーツ情報の初期化
 		(m_parts + i)->mtxWorld = {};												// ワールドマトリックス
+		
+		CModelManager *Manager = CModelManager::GetManager();
 
-		// Xファイルの読み込み
-		D3DXLoadMeshFromX(m_partsFile[(m_parts + i)->nType].aName,
-			D3DXMESH_SYSTEMMEM,
-			CManager::GetRenderer()->GetDevice(),
-			NULL,
-			&(m_parts + i)->pBuffer,
-			NULL,
-			&(m_parts + i)->nNumMat,
-			&(m_parts + i)->pMesh);
+		CModel*Data = Manager->Load(m_partsFile[(m_parts + i)->nType].aName);
+
+		//ここにコピーしてるからよくない読み込んでからDataをそのまま使え浜田琉雅
+		(m_parts + i)->pBuffer = Data->pBuffer;
+		(m_parts + i)->nNumMat = Data->nNumMat;
+		(m_parts + i)->pMesh = Data->pMesh;
+
+		//// Xファイルの読み込み
+		//D3DXLoadMeshFromX(m_partsFile[(m_parts + i)->nType].aName,
+		//	D3DXMESH_SYSTEMMEM,
+		//	CManager::GetRenderer()->GetDevice(),
+		//	NULL,
+		//	&(m_parts + i)->pBuffer,
+		//	NULL,
+		//	&(m_parts + i)->nNumMat,
+		//	&(m_parts + i)->pMesh);
 	}
 }
 
@@ -505,20 +517,20 @@ void CMotion::LoodSetMotion(char * pFileName)
 //=============================================================================
 void CMotion::Uninit(void)
 {
-	for (int i = 0; i < m_nMaxParts; i++)
-	{
-		if (m_parts[i].pBuffer != NULL)
-		{// 頂点バッファーの解放
-			m_parts[i].pBuffer->Release();
-			m_parts[i].pBuffer = NULL;
-		}
+	//for (int i = 0; i < m_nMaxParts; i++)
+	//{
+	//	if (m_parts[i].pBuffer != NULL)
+	//	{// 頂点バッファーの解放
+	//		m_parts[i].pBuffer->Release();
+	//		m_parts[i].pBuffer = NULL;
+	//	}
 
-		if (m_parts[i].pMesh != NULL)
-		{// メッシュの解放
-			m_parts[i].pMesh->Release();
-			m_parts[i].pMesh = NULL;
-		}
-	}
+	//	if (m_parts[i].pMesh != NULL)
+	//	{// メッシュの解放
+	//		m_parts[i].pMesh->Release();
+	//		m_parts[i].pMesh = NULL;
+	//	}
+	//}
 
 	
 }
@@ -534,4 +546,76 @@ void CMotion::CntReset(const int nNumMotionOld)
 	m_motion[nNumMotionOld].nCntKeySet = 0;
 }
 
+CModelManager::CModelManager()
+{
+	for (int i = 0; i < MODEL_MAX; i++)
+	{
+		m_apModel[i] = nullptr;
+	}
+}
 
+CModelManager::~CModelManager()
+{
+}
+
+CModelManager * CModelManager::GetManager()
+{
+	if (ms_ModelManager == nullptr)
+	{
+		ms_ModelManager = new CModelManager;
+	}
+	return ms_ModelManager;
+}
+
+CModel*  CModelManager::Load(const char *pXFileName)
+{
+	for (int i = 0; i < MODEL_MAX; i++)
+	{
+		if (m_apModel[i] == nullptr)
+		{
+			continue;
+		}
+
+		if (strcmp(m_apModel[i]->m_xFilename, &pXFileName[0]) == 0)
+		{
+			return m_apModel[i];
+		}
+	}
+
+	for (int i = 0; i < MODEL_MAX; i++)
+	{
+		if (m_apModel[i] == nullptr)
+		{
+			m_apModel[i] = new CModel;
+			strcpy(m_apModel[i]->m_xFilename, &pXFileName[0]);
+			// Xファイルの読み込み
+			D3DXLoadMeshFromX(pXFileName,
+				D3DXMESH_SYSTEMMEM,
+				CManager::GetRenderer()->GetDevice(),
+				NULL,
+				&m_apModel[i]->pBuffer,
+				NULL,
+				&m_apModel[i]->nNumMat,
+				&m_apModel[i]->pMesh);
+
+			return m_apModel[i];
+		}
+	}
+
+	assert(false);
+	return nullptr;
+}
+
+void CModelManager::Release(const char *pXFileName)
+{
+
+}
+
+CModel::CModel():
+	nType(-1),
+	pMesh(nullptr),
+	pBuffer(nullptr),
+	nNumMat(0)
+{
+	m_xFilename[0] = '\0';
+}
