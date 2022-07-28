@@ -14,8 +14,9 @@
 #include "object3d.h"
 #include "file.h"
 #include "letter.h"
-
-
+#include "score.h"
+#include "player.h"
+#include "multiply.h"
 
 //------------------------------------
 // static変数
@@ -68,6 +69,8 @@ void CBell::Uninit(void)
 {
 	// 現在のモーション番号の保管
 	CObject3d::Uninit();
+
+
 }
 
 //------------------------------------
@@ -80,10 +83,45 @@ void CBell::Update(void)
 
 	m_pos += m_move;
 
-	if (m_pos.x <= -SCREEN_WIDTH)
+	m_move.y -= 0.5f;
+
+	for (int i = 0; i < MAX_OBJECT; i++)
+	{	// 当たり判定
+		CObject*pObject;
+		pObject = GetObjectData(i);
+		if (pObject != nullptr)
+		{
+			EObjectType Type = pObject->GetType();
+			if (Type == CObject::PLAYER)
+			{	// Playerとの当たり判定
+				CPlayer* cPlayer = dynamic_cast<CPlayer*>(pObject);  // ダウンキャスト
+				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
+				float Size = 30.0f;
+
+				if (((m_pos.y - Size) <= (PlayerPos->y + Size)) &&
+					((m_pos.y + Size) >= (PlayerPos->y - Size)) &&
+					((m_pos.x - Size) <= (PlayerPos->x + Size)) &&
+					((m_pos.x + Size) >= (PlayerPos->x - Size)))
+				{
+					
+					GetScore()->Add(10 * (*CMultiply::GetRate()+1));
+					
+
+					CObject::Release();
+
+					return;
+				}
+			}
+		}
+	}
+	if (m_pos.y <= -360.0f)
+	{
+		m_pos.y = -360.0f;
+		m_move.y = 0.0f;
+	}
+	if (m_pos.x <= -1280.0f)
 	{
 		CObject::Release();
-		//m_pos.x = SCREEN_WIDTH;
 	}
 }
 

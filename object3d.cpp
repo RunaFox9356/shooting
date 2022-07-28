@@ -6,7 +6,10 @@
 //============================
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <assert.h>
+
 #include "object3d.h"
 #include "input.h"
 #include "camera.h"
@@ -17,6 +20,7 @@
 #include "score.h"
 #include "hit.h"
 #include "multiply.h"
+#include "bell.h"
 
 int CObject3d::m_drop = 0;
 //------------------------------------
@@ -262,8 +266,20 @@ void CObject3d::HitLife(int Damage)
 		CMultiply::SetRate((1 + *CMultiply::GetRate()));
 		CMultiply::list(*CMultiply::GetRate(), m_pos,true);
 
-		GetScore()->Add(50);
+		for (size_t i = 0; i < 10; i++)
+		{
 
+			GetScore()->Add(50);
+			D3DXVECTOR3 scale(3.8f, 3.8f, 3.8f);
+			CBell * Bell = CBell::Create();
+			Bell->SetUp(BELL);
+
+			Bell->SetMove(D3DXVECTOR3((float)(rand() % 10 + -10), (float)(rand() % 10 + 5), 0.0f));
+			Bell->SetPos(m_pos);
+			Bell->SetSize(scale);
+
+			Bell->SetLife(10);
+		}
 		m_drop++;
 		if (m_drop >=5)
 		{

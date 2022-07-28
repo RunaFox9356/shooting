@@ -55,6 +55,7 @@ CManager::~CManager()
 HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 {
 	
+	srand((unsigned int)time(NULL)); // Œ»İ‚Ìî•ñ‚Å‰Šú‰»
 	m_cRenderer = new CRenderer;
 	m_Input = CInput::Create();
 

@@ -103,8 +103,6 @@ public:
 	// パーツの設定
 	void SetParts(D3DXMATRIX mtxWorld);							// マテリアルデータ
 
-	
-
 	// モーションの再生
 	bool PlayMotion(const int nCntMotionSet);
 
