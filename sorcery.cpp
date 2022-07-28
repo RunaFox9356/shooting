@@ -11,6 +11,7 @@
 #include "particle_manager.h"
 #include <assert.h>
 #include "utility.h"
+#include "hit.h"
 
 //=============================================================================
 // コンストラクト関数
@@ -272,8 +273,7 @@ void CSorcey::Collision()
 						((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
 					{
 
-						
-
+						CHit::Create(*enemyPos, m_NouPlayer);
 						switch (m_NouPlayer)
 						{
 						case CPlayer::NOW_FIRE:

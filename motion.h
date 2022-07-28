@@ -133,7 +133,7 @@ class CModel
 public: /* 定義 */
 
 	CModel();
-	~CModel();
+	~CModel() {};
 	int				nType;					// パーツのタイプ
 	LPD3DXMESH		pMesh;					// メッシュ情報へのポインタ
 	LPD3DXBUFFER	pBuffer;				// マテリアル情報へのポインタ
@@ -161,8 +161,7 @@ public:
 public: /* メンバ関数 */
 	static CModelManager *GetManager();
 	CModel* Load(const char *pXFileName);					// 指定の読み込み
-	void Release(const char *pXFileName);					// 指定の破棄
-	void ReleaseAll ();					                    // 指定の破棄
+	static void ReleaseAll();					                    // 指定の破棄
 private: /* メンバ変数 */
 
 	CModel* m_apModel[MODEL_MAX];

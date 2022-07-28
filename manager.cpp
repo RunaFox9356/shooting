@@ -108,8 +108,8 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 void CManager::Uninit()
 {
 	// ƒ|ƒŠƒSƒ“‚ÌI—¹ˆ—
+	CModelManager::ReleaseAll();
 	CObject::AllUninit();
-
 	if (m_pTexture != nullptr)
 	{// I—¹ˆ—
 

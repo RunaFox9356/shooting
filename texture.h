@@ -33,6 +33,7 @@ public: /* ’è‹` */
 		TEXTURE_TEMPEST,	//–\•—
 		TEXTURE_RAIN,		//—‹‰J
 		TEXTURE_SMOKE,
+		TEXTURE_LIGHT,
 		TEXTURE_MAX,
 		TEXTURE_NONE,	// Žg—p‚µ‚È‚¢
 	};

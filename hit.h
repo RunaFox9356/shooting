@@ -23,7 +23,7 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	static CHit* Create(D3DXVECTOR3 pos);
+	static CHit* Create(D3DXVECTOR3 pos, int Type);
 
 	void SelectTex(CTexture::TEXTURE tex);
 	void SetAnimation(const int U, const int V);

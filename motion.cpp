@@ -368,7 +368,7 @@ void CMotion::LoodSetMotion(char * pFileName)
 
 						// メモリの解放
 						m_parts = new Parts[m_nMaxParts];
-						m_motion = new MyMotion[MAX_MOTION];
+  						m_motion = new MyMotion[MAX_MOTION];
 						assert(m_parts != nullptr && m_motion != nullptr);
 					}
 
@@ -546,6 +546,12 @@ void CMotion::CntReset(const int nNumMotionOld)
 	m_motion[nNumMotionOld].nCntKeySet = 0;
 }
 
+//=============================================================================
+// マネージャーのコンストラクタ
+// Author :浜田琉雅
+// 概要 : 数値の初期化
+//=============================================================================
+
 CModelManager::CModelManager()
 {
 	for (int i = 0; i < MODEL_MAX; i++)
@@ -554,10 +560,20 @@ CModelManager::CModelManager()
 	}
 }
 
+//=============================================================================
+//  マネージャーのデス
+// Author : 浜田琉雅
+// 概要 : 
+//=============================================================================
 CModelManager::~CModelManager()
 {
 }
 
+//=============================================================================
+// カウントのリセット
+// Author : 浜田琉雅
+// 概要 : カウントのリセット
+//=============================================================================
 CModelManager * CModelManager::GetManager()
 {
 	if (ms_ModelManager == nullptr)
@@ -567,6 +583,11 @@ CModelManager * CModelManager::GetManager()
 	return ms_ModelManager;
 }
 
+//=============================================================================
+// モデルのロード
+// Author : 浜田琉雅
+// 概要 : モデルのロード
+//=============================================================================
 CModel*  CModelManager::Load(const char *pXFileName)
 {
 	for (int i = 0; i < MODEL_MAX; i++)
@@ -588,6 +609,7 @@ CModel*  CModelManager::Load(const char *pXFileName)
 		{
 			m_apModel[i] = new CModel;
 			strcpy(m_apModel[i]->m_xFilename, &pXFileName[0]);
+
 			// Xファイルの読み込み
 			D3DXLoadMeshFromX(pXFileName,
 				D3DXMESH_SYSTEMMEM,
@@ -606,11 +628,41 @@ CModel*  CModelManager::Load(const char *pXFileName)
 	return nullptr;
 }
 
-void CModelManager::Release(const char *pXFileName)
+//=============================================================================
+//  モデルの破棄
+// Author : 浜田琉雅
+// 概要 : モデルの破棄
+//=============================================================================
+void CModelManager::ReleaseAll()
 {
+	CModelManager *Manager = CModelManager::GetManager();
+	if (Manager != nullptr)
+	{
+		for (int i = 0; i < MODEL_MAX; i++)
+		{
+			if (Manager->m_apModel[i] != nullptr)
+			{
+				if (Manager->m_apModel[i]->pBuffer != NULL)
+				{// 頂点バッファーの解放
+					Manager->m_apModel[i]->pBuffer->Release();
+					Manager->m_apModel[i]->pBuffer = NULL;
+				}
 
+				if (Manager->m_apModel[i]->pMesh != NULL)
+				{// メッシュの解放
+					Manager->m_apModel[i]->pMesh->Release();
+					Manager->m_apModel[i]->pMesh = NULL;
+				}
+			}
+		}
+	}
 }
 
+//=============================================================================
+// モデルのコンストラクタ
+// Author : 浜田琉雅
+// 概要 : 
+//=============================================================================
 CModel::CModel():
 	nType(-1),
 	pMesh(nullptr),

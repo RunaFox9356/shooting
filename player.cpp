@@ -21,6 +21,7 @@
 #include "sorcery.h"
 #include "particle_manager.h"
 #include "utility.h"
+#include "bell.h"
 
 //------------------------------------
 // static•Ï”
@@ -149,6 +150,14 @@ void CPlayer::Move()	//“®‚«ƒZƒbƒg
 		m_Pow++;
 		if (m_Pow >=20)
 		{
+			D3DXVECTOR3 scale(1.8f, 1.8f, 1.8f);
+			CBell * Bell = CBell::Create();
+			Bell->SetUp(BELL);
+			Bell->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+			Bell->SetPos(m_pos);
+			Bell->SetSize(scale);
+		
+			Bell->SetLife(10);
 			m_motionType = CObject3d::ANIME_ATTACK;
 			m_Pow = 0;
 			switch (m_NowMagic)

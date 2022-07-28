@@ -75,7 +75,7 @@ void CHit::Draw()
 //=============================================================================
 // createŠÖ”
 //=============================================================================
-CHit *CHit::Create(D3DXVECTOR3 pos)
+CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 {
 	CHit * pObject = nullptr;
 	pObject = new CHit;
@@ -91,8 +91,8 @@ CHit *CHit::Create(D3DXVECTOR3 pos)
 		pObject->SetPos(D3DXVECTOR3(Pos.x, Pos.y-50.0f, 0.0f));
  		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
   		pObject->SetAnimation(8,1);
-		CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
-		switch (NouPlayer)
+		int nType = Type;
+		switch (nType)
 		{
 		case CPlayer::NOW_FIRE:		
 			pObject->SetTexture(CTexture::TEXTURE_FIRE);
@@ -107,6 +107,7 @@ CHit *CHit::Create(D3DXVECTOR3 pos)
 			pObject->SetTexture(CTexture::TEXTURE_THUNDER);
 			break;
 		default:
+			pObject->SetTexture(CTexture::TEXTURE_LIGHT);
 			break;
 		}
 		pObject->SetSize(100.0f);

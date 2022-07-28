@@ -99,7 +99,7 @@ void CBullet::Update()
 					((m_pos.x + size) >= (enemyPos->x - pEnemySize->x)))
 				{  
 					CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
-					
+					CHit::Create(*enemyPos, NouPlayer);
 					switch (NouPlayer)
 					{
 					case CPlayer::NOW_FIRE:

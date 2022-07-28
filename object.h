@@ -27,6 +27,7 @@ public:
 		CRYSTAL,
 		BG,
 		SORCERY,
+		BELL,
 		MAX,
 		NONE
 	};

@@ -161,8 +161,11 @@ void CObject3d::Draw(void)
 		// ƒeƒNƒXƒ`ƒƒ‚ÌÝ’è
 		pDevice->SetTexture(0, NULL);
 
-		// ƒp[ƒc‚Ì•`‰æÝ’è
-		m_pMotion->SetParts(m_mtxWorld);
+		if (m_pMotion)
+		{
+			// ƒp[ƒc‚Ì•`‰æÝ’è
+			m_pMotion->SetParts(m_mtxWorld);
+		}
 
 		// s—ñŠ|‚¯ŽZŠÖ”(‘æ2ˆø”~‘æ3ˆø”‘æ‚ð‚Pˆø”‚ÉŠi”[)
 		pDevice->SetMaterial(&marDef);
@@ -253,7 +256,7 @@ void CObject3d::SetLife(int Life)
 void CObject3d::HitLife(int Damage)
 {
 	m_Life -= Damage;
-	CHit::Create(m_pos);
+	
 	if (m_Life <= 0)
 	{
 		CMultiply::SetRate((1 + *CMultiply::GetRate()));
