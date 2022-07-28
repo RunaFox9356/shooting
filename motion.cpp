@@ -347,6 +347,7 @@ void CMotion::LoodSetMotion(char * pFileName)
 			{// ファイル名の読み込み
 				fscanf(pFile, "%s", &g_aEqual[0]);
 				fscanf(pFile, "%s", &m_partsFile[nCntFileName].aName[0]);
+
 				nCntFileName++;
 			}
 
@@ -517,22 +518,19 @@ void CMotion::LoodSetMotion(char * pFileName)
 //=============================================================================
 void CMotion::Uninit(void)
 {
-	//for (int i = 0; i < m_nMaxParts; i++)
-	//{
-	//	if (m_parts[i].pBuffer != NULL)
-	//	{// 頂点バッファーの解放
-	//		m_parts[i].pBuffer->Release();
-	//		m_parts[i].pBuffer = NULL;
-	//	}
+	if (m_parts != nullptr)
+	{
+		delete m_parts;
+		m_parts = nullptr;
+	}
 
-	//	if (m_parts[i].pMesh != NULL)
-	//	{// メッシュの解放
-	//		m_parts[i].pMesh->Release();
-	//		m_parts[i].pMesh = NULL;
-	//	}
-	//}
 
-	
+	if (m_motion != nullptr)
+	{
+		delete m_motion;
+		m_motion = nullptr;
+	}
+
 }
 
 //=============================================================================
@@ -599,6 +597,7 @@ CModel*  CModelManager::Load(const char *pXFileName)
 
 		if (strcmp(m_apModel[i]->m_xFilename, &pXFileName[0]) == 0)
 		{
+			m_apModel[i]->nType = i;
 			return m_apModel[i];
 		}
 	}
@@ -607,6 +606,7 @@ CModel*  CModelManager::Load(const char *pXFileName)
 	{
 		if (m_apModel[i] == nullptr)
 		{
+
 			m_apModel[i] = new CModel;
 			strcpy(m_apModel[i]->m_xFilename, &pXFileName[0]);
 
@@ -619,7 +619,49 @@ CModel*  CModelManager::Load(const char *pXFileName)
 				NULL,
 				&m_apModel[i]->nNumMat,
 				&m_apModel[i]->pMesh);
+			m_apModel[i]->nType = i;
+			return m_apModel[i];
+		}
+	}
 
+	assert(false);
+	return nullptr;
+}
+
+CModel * CModelManager::LoadXfile(const char * pXFileName)
+{
+	for (int i = 0; i < MODEL_MAX; i++)
+	{
+		if (m_apModel[i] == nullptr)
+		{
+			continue;
+		}
+
+		if (strcmp(m_apModel[i]->m_xFilename, &pXFileName[0]) == 0)
+		{
+			m_apModel[i]->nType = i;
+			return m_apModel[i];
+		}
+	}
+
+	for (int i = 0; i < MODEL_MAX; i++)
+	{
+		if (m_apModel[i] == nullptr)
+		{
+
+			m_apModel[i] = new CModel;
+			strcpy(m_apModel[i]->m_xFilename, &pXFileName[0]);
+
+			// Xファイルの読み込み
+			D3DXLoadMeshFromX(pXFileName,
+				D3DXMESH_SYSTEMMEM,
+				CManager::GetRenderer()->GetDevice(),
+				NULL,
+				&m_apModel[i]->pBuffer,
+				NULL,
+				&m_apModel[i]->nNumMat,
+				&m_apModel[i]->pMesh);
+			m_apModel[i]->nType = i;
 			return m_apModel[i];
 		}
 	}

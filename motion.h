@@ -25,8 +25,8 @@ public:
 	//***************************************************************************
 	// 定数定義
 	//***************************************************************************
-	static const unsigned int MAX_MOTION = (128);					// モーション数の最大数
-	static const unsigned int MAX_MODEL_PARTS = (128);				// モデル数の最大数
+	static const unsigned int MAX_MOTION = (12);					// モーション数の最大数
+	static const unsigned int MAX_MODEL_PARTS = (300);				// モデル数の最大数
 	static const unsigned int MAX_KEY = (64);						// キーの最大数
 	static const unsigned int MAX_KEYSET = (64);					// キー設定の最大数
 	static const unsigned int MOTION_BLEND_FRAM = (12);				// モーションブレンドのフレーム数	
@@ -103,6 +103,8 @@ public:
 	// パーツの設定
 	void SetParts(D3DXMATRIX mtxWorld);							// マテリアルデータ
 
+	
+
 	// モーションの再生
 	bool PlayMotion(const int nCntMotionSet);
 
@@ -126,6 +128,7 @@ private:
 	Parts		*m_parts;							// パーツ
 	PartsFile	m_partsFile[MAX_MODEL_PARTS];		// パーツのXファイル名
 	int			m_nMaxParts;						// パーツ数
+	int			m_nType;
 };
 
 class CModel
@@ -160,11 +163,14 @@ public:
 
 public: /* メンバ関数 */
 	static CModelManager *GetManager();
-	CModel* Load(const char *pXFileName);					// 指定の読み込み
-	static void ReleaseAll();					                    // 指定の破棄
+	CModel* Load(const char *pXFileName);	
+	CModel* LoadXfile(const char *pXFileName);	// 指定の読み込み
+	static void ReleaseAll();
+	CModel* m_apModel[MODEL_MAX];
+
 private: /* メンバ変数 */
 
-	CModel* m_apModel[MODEL_MAX];
+
 
 };
 
