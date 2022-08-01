@@ -89,14 +89,13 @@ void CBullet::Update()
 				assert(pObject3d != nullptr);
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
-				float enemySize = 50.0f;
+				float enemySize = 30.0f;
 				 enemySize *= pEnemySize->y;
-				float size = 50.0f;
 
-				if (((m_pos.y - size) <= (enemyPos->y + enemySize)) &&
-					((m_pos.y + size) >= (enemyPos->y - enemySize)) &&
-					((m_pos.x - size) <= (enemyPos->x + pEnemySize->x)) &&
-					((m_pos.x + size) >= (enemyPos->x - pEnemySize->x)))
+				if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
+					((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
+					((m_pos.x - m_Size.x) <= (enemyPos->x + pEnemySize->x)) &&
+					((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
 				{  
 					CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
 					CHit::Create(*enemyPos, NouPlayer);

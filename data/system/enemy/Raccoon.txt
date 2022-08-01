@@ -9,7 +9,7 @@ SCRIPT			# この行は絶対消さないこと！
 #------------------------------------------------------------------------------
 # モデル数
 #------------------------------------------------------------------------------
-NUM_MODEL = 7
+NUM_MODEL = 6
 
 #------------------------------------------------------------------------------
 # モデルファイル名
@@ -20,14 +20,13 @@ MODEL_FILENAME = data/MODEL/tanuki/hand.x	 	# 左前足
 MODEL_FILENAME = data/MODEL/tanuki/asi.x	 	# 右後ろ足
 MODEL_FILENAME = data/MODEL/tanuki/asi.x		# 左後ろ足
 MODEL_FILENAME = data/MODEL/tanuki/sippo.x		# しっぽ
-MODEL_FILENAME = data/MODEL/tanuki/katana.x		# かたな
 
 
 #------------------------------------------------------------------------------
 # キャラクター情報
 #------------------------------------------------------------------------------
 CHARACTERSET
-	NUM_PARTS = 7					# パーツ数
+	NUM_PARTS = 6					# パーツ数
 	MOVE = 3.0						# 移動量
 	JUMP = 10.25					# ジャンプ量
 	RADIUS = 20.0					# 半径
@@ -74,12 +73,7 @@ PARTSSET
 	ROT = 0.0 0.0 0.0
 END_PARTSSET
 
-PARTSSET
-	PARENT = 1
-	INDEX = 6
-	POS = 0.0 0.0 0.0
-	ROT = 0.0 0.0 0.0
-END_PARTSSET
+
 END_CHARACTERSET
 
 

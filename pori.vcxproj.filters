@@ -37,6 +37,9 @@
     <Filter Include="オブジェクト\数字">
       <UniqueIdentifier>{893ba109-c22b-4607-bdee-b9db01165e51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="オブジェクト\モデル系\敵系統">
+      <UniqueIdentifier>{e415c547-7541-4293-8a35-ccf5620603ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="object.cpp">
@@ -123,9 +126,6 @@
     <ClCompile Include="particle.cpp">
       <Filter>オブジェクト\魔法系</Filter>
     </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>オブジェクト\モデル系</Filter>
-    </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>オブジェクト\モデル系</Filter>
     </ClCompile>
@@ -149,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="bell.cpp">
       <Filter>オブジェクト\モデル系</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClCompile>
+    <ClCompile Include="raccoon.cpp">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,9 +192,6 @@
       <Filter>システム</Filter>
     </ClInclude>
     <ClInclude Include="renderer.h">
-      <Filter>システム</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
       <Filter>システム</Filter>
     </ClInclude>
     <ClInclude Include="texture.h">
@@ -239,9 +242,6 @@
     <ClInclude Include="particle.h">
       <Filter>オブジェクト\魔法系</Filter>
     </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>オブジェクト\モデル系</Filter>
-    </ClInclude>
     <ClInclude Include="player.h">
       <Filter>オブジェクト\モデル系</Filter>
     </ClInclude>
@@ -265,6 +265,15 @@
     </ClInclude>
     <ClInclude Include="bell.h">
       <Filter>オブジェクト\モデル系</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>リソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClInclude>
+    <ClInclude Include="raccoon.h">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@
 #include "motion.h"
 #include "manager.h"
 #include "object3d.h"
+#include "raccoon.h"
 
 #include "file.h"
 #include "letter.h"
@@ -55,9 +56,9 @@ HRESULT CEnemy::Init(void)
 	// åªç›ÇÃÉÇÅ[ÉVÉáÉìî‘çÜÇÃï€ä«
 	CObject3d::Init();
 
-	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
-				   D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
-		           "Data/system/enemy/Raccoon.txt");
+	//CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+	//			   D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
+	//	           "Data/system/enemy/Raccoon.txt");
 
 	m_motionTypeOld = m_motionType;
 	m_rot.y += (D3DX_PI*0.5f);
@@ -101,10 +102,18 @@ void CEnemy::Draw(void)
 //------------------------------------
 // create
 //------------------------------------
-CEnemy *CEnemy::Create()
+CEnemy *CEnemy::Create(const int Type)
 {
 	CEnemy * pObject = nullptr;
-	pObject = new CEnemy;
+
+	switch (Type)
+	{
+	case TYPE_RACCOONL:
+		pObject = new CRaccoon;
+	default:
+		break;
+	}
+	
 
 	if (pObject != nullptr)
 	{
@@ -131,6 +140,7 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 		D3DXVECTOR3 size;
 		D3DXVECTOR3 rot;
 		int Life;
+		int Type;
 		for (int nCntEnemy = 0; nCntEnemy < nIndex; nCntEnemy++)
 		{
 			std::string name = "ENEMY";
@@ -141,8 +151,9 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 			size = D3DXVECTOR3(j[name]["SIZE"]["X"], j[name]["SIZE"]["Y"], j[name]["SIZE"]["Z"]);
 			rot = D3DXVECTOR3(j[name]["ROT"]["X"], j[name]["ROT"]["Y"], j[name]["ROT"]["Z"]);
 			Life = j[name]["LIFE"];
+			Type = j[name]["TYPE"];
 
-			CEnemy * Enemy = CEnemy::Create();
+			CEnemy * Enemy = CEnemy::Create(Type);
 			Enemy->SetUp(ENEMY); 
 			Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
 			Enemy->SetPos(pos);

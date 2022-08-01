@@ -27,6 +27,15 @@ public:
 		ANIME_MAX
 	};
 
+	enum TYPE
+	{
+		TYPE_RACCOONL = 0,	// ニュートラル
+		TYPE_FOX,			// 歩き
+		TYPE_FOX2,		// 攻撃
+		TYPE_FOX3,			// ジャンプ
+		TYPE_FOX4,		// 着地
+		TYPE_MAX
+	};
 
 	enum DAMEGE
 	{
@@ -65,7 +74,7 @@ public:
 	void Update(void)override;	// 更新
 	void Draw()override;	// 描画
 	static void  CEnemy::LoadEnemy(const char * pFdata);
-	static CEnemy *CEnemy::Create();
+	static CEnemy *CEnemy::Create(const int Type);
 
 
 private:
