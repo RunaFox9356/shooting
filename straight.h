@@ -4,8 +4,8 @@
 // Author:hamada ryuuga
 //
 //============================
-#ifndef _CRACCOON_H_
-#define _CRACCOON_H_
+#ifndef _STRAIGHT_H_
+#define _STRAIGHT_H_
 
 #include "main.h"
 #include "motion.h"
@@ -15,23 +15,24 @@
 
 class  CMotion;
 
-class CRaccoon : public CEnemy
+class CStraight : public CEnemy
 {
 
 public:
-	CRaccoon();
-	~CRaccoon();
+	CStraight();
+	~CStraight();
 
 	HRESULT Init(void)override;	// èâä˙âª
 	void Uninit(void)override;	// îjä¸
 	void Update(void)override;	// çXêV
 	void Draw()override;	// ï`âÊ
-	static CRaccoon *CRaccoon::Create();
+	static CStraight *CStraight::Create();
 
 
 private:
-	float moveSin;
+
 
 
 };
 #endif
+

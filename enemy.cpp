@@ -13,7 +13,7 @@
 #include "manager.h"
 #include "object3d.h"
 #include "raccoon.h"
-
+#include "straight.h"
 #include "file.h"
 #include "letter.h"
 
@@ -110,6 +110,10 @@ CEnemy *CEnemy::Create(const int Type)
 	{
 	case TYPE_RACCOONL:
 		pObject = new CRaccoon;
+		break;
+	case TYPE_FOX:
+		pObject = new CStraight;
+		break;
 	default:
 		break;
 	}

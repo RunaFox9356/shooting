@@ -62,6 +62,7 @@ void CNumber::Update()
 
 		col.P3 -= 1.0f / m_DesTimarMax;
 
+		m_pos.y -= 1.0f;
 		
 		CObject2d::SetCollar(col);
 

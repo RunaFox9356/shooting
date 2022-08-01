@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include "raccoon.h"
+#include "straight.h"
 #include "camera.h"
 #include "motion.h"
 #include "manager.h"
@@ -20,31 +20,31 @@
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CRaccoon::CRaccoon() 
+CStraight::CStraight()
 {
-	moveSin = 0.0f;
+	
 }
 
 //------------------------------------
 // デストラクタ
 //------------------------------------
-CRaccoon::~CRaccoon()
+CStraight::~CStraight()
 {
 }
 
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CRaccoon::Init(void)
+HRESULT CStraight::Init(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
 
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
-		"Data/system/enemy/Raccoon.txt");
+		"Data/system/enemy/FoxPoizun.txt");
 
-	
+
 	m_rot.y += (D3DX_PI*0.5f);
 	return S_OK;
 }
@@ -52,7 +52,7 @@ HRESULT CRaccoon::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CRaccoon::Uninit(void)
+void CStraight::Uninit(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
@@ -61,21 +61,18 @@ void CRaccoon::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CRaccoon::Update(void)
+void CStraight::Update(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();
 
-	moveSin += 0.05f;
-	//ここにmoveをいれる
-	m_pos.y += sinf(moveSin);
 
 }
 
 //------------------------------------
 // 描画
 //------------------------------------
-void CRaccoon::Draw(void)
+void CStraight::Draw(void)
 {
 	CEnemy::Draw();
 }
@@ -83,10 +80,10 @@ void CRaccoon::Draw(void)
 //------------------------------------
 // create
 //------------------------------------
-CRaccoon *CRaccoon::Create()
+CStraight *CStraight::Create()
 {
-	CRaccoon * pObject = nullptr;
-	pObject = new CRaccoon;
+	CStraight * pObject = nullptr;
+	pObject = new CStraight;
 
 	if (pObject != nullptr)
 	{

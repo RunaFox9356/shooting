@@ -93,7 +93,7 @@ void CBell::Update(void)
 
 				D3DXVECTOR3 vecPlayerDist = *PlayerPos - m_pos;
 				float distPlayer = D3DXVec3Length(&vecPlayerDist);
-				if (PlayerPos->y >= 50.0f&& 620.0f >= m_pos.x)
+				if ((PlayerPos->y >= 50.0f|| PlayerPos->y <= -27te0.0f)&& 620.0f >= m_pos.x)
 				{
 					m_dist = true;
 				}

@@ -32,7 +32,7 @@ void CCamera::Init(void)
 	m_posV = D3DXVECTOR3(0.0f, 0.0f, -150.0f);
 	m_posR = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	m_vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	m_directionR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_directionR = D3DXVECTOR3(10.0f, 0.0f, 0.0f);
 	m_directionV = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	m_fDistance = sqrtf((m_posR.x - m_posV.x) *

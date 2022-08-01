@@ -188,6 +188,7 @@
     <ClCompile Include="result.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="sorcery.cpp" />
+    <ClCompile Include="straight.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="title.cpp" />
     <ClCompile Include="utility.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="result.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="sorcery.h" />
+    <ClInclude Include="straight.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="utility.h" />
