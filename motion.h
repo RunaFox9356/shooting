@@ -25,7 +25,7 @@ public:
 	//***************************************************************************
 	// 定数定義
 	//***************************************************************************
-	static const unsigned int MAX_MOTION = (12);					// モーション数の最大数
+	static const unsigned int MAX_MOTION = (13);					// モーション数の最大数
 	static const unsigned int MAX_MODEL_PARTS = (300);				// モデル数の最大数
 	static const unsigned int MAX_KEY = (64);						// キーの最大数
 	static const unsigned int MAX_KEYSET = (64);					// キー設定の最大数

@@ -19,6 +19,8 @@ public:
 
 };
 
+#define MAXRATE (10)
+#define RATE (MAXRATE-1)
 
 class CMultiply : public CObject
 {
@@ -52,8 +54,8 @@ private:
 	static int m_Rate;		//”{—¦
 	static int m_RateWait;
 
-	CNumber * ratio[10];
-	static CNumber * Fastratio[10];
+	CNumber * ratio[MAXRATE];
+	static CNumber * Fastratio[MAXRATE];
 };
 
 #endif

@@ -57,7 +57,7 @@ HRESULT CEnemy::Init(void)
 
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 				   D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
-		           "Data/system/enemy/FoxPoizun.txt");
+		           "Data/system/enemy/Raccoon.txt");
 
 	m_motionTypeOld = m_motionType;
 	m_rot.y += (D3DX_PI*0.5f);

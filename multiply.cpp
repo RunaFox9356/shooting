@@ -12,7 +12,7 @@
 
 int CMultiply::m_Rate = 0;
 int CMultiply::m_RateWait = 0;
-CNumber * CMultiply::Fastratio[10] = {};
+CNumber * CMultiply::Fastratio[MAXRATE] = {};
 //=============================================================================
 // ÉZÉbÉgä÷êî
 //=============================================================================
@@ -24,7 +24,7 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 
 	nDigits = (int)log10f((float)nModScore);
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < RATE; i++)
 	{
 		ratio[i] = nullptr;
 	}
@@ -68,7 +68,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	int nDigits;
 
 	nDigits = (int)log10f((float)nModScore);
-	for (int i = 10; i >= 0; i--)
+	for (int i = RATE; i >= 0; i--)
 	{
 		if (Fastratio[i] == nullptr)
 		{
@@ -150,7 +150,7 @@ void CMultiply::Uninit()
 {
 	m_Rate = 0;
 	m_RateWait = 0;
-	for (int nCntScore = 0; nCntScore <= 10; nCntScore++)
+	for (int nCntScore = 0; nCntScore <= RATE; nCntScore++)
 	{
 		if (Fastratio[nCntScore] == nullptr)
 		{
@@ -173,9 +173,11 @@ void CMultiply::Update()
 	if (m_RateWait <= 0)
 	{
 		m_RateWait = 20;
-		if (m_Rate >= 1)
+	
+		if (m_Rate >= 0)
 		{
 			m_Rate--;
+			
 			CMultiply::FastSet(m_Rate, D3DXVECTOR3(100.0f, 200.0f, 0.0f));
 		}
 	}

@@ -93,9 +93,13 @@ void CBell::Update(void)
 
 				D3DXVECTOR3 vecPlayerDist = *PlayerPos - m_pos;
 				float distPlayer = D3DXVec3Length(&vecPlayerDist);
-				if (!m_dist)
+				if (PlayerPos->y >= 50.0f&& 620.0f >= m_pos.x)
 				{
-					m_pos += vecPlayerDist / distPlayer * 10.0f;
+					m_dist = true;
+				}
+				if (m_dist)
+				{
+					m_pos += vecPlayerDist / distPlayer * 30.0f;
 				}
 				if (distPlayer <= 1.0f)
 				{
@@ -110,7 +114,6 @@ void CBell::Update(void)
 					
 					GetScore()->Add(10 * (*CMultiply::GetRate()+1));
 					
-
 					CObject::Release();
 
 					return;
@@ -132,6 +135,7 @@ void CBell::Update(void)
 			}
 		}
 	}
+
 	if (m_pos.x <= -1280.0f)
 	{
 		CObject::Release();
