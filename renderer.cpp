@@ -178,8 +178,8 @@ void CRenderer::Update()
 	pCamera[0]->Update();
 
 	CObject::AllUpdate();
-	pCamera[1]->Update();
 
+	pCamera[1]->Update();
 
 	pLight->Update();
 
@@ -210,7 +210,7 @@ void CRenderer::Draw()
 
 		pCamera[1]->Set(1);
 		CObject::TypeDraw(CObject::NONE);
-		//particle->Draw();	// パーティクル
+		
 
 #ifdef _DEBUG
 		// FPS表示

@@ -10,6 +10,8 @@
 
 #include "object2d.h"
 
+
+#
 class CNumber;
 class CMultiplyManager
 {

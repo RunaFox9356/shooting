@@ -58,6 +58,9 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
  	
 }
 
+//=============================================================================
+//スコアの設置
+//=============================================================================
 CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 {
 	int aPosTexU[100];
@@ -70,9 +73,11 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		if (Fastratio[i] == nullptr)
 		{
 			Fastratio[i] = CNumber::Create();
+			Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		}
+
 		aPosTexU[i] = 0;
-		Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
+		
 	}
 	for (int i = nDigits; i >= 0; i--)
 	{
@@ -82,7 +87,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	}
 	D3DXVECTOR3 ratiopos = Pos;
 
-							// スクリーンサイズ
+	// モデルから高さを計算
 	ratiopos += D3DXVECTOR3(0.0f, -50.0f, 0.0f);
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (int nCntScore = 0; nCntScore <= nDigits; nCntScore++)
@@ -99,6 +104,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	}
 	return nullptr;
 }
+
 //=============================================================================
 // 数字を表示する関数
 //=============================================================================
@@ -142,14 +148,18 @@ CMultiply::~CMultiply()
 //=============================================================================
 void CMultiply::Uninit()
 {
-	for (int i = 0; i < 10; i++)
+	m_Rate = 0;
+	m_RateWait = 0;
+	for (int nCntScore = 0; nCntScore <= 10; nCntScore++)
 	{
-		if (ratio[i] != nullptr)
+		if (Fastratio[nCntScore] == nullptr)
 		{
-			//ratio[i]->Uninit();
-			//delete ratio[i];
-			//ratio[i] = nullptr;
+			return;
 		}
+
+
+		Fastratio[nCntScore] = nullptr;
+		
 	}
 }
 

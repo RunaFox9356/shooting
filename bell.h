@@ -12,11 +12,16 @@
 #include "renderer.h"
 #include "object3d.h"
 
+
+
 class  CMotion;
 
 class CBell : public CObject3d
 {
 public:
+
+	static const int BOUNDPOWER;
+
 	enum ANIME
 	{
 		ANIME_NORMAL = 0,	// ニュートラル
@@ -47,14 +52,6 @@ public:
 	};
 
 public:
-	static const float ATTENUATION;		// 減衰係数
-	static const float SPEED;			// スピード
-	static const float WIDTH;			// モデルの半径
-	static const int MAX_PRAYER;		// 最大数
-	static const int MAX_MOVE;			// アニメーションの最大数
-	static const int INVINCIBLE;		// 無敵時間
-	static const int MAX_MODELPARTS = 9;
-	static const int MAX_COPY;
 
 public:
 	CBell();
@@ -72,7 +69,8 @@ private:
 	//void Move(void);		// 移動
 
 private:
-
+	bool            m_dist;
+	int				m_bound;
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
 };

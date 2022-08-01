@@ -181,6 +181,12 @@ bool CInput::Trigger(STAN_DART_INPUT_KEY key)
 			return true;
 		}
 		break;
+	case CInput::KEY_DEBUG:
+		if (m_pKeyboard->GetKeyboardTrigger(DIK_F1))
+		{
+			return true;
+		}
+		break;
 	default:
 		break;
 	}

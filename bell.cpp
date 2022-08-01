@@ -18,23 +18,17 @@
 #include "player.h"
 #include "multiply.h"
 
-//------------------------------------
-// static変数
-//------------------------------------
-const float CBell::ATTENUATION = 0.5f;	// 
-const float CBell::SPEED = 1.0f;			// 移動量
-const float CBell::WIDTH = 10.0f;			// モデルの半径
-const int CBell::MAX_PRAYER = 16;			// 最大数
-const int CBell::MAX_MOVE = 9;			// アニメーションの最大数
-const int CBell::INVINCIBLE = 300;		// 無敵時間
-const int CBell::MAX_COPY = 4;			// 最大コピー数
+
+const int CBell::BOUNDPOWER = 10;
 
 //------------------------------------
 // コンストラクタ
 //------------------------------------
 CBell::CBell() :
 	m_motionType(ANIME_NORMAL),
-	m_motionTypeOld(ANIME_NORMAL)
+	m_motionTypeOld(ANIME_NORMAL),
+	m_bound(BOUNDPOWER),
+	m_dist(false)
 {
 }
 
@@ -81,10 +75,9 @@ void CBell::Update(void)
 	// 現在のモーション番号の保管
 	CObject3d::Update();
 
+
+
 	m_pos += m_move;
-
-	m_move.y -= 0.5f;
-
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{	// 当たり判定
 		CObject*pObject;
@@ -98,6 +91,17 @@ void CBell::Update(void)
 				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 				float Size = 30.0f;
 
+				D3DXVECTOR3 vecPlayerDist = *PlayerPos - m_pos;
+				float distPlayer = D3DXVec3Length(&vecPlayerDist);
+				if (!m_dist)
+				{
+					m_pos += vecPlayerDist / distPlayer * 10.0f;
+				}
+				if (distPlayer <= 1.0f)
+				{
+					m_pos = *PlayerPos;
+					
+				}
 				if (((m_pos.y - Size) <= (PlayerPos->y + Size)) &&
 					((m_pos.y + Size) >= (PlayerPos->y - Size)) &&
 					((m_pos.x - Size) <= (PlayerPos->x + Size)) &&
@@ -114,10 +118,19 @@ void CBell::Update(void)
 			}
 		}
 	}
-	if (m_pos.y <= -360.0f)
+	if (!m_dist)
 	{
-		m_pos.y = -360.0f;
-		m_move.y = 0.0f;
+		
+		m_move.y -= 0.5f;
+		if (m_pos.y <= -360.0f)
+		{
+			m_pos.y = -360.0f;
+			m_move.y = (-m_move.y)*((rand() % 5 + 1)*0.1f);
+			if (m_move.y <= 1.0f)
+			{
+				m_move.y = 0;
+			}
+		}
 	}
 	if (m_pos.x <= -1280.0f)
 	{

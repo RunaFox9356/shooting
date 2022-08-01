@@ -7,32 +7,21 @@
 
 #include "manager.h"
 #include "main.h"
-#include "object.h"
-#include "light.h"
-#include "player.h"
+
 #include "renderer.h"
 #include "input.h"
-#include "file.h"
-#include "bullet.h"
-#include "texture.h"
-#include "magic.h"
 #include "game.h"
 #include "title.h"
 #include "result.h"
-#include "multiply.h"
-#include "particle_manager.h"
 
+#include "texture.h"
 
 //-----------------------------------------------------------------------------
 // 静的メンバー変数の初期化
 //-----------------------------------------------------------------------------
 CRenderer * CManager::m_cRenderer = nullptr; 
 CTexture * CManager::m_pTexture = nullptr;
-CMagicBox* CManager::m_MagicBox = nullptr;
 CObject*CManager::m_Game = nullptr;
-CManager* CManager::application = nullptr;
-CParticleManager*CManager::paticleManager = nullptr;
-CPlayer*CManager::m_Player = nullptr;
 
 //=============================================================================
 // コンストラクト関数
@@ -55,8 +44,9 @@ CManager::~CManager()
 HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 {
 	
-	srand((unsigned int)time(NULL)); // 現在時刻の情報で初期化
+
 	m_cRenderer = new CRenderer;
+
 	m_Input = CInput::Create();
 
 	// 初期化処理
@@ -70,14 +60,6 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 		return E_FAIL;
 	}
 
-	paticleManager = new CParticleManager;
-	// パーティクル
-	if (FAILED(paticleManager->Init()))
-	{
-		return E_FAIL;
-	}
-
-	
 
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
@@ -88,18 +70,7 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	SetMode(m_mode);
 
 
-	CObject::AllCreate();
-
-	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(100.0f, 650.0f, 0.0f));
-
-	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_THUNDER);
-	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_ICE);
-	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_FIRE);
-
-	CMultiply::FastSet(0, D3DXVECTOR3(100.0f, 200.0f, 0.0f));
 	
-	m_Player = CPlayer::Create();
-	m_Player->SetUp(CObject::PLAYER);
 	return S_OK;
 }
 
@@ -108,9 +79,8 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 //=============================================================================
 void CManager::Uninit()
 {
-	// ポリゴンの終了処理
-	CModelManager::ReleaseAll();
 	CObject::AllUninit();
+
 	if (m_pTexture != nullptr)
 	{// 終了処理
 
@@ -126,15 +96,6 @@ void CManager::Uninit()
 		m_cRenderer = nullptr;
 	}
 
-	// パーティクルマネジャーの解放
-	if (paticleManager != nullptr)
-	{
-		paticleManager->Uninit();
-
-		delete paticleManager;
-		paticleManager = nullptr;
-	}
-
 	//入力処理の終了処理
 	m_Input->Uninit();
 
@@ -145,11 +106,14 @@ void CManager::Uninit()
 //=============================================================================
 void CManager::Update()
 {
+
 	//入力処理の更新処理
 	m_Input->Update();
 	m_cRenderer->Update();
-	paticleManager->Update();
+
 	//m_Game->Update();
+
+
 }
 
 //=============================================================================
@@ -157,15 +121,8 @@ void CManager::Update()
 //=============================================================================
 void CManager::Draw()
 {
-
-
-
 	// 描画処理	
 	m_cRenderer->Draw();
-
-	//m_cRenderer->DrawBG();
-	//m_cRenderer->DrawNotBG();
-	//m_Game->Draw();
 
 }
 
@@ -187,23 +144,18 @@ CTexture *CManager::GetTexture()
 	return m_pTexture;
 }
 
-CMagicBox* CManager::GetMagicBox()
-{
-	return m_MagicBox;
-}
 
 //========================
 // モードの設定
 //========================
 void CManager::SetMode(MODE mode)
 {
+	
 	if (m_Game != nullptr)
 	{
-		m_Game->Uninit();
-		delete m_Game;
-		m_Game = nullptr;
+		m_Game->Release();
 	}
-
+	
 	switch (mode)
 	{
 	case CManager::MODE_TITLE:
@@ -219,9 +171,12 @@ void CManager::SetMode(MODE mode)
 		break;
 	}
 
-	if (FAILED(m_Game->Init()))
-	{
-		return;
+	// 初期化処理
+	if (FAILED(m_Game->Init()))	//画面サイズ
+	{//初期化処理が失敗した場合
+		return ;
 	}
+	m_Game->SetUp(CObject::MODE);
+
 }
 

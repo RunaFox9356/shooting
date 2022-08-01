@@ -28,7 +28,8 @@ public:
 		KEY_LEFT,
 		KEY_RIGHT,
 		KEY_DECISION,
-		KEY_SHOT
+		KEY_SHOT,
+		KEY_DEBUG
 	};
 
 	CInput();

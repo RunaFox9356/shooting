@@ -123,6 +123,26 @@ void CObject::AllUninit()
 	}
 	m_AllMember = 0;
 }
+
+//=============================================================================
+// ModeNotUninitä÷êî
+//=============================================================================
+void CObject::ModeNotUninit()
+{
+	for (int i = 0; i < MAX_OBJECT; i++)
+	{
+		if (m_pObject[i] != nullptr)
+		{
+			if (m_pObject[i]->m_Type != MODE)
+			{
+				m_pObject[i]->Uninit();
+				delete m_pObject[i];
+				m_pObject[i] = nullptr;
+			}
+		}
+	}
+	m_AllMember = 1;
+}
 //=============================================================================
 // AllCreateä÷êî
 //=============================================================================
@@ -133,7 +153,7 @@ void CObject::AllCreate()
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create();
 	pScore->Set(0);
-	pScore-> Add(20);
+	
 
 }
 
@@ -169,7 +189,11 @@ void CObject::SetUp(EObjectType Type)
 	case EObjectType::BG:
 		m_Type = BG;
 		
-		break;
+		break;	
+	case EObjectType::MODE:
+			m_Type = MODE;
+
+			break;
 	default:
 		break;
 	}

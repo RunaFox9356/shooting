@@ -22,6 +22,7 @@
 #include "particle_manager.h"
 #include "utility.h"
 #include "bell.h"
+#include "game.h"
 
 //------------------------------------
 // static変数
@@ -188,7 +189,7 @@ void CPlayer::Move()	//動きセット
 	}
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
-		CParticleManager* particleManager = CManager::GetParticleManager();
+		CParticleManager* particleManager = CGame::GetParticleManager();
 
 		if (particleManager->GetEmitter().size() == 0)
 		{
@@ -221,7 +222,7 @@ void CPlayer::Move()	//動きセット
 				break;
 			}
 			CSorcey::Create(m_pos, m_NowMagic)->SetUp(EObjectType::SORCERY);
-			CManager::GetMagicBox()->CMagicBox::MagicRelease();
+			CGame::GetMagicBox()->CMagicBox::MagicRelease();
 		}
 	}
 

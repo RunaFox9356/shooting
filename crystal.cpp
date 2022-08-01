@@ -16,6 +16,7 @@
 #include "player.h"
 #include "bullet.h"
 #include "score.h"
+#include "game.h"
 int CCrystal::m_popType = 2;
 LPDIRECT3DTEXTURE9	CCrystal::m_pTexture;
 
@@ -91,7 +92,7 @@ void CCrystal::Update()
 				{
 					if (m_Hit <= 30)
 					{
-						CManager::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
+						CGame::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
 						GetScore()->Add(200);
 					}
 					else

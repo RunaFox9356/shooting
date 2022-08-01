@@ -12,6 +12,7 @@
 #include <assert.h>
 #include "utility.h"
 #include "hit.h"
+#include "game.h"
 
 //=============================================================================
 // コンストラクト関数
@@ -156,7 +157,7 @@ void CSorcey::SetSpeed(const int &Speed)
 //=============================================================================
 void CSorcey::PlayAnimation()
 {
-	CParticleManager* particleManager = CManager::GetParticleManager();
+	CParticleManager* particleManager = CGame::GetParticleManager();
 	m_PatternAnimX++;
 
 	if (m_PatternAnimX > m_DivisionX)
@@ -197,8 +198,8 @@ void CSorcey::PlayAnimation()
 void CSorcey::Move()
 {
 	D3DXVECTOR3 Imguipos, PlayerPos;
-	CParticleManager* particleManager = CManager::GetParticleManager();
-	CPlayer *Data = CManager::GetPlayer();
+	CParticleManager* particleManager = CGame::GetParticleManager();
+	CPlayer *Data = CGame::GetPlayer();
 
 	if (particleManager->GetEmitter().size() != 0)
 	{

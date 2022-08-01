@@ -28,6 +28,7 @@ public:
 		BG,
 		SORCERY,
 		BELL,
+		MODE,
 		MAX,
 		NONE
 	};
@@ -46,7 +47,7 @@ public:
 	static void AllDraw();
 	static void AllUninit();
 	static void AllCreate();
-
+	static void ModeNotUninit();
 	static void TypeDraw(EObjectType Type);
 
 	int * GetId();

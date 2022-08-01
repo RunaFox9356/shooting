@@ -6,6 +6,7 @@
 //**************************************************
 #include "title.h"
 #include "input.h"
+#include "manager.h"
 
 //========================
 // コンストラクター
@@ -41,6 +42,13 @@ void CTitle::Uninit(void)
 void CTitle::Update(void)
 {
 #ifdef _DEBUG
+
+	CInput *CInputpInput = CInput::GetKey();
+	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
+	{
+		//モードの設定
+		CManager::SetMode(CManager::MODE_GAME);
+	}
 
 	/*if (GetKeyboardPress(DIK_0))
 	{

@@ -11,6 +11,7 @@
 #include "manager.h"
 #include "texture.h"
 #include "particle_manager.h"
+#include "game.h"
 
 static int index = 0;
 namespace nl = nlohmann;
@@ -110,13 +111,18 @@ void LoadJson(const char* cUrl)
 
 		if (chack)
 		{
-			CManager::GetParticleManager()->SetBundledData(loadData, index);
+			if (index >= 4)
+			{
+				index = 0;
+			}
+			CGame::GetParticleManager()->SetBundledData(loadData, index);
 			index++;
 		}
 		else
 		{
-			CManager::GetParticleManager()->ChangeBundledData(0, loadData);
+			CGame::GetParticleManager()->ChangeBundledData(0, loadData);
 		}
 	}
 
 }
+

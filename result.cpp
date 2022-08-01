@@ -10,7 +10,7 @@
 //------------------------
 #include "result.h"
 #include "input.h"
-
+#include "manager.h"
 
 //========================
 // コンストラクター
@@ -47,6 +47,12 @@ void CResult::Uninit(void)
 void CResult::Update(void)
 {
 
+	CInput *CInputpInput = CInput::GetKey();
+	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
+	{
+		//モードの設定
+		CManager::SetMode(CManager::MODE_TITLE);
+	}
 
 }
 
