@@ -65,38 +65,39 @@ void CBullet::Uninit()
 void CBullet::Update()
 {
 	C3dpolygon::Update();
-	
+
 	Move();
-	
-	if (m_pos.y >SCREEN_HEIGHT)
+
+	if (m_pos.y > SCREEN_HEIGHT)
 	{
 		CObject::Release();
 	}
-	if (m_pos.x >SCREEN_WIDTH)
+	if (m_pos.x > SCREEN_WIDTH)
 	{
 		CObject::Release();
 	}
-	for (int i = 0; i < MAX_OBJECT; i++)
+	CObject**pObject;
+	pObject = GetObjectData(0);
+
+	for (int j = 0; j < MAX_OBJECT; j++)
 	{
-		CObject*pObject;
-		pObject = GetObjectData(i);
-		if (pObject != nullptr)
+		if (pObject[j] != nullptr)
 		{
-			EObjectType Type = pObject->GetType();
+			EObjectType Type = pObject[j]->GetType();
 			if (Type == CObject::ENEMY)
 			{
-				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
+				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject[j]);  // ダイナミックキャスト
 				assert(pObject3d != nullptr);
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
 				float enemySize = 30.0f;
-				 enemySize *= pEnemySize->y;
+				enemySize *= pEnemySize->y;
 
 				if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
 					((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
 					((m_pos.x - m_Size.x) <= (enemyPos->x + pEnemySize->x)) &&
 					((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
-				{  
+				{
 					CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
 					CHit::Create(*enemyPos, NouPlayer);
 					switch (NouPlayer)
@@ -120,17 +121,15 @@ void CBullet::Update()
 						pObject3d->HitLife(5);
 						break;
 					}
-					
 
-				    // 解放
+
+					// 解放
 					CObject::Release();
 					return;
 				}
 			}
 		}
 	}
-
-
 }
 
 //=============================================================================
@@ -227,31 +226,33 @@ void CBullet::Move()
 	{
 		bool homing = false;
 
-		for (int i = 0; i < MAX_OBJECT; i++)
+		for (int i = 0; i < MAX_LIST; i++)
 		{
-			CObject*pObject = nullptr;
+			CObject**pObject = nullptr;
 			pObject = GetObjectData(i);
-
-			if (pObject != nullptr)
+			for (int j = 0; j < MAX_OBJECT; j++)
 			{
-				EObjectType Type = pObject->GetType();
-				if (Type == CObject::ENEMY)
+				if (pObject[j] != nullptr)
 				{
-					/*D3DXVECTOR3 vec = *pObject->GetPos() - m_pos;
-					float length = D3DXVec3Length(&vec);
-
-					if (m_Length >= length)
+					EObjectType Type = pObject[j]->GetType();
+					if (Type == CObject::ENEMY)
 					{
-						m_Length = length;
-						m_VecLength = vec;
-					}*/
-					CEnemy* Enemy = dynamic_cast<CEnemy*>(pObject);  // ダウンキャスト
+						/*D3DXVECTOR3 vec = *pObject->GetPos() - m_pos;
+						float length = D3DXVec3Length(&vec);
 
-					D3DXVECTOR3 vecDiff = *Enemy->GetPos() - m_pos;
-					float fLength = D3DXVec3Length(&vecDiff);
-					m_pos = m_pos + ((vecDiff / fLength) * 10.0f);
-					homing = true;
-					break;
+						if (m_Length >= length)
+						{
+							m_Length = length;
+							m_VecLength = vec;
+						}*/
+						CEnemy* Enemy = dynamic_cast<CEnemy*>(pObject[j]);  // ダウンキャスト
+
+						D3DXVECTOR3 vecDiff = *Enemy->GetPos() - m_pos;
+						float fLength = D3DXVec3Length(&vecDiff);
+						m_pos = m_pos + ((vecDiff / fLength) * 10.0f);
+						homing = true;
+						break;
+					}
 				}
 			}
 		}

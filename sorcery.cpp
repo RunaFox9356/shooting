@@ -253,16 +253,17 @@ void CSorcey::Move()
 //=============================================================================
 void CSorcey::Collision()
 {
-	for (int i = 0; i < MAX_OBJECT; i++)
+
+	CObject**pObject;
+	pObject = GetObjectData(0);
+	for (int j = 0; j < MAX_OBJECT; j++)
 	{
-		CObject*pObject;
-		pObject = GetObjectData(i);
-		if (pObject != nullptr)
+		if (pObject[j] != nullptr)
 		{
-			EObjectType Type = pObject->GetType();
+			EObjectType Type = pObject[j]->GetType();
 			if (Type == CObject::ENEMY)
 			{
-				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject);  // ダウンキャスト
+				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject[j]);  // ダウンキャスト
 				assert(pObject3d != nullptr);
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
@@ -270,7 +271,7 @@ void CSorcey::Collision()
 				{
 					float enemySize = 50.0f;
 					enemySize *= pEnemySize->y;
-					
+
 
 					if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
 						((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
@@ -302,6 +303,7 @@ void CSorcey::Collision()
 			}
 		}
 	}
+
 }
 
 //=============================================================================

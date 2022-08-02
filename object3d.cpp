@@ -114,8 +114,6 @@ void CObject3d::Update(void)
 		m_bMotion = m_pMotion->PlayMotion((int)(m_motionType));
 	}
 
-
-
 	if (!m_bMotion)
 	{// 使用してるモーションがない場合
 		m_motionType = ANIME_NORMAL;
@@ -200,18 +198,18 @@ void CObject3d::Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot,  char * pFil
 {
 	// 情報の初期化
 	m_pos = pos;											// 位置の初期化
-	m_posOld = m_pos;								// 過去位置の初期化
-	m_posOld = m_pos;								// 過去位置の初期化
+	m_posOld = m_pos;										// 過去位置の初期化
+	m_posOld = m_pos;										// 過去位置の初期化
 	m_rot = rot;											// 向きの初期化
-	m_modelMin = D3DXVECTOR3(100.0f, 100.0f, 100.0f);	// 頂点座標の最小値
+	m_modelMin = D3DXVECTOR3(100.0f, 100.0f, 100.0f);		// 頂点座標の最小値
 	m_modelMax = D3DXVECTOR3(-100.0f, -100.0f, -100.0f);	// 頂点座標の最大値
 	m_mtxWorld = {};										// ワールドマトリックス
 	//m_rotDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			// 目的の向き
 	m_motionType = ANIME_NORMAL;							// ニュートラルモーション
-	m_motionTypeOld = m_motionType;				// ニュートラルモーション
-	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);				// 移動量
-	m_bMotionBlend = false;								// モーションブレンドの使用状況
-	m_isUse = true;										// 使用状況
+	m_motionTypeOld = m_motionType;							// ニュートラルモーション
+	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);					// 移動量
+	m_bMotionBlend = false;									// モーションブレンドの使用状況
+	m_isUse = true;											// 使用状況
 
 	// モーション情報
 	m_pMotion = new CMotion(pFileName);
@@ -267,7 +265,7 @@ void CObject3d::HitLife(int Damage)
 
 	if (m_Life <= 0)
 	{
-		CHit::Create(m_pos,(int)CPlayer::GetMagic());
+		//CHit::Create(m_pos,(int)CPlayer::GetMagic());
 		CMultiply::SetRate((1 + *CMultiply::GetRate()));
 		CMultiply::list(*CMultiply::GetRate(), m_pos,true);
 
@@ -278,7 +276,7 @@ void CObject3d::HitLife(int Damage)
 			CBell * Bell = CBell::Create();
 			Bell->SetUp(BELL);
 
-			Bell->SetMove(D3DXVECTOR3((float)(rand() % 10 + -10), (float)(rand() % 10 + 5), 0.0f));
+			Bell->SetMove(D3DXVECTOR3((float)-(rand() % 10 + 1), (float)(rand() % 10 + 5), 0.0f));
 			Bell->SetPos(m_pos);
 			Bell->SetSize(scale);
 

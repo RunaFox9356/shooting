@@ -72,88 +72,93 @@ void CCrystal::Update()
 		m_move.y = 13.0f;
 		//CObject::Release();
 	}
-	for (int i = 0; i < MAX_OBJECT; i++)
-	{	// 当たり判定
-		CObject*pObject;
+	for (int i = 0; i < MAX_LIST; i++)
+	{
+		// 当たり判定
+		CObject**pObject;
 		pObject = GetObjectData(i);
-		if (pObject != nullptr)
+
+		for (int j = 0; j < MAX_OBJECT; j++)
 		{
-			EObjectType Type = pObject->GetType();
-			if (Type == CObject::PLAYER)
-			{	// Playerとの当たり判定
-				CPlayer* cPlayer = dynamic_cast<CPlayer*>(pObject);  // ダウンキャスト
-				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
-				float Size = 50.0f;
+			if (pObject[j] != nullptr)
+			{
+				EObjectType Type = pObject[j]->GetType();
+				if (Type == CObject::PLAYER)
+				{	// Playerとの当たり判定
+					CPlayer* cPlayer = dynamic_cast<CPlayer*>(pObject[j]);  // ダウンキャスト
+					const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
+					float Size = 50.0f;
 
-				if (((m_pos.y - m_Size.y) <= (PlayerPos->y + Size)) &&
-					((m_pos.y + m_Size.y) >= (PlayerPos->y - Size)) &&
-					((m_pos.x - m_Size.x) <= (PlayerPos->x + Size)) &&
-					((m_pos.x + m_Size.x) >= (PlayerPos->x - Size)))
-				{
-					if (m_Hit <= 30)
+					if (((m_pos.y - m_Size.y) <= (PlayerPos->y + Size)) &&
+						((m_pos.y + m_Size.y) >= (PlayerPos->y - Size)) &&
+						((m_pos.x - m_Size.x) <= (PlayerPos->x + Size)) &&
+						((m_pos.x + m_Size.x) >= (PlayerPos->x - Size)))
 					{
-						CGame::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
-						GetScore()->Add(200);
-					}
-					else
-					{
-						GetScore()->Add(1000);
-					}
+						if (m_Hit <= 30)
+						{
+							CGame::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
+							GetScore()->Add(200);
+						}
+						else
+						{
+							GetScore()->Add(1000);
+						}
 
-					CObject::Release();
+						CObject::Release();
 
-					return;
+						return;
+					}
 				}
-			}
-			if (Type == CObject::BULLET)
-			{	// たまとの当たり判定
-				CBullet* bullet = dynamic_cast<CBullet*>(pObject);  // ダウンキャスト
- 				const D3DXVECTOR3 *BulletPos = bullet->GetPos();
+				if (Type == CObject::BULLET)
+				{	// たまとの当たり判定
+					CBullet* bullet = dynamic_cast<CBullet*>(pObject[j]);  // ダウンキャスト
+					const D3DXVECTOR3 *BulletPos = bullet->GetPos();
 
-				float Size = 40.0f;
+					float Size = 40.0f;
 
-				if (((m_pos.y - m_Size.y) <= (BulletPos->y + Size)) &&
-					((m_pos.y + m_Size.y) >= (BulletPos->y - Size)) &&
-					((m_pos.x - m_Size.x) <= (BulletPos->x + Size)) &&
-					((m_pos.x + m_Size.x) >= (BulletPos->x - Size)))
-				{
-					m_move.y = 5.0f;
-					m_Hit++;
-					if (m_Hit <= 30)
-					{//出てくるタイプの設定
-						m_myType++;
-
-						if (m_myType >= 6)
-						{
-							m_myType = 2;
-						}
-
-						//色の設定
-						switch (m_myType)
-						{
-						case NOW_FIRE:
-							SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
-							break;
-						case NOW_ICE:
-							SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
-							break;
-						case NOW_STORM:
-							SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
-							break;
-						case NOW_SUN:
-							SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
-							break;
-						default:
-							SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
-							break;
-						}
-					}
-					else
+					if (((m_pos.y - m_Size.y) <= (BulletPos->y + Size)) &&
+						((m_pos.y + m_Size.y) >= (BulletPos->y - Size)) &&
+						((m_pos.x - m_Size.x) <= (BulletPos->x + Size)) &&
+						((m_pos.x + m_Size.x) >= (BulletPos->x - Size)))
 					{
-						SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+						m_move.y = 5.0f;
+						m_Hit++;
+						if (m_Hit <= 30)
+						{//出てくるタイプの設定
+							m_myType++;
+
+							if (m_myType >= 6)
+							{
+								m_myType = 2;
+							}
+
+							//色の設定
+							switch (m_myType)
+							{
+							case NOW_FIRE:
+								SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
+								break;
+							case NOW_ICE:
+								SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
+								break;
+							case NOW_STORM:
+								SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
+								break;
+							case NOW_SUN:
+								SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
+								break;
+							default:
+								SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+								break;
+							}
+						}
+						else
+						{
+							SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+						}
+						pObject[j]->Release();
+						return;
 					}
-					pObject->Release();
-					return;
 				}
 			}
 		}

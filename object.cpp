@@ -15,23 +15,24 @@
 #include "mesh.h"
 #include "magic.h"
 #include "score.h"
+#include <assert.h>
 
-
-CObject *CObject::m_pObject[MAX_OBJECT] = {};
+CObject *CObject::m_pObject[MAX_LIST][MAX_OBJECT] = {};
 int CObject::m_AllMember = 0;
 CScore * pScore;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CObject::CObject()
+CObject::CObject(int list)
 {
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{
-		if (m_pObject[i] == nullptr)
+		if (m_pObject[list][i] == nullptr)
 		{
 			m_Type = NONE;
+			m_list = list;
 			m_nID = i;
-			m_pObject[i] = this;
+			m_pObject[list][i] = this;
 			m_AllMember++;
 			break;
 		}
@@ -51,11 +52,14 @@ CObject::~CObject()
 //=============================================================================
 void CObject::AllUpdate()
 {
-	for (int i = 0; i < MAX_OBJECT; i++)
+	for (int j = 0; j < MAX_LIST; j++)
 	{
-		if (m_pObject[i] != nullptr)
+		for (int i = 0; i < MAX_OBJECT; i++)
 		{
-			m_pObject[i]->Update();
+			if (m_pObject[j][i] != nullptr)
+			{
+				m_pObject[j][i]->Update();
+			}
 		}
 	}
 }
@@ -64,13 +68,16 @@ void CObject::AllUpdate()
 //=============================================================================
 void CObject::AllDraw()
 {
-	for (int i = 0; i < MAX_OBJECT; i++)
+	for (int j = 0; j < MAX_LIST; j++)
 	{
-		if (m_pObject[i] != nullptr)
+		for (int i = 0; i < MAX_OBJECT; i++)
 		{
-			m_pObject[i]->Draw();
-		}
+			if (m_pObject[j][i] != nullptr)
+			{
+				m_pObject[j][i]->Draw();
+			}
 
+		}
 	}
 }
 
@@ -79,26 +86,28 @@ void CObject::AllDraw()
 //=============================================================================
 void CObject::TypeDraw(EObjectType Type)
 {
-	
-	for (int i = 0; i < MAX_OBJECT; i++)
+	for (int j = 0; j < MAX_LIST; j++)
 	{
-		if (Type == BG)
+		for (int i = 0; i < MAX_OBJECT; i++)
 		{
-			if (m_pObject[i] != nullptr)
+			if (Type == BG)
 			{
-				if (m_pObject[i]->m_Type == BG)
+				if (m_pObject[j][i] != nullptr)
 				{
-					m_pObject[i]->Draw();
+					if (m_pObject[j][i]->m_Type == BG)
+					{
+						m_pObject[j][i]->Draw();
+					}
 				}
 			}
-		}
-		else
-		{
-			if (m_pObject[i] != nullptr)
+			else
 			{
-				if (m_pObject[i]->m_Type != BG)
+				if (m_pObject[j][i] != nullptr)
 				{
-					m_pObject[i]->Draw();
+					if (m_pObject[j][i]->m_Type != BG)
+					{
+						m_pObject[j][i]->Draw();
+					}
 				}
 			}
 		}
@@ -111,15 +120,18 @@ void CObject::TypeDraw(EObjectType Type)
 //=============================================================================
 void CObject::AllUninit()
 {
-	for (int i = 0; i < MAX_OBJECT; i++)
+	for (int j = 0; j < MAX_LIST; j++)
 	{
-		if (m_pObject[i] != nullptr)
+		for (int i = 0; i < MAX_OBJECT; i++)
 		{
-			m_pObject[i]->Uninit();
-			delete m_pObject[i];
-			m_pObject[i] = nullptr;
-		}
+			if (m_pObject[j][i] != nullptr)
+			{
+				m_pObject[j][i]->Uninit();
+				delete m_pObject[j][i];
+				m_pObject[j][i] = nullptr;
+			}
 
+		}
 	}
 	m_AllMember = 0;
 }
@@ -129,15 +141,18 @@ void CObject::AllUninit()
 //=============================================================================
 void CObject::ModeNotUninit()
 {
-	for (int i = 0; i < MAX_OBJECT; i++)
+	for (int j = 0; j < MAX_LIST; j++)
 	{
-		if (m_pObject[i] != nullptr)
+		for (int i = 0; i < MAX_OBJECT; i++)
 		{
-			if (m_pObject[i]->m_Type != MODE)
+			if (m_pObject[j][i] != nullptr)
 			{
-				m_pObject[i]->Uninit();
-				delete m_pObject[i];
-				m_pObject[i] = nullptr;
+				if (m_pObject[j][i]->m_Type != MODE)
+				{
+					m_pObject[j][i]->Uninit();
+					delete m_pObject[j][i];
+					m_pObject[j][i] = nullptr;
+				}
 			}
 		}
 	}
@@ -188,12 +203,10 @@ void CObject::SetUp(EObjectType Type)
 		break;
 	case EObjectType::BG:
 		m_Type = BG;
-		
-		break;	
+		break;
 	case EObjectType::MODE:
-			m_Type = MODE;
-
-			break;
+		m_Type = MODE;
+		break;
 	default:
 		break;
 	}
@@ -209,9 +222,10 @@ void CObject::Release()
 	if (m_pObject[m_nID] != nullptr)
 	{
 		const int nID = m_nID;
-		m_pObject[nID]->Uninit();
-		delete m_pObject[nID];
-		m_pObject[nID] = nullptr;
+		const int nlist = m_list;
+		m_pObject[nlist][nID]->Uninit();
+		delete m_pObject[nlist][nID];
+		m_pObject[nlist][nID] = nullptr;
 		m_AllMember--;
 	}
 }
@@ -219,9 +233,16 @@ void CObject::Release()
 //=============================================================================
 // objectのデータを取得する関数
 //=============================================================================
-CObject*CObject::GetObjectData(int nCount)
+CObject**CObject::GetObjectData(int nCount)
 {
+	//assert(m_list >= 0&&m_list < MAX_LIST);
+	//if (m_list < 0 || m_list >= MAX_LIST)
+	//{
+	//	return nullptr;
+	//}
+	
 	return m_pObject[nCount];
+	
 }
 
 //=============================================================================

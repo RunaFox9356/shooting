@@ -29,7 +29,7 @@ private:
 public:
 	static CObject2d *CObject2d::Create();
 
-	CObject2d();
+	CObject2d(int list = 0);
 	~CObject2d() override;
 	HRESULT Init() override;
 	void Uninit() override;

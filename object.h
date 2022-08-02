@@ -33,9 +33,9 @@ public:
 		NONE
 	};
 
-	const static int MAX_OBJECT = 2560;
-
-	CObject();
+	const static int MAX_OBJECT = 2560/2;
+	const static int MAX_LIST = 2;
+	CObject(int list = 0);
 	virtual ~CObject();
 	virtual HRESULT Init() = 0;
 	virtual void Uninit() = 0;
@@ -51,7 +51,7 @@ public:
 	static void TypeDraw(EObjectType Type);
 
 	int * GetId();
-	CObject * GetObjectData(int nCount);
+	CObject ** GetObjectData(int nCount);
 	void SetUp(EObjectType Type);
 
 	void Release();
@@ -59,8 +59,9 @@ public:
 	CScore*GetScore();
 
 protected:
-	static CObject *m_pObject[MAX_OBJECT]; 
+	static CObject *m_pObject[MAX_LIST][MAX_OBJECT];
 	int	m_nID;
+	int m_list;
 private:
 	//int	m_nID;
 	static int m_AllMember;
