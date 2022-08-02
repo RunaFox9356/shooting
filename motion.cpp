@@ -15,6 +15,7 @@
 #include "utility.h"	
 
 
+
 CModelManager * CModelManager::ms_ModelManager;
 
 //=============================================================================
@@ -96,7 +97,7 @@ void CMotion::Init(void)
 // Author : 唐﨑結斗
 // 概要 : 行列を利用して、パーツの親子関係と描画設定を行う
 //=============================================================================
-void CMotion::SetParts(D3DXMATRIX mtxWorld)
+void CMotion::SetParts(D3DXMATRIX mtxWorld, CObject3d::DAMEGE Type)
 {
 
 		D3DXMATRIX mtxRot;
@@ -160,15 +161,30 @@ void CMotion::SetParts(D3DXMATRIX mtxWorld)
 		// マテリアルデータへのポインタを取得
 		pMat = (D3DXMATERIAL*)(m_parts + i)->pBuffer->GetBufferPointer();
 
+		DWORD ambient;
+		pDevice->GetRenderState(D3DRS_AMBIENT, &ambient);
+
+		if (Type == CObject3d::DAMEGE_DAMAGE)
+		{
+			pDevice->SetRenderState(D3DRS_AMBIENT, 0xffff0000);//あか
+		}
+
+		//pDevice->SetRenderState(D3DRS_AMBIENT, 0xff6666ff); // ほんのり青
+
 		for (int nCntMat = 0; nCntMat < (int)(m_parts + i)->nNumMat; nCntMat++)
 		{
 			pMat[nCntMat].MatD3D.Ambient = pMat[nCntMat].MatD3D.Diffuse;
+			//pMat[nCntMat].MatD3D.Ambient.r *= 2.0f;
+			//pMat[nCntMat].MatD3D.Ambient.g *= 0.2f;
+			//pMat[nCntMat].MatD3D.Ambient.b *= 0.2f;
 			// マテリアルの設定
 			pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
 			// プレイヤーパーツの描画
 			(m_parts + i)->pMesh->DrawSubset(nCntMat);
 		}
+
+		pDevice->SetRenderState(D3DRS_AMBIENT, ambient);
 
 		// 保していたマテリアルを戻す
 		pDevice->SetMaterial(&matDef);

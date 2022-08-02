@@ -63,8 +63,6 @@ void CBell::Uninit(void)
 {
 	// 現在のモーション番号の保管
 	CObject3d::Uninit();
-
-
 }
 
 //------------------------------------
@@ -74,8 +72,6 @@ void CBell::Update(void)
 {
 	// 現在のモーション番号の保管
 	CObject3d::Update();
-
-
 
 	m_pos += m_move;
 	for (int i = 0; i < MAX_OBJECT; i++)
@@ -93,7 +89,7 @@ void CBell::Update(void)
 
 				D3DXVECTOR3 vecPlayerDist = *PlayerPos - m_pos;
 				float distPlayer = D3DXVec3Length(&vecPlayerDist);
-				if ((PlayerPos->y >= 50.0f|| PlayerPos->y <= -27te0.0f)&& 620.0f >= m_pos.x)
+				if ((PlayerPos->y >= 50.0f|| PlayerPos->y <= -270.0f)&& 620.0f >= m_pos.x)
 				{
 					m_dist = true;
 				}

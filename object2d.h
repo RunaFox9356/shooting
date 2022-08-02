@@ -45,12 +45,12 @@ public:
 	void SetCollar(PositionVec4 Collar);
 
 	D3DXCOLOR GetCollar() { return D3DXCOLOR(m_col.P0, m_col.P1, m_col.P2, m_col.P3); };
-	float GetSize() { return m_fSize; };
-	void SetSize(float Size) { m_fSize = Size; };
+	D3DXVECTOR3 GetSize() { return m_fSize; };
+	void SetSize(D3DXVECTOR3 Size) { m_fSize = Size; };
 protected:
 	int  m_nTimer;
 	float m_nScale;
-	float m_fSize;
+	D3DXVECTOR3 m_fSize;
 	D3DXVECTOR3 m_move; //polygonÇÃà íu
 	D3DXVECTOR3 m_pos; //polygonÇÃà íu
 	PositionVec4 m_col;	// êF

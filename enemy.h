@@ -37,12 +37,7 @@ public:
 		TYPE_MAX
 	};
 
-	enum DAMEGE
-	{
-		DAMEGE_NORMAL = 0,	// ニュートラル
-		DAMEGE_NOU,			// ダメージくらってる
-		DAMEGE_MAX
-	};
+	
 
 	
 	//modelデータの構造体//

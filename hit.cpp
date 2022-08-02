@@ -9,7 +9,7 @@
 #include <assert.h>
 #include "player.h"
 #include "utility.h"
-
+#include "manager.h"
 
 
 //=============================================================================
@@ -69,7 +69,18 @@ void CHit::Update()
 //=============================================================================
 void CHit::Draw()
 {
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
+	//アルファブレンディングを加算合成に設定
+	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+
 	CObject2d::Draw();
+
+	//αブレンディングを元に戻す
+	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 }
 
 //=============================================================================
@@ -110,7 +121,7 @@ CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 			pObject->SetTexture(CTexture::TEXTURE_LIGHT);
 			break;
 		}
-		pObject->SetSize(100.0f);
+		pObject->SetSize(D3DXVECTOR3(100.0f, 100.0f, 0.0f));
 	}
 	return pObject;
 }

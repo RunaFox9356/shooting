@@ -34,6 +34,7 @@ public: /* ’è‹` */
 		TEXTURE_RAIN,		//—‹‰J
 		TEXTURE_SMOKE,
 		TEXTURE_LIGHT,
+		TEXTURE_BOX,
 		TEXTURE_MAX,
 		TEXTURE_NONE,	// Žg—p‚µ‚È‚¢
 	};

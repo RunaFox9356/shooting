@@ -12,7 +12,7 @@
 #include "renderer.h"
 #include "object.h"
 #include "main.h"
-#include "motion.h"
+
 
 class  CMotion;
 
@@ -34,6 +34,14 @@ public:
 		ANIME_LANDING,		// 着地
 		ANIME_MAX
 	};
+
+	enum DAMEGE
+	{
+		DAMEGE_NORMAL = 0,	// ニュートラル
+		DAMEGE_DAMAGE,			// ダメージくらってる
+		DAMEGE_MAX
+	};
+
 	CObject3d();
 	~CObject3d() override;
 	HRESULT Init() override;
@@ -59,7 +67,7 @@ protected:
 	D3DXVECTOR3		m_rotMove;					// 回転ムーブ
 	ANIME			m_motionType;					// モーションタイプ(現在)
 	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
-
+	DAMEGE			m_Damegeis;
 private:
 	D3DXVECTOR3 m_nScale;
 
@@ -90,12 +98,14 @@ private:
 	bool			m_isUse;					// 使ってるか使ってないか
 	bool			m_isLoop;					// ループするかしないか
 
-	int				m_time;		// タイムの最大数
-	int				m_nparts;	// パーツの最大数
-	int				m_pow;		// ジャンプパワー
-	int				m_nMotion;	// モーション番号
+	int				m_time;						// タイムの最大数
+	int				m_nparts;					// パーツの最大数
+	int				m_pow;						// ジャンプパワー
+	int				m_nMotion;					// モーション番号
 	int				m_Life;
 
 	int             m_HitCount;
+
+		
 };
 #endif

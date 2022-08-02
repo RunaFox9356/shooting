@@ -47,7 +47,7 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 		ratio[nCntScore] = CNumber::Create();
 		ratio[nCntScore]->SetPos(ratiopos);
 		ratiopos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
-		ratio[nCntScore]->SetSize(30);
+		ratio[nCntScore]->SetSize(D3DXVECTOR3(30.0f, 30.0f, 0.0f));
 	
 
 		ratio[nCntScore]->SetTex(PositionVec4(
@@ -104,7 +104,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		
 		Fastratio[nCntScore]->SetPos(ratiopos);
 		ratiopos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
-		Fastratio[nCntScore]->SetSize(30);
+		Fastratio[nCntScore]->SetSize(D3DXVECTOR3(30.0f, 30.0f, 0.0f));
 		
 		//”’l‚ª‚O‚©‚ÂŒ¸­’†‚È‚ç‚O‚ğÁ‚·
 		if (aPosTexU[nCntScore] == 0&& m_RateWait == 0)

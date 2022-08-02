@@ -32,7 +32,7 @@ HRESULT CScore::Init()
 	{	
 		m_pNumber[nCntScore] = CNumber::Create();
 		m_pNumber[nCntScore]->SetPos(m_posScore);
-		m_pNumber[nCntScore]->SetSize(30);
+		m_pNumber[nCntScore]->SetSize(D3DXVECTOR3 (30.0f, 30.0f, 0.0f));
 		m_posScore += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
 	}
 

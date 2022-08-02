@@ -17,15 +17,7 @@ class CMagicBox;
 class CPlayer : public CObject3d
 {
 public:
-	enum ANIME
-	{
-		ANIME_NORMAL = 0,	// ニュートラル
-		ANIME_RUN,			// 歩き
-		ANIME_ATTACK,		// 攻撃
-		ANIME_JUMP,			// ジャンプ
-		ANIME_LANDING,		// 着地
-		ANIME_MAX
-	};
+
 
 	enum DAMEGE
 	{

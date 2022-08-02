@@ -65,7 +65,7 @@ CBg *CBg::Create()
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-		pObject->SetSize(1280.0f);
+		pObject->SetSize(D3DXVECTOR3(1280.0f, 1280.0f, 0.0f));
 		//pObject->SetTexture(CTexture::);
 	}
 

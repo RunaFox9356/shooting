@@ -81,7 +81,7 @@ void CParticle::Update()
 
 	SetPos(m_pos);
 	SetCollar(PositionVec4(myColor.r, myColor.g, myColor.b, myColor.a));
-	SetSize(m_data.fWidth);
+	SetSize(D3DXVECTOR3(m_data.fWidth, m_data.fWidth,0.0f));
 
 	if (m_data.nLife <= 0)
 	{// エフェクトの寿命
@@ -143,7 +143,8 @@ CParticle* CParticle::Create(const Info& inParticle, const D3DXVECTOR3& inPos)
 	{
 		particle = new CParticle;
 		particle->Init();
-		particle->SetSize(particle->m_data.fWidth);
+		
+		particle->SetSize(D3DXVECTOR3(particle->m_data.fWidth, particle->m_data.fWidth,0.0f));
 		particle->SetPos(inPos);
 		particle->m_data = inParticle;
 		//particle->SetTexture(particle->m_data.nIdxTex);

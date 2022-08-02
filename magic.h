@@ -19,10 +19,10 @@ class CMagicBox : public CObject2d
 public:
 	CMagicBox() {}
 	~CMagicBox() override {}
-	HRESULT Init() override {return S_OK; }
-	void Uninit() override {}
-	void Update() override {}
-	void Draw() override {}
+	HRESULT Init() override { CObject2d::Init(); return S_OK; }
+	void Uninit() override { CObject2d::Uninit(); }
+	void Update() override { CObject2d::Update(); }
+	void Draw() override { CObject2d::Draw(); }
 	void Magicplay(CTexture::TEXTURE TEX);
 	void MagicRelease(void);
 	static CMagicBox* Create(D3DXVECTOR3 pos);

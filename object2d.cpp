@@ -128,7 +128,8 @@ void CObject2d::Update()
 	for (int i = 0; i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&addPos[i], &m_Vtx[i], &mtx);
-		pVtx[i].pos = m_pos + (addPos[i] * m_fSize);//<-サイズ変更
+		pVtx[i].pos.x = m_pos.x + (addPos[i].x * m_fSize.x);//<-サイズ変更
+		pVtx[i].pos.y = m_pos.y + (addPos[i].y * m_fSize.y);//<-サイズ変更
 		pVtx[i].pos.z = 0.0f;
 	}
 

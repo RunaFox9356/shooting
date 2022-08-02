@@ -97,17 +97,21 @@ CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 	CMagicBox*object = nullptr;
 	object = new CMagicBox;
 
+	object->Init();
+	object->SetPos(D3DXVECTOR3(D3DXVECTOR3(pos.x+ 150.0f, pos.y+50.0f, pos.z)));
+	object->SetSize(D3DXVECTOR3(250.0f, 20.0f, 0.0f));
+	object->SetTexture(CTexture::TEXTURE_BOX);
 	for (int i = 0; i < 3; i++)
 	{
 		object->cMagic[i] = nullptr;
 		object->cMagic[i] = new CMagic;
-		float posX = pos.x + 100 * i;
+		float posX = pos.x + 160 * i;
 		if (object->cMagic[i] != nullptr)
 		{
 			object->cMagic[i]->Init();
-			object->cMagic[i]->SetPos(D3DXVECTOR3(posX, pos.y, pos.z));
+			object->cMagic[i]->SetPos(D3DXVECTOR3(posX, pos.y+50.0f, pos.z));
 			object->cMagic[i]->SelectTex(CTexture::TEXTURE_NONE);
-			object->cMagic[i]->SetSize(80);
+			object->cMagic[i]->SetSize(D3DXVECTOR3(50.0f, 50.0f, 0.0f));
 		}
 	}
 	return object;
@@ -157,6 +161,8 @@ void CMagicBox::Magicplay(CTexture::TEXTURE TEX)
 			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		}
 	}
+	cMagic[0]->SetPos(D3DXVECTOR3(m_pos.x - 150.0f, m_pos.y - 50.0f, m_pos.z));
+	cMagic[0]->SetSize(D3DXVECTOR3(100.0f, 100.0f, 0.0f));
 }
 //=============================================================================
 // ‚Í‚«‚¾‚µ
@@ -194,4 +200,6 @@ void CMagicBox::MagicRelease(void)
 			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		}
 	}
+	cMagic[0]->SetPos(D3DXVECTOR3(m_pos.x-150.0f, m_pos.y - 50.0f, m_pos.z));
+	cMagic[0]->SetSize(D3DXVECTOR3(100.0f, 100.0f, 0.0f));
 }

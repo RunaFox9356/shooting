@@ -21,6 +21,7 @@
 #include "hit.h"
 #include "multiply.h"
 #include "bell.h"
+#include "player.h"
 
 int CObject3d::m_drop = 0;
 //------------------------------------
@@ -50,7 +51,8 @@ CObject3d::CObject3d() :
 	m_time(0),
 	m_nparts(0),
 	m_pow(0),
-	m_nMotion(0)
+	m_nMotion(0),
+	m_Damegeis(DAMEGE_NORMAL)
 {
 	//memset(&s_Player, NULL, sizeof(s_Player));
 	/*memset(&m_motion, 0, sizeof(m_motion));*/
@@ -168,7 +170,7 @@ void CObject3d::Draw(void)
 		if (m_pMotion)
 		{
 			// ƒp[ƒc‚Ì•`‰æİ’è
-			m_pMotion->SetParts(m_mtxWorld);
+			m_pMotion->SetParts(m_mtxWorld, m_Damegeis);
 		}
 
 		// s—ñŠ|‚¯ZŠÖ”(‘æ2ˆø”~‘æ3ˆø”‘æ‚ğ‚Pˆø”‚ÉŠi”[)
@@ -261,14 +263,16 @@ void CObject3d::HitLife(int Damage)
 {
 	m_Life -= Damage;
 	
+	m_Damegeis = DAMEGE_DAMAGE;
+
 	if (m_Life <= 0)
 	{
+		CHit::Create(m_pos,(int)CPlayer::GetMagic());
 		CMultiply::SetRate((1 + *CMultiply::GetRate()));
 		CMultiply::list(*CMultiply::GetRate(), m_pos,true);
 
-		for (size_t i = 0; i < 10; i++)
+		for (size_t i = 0; i < 5; i++)
 		{
-
 			GetScore()->Add(50);
 			D3DXVECTOR3 scale(3.8f, 3.8f, 3.8f);
 			CBell * Bell = CBell::Create();
@@ -281,7 +285,7 @@ void CObject3d::HitLife(int Damage)
 			Bell->SetLife(10);
 		}
 		m_drop++;
-		if (m_drop >=5)
+		if (m_drop >= 5)
 		{
 			m_drop = 0;
 			CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));

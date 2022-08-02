@@ -151,8 +151,8 @@ void CPlayer::Move()	//“®‚«ƒZƒbƒg
 		m_Pow++;
 		if (m_Pow >=20)
 		{
-		
 			m_motionType = CObject3d::ANIME_ATTACK;
+	
 			m_Pow = 0;
 			switch (m_NowMagic)
 			{

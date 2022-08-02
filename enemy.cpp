@@ -115,6 +115,7 @@ CEnemy *CEnemy::Create(const int Type)
 		pObject = new CStraight;
 		break;
 	default:
+		pObject = new CRaccoon;
 		break;
 	}
 	

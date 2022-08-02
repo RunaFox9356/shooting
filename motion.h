@@ -13,6 +13,8 @@
 //***************************************************************************
 #include"main.h"
 #include "renderer.h"
+#include "object3d.h"
+
 
 //=============================================================================
 // モーションクラス
@@ -25,7 +27,7 @@ public:
 	//***************************************************************************
 	// 定数定義
 	//***************************************************************************
-	static const unsigned int MAX_MOTION = (13);					// モーション数の最大数
+	static const unsigned int MAX_MOTION = (7);					// モーション数の最大数
 	static const unsigned int MAX_MODEL_PARTS = (300);				// モデル数の最大数
 	static const unsigned int MAX_KEY = (64);						// キーの最大数
 	static const unsigned int MAX_KEYSET = (64);					// キー設定の最大数
@@ -101,7 +103,7 @@ public:
 	void Init(void);
 
 	// パーツの設定
-	void SetParts(D3DXMATRIX mtxWorld);							// マテリアルデータ
+	void SetParts(D3DXMATRIX mtxWorld, CObject3d::DAMEGE Type);							// マテリアルデータ
 
 	// モーションの再生
 	bool PlayMotion(const int nCntMotionSet);
