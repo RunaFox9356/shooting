@@ -20,7 +20,7 @@ int CMagicCircleManager::CMagicCircle::m_popType = 2;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CMagicCircleManager::CMagicCircle::CMagicCircle()
+CMagicCircleManager::CMagicCircle::CMagicCircle() :C3dpolygon(1)
 {
 }
 
@@ -71,11 +71,10 @@ void CMagicCircleManager::CMagicCircle::Update()
 	if (particleManager->GetEmitter().size() == 0)
 	{
 		m_isEndAnimation = false;
-		
 	}
 	if (!m_isEndAnimation)
 	{
-		m_Size -= m_DefaultSize / 10.0f;
+		m_Size -= m_DefaultSize / (m_DecreasingRate*0.5f);
 
 		if (m_Size.x <= 0.0f)
 		{
@@ -187,9 +186,9 @@ CMagicCircleManager * CMagicCircleManager::Create(D3DXVECTOR3 pos)
 			object->MagicCircle[i]->Init();
 			object->MagicCircle[i]->SetPos(pos);
 			object->MagicCircle[i]->SetDecreasingRate(30.0f + (20.0f*i));
-			object->MagicCircle[i]->SetTexture((CTexture::TEXTURE)((int)CTexture::TEXTURE_MAGICCIRCLE1+ i));
+			object->MagicCircle[i]->SetTexture((CTexture::TEXTURE)((int)CTexture::TEXTURE_MAGICCIRCLE1+ rand() % 4 + 0));
 			object->MagicCircle[i]->SetSize(D3DXVECTOR3(1.0f + (10.0f*i), 1.0f + (10.0f*i), 0.0f));
-			object->MagicCircle[i]->SetDefaultSize(D3DXVECTOR3(150.0f+(50.0f*i), 150.0f + (50.0f * i), 0.0f));
+			object->MagicCircle[i]->SetDefaultSize(D3DXVECTOR3(100.0f+(70.0f*i), 100.0f + (70.0f * i), 0.0f));
 			object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 
 		}

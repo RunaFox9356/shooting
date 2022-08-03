@@ -24,7 +24,7 @@ protected:
 	static const D3DXVECTOR3 m_Vtx[4];
 
 public:
-	C3dpolygon();
+	C3dpolygon(int list = 0);
 	~C3dpolygon() override;
 	HRESULT Init() override;
 	void Uninit() override;

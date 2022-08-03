@@ -187,12 +187,12 @@ void CPlayer::Move()	//動きセット
 	}
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
-		CMagicCircleManager::Create(m_pos);
+		
 		CParticleManager* particleManager = CGame::GetParticleManager();
 
 		if (particleManager->GetEmitter().size() == 0)
 		{
-		
+			
 			D3DXVECTOR3 Pos = ScreenCastWorld(
 				&m_pos,			// スクリーン座標
 				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
@@ -220,6 +220,7 @@ void CPlayer::Move()	//動きセット
 			default:
 				break;
 			}
+			CMagicCircleManager::Create(m_pos);
 			CSorcey::Create(m_pos, m_NowMagic)->SetUp(EObjectType::SORCERY);
 			CGame::GetMagicBox()->CMagicBox::MagicRelease();
 		}

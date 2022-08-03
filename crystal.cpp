@@ -62,10 +62,8 @@ void CCrystal::Update()
 {
 	C3dpolygon::Update();
 	m_move.y -= 0.1f;
-	if (m_move.y <= -5.0f)
-	{
-		//m_move.y = 5.0f;
-	}
+	m_move.x = -1.0f;
+	
 	m_pos += m_move;
 
 	if (m_pos.y < -SCREEN_HEIGHT)
@@ -124,6 +122,7 @@ void CCrystal::Update()
 					{
 						m_move.y = 5.0f;
 						m_Hit++;
+						m_move.x = 1.5f;
 						if (m_Hit <= 30)
 						{//出てくるタイプの設定
 							m_myType++;
