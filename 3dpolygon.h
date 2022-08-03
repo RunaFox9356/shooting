@@ -46,8 +46,9 @@ protected:
 	D3DXVECTOR3 m_pos; //polygonの位置
 	D3DXVECTOR3 m_Size;
 	D3DXMATRIX m_mtxWorld;					// マトリックス
-private:
 	int  m_nTimer;
+private:
+
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = nullptr;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 

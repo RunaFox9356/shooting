@@ -116,6 +116,9 @@ CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 		case CPlayer::NOW_SUN:
 			pObject->SetTexture(CTexture::TEXTURE_THUNDER);
 			break;
+		case CPlayer::NOW_NON:
+			pObject->SetTexture(CTexture::TEXTURE_HIT);
+			break;
 		default:
 			pObject->SetTexture(CTexture::TEXTURE_LIGHT);
 			break;

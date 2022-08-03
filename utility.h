@@ -104,4 +104,10 @@ D3DXVECTOR3 WorldCastScreen(D3DXVECTOR3 *screenPos,			// スクリーン座標
 //--------------------------------------------------
 D3DXVECTOR3 ScreenCastWorld(D3DXVECTOR3 *screenPos,			// スクリーン座標
 	D3DXVECTOR3 screenSize);
+
+bool CollisionCircle(D3DXVECTOR3 Pos1,
+	                 float fRadius1, 
+	                 D3DXVECTOR3 Pos2,
+	                 float fRadius2);
+
 #endif // !_UTILITY_H_

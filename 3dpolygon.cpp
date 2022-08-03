@@ -112,10 +112,6 @@ void C3dpolygon::Draw()
 	//デバイスの取得
  	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	//pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	//pDevice->SetRenderState(D3DRS_ALPHAREF, 100);
-	//pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
 	// ワールド座標行列の設定
@@ -138,13 +134,6 @@ void C3dpolygon::Draw()
 	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 
 	pDevice->SetTexture(0, NULL);
-
-	// 新規深度値 <= Zバッファ深度値 (初期設定)
-	//pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
-	//pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-
-	//// αテストを無効に戻す
-	//pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 }
 
 

@@ -163,6 +163,7 @@
     <ClCompile Include="hamada.cpp" />
     <ClCompile Include="hit.cpp" />
     <ClCompile Include="magic.cpp" />
+    <ClCompile Include="magiccircle.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="file.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="hamada.h" />
     <ClInclude Include="hit.h" />
     <ClInclude Include="magic.h" />
+    <ClInclude Include="magiccircle.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="file.h" />

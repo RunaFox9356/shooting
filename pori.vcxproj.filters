@@ -159,6 +159,9 @@
     <ClCompile Include="straight.cpp">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
+    <ClCompile Include="magiccircle.cpp">
+      <Filter>オブジェクト\魔法系</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gon.h">
@@ -280,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="straight.h">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClInclude>
+    <ClInclude Include="magiccircle.h">
+      <Filter>オブジェクト\魔法系</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,15 +14,14 @@
 #include "manager.h"
 #include "motion.h"
 #include "object3d.h"
-#include "bullet.h"
-#include "enemy.h"	
+#include "bullet.h"	
 #include "magic.h"
-#include "multiply.h"
 #include "sorcery.h"
 #include "particle_manager.h"
 #include "utility.h"
 #include "bell.h"
 #include "game.h"
+#include "magiccircle.h"
 
 //------------------------------------
 // static変数
@@ -65,7 +64,6 @@ HRESULT CPlayer::Init(void)
 	m_MoveSpeed = 3.0f;
 	m_rot.y += (-D3DX_PI*0.5f);
 	SetSize(D3DXVECTOR3(2.0f,2.0f,2.0f));
-
 
 	return S_OK;
 }
@@ -189,6 +187,7 @@ void CPlayer::Move()	//動きセット
 	}
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
+		CMagicCircleManager::Create(m_pos);
 		CParticleManager* particleManager = CGame::GetParticleManager();
 
 		if (particleManager->GetEmitter().size() == 0)
@@ -199,7 +198,7 @@ void CPlayer::Move()	//動きセット
 				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
 			m_CastMagic = m_NowMagic;
 		
-
+	
 			switch (m_NowMagic)
 			{	
 			case CPlayer::NOW_FIRE:
