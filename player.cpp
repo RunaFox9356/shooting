@@ -31,7 +31,7 @@ const float CPlayer::SPEED = 1.0f;			// 移動量
 const float CPlayer::WIDTH = 10.0f;			// モデルの半径
 const int CPlayer::MAX_PRAYER = 16;			// 最大数
 const int CPlayer::MAX_MOVE = 9;			// アニメーションの最大数
-const int CPlayer::INVINCIBLE = 300;		// 無敵時間
+const int CPlayer::INVINCIBLE = 30;		// 無敵時間
 CPlayer::NOWMAGIC CPlayer::m_NowMagic = NOW_NON;		// 無敵時間
 CPlayer::NOWMAGIC CPlayer::m_CastMagic = NOW_NON;		// 無敵時間
 

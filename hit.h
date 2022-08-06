@@ -11,9 +11,9 @@
 #define _HIT_H_			// 二重インクルード防止のマクロ定義
 
 #include "renderer.h"
-#include "object2d.h"
+#include "3dpolygon.h"
 
-class CHit : public CObject2d
+class CHit : public C3dpolygon
 {
 
 public:
@@ -23,6 +23,8 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
+	void SetMove(const D3DXVECTOR3 &move)override {};
+
 	static CHit* Create(D3DXVECTOR3 pos, int Type);
 
 	void SelectTex(CTexture::TEXTURE tex);

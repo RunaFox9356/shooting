@@ -92,7 +92,7 @@ CLife *CLife::Create(const D3DXVECTOR3 & pos)
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-		pObject->SetSize(D3DXVECTOR3((float)CPlayer::MAXLIFE, 50.0f, 0.0f));
+		pObject->SetSize(D3DXVECTOR3((float)CPlayer::MAXLIFE, 20.0f, 0.0f));
 		pObject->SetPos(pos);
 		
 		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));

@@ -10,12 +10,12 @@
 #include "player.h"
 #include "utility.h"
 #include "manager.h"
-
+#include "hamada.h"
 
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CHit::CHit():CObject2d(1)
+CHit::CHit():C3dpolygon(1)
 {
 }
 
@@ -31,9 +31,9 @@ CHit::~CHit()
 //=============================================================================
 HRESULT CHit::Init()
 {
-	CObject2d::Init();
+	C3dpolygon::Init();
 
-	CObject2d::SetTexture(CTexture::TEXTURE_BULLET);
+	C3dpolygon::SetTexture(CTexture::TEXTURE_BULLET);
 
 	
 	return S_OK;
@@ -44,7 +44,7 @@ HRESULT CHit::Init()
 //=============================================================================
 void CHit::Uninit()
 {
-	CObject2d::Uninit();
+	C3dpolygon::Uninit();
 }
 
 //=============================================================================
@@ -52,7 +52,7 @@ void CHit::Uninit()
 //=============================================================================
 void CHit::Update()
 {
-	CObject2d::Update();
+	C3dpolygon::Update();
 
 	//アニメーション設定
 	m_CounterAnim++;
@@ -74,7 +74,9 @@ void CHit::Draw()
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-	CObject2d::Draw();
+	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	C3dpolygon::Draw();
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
@@ -90,15 +92,15 @@ CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 	CHit * pObject = nullptr;
 	pObject = new CHit;
 
-	D3DXVECTOR3 Pos = ScreenCastWorld(
-		&pos,			// スクリーン座標
-		D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
+	//D3DXVECTOR3 Pos = ScreenCastWorld(
+	//	&pos,			// スクリーン座標
+	//	D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
 
 	
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-		pObject->SetPos(D3DXVECTOR3(Pos.x, Pos.y-50.0f, 0.0f));
+		pObject->SetPos(D3DXVECTOR3(pos.x, pos.y-50.0f, 0.0f));
  		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
   		pObject->SetAnimation(8,1);
 		int nType = Type;
@@ -133,7 +135,7 @@ CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 //=============================================================================
 void CHit::SelectTex(CTexture::TEXTURE tex)
 {
-	CObject2d::SetTexture(tex);
+	C3dpolygon::SetTexture(tex);
 }
 
 //=============================================================================
