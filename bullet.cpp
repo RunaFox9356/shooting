@@ -125,7 +125,6 @@ void CBullet::Update()
 						break;
 					}
 
-
 					// ‰ğ•ú
 					CObject::Release();
 					return;
@@ -155,7 +154,7 @@ void CBullet::Draw()
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	//‰ÁZ‡¬‰Šú‰»
+
 }
 
 //=============================================================================

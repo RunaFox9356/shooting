@@ -125,6 +125,12 @@ void CObject3d::Update(void)
 	{
 		m_motionType = ANIME_NORMAL;
 	}
+
+	m_Invincible--;
+	if (m_Invincible <= 0)
+	{
+		m_Damegeis = DAMEGE_NORMAL;
+	}
 }
 
 //------------------------------------
@@ -263,33 +269,53 @@ void CObject3d::HitLife(int Damage)
 	
 	m_Damegeis = DAMEGE_DAMAGE;
 
-	if (m_Life <= 0)
+	m_Invincible = INVINCIBLE;
+	EObjectType Type =  GetType();
+
+	if (Type != PLAYER)
 	{
-		CMultiply::SetRate((1 + *CMultiply::GetRate()));
-		CMultiply::list(*CMultiply::GetRate(), m_pos,true);
-
-		for (int i = 0; i < 5; i++)
+		if (m_Life <= 0)
 		{
-			GetScore()->Add(50);
-			D3DXVECTOR3 scale(3.8f, 3.8f, 3.8f);
-			CBell * Bell = CBell::Create();
-			Bell->SetUp(BELL);
+			CMultiply::SetRate((1 + *CMultiply::GetRate()));
+			CMultiply::list(*CMultiply::GetRate(), m_pos, true);
 
-			Bell->SetMove(D3DXVECTOR3((float)-(rand() % 10 + 1), (float)(rand() % 10 + 5), 0.0f));
-			Bell->SetPos(m_pos);
-			Bell->SetSize(scale);
+			for (int i = 0; i < 5; i++)
+			{
+				GetScore()->Add(50);
+				D3DXVECTOR3 scale(3.8f, 3.8f, 3.8f);
+				CBell * Bell = CBell::Create();
+				Bell->SetUp(BELL);
 
-			Bell->SetLife(10);
+				Bell->SetMove(D3DXVECTOR3((float)-(rand() % 10 + 1), (float)(rand() % 10 + 5), 0.0f));
+				Bell->SetPos(m_pos);
+				Bell->SetSize(scale);
+
+				Bell->SetLife(10);
+			}
+			m_drop++;
+			if (m_drop >= 5)
+			{
+				m_drop = 0;
+				CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
+			}
+			// ‰ð•ú
+			CObject::Release();
 		}
-		m_drop++;
-		if (m_drop >= 5)
-		{
-			m_drop = 0;
-			CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
-		}
-		// ‰ð•ú
-		CObject::Release();
 	}
+	else
+	{
+		if (m_Life <= 0)
+		{
+			CManager::SetMode(CManager::MODE_RESULT);
+		}
+	}
+}
+//------------------------------------
+// GetDamegeData
+//------------------------------------
+CObject3d::DAMEGE &CObject3d::GetDamegeData()
+{
+	return m_Damegeis;
 }
 
 //------------------------------------

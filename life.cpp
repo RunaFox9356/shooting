@@ -11,6 +11,8 @@
 #include "player.h"
 #include "game.h"
 
+
+const D3DXVECTOR3 CLife::m_Vtx[4];
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -47,28 +49,17 @@ void CLife::Uninit()
 //------------------------------------
 void CLife::Update()
 {
-	VERTEX_2D *pVtx; //頂点へのポインタ
 
-	 //頂点バッファをロックし頂点情報へのポインタを取得
-	GetVtx()->Lock(0, 0, (void**)&pVtx, 0);
-
-	D3DXVECTOR3 addPos[4];
-	D3DXMATRIX mtx;	// 計算用マトリックス
-
-					//マトリックス作成
-	D3DXMatrixIdentity(&mtx);
-
-	//頂点座標
-	for (int i = 0; i < 2; ++i)
+	CObject2d::Update();
+	if (m_pos.x <= CPlayer::MAXLIFE*0.5f)
 	{
-		D3DXVec3TransformCoord(&addPos[i], &m_Vtx[i], &mtx);
-		pVtx[i].pos.x = m_pos.x + (addPos[i].x * m_fSize.x);//<-サイズ変更
-		pVtx[i].pos.y = m_pos.y + (addPos[i].y * m_fSize.y);//<-サイズ変更
-		pVtx[i].pos.z = 0.0f;
+		SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 1.0f));
 	}
-
-	//頂点バッファをアンロック
-	GetVtx()->Unlock();
+	if (m_pos.x <= CPlayer::MAXLIFE*0.1f)
+	{
+		SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
+	}
+	//CLife::SetDamage(1);
 }
 
 //------------------------------------
@@ -96,15 +87,15 @@ void CLife::Draw()
 CLife *CLife::Create(const D3DXVECTOR3 & pos)
 {
 	CLife * pObject = nullptr;
-	pObject = new CLife(0);
+	pObject = new CLife(1);
 
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-		pObject->SetSize(D3DXVECTOR3(300.0f, 50.0f, 0.0f));
+		pObject->SetSize(D3DXVECTOR3((float)CPlayer::MAXLIFE, 50.0f, 0.0f));
 		pObject->SetPos(pos);
-		pObject->SetTexture(CTexture::TEXTURE_NONE);
-		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		
+		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 	}
 
 	return pObject;
@@ -130,7 +121,8 @@ void CLife::SetMove(const D3DXVECTOR3 & move)
 
 void CLife::SetDamage(const int Damage)
 {
-	m_fSize.x -= Damage;
+	m_Size.x -= Damage;
+	m_pos.x -= Damage;
 	CPlayer* cPlayer = CGame::GetPlayer();
-
+	cPlayer->HitLife(Damage);
 }

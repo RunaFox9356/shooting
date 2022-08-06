@@ -157,7 +157,7 @@ void CCrystal::Update()
 						{
 							SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 						}
-						pObject[j]->Release();
+						pObject[nObject]->Release();
 						return;
 					}
 				}

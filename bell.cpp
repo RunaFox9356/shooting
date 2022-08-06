@@ -88,8 +88,10 @@ void CBell::Update(void)
 				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 				float Size = 30.0f;
 
+				//’Ç]
 				D3DXVECTOR3 vecPlayerDist = *PlayerPos - m_pos;
 				float distPlayer = D3DXVec3Length(&vecPlayerDist);
+				
 				if ((PlayerPos->y >= 50.0f || PlayerPos->y <= -270.0f) && 620.0f >= m_pos.x)
 				{
 					m_dist = true;
@@ -101,8 +103,8 @@ void CBell::Update(void)
 				if (distPlayer <= 1.0f)
 				{
 					m_pos = *PlayerPos;
-
 				}
+
 				if (((m_pos.y - Size) <= (PlayerPos->y + Size)) &&
 					((m_pos.y + Size) >= (PlayerPos->y - Size)) &&
 					((m_pos.x - Size) <= (PlayerPos->x + Size)) &&

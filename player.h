@@ -19,13 +19,6 @@ class CPlayer : public CObject3d
 public:
 
 
-	enum DAMEGE
-	{
-		DAMEGE_NORMAL = 0,	// ニュートラル
-		DAMEGE_NOU,			// ダメージくらってる
-		DAMEGE_MAX
-	};
-
 	enum NOWMAGIC
 	{
 		NOW_FIRE = 2,		// 火
@@ -47,6 +40,7 @@ public:
 	};
 
 public:
+	static const int MAXLIFE = 300;
 	static const float ATTENUATION;		// 減衰係数
 	static const float SPEED;			// スピード
 	static const float WIDTH;			// モデルの半径
@@ -68,6 +62,7 @@ public:
 	static NOWMAGIC *GetMagic();
 	static void SetMagic(CPlayer::NOWMAGIC NextMagic);
 	static CPlayer::NOWMAGIC * GetCastMagic();
+
 private:
 	
 	void Move();		// 移動

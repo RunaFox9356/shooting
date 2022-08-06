@@ -64,7 +64,7 @@ HRESULT CPlayer::Init(void)
 	m_MoveSpeed = 7.0f;
 	m_rot.y += (-D3DX_PI*0.5f);
 	SetSize(D3DXVECTOR3(2.0f,2.0f,2.0f));
-
+	SetLife(CPlayer::MAXLIFE);
 	return S_OK;
 }
 
@@ -108,7 +108,6 @@ CPlayer *CPlayer::Create()
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-		pObject->SetLife(5);
 	}
 
 	return pObject;
@@ -122,19 +121,17 @@ void CPlayer::Move()	//動きセット
 	CInput *CInputpInput = CInput::GetKey();
 	D3DXVECTOR3 *Camerarot = CRenderer::GetCamera()->GetRot();
 	float consumption = 0.0f;
+
 	if (CInputpInput->Press(CInput::KEY_RIGHT))
 	{
 		m_move.x += sinf(D3DX_PI *0.5f + Camerarot->y) * SPEED * m_MoveSpeed;
 		m_move.z += cosf(D3DX_PI *0.5f + Camerarot->y) * SPEED * m_MoveSpeed;
 		consumption = m_rotMove.x + (D3DX_PI*0.5f) - m_rot.y + Camerarot->y;
-
 	}
 	if (CInputpInput->Press(CInput::KEY_LEFT))
 	{
 		m_move.x += sinf(-D3DX_PI *0.5f + Camerarot->y) * SPEED * m_MoveSpeed;
 		m_move.z += cosf(-D3DX_PI *0.5f + Camerarot->y) * SPEED * m_MoveSpeed;
-		
-	
 	}
 	if (CInputpInput->Press(CInput::KEY_DOWN))
 	{	
@@ -144,6 +141,8 @@ void CPlayer::Move()	//動きセット
 	{	
 		m_move.y += m_MoveSpeed;
 	}
+
+	//弾のクリエイト
 	if (CInputpInput->Press(CInput::KEY_SHOT))
 	{
 		m_Pow++;
@@ -154,12 +153,10 @@ void CPlayer::Move()	//動きセット
 			m_Pow = 0;
 			switch (m_NowMagic)
 			{
-				
 			case CPlayer::NOW_FIRE:
 				CBullet::Create(m_pos, D3DXVECTOR3(13.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
 				break;
 			case CPlayer::NOW_ICE:
-
 				CBullet::Create(m_pos, D3DXVECTOR3(15.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
 				break;
 			case CPlayer::NOW_STORM:
@@ -185,9 +182,11 @@ void CPlayer::Move()	//動きセット
 	{
 		m_Pow = 20;
 	}
+
+	//	必殺技
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
-		
+		//	particleManagerの取得
 		CParticleManager* particleManager = CGame::GetParticleManager();
 
 		if (particleManager->GetEmitter().size() == 0)
@@ -196,9 +195,10 @@ void CPlayer::Move()	//動きセット
 			D3DXVECTOR3 Pos = ScreenCastWorld(
 				&m_pos,			// スクリーン座標
 				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
+			
+			//CastMagicの中につかった情報を入れる
 			m_CastMagic = m_NowMagic;
 		
-	
 			switch (m_NowMagic)
 			{	
 			case CPlayer::NOW_FIRE:
@@ -220,6 +220,8 @@ void CPlayer::Move()	//動きセット
 			default:
 				break;
 			}
+
+			//パーティクルのクリエイト
 			CMagicCircleManager::Create(m_pos);
 			CSorcey::Create(m_pos, m_NowMagic)->SetUp(EObjectType::SORCERY);
 			CGame::GetMagicBox()->CMagicBox::MagicRelease();
@@ -255,9 +257,7 @@ void CPlayer::Move()	//動きセット
 	{
 		m_rot.y += D3DX_PI * 2;
 	}
-
 }
-
 
 //------------------------------------
 // SetMagic

@@ -25,6 +25,10 @@ private:
 	
 
 public:
+
+	static const int INVINCIBLE = 300;
+
+
 	enum ANIME
 	{
 		ANIME_NORMAL = 0,	// ニュートラル
@@ -57,6 +61,7 @@ public:
 	void SetSize(D3DXVECTOR3 &Size);
 	void SetLife(int Life);
 	void HitLife(int Damage);
+	DAMEGE& GetDamegeData();
 
 	const D3DXVECTOR3 *GetSize() const;
 
@@ -104,7 +109,7 @@ private:
 	int				m_nMotion;					// モーション番号
 	int				m_Life;
 
-	int             m_HitCount;
+	int             m_Invincible;
 
 		
 };

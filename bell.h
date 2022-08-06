@@ -22,25 +22,6 @@ public:
 
 	static const int BOUNDPOWER;
 
-	enum ANIME
-	{
-		ANIME_NORMAL = 0,	// ニュートラル
-		ANIME_RUN,			// 歩き
-		ANIME_ATTACK,		// 攻撃
-		ANIME_JUMP,			// ジャンプ
-		ANIME_LANDING,		// 着地
-		ANIME_MAX
-	};
-
-
-	enum DAMEGE
-	{
-		DAMEGE_NORMAL = 0,	// ニュートラル
-		DAMEGE_NOU,			// ダメージくらってる
-		DAMEGE_MAX
-	};
-
-
 	//modelデータの構造体//
 	struct MODELDATAPLAYER
 	{

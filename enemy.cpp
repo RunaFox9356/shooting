@@ -16,21 +16,14 @@
 #include "straight.h"
 #include "file.h"
 #include "letter.h"
+#include "player.h"
+#include "game.h"
+#include "life.h"
 
 namespace nl = nlohmann;
 
 static nl::json j;//リストの生成
 
-//------------------------------------
-// static変数
-//------------------------------------
-const float CEnemy::ATTENUATION = 0.5f;	// 
-const float CEnemy::SPEED = 1.0f;			// 移動量
-const float CEnemy::WIDTH = 10.0f;			// モデルの半径
-const int CEnemy::MAX_PRAYER = 16;			// 最大数
-const int CEnemy::MAX_MOVE = 9;			// アニメーションの最大数
-const int CEnemy::INVINCIBLE = 300;		// 無敵時間
-const int CEnemy::MAX_COPY = 4;			// 最大コピー数
 
 //------------------------------------
 // コンストラクタ
@@ -89,6 +82,7 @@ void CEnemy::Update(void)
 		CObject::Release();
 		//m_pos.x = SCREEN_WIDTH;
 	}
+	Collision();
 }
 
 //------------------------------------
@@ -97,6 +91,31 @@ void CEnemy::Update(void)
 void CEnemy::Draw(void)
 {
 	CObject3d::Draw();
+}
+
+//------------------------------------
+// 当たり判定
+//------------------------------------
+void CEnemy::Collision()
+{
+
+	CPlayer* cPlayer = CGame::GetPlayer();
+	const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
+	float Size = 30.0f;
+	
+	if (cPlayer->GetDamegeData() == DAMEGE_NORMAL)
+	{
+		if (((m_pos.y - Size) <= (PlayerPos->y + Size)) &&
+			((m_pos.y + Size) >= (PlayerPos->y - Size)) &&
+			((m_pos.x - Size) <= (PlayerPos->x + Size)) &&
+			((m_pos.x + Size) >= (PlayerPos->x - Size)))
+		{
+
+			CObject::GetLife()->CLife::SetDamage(100);
+
+			return;
+		}
+	}
 }
 
 //------------------------------------
@@ -118,7 +137,6 @@ CEnemy *CEnemy::Create(const int Type)
 		pObject = new CRaccoon;
 		break;
 	}
-	
 
 	if (pObject != nullptr)
 	{

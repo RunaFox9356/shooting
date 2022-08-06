@@ -16,12 +16,14 @@
 #include "magic.h"
 #include "score.h"
 #include "bg.h"
+#include "life.h"
 #include <assert.h>
 
 
 CObject *CObject::m_pObject[MAX_LIST][MAX_OBJECT] = {};
 int CObject::m_AllMember = 0;
-CScore * pScore;
+CScore * CObject::pScore;
+ CLife* CObject::pLife;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
@@ -47,7 +49,6 @@ CObject::~CObject()
 {
 
 }
-
 
 //=============================================================================
 // AllUpdate関数
@@ -170,7 +171,7 @@ void CObject::AllCreate()
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create();
 	pScore->Set(0);
-	
+	pLife = CLife::Create(D3DXVECTOR3(300.0f, 150.0f, 0.0f));
 
 }
 
@@ -262,4 +263,12 @@ int * CObject::GetId()
 CObject::EObjectType CObject::GetType()
 {
 	return m_Type;
+}
+
+//=============================================================================
+// objectのLifeを取得
+//=============================================================================
+CLife* CObject::GetLife()
+{
+	return pLife;
 }

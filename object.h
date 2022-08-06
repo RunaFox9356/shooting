@@ -12,7 +12,7 @@
 #include "renderer.h"
 
 class CScore;
-
+class CLife;
 
 class CObject
 {
@@ -49,6 +49,7 @@ public:
 	static void AllCreate();
 	static void ModeNotUninit();
 	static void TypeDraw(EObjectType Type);
+	static CLife* CObject::GetLife();
 
 	int * GetId();
 	CObject ** GetObjectData(int nCount);
@@ -56,6 +57,7 @@ public:
 
 	void Release();
 	EObjectType GetType();
+
 	CScore*GetScore();
 
 protected:
@@ -66,6 +68,8 @@ private:
 	//int	m_nID;
 	static int m_AllMember;
 	EObjectType m_Type;
+	static CScore * pScore;
+	static CLife* pLife;
 
 
 };

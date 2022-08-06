@@ -51,14 +51,7 @@ public:
 	};
 
 public:
-	static const float ATTENUATION;		// 減衰係数
-	static const float SPEED;			// スピード
-	static const float WIDTH;			// モデルの半径
-	static const int MAX_PRAYER;		// 最大数
-	static const int MAX_MOVE;			// アニメーションの最大数
-	static const int INVINCIBLE;		// 無敵時間
-	static const int MAX_MODELPARTS = 9;
-	static const int MAX_COPY;
+
 
 public:
 	CEnemy();
@@ -68,6 +61,7 @@ public:
 	void Uninit(void)override;	// 破棄
 	void Update(void)override;	// 更新
 	void Draw()override;	// 描画
+	void Collision();	// 当たり判定
 	static void  CEnemy::LoadEnemy(const char * pFdata);
 	static CEnemy *CEnemy::Create(const int Type);
 
