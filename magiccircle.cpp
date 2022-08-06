@@ -20,7 +20,7 @@ int CMagicCircleManager::CMagicCircle::m_popType = 2;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CMagicCircleManager::CMagicCircle::CMagicCircle() :C3dpolygon(1)
+CMagicCircleManager::CMagicCircle::CMagicCircle() :C3dpolygon(0)
 {
 }
 

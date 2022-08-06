@@ -14,10 +14,11 @@
 #include "hit.h"
 #include "game.h"
 
+
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CSorcey::CSorcey()
+CSorcey::CSorcey() :C3dpolygon(0)
 {
 }
 
@@ -31,7 +32,7 @@ CSorcey::~CSorcey()
 //=============================================================================
 // ポリゴンの初期化
 //=============================================================================
-HRESULT CSorcey::Init()
+HRESULT CSorcey::Init() 
 {
 	C3dpolygon::Init();
 	return S_OK;
@@ -77,12 +78,8 @@ void CSorcey::Draw()
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-
-
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	C3dpolygon::Draw();
-
-
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
@@ -256,14 +253,14 @@ void CSorcey::Collision()
 
 	CObject**pObject;
 	pObject = GetObjectData(0);
-	for (int j = 0; j < MAX_OBJECT; j++)
+	for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
 	{
-		if (pObject[j] != nullptr)
+		if (pObject[nObject] != nullptr)
 		{
-			EObjectType Type = pObject[j]->GetType();
+			EObjectType Type = pObject[nObject]->GetType();
 			if (Type == CObject::ENEMY)
 			{
-				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject[j]);  // ダウンキャスト
+				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject[nObject]);  // ダウンキャスト
 				assert(pObject3d != nullptr);
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
@@ -271,7 +268,6 @@ void CSorcey::Collision()
 				{
 					float enemySize = 50.0f;
 					enemySize *= pEnemySize->y;
-
 
 					if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
 						((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&

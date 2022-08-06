@@ -32,7 +32,7 @@ private:
 	{
 
 	public:
-		CMagic();
+		CMagic(int list);
 		~CMagic() override;
 		HRESULT Init() override;
 		void Uninit() override;

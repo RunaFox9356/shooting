@@ -162,6 +162,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="hamada.cpp" />
     <ClCompile Include="hit.cpp" />
+    <ClCompile Include="life.cpp" />
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="magiccircle.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="hamada.h" />
     <ClInclude Include="hit.h" />
+    <ClInclude Include="life.h" />
     <ClInclude Include="magic.h" />
     <ClInclude Include="magiccircle.h" />
     <ClInclude Include="mesh.h" />

@@ -79,20 +79,23 @@ void CBullet::Update()
 	CObject**pObject;
 	pObject = GetObjectData(0);
 
-	for (int j = 0; j < MAX_OBJECT; j++)
+	for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
 	{
-		if (pObject[j] != nullptr)
+		if (pObject[nObject] != nullptr)
 		{
-			EObjectType Type = pObject[j]->GetType();
+			EObjectType Type = pObject[nObject]->GetType();
 			if (Type == CObject::ENEMY)
 			{
-				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject[j]);  // ダイナミックキャスト
+				CObject3d* pObject3d = dynamic_cast<CObject3d*>(pObject[nObject]);  // ダイナミックキャスト
 				assert(pObject3d != nullptr);
+				//サイズ
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
+
 				float enemySize = 30.0f;
 				enemySize *= pEnemySize->y;
 
+				//当たり判定
 				if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
 					((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
 					((m_pos.x - m_Size.x) <= (enemyPos->x + pEnemySize->x)) &&
@@ -226,15 +229,15 @@ void CBullet::Move()
 	{
 		bool homing = false;
 
-		for (int i = 0; i < MAX_LIST; i++)
+		for (int nList = 0; nList < MAX_LIST; nList++)
 		{
 			CObject**pObject = nullptr;
-			pObject = GetObjectData(i);
-			for (int j = 0; j < MAX_OBJECT; j++)
+			pObject = GetObjectData(nList);
+			for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
 			{
-				if (pObject[j] != nullptr)
+				if (pObject[nObject] != nullptr)
 				{
-					EObjectType Type = pObject[j]->GetType();
+					EObjectType Type = pObject[nObject]->GetType();
 					if (Type == CObject::ENEMY)
 					{
 						/*D3DXVECTOR3 vec = *pObject->GetPos() - m_pos;
@@ -245,7 +248,7 @@ void CBullet::Move()
 							m_Length = length;
 							m_VecLength = vec;
 						}*/
-						CEnemy* Enemy = dynamic_cast<CEnemy*>(pObject[j]);  // ダウンキャスト
+						CEnemy* Enemy = dynamic_cast<CEnemy*>(pObject[nObject]);  // ダウンキャスト
 
 						D3DXVECTOR3 vecDiff = *Enemy->GetPos() - m_pos;
 						float fLength = D3DXVec3Length(&vecDiff);

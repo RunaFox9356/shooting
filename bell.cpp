@@ -77,14 +77,14 @@ void CBell::Update(void)
 	// 当たり判定
 	CObject**pObject;
 	pObject = GetObjectData(0);
-	for (int j = 0; j < MAX_OBJECT; j++)
+	for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
 	{
-		if (pObject[j] != nullptr)
+		if (pObject[nObject] != nullptr)
 		{
-			EObjectType Type = pObject[j]->GetType();
+			EObjectType Type = pObject[nObject]->GetType();
 			if (Type == CObject::PLAYER)
 			{	// Playerとの当たり判定
-				CPlayer* cPlayer = dynamic_cast<CPlayer*>(pObject[j]);  // ダウンキャスト
+				CPlayer* cPlayer = dynamic_cast<CPlayer*>(pObject[nObject]);  // ダウンキャスト
 				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 				float Size = 30.0f;
 

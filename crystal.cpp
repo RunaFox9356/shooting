@@ -24,7 +24,7 @@ LPDIRECT3DTEXTURE9	CCrystal::m_pTexture;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CCrystal::CCrystal()
+CCrystal::CCrystal() :C3dpolygon(1)
 {
 }
 
@@ -71,20 +71,20 @@ void CCrystal::Update()
 		m_move.y = 13.0f;
 		//CObject::Release();
 	}
-	for (int i = 0; i < MAX_LIST; i++)
+	for (int nlist = 0; nlist < MAX_LIST; nlist++)
 	{
 		// 当たり判定
 		CObject**pObject;
-		pObject = GetObjectData(i);
+		pObject = GetObjectData(nlist);
 
-		for (int j = 0; j < MAX_OBJECT; j++)
+		for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
 		{
-			if (pObject[j] != nullptr)
+			if (pObject[nObject] != nullptr)
 			{
-				EObjectType Type = pObject[j]->GetType();
+				EObjectType Type = pObject[nObject]->GetType();
 				if (Type == CObject::PLAYER)
 				{	// Playerとの当たり判定
-					CPlayer* cPlayer = CGame::GetPlayer(); 
+					CPlayer* cPlayer = CGame::GetPlayer();
 					const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 					float Size = 50.0f;
 
@@ -110,7 +110,7 @@ void CCrystal::Update()
 				}
 				if (Type == CObject::BULLET)
 				{	// たまとの当たり判定
-					CBullet* bullet = dynamic_cast<CBullet*>(pObject[j]);  // ダウンキャスト
+					CBullet* bullet = dynamic_cast<CBullet*>(pObject[nObject]);  // ダウンキャスト
 					const D3DXVECTOR3 *BulletPos = bullet->GetPos();
 
 					float Size = 40.0f;
@@ -132,7 +132,7 @@ void CCrystal::Update()
 								m_myType = 2;
 							}
 
-							CHit::Create(m_pos,6);
+							CHit::Create(m_pos, 6);
 							//色の設定
 							switch (m_myType)
 							{

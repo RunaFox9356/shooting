@@ -265,11 +265,10 @@ void CObject3d::HitLife(int Damage)
 
 	if (m_Life <= 0)
 	{
-		//CHit::Create(m_pos,(int)CPlayer::GetMagic());
 		CMultiply::SetRate((1 + *CMultiply::GetRate()));
 		CMultiply::list(*CMultiply::GetRate(), m_pos,true);
 
-		for (size_t i = 0; i < 5; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			GetScore()->Add(50);
 			D3DXVECTOR3 scale(3.8f, 3.8f, 3.8f);

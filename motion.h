@@ -168,10 +168,6 @@ public: /* ƒƒ“ƒoŠÖ” */
 	static void ReleaseAll();
 	CModel* m_apModel[MODEL_MAX];
 
-
-
-
-
 };
 
 

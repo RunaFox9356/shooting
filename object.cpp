@@ -15,7 +15,9 @@
 #include "mesh.h"
 #include "magic.h"
 #include "score.h"
+#include "bg.h"
 #include <assert.h>
+
 
 CObject *CObject::m_pObject[MAX_LIST][MAX_OBJECT] = {};
 int CObject::m_AllMember = 0;
@@ -164,7 +166,7 @@ void CObject::ModeNotUninit()
 void CObject::AllCreate()
 {
 
-	CMesh::Create();
+	CBg::Create();
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create();
 	pScore->Set(0);
@@ -235,14 +237,7 @@ void CObject::Release()
 //=============================================================================
 CObject**CObject::GetObjectData(int nCount)
 {
-	//assert(m_list >= 0&&m_list < MAX_LIST);
-	//if (m_list < 0 || m_list >= MAX_LIST)
-	//{
-	//	return nullptr;
-	//}
-	
 	return m_pObject[nCount];
-	
 }
 
 //=============================================================================

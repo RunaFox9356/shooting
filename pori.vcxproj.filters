@@ -34,11 +34,14 @@
     <Filter Include="オブジェクト\モデル系">
       <UniqueIdentifier>{a769b689-bec5-49cb-b2fa-c4d659f98e33}</UniqueIdentifier>
     </Filter>
-    <Filter Include="オブジェクト\数字">
-      <UniqueIdentifier>{893ba109-c22b-4607-bdee-b9db01165e51}</UniqueIdentifier>
-    </Filter>
     <Filter Include="オブジェクト\モデル系\敵系統">
       <UniqueIdentifier>{e415c547-7541-4293-8a35-ccf5620603ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="オブジェクト\モデル系\UI">
+      <UniqueIdentifier>{145a86af-5ff6-4807-9f6d-f2bec8c20e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="オブジェクト\モデル系\UI\数字">
+      <UniqueIdentifier>{893ba109-c22b-4607-bdee-b9db01165e51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -133,13 +136,10 @@
       <Filter>オブジェクト\モデル系</Filter>
     </ClCompile>
     <ClCompile Include="score.cpp">
-      <Filter>オブジェクト\数字</Filter>
+      <Filter>オブジェクト\モデル系\UI\数字</Filter>
     </ClCompile>
     <ClCompile Include="number.cpp">
-      <Filter>オブジェクト\数字</Filter>
-    </ClCompile>
-    <ClCompile Include="multiply.cpp">
-      <Filter>オブジェクト\数字</Filter>
+      <Filter>オブジェクト\モデル系\UI\数字</Filter>
     </ClCompile>
     <ClCompile Include="hit.cpp">
       <Filter>オブジェクト\魔法系</Filter>
@@ -161,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="magiccircle.cpp">
       <Filter>オブジェクト\魔法系</Filter>
+    </ClCompile>
+    <ClCompile Include="multiply.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="life.cpp">
+      <Filter>オブジェクト\モデル系\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,13 +261,13 @@
       <Filter>オブジェクト\モデル系</Filter>
     </ClInclude>
     <ClInclude Include="score.h">
-      <Filter>オブジェクト\数字</Filter>
+      <Filter>オブジェクト\モデル系\UI\数字</Filter>
     </ClInclude>
     <ClInclude Include="number.h">
-      <Filter>オブジェクト\数字</Filter>
+      <Filter>オブジェクト\モデル系\UI\数字</Filter>
     </ClInclude>
     <ClInclude Include="multiply.h">
-      <Filter>オブジェクト\数字</Filter>
+      <Filter>オブジェクト\モデル系\UI\数字</Filter>
     </ClInclude>
     <ClInclude Include="hit.h">
       <Filter>オブジェクト\魔法系</Filter>
@@ -286,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="magiccircle.h">
       <Filter>オブジェクト\魔法系</Filter>
+    </ClInclude>
+    <ClInclude Include="life.h">
+      <Filter>オブジェクト\モデル系\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

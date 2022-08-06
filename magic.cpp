@@ -11,7 +11,7 @@
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CMagicBox::CMagic::CMagic()
+CMagicBox::CMagic::CMagic(int list):CObject2d(list)
 {
 
 
@@ -104,7 +104,7 @@ CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 	for (int i = 0; i < 3; i++)
 	{
 		object->cMagic[i] = nullptr;
-		object->cMagic[i] = new CMagic;
+		object->cMagic[i] = new CMagic(1);
 		float posX = pos.x + 160 * i;
 		if (object->cMagic[i] != nullptr)
 		{

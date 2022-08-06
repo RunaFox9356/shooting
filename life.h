@@ -6,26 +6,24 @@
 //=============================================================================
 
 
-#ifndef _BG_H_			// このマクロ定義がされてなかったら
-#define _BG_H_			// 二重インクルード防止のマクロ定義
+#ifndef _LIFE_H_			// このマクロ定義がされてなかったら
+#define _LIFE_H_			// 二重インクルード防止のマクロ定義
 
 #include "renderer.h"
-#include "3dpolygon.h"
+#include "object2d.h"
 #include "texture.h"
 
-
-
-class CBg : public C3dpolygon
+class CLife : public CObject2d
 {
 private:
 	//polygonの拡大サイズ
 	static const D3DXVECTOR3 m_Vtx[4];
 
 public:
-	static CBg *CBg::Create();
+	static CLife *CLife::Create(const D3DXVECTOR3 & pos);
 
-	CBg(const int list);
-	~CBg() override;
+	CLife(const int list);
+	~CLife() override;
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
@@ -33,6 +31,8 @@ public:
 	const D3DXVECTOR3 *GetPos() const override;
 	void SetPos(const D3DXVECTOR3 &pos) override;
 	void SetMove(const D3DXVECTOR3 &move)override;
+	void SetDamage(const int Damage);
 };
 
 #endif
+

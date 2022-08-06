@@ -17,7 +17,7 @@ class CNumber : public CObject2d
 public:
 
 	
-	CNumber();
+	CNumber(int list);
 	~CNumber();
 	HRESULT Init() override;
 	void Uninit() override;

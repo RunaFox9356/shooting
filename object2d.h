@@ -47,6 +47,8 @@ public:
 	D3DXCOLOR GetCollar() { return D3DXCOLOR(m_col.P0, m_col.P1, m_col.P2, m_col.P3); };
 	D3DXVECTOR3 GetSize() { return m_fSize; };
 	void SetSize(D3DXVECTOR3 Size) { m_fSize = Size; };
+
+	LPDIRECT3DVERTEXBUFFER9 &GetVtx() { return m_pVtxBuff; };
 protected:
 	int  m_nTimer;
 	float m_nScale;
