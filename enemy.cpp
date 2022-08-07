@@ -32,6 +32,7 @@ CEnemy::CEnemy() :
 	m_motionType(ANIME_NORMAL),
 	m_motionTypeOld(ANIME_NORMAL)
 {
+
 }
 
 //------------------------------------
@@ -63,6 +64,8 @@ HRESULT CEnemy::Init(void)
 //------------------------------------
 void CEnemy::Uninit(void)
 {
+	m_AllEnemy--;
+	
 	// åªç›ÇÃÉÇÅ[ÉVÉáÉìî‘çÜÇÃï€ä«
 	CObject3d::Uninit();
 }

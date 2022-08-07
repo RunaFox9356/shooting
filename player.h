@@ -18,7 +18,6 @@ class CPlayer : public CObject3d
 {
 public:
 
-
 	enum NOWMAGIC
 	{
 		NOW_FIRE = 2,		// ‰Î

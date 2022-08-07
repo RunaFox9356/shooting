@@ -36,6 +36,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	virtual const D3DXVECTOR3 *GetPos() const;
+
 	virtual void SetPos(const D3DXVECTOR3 &pos);
 	virtual void SetMove(const D3DXVECTOR3 &move);
 
@@ -46,8 +47,9 @@ public:
 
 	D3DXCOLOR GetCollar() { return D3DXCOLOR(m_col.P0, m_col.P1, m_col.P2, m_col.P3); };
 	D3DXVECTOR3 GetSize() { return m_Size; };
-	void SetSize(D3DXVECTOR3 Size) { m_Size = Size; };
 
+	void SetSize(D3DXVECTOR3 Size) { m_Size = Size; };
+	D3DXVECTOR3 &GetMove() { return m_move; };
 	LPDIRECT3DVERTEXBUFFER9 &GetVtx() { return m_pVtxBuff; };
 protected:
 	int  m_nTimer;

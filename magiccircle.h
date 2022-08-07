@@ -23,7 +23,7 @@ public:
 	void Uninit() override {}
 	void Update() override {}
 	void Draw() override {}
-	void SetMove(const D3DXVECTOR3 &move)override {};
+	void SetMove(const D3DXVECTOR3 &move)override { move; };
 	static CMagicCircleManager* Create(D3DXVECTOR3 pos);
 
 

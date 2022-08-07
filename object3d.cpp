@@ -276,6 +276,7 @@ void CObject3d::HitLife(int Damage)
 	{
 		if (m_Life <= 0)
 		{
+
 			CMultiply::SetRate((1 + *CMultiply::GetRate()));
 			CMultiply::list(*CMultiply::GetRate(), m_pos, true);
 

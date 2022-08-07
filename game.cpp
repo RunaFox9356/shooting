@@ -64,7 +64,7 @@ HRESULT CGame::Init(void)
 
 	m_Player = CPlayer::Create();
 	m_Player->SetUp(CObject::PLAYER);
-
+	
 	return S_OK;
 }
 
@@ -86,6 +86,12 @@ void CGame::Update(void)
 	//CManager::GetRenderer()->Update();
 	CInput *CInputpInput = CInput::GetKey();
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
+	{
+		//モードの設定
+		CManager::SetMode(CManager::MODE_RESULT);
+	}
+
+	if (GetMaxEnemy() <= 0)
 	{
 		//モードの設定
 		CManager::SetMode(CManager::MODE_RESULT);

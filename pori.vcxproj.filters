@@ -162,11 +162,11 @@
     <ClCompile Include="magiccircle.cpp">
       <Filter>オブジェクト\魔法系</Filter>
     </ClCompile>
-    <ClCompile Include="multiply.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="life.cpp">
       <Filter>オブジェクト\モデル系\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="multiply.cpp">
+      <Filter>オブジェクト\モデル系\UI\数字</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

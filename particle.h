@@ -1,7 +1,7 @@
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //particle.h
 // Author : Tanaka Kouta
-// Author : HamadaRyuuga
+// Author : Hamada Ryuuga
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 #ifndef _PARTICLE_H_		//このマクロが定義されてなかったら
 #define _PARTICLE_H_		//2重インクルード防止のマクロ定義
@@ -13,7 +13,7 @@
 // パーティクルクラス
 // Author : Tanaka Kouta
 // Author : Yuda Kaito
-// Author ; hamada
+// Author ; hamada 
 // 概要 : パーティクルの処理を担当するクラス
 //-------------------------------------------------
 class CParticle : public CObject2d
@@ -48,7 +48,7 @@ public: // 構造体
 	//-------------------------------------------------
 	// エフェクトのカラー構造体
 	// Author : 唐﨑結斗
-	// Author ; hamada
+	// Author ; hamada 
 	// 概要 : エフェクトの色関係の構造体
 	//-------------------------------------------------
 	struct Color	// ※新規追加構造体(ファイルに追加後消してください)

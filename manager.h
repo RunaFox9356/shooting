@@ -22,6 +22,8 @@ class CManager
 {
 public:
 
+	static const D3DXVECTOR3 Pos;
+
 	//‰æ–Ê(ƒ‚[ƒh)‚Ìí—Ş
 	enum MODE
 	{

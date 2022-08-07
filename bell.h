@@ -12,8 +12,6 @@
 #include "renderer.h"
 #include "object3d.h"
 
-
-
 class  CMotion;
 
 class CBell : public CObject3d
@@ -29,7 +27,6 @@ public:
 		int nowKey;		// 今のキー
 		int loop;		// ループするかどうか[0:ループしない / 1 : ループする]
 		int num_key;  	// キー数
-						/*MyKeySet KeySet[MAX_KEY];*/
 	};
 
 public:

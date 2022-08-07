@@ -13,8 +13,6 @@
 #include "3dpolygon.h"
 #include "texture.h"
 
-
-
 class CBg : public C3dpolygon
 {
 private:

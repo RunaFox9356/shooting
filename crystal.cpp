@@ -63,7 +63,7 @@ void CCrystal::Update()
 	C3dpolygon::Update();
 	m_move.y -= 0.1f;
 	m_move.x = -1.0f;
-	
+
 	m_pos += m_move;
 
 	if (m_pos.y < -SCREEN_HEIGHT)
@@ -79,87 +79,94 @@ void CCrystal::Update()
 
 		for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
 		{
-			if (pObject[nObject] != nullptr)
+			if (pObject[nObject] == nullptr)
 			{
-				EObjectType Type = pObject[nObject]->GetType();
-				if (Type == CObject::PLAYER)
-				{	// Playerとの当たり判定
-					CPlayer* cPlayer = CGame::GetPlayer();
-					const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
-					float Size = 50.0f;
+				continue;
+			}
+			EObjectType Type = pObject[nObject]->GetType();
+			if (Type == CObject::PLAYER)
+			{	// Playerとの当たり判定
+				CPlayer* cPlayer = CGame::GetPlayer();
+				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
+				float Size = 50.0f;
 
-					if (((m_pos.y - m_Size.y) <= (PlayerPos->y + Size)) &&
-						((m_pos.y + m_Size.y) >= (PlayerPos->y - Size)) &&
-						((m_pos.x - m_Size.x) <= (PlayerPos->x + Size)) &&
-						((m_pos.x + m_Size.x) >= (PlayerPos->x - Size)))
+				//当たり判定のサイズ
+				if (((m_pos.y - m_Size.y) <= (PlayerPos->y + Size)) &&
+					((m_pos.y + m_Size.y) >= (PlayerPos->y - Size)) &&
+					((m_pos.x - m_Size.x) <= (PlayerPos->x + Size)) &&
+					((m_pos.x + m_Size.x) >= (PlayerPos->x - Size)))
+				{
+					if (m_Hit <= 30)
 					{
-						if (m_Hit <= 30)
-						{
-							CGame::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
-							GetScore()->Add(200);
-						}
-						else
-						{
-							GetScore()->Add(1000);
-						}
-
-						CObject::Release();
-
-						return;
+						CGame::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
+						GetScore()->Add(200);
 					}
+					else
+					{
+						GetScore()->Add(1000);
+					}
+
+					CObject::Release();
+
+					return;
 				}
-				if (Type == CObject::BULLET)
-				{	// たまとの当たり判定
-					CBullet* bullet = dynamic_cast<CBullet*>(pObject[nObject]);  // ダウンキャスト
-					const D3DXVECTOR3 *BulletPos = bullet->GetPos();
+			}
+			if (Type == CObject::BULLET|| Type == CObject::RANKUPBULLET)
+			{	// たまとの当たり判定
+				CBullet* bullet = dynamic_cast<CBullet*>(pObject[nObject]);  // ダウンキャスト
+				const D3DXVECTOR3 *BulletPos = bullet->GetPos();
 
-					float Size = 40.0f;
+				float Size = 40.0f;
 
-					if (((m_pos.y - m_Size.y) <= (BulletPos->y + Size)) &&
-						((m_pos.y + m_Size.y) >= (BulletPos->y - Size)) &&
-						((m_pos.x - m_Size.x) <= (BulletPos->x + Size)) &&
-						((m_pos.x + m_Size.x) >= (BulletPos->x - Size)))
-					{
-						m_move.y = 5.0f;
-						m_Hit++;
-						m_move.x = 1.5f;
-						if (m_Hit <= 30)
-						{//出てくるタイプの設定
-							m_myType++;
+				if (((m_pos.y - m_Size.y) <= (BulletPos->y + Size)) &&
+					((m_pos.y + m_Size.y) >= (BulletPos->y - Size)) &&
+					((m_pos.x - m_Size.x) <= (BulletPos->x + Size)) &&
+					((m_pos.x + m_Size.x) >= (BulletPos->x - Size)))
+				{
+					m_move.y = 5.0f;
+					m_Hit++;
+					m_move.x = 1.5f;
+					if (m_Hit <= 30)
+					{//出てくるタイプの設定
+						m_myType++;
 
-							if (m_myType >= 6)
-							{
-								m_myType = 2;
-							}
-
-							CHit::Create(m_pos, 6);
-							//色の設定
-							switch (m_myType)
-							{
-							case NOW_FIRE:
-								SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
-								break;
-							case NOW_ICE:
-								SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
-								break;
-							case NOW_STORM:
-								SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
-								break;
-							case NOW_SUN:
-								SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
-								break;
-							default:
-								SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
-								break;
-							}
-						}
-						else
+						if (m_myType >= 6)
 						{
-							SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+							m_myType = 2;
 						}
-						pObject[nObject]->Release();
-						return;
+
+						CHit::Create(m_pos, 6);
+						//色の設定
+						switch (m_myType)
+						{
+						case NOW_FIRE:
+							SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
+							break;
+						case NOW_ICE:
+							SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
+							break;
+						case NOW_STORM:
+							SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
+							break;
+						case NOW_SUN:
+							SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
+							break;
+						default:
+							SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+							break;
+						}
 					}
+					else
+					{
+						SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+					}
+					pObject[nObject]->Release();
+					if (Type != CObject::RANKUPBULLET)
+					{
+						CBullet::Create(m_pos, D3DXVECTOR3(15.0f, 3.0f, 0.0f))->SetUp(EObjectType::RANKUPBULLET);
+						CBullet::Create(m_pos, D3DXVECTOR3(15.0f, -3.0f, 0.0f))->SetUp(EObjectType::RANKUPBULLET);
+					}
+					return;
 				}
 			}
 		}

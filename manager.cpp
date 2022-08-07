@@ -22,7 +22,7 @@
 CRenderer * CManager::m_cRenderer = nullptr; 
 CTexture * CManager::m_pTexture = nullptr;
 CObject*CManager::m_Game = nullptr;
-
+const D3DXVECTOR3 CManager::Pos = D3DXVECTOR3(1280.0f * 0.5f, 720.0f * 0.5f, 0.0f);
 //=============================================================================
 // コンストラクト関数
 //=============================================================================

@@ -23,7 +23,7 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	void SetMove(const D3DXVECTOR3 &move)override {};
+	void SetMove(const D3DXVECTOR3 &move)override { m_move = move; };
 
 	static CHit* Create(D3DXVECTOR3 pos, int Type);
 
@@ -38,7 +38,7 @@ private:
 	int m_DivisionX;
 	int m_DivisionY;
 	int m_DivisionMAX;
-
+	D3DXVECTOR3 m_move;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 
 };

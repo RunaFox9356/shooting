@@ -29,6 +29,7 @@ public:
 		SORCERY,
 		BELL,
 		MODE,
+		RANKUPBULLET,
 		MAX,
 		NONE
 	};
@@ -50,7 +51,7 @@ public:
 	static void ModeNotUninit();
 	static void TypeDraw(EObjectType Type);
 	static CLife* CObject::GetLife();
-
+	static int& CObject::GetMaxEnemy() { return m_AllEnemy; };
 	int * GetId();
 	CObject ** GetObjectData(int nCount);
 	void SetUp(EObjectType Type);
@@ -64,6 +65,7 @@ protected:
 	static CObject *m_pObject[MAX_LIST][MAX_OBJECT];
 	int	m_nID;
 	int m_list;
+	static int m_AllEnemy;
 private:
 	//int	m_nID;
 	static int m_AllMember;

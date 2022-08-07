@@ -39,7 +39,13 @@ const char* CTexture::s_FileName[] =
 	"data/TEXTURE/MagicCircle4.png",
 	"data/TEXTURE/MagicCircle5.png",
 	"data/TEXTURE/MagicCircle2.png",
-	"Data/TEXTURE/rand.png"
+	"Data/TEXTURE/rand.png",
+	"Data/TEXTURE/BG.png",
+	"Data/TEXTURE/GonBG.png",
+	"Data/TEXTURE/Fox.png",
+	"Data/TEXTURE/gamestart.png",
+	"Data/TEXTURE/Getrotation.png",
+	"Data/TEXTURE/siro.jpg"
 };
 
 static_assert(sizeof(CTexture::s_FileName) / sizeof(CTexture::s_FileName[0]) == CTexture::TEXTURE_MAX, "aho");

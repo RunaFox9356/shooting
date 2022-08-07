@@ -21,7 +21,8 @@
 
 
 CObject *CObject::m_pObject[MAX_LIST][MAX_OBJECT] = {};
-int CObject::m_AllMember = 0;
+int CObject::m_AllMember = 0; 
+int CObject::m_AllEnemy = 0;
 CScore * CObject::pScore;
  CLife* CObject::pLife;
 //=============================================================================
@@ -47,7 +48,6 @@ CObject::CObject(int list)
 //=============================================================================
 CObject::~CObject()
 {
-
 }
 
 //=============================================================================
@@ -79,7 +79,6 @@ void CObject::AllDraw()
 			{
 				m_pObject[j][i]->Draw();
 			}
-
 		}
 	}
 }
@@ -166,7 +165,6 @@ void CObject::ModeNotUninit()
 //=============================================================================
 void CObject::AllCreate()
 {
-
 	CBg::Create();
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create();
@@ -185,6 +183,7 @@ void CObject::SetUp(EObjectType Type)
 	case EObjectType::ENEMY:
 	{
 		m_Type = ENEMY;
+		m_AllEnemy++;
 		break;
 	}
 	case EObjectType::PLAYER:
@@ -222,7 +221,7 @@ void CObject::SetUp(EObjectType Type)
 //=============================================================================
 void CObject::Release()
 {
-	if (m_pObject[m_nID] != nullptr)
+	if (m_pObject[m_list][m_nID] != nullptr)
 	{
 		const int nID = m_nID;
 		const int nlist = m_list;
