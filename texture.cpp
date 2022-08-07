@@ -18,33 +18,33 @@
 //==================================================
 const char* CTexture::s_FileName[] =
 {// テクスチャのパス
-	"data/TEXTURE/wa.jpg",	// 玉画像
-	"data/TEXTURE/gon.png",	//GON
-	"data/TEXTURE/fire.png",
-	"data/TEXTURE/ice.png",
-	"data/TEXTURE/storm.png",
-	"data/TEXTURE/sun.png",
-	"data/TEXTURE/daia.png",
-	"data/TEXTURE/Score001.png",
-	"data/TEXTURE/impact.png",
-	"data/TEXTURE/Iceburst.png",
-	"data/TEXTURE/tempest.png",
-	"data/TEXTURE/rain.png",
-	"data/TEXTURE/smoke.jpg",
-	"data/TEXTURE/light.png",
-	"data/TEXTURE/Box.png",
-	"data/TEXTURE/HIT.png",
-	"data/TEXTURE/MagicCircle1.png",
+	"data/TEXTURE/wa.jpg",			//玉画像
+	"data/TEXTURE/gon.png",			//GON
+	"data/TEXTURE/fire.png",		//火
+	"data/TEXTURE/ice.png",			//氷
+	"data/TEXTURE/storm.png",		//風
+	"data/TEXTURE/sun.png",         //雷
+	"data/TEXTURE/daia.png",		//CRYSTAL
+	"data/TEXTURE/Score001.png",	//score
+	"data/TEXTURE/impact.png",		//火
+	"data/TEXTURE/Iceburst.png",	//氷	
+	"data/TEXTURE/tempest.png",		//風
+	"data/TEXTURE/rain.png",		//雷
+	"data/TEXTURE/smoke.jpg",		//煙
+	"data/TEXTURE/light.png",		//光
+	"data/TEXTURE/Box.png",			//BOX背景
+	"data/TEXTURE/HIT.png",			//光（クリスタルのHIT）
+	"data/TEXTURE/MagicCircle1.png",//魔法陣
 	"data/TEXTURE/MagicCircle3.png",
 	"data/TEXTURE/MagicCircle4.png",
 	"data/TEXTURE/MagicCircle5.png",
 	"data/TEXTURE/MagicCircle2.png",
-	"Data/TEXTURE/rand.png",
-	"Data/TEXTURE/BG.png",
+	"Data/TEXTURE/rand.png",		//背景１
+	"Data/TEXTURE/BG.png",			//ここからTITLE
 	"Data/TEXTURE/GonBG.png",
 	"Data/TEXTURE/Fox.png",
 	"Data/TEXTURE/gamestart.png",
-	"Data/TEXTURE/Getrotation.png",
+	"Data/TEXTURE/Getrotation.png",	//ここからリザルト
 	"Data/TEXTURE/siro.jpg"
 };
 
