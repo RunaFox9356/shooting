@@ -78,15 +78,16 @@ private:
 
 	LPDIRECT3DTEXTURE9	m_pTexture = NULL;
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
+
 	CMotion			*m_pMotion;					// モーション
-						// 位置
+
+	// 位置
 	D3DXVECTOR3		m_posOld;					// 位置過去
 	//D3DXVECTOR3		m_move;						// ムーブ
 
 	D3DXVECTOR3		m_modelMin;					// サイズ最小
 	D3DXVECTOR3		m_modelMax;					// サイズ最大
 	D3DXMATRIX		m_mtxWorld;					// マトリックス//ポリゴンの位置や回転行列すべてをつめてるナニカ
-
 
 	int				m_nMaxModelType;				// モデルのタイプ数
 	int				m_nMaxModelParts;				// 扱うモデルパーツ数

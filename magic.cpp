@@ -104,7 +104,7 @@ CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 	for (int i = 0; i < 3; i++)
 	{
 		object->cMagic[i] = nullptr;
-		object->cMagic[i] = new CMagic(1);
+		object->cMagic[i] = new CMagic(2);
 		float posX = pos.x + 160 * i;
 		if (object->cMagic[i] != nullptr)
 		{

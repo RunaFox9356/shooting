@@ -64,6 +64,7 @@ CObject3d::CObject3d() :
 //------------------------------------
 CObject3d::~CObject3d()
 {
+	assert(m_pMotion == nullptr);
 }
 
 //------------------------------------
@@ -88,6 +89,11 @@ HRESULT CObject3d::Init(void)
 void CObject3d::Uninit(void)
 {
 	m_pMotion->Uninit();
+	if (m_pMotion != nullptr)
+	{
+		delete m_pMotion;
+		m_pMotion = nullptr;
+	}
 }
 
 //------------------------------------

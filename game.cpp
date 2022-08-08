@@ -75,6 +75,8 @@ void CGame::Uninit(void)
 {
 	// ƒ|ƒŠƒSƒ“‚ÌI—¹ˆ—
 	CObject::ModeNotUninit();
+
+	CModelManager::ReleaseAll();
 }
 
 //========================

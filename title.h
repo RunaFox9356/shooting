@@ -14,9 +14,6 @@
 class CTitle :public CObject
 {
 public:
-
-
-public:
 	CTitle();
 	~CTitle();
 	HRESULT Init() override;
@@ -24,7 +21,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	
-
+private:
 	CObject2d *m_object2d[4];
 	int m_addX;
 	int m_addY;

@@ -14,12 +14,12 @@ NUM_MODEL = 6
 #------------------------------------------------------------------------------
 # モデルファイル名
 #------------------------------------------------------------------------------
-MODEL_FILENAME = data/MODEL/tanuki/karada.x 	# からだ
-MODEL_FILENAME = data/MODEL/tanuki/hand.x		# 右前足
-MODEL_FILENAME = data/MODEL/tanuki/hand.x	 	# 左前足
-MODEL_FILENAME = data/MODEL/tanuki/asi.x	 	# 右後ろ足
-MODEL_FILENAME = data/MODEL/tanuki/asi.x		# 左後ろ足
-MODEL_FILENAME = data/MODEL/tanuki/sippo.x		# しっぽ
+MODEL_FILENAME = Data/MODEL/tanuki/karada.x 	# からだ
+MODEL_FILENAME = Data/MODEL/tanuki/hand.x		# 右前足
+MODEL_FILENAME = Data/MODEL/tanuki/hand.x	 	# 左前足
+MODEL_FILENAME = Data/MODEL/tanuki/asi.x	 	# 右後ろ足
+MODEL_FILENAME = Data/MODEL/tanuki/asi.x		# 左後ろ足
+MODEL_FILENAME = Data/MODEL/tanuki/sippo.x		# しっぽ
 
 
 #------------------------------------------------------------------------------

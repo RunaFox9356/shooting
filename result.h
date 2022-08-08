@@ -19,10 +19,8 @@ public:
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
-	void Draw() override;
-public:
-	
-
+	void Draw() override;	
+private:
 	CObject2d *m_object2d[4];
 	int m_addX;
 	int m_addY;

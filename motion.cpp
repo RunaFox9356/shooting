@@ -14,8 +14,6 @@
 #include "motion.h"
 #include "utility.h"	
 
-
-
 CModelManager * CModelManager::ms_ModelManager;
 
 //=============================================================================
@@ -48,6 +46,7 @@ CMotion::CMotion(char * pFileName)
 //=============================================================================
 CMotion::~CMotion()
 {
+
 }
 
 //=============================================================================
@@ -540,13 +539,11 @@ void CMotion::Uninit(void)
 		m_parts = nullptr;
 	}
 
-
 	if (m_motion != nullptr)
 	{
 		delete m_motion;
 		m_motion = nullptr;
 	}
-
 }
 
 //=============================================================================
@@ -565,7 +562,6 @@ void CMotion::CntReset(const int nNumMotionOld)
 // Author :浜田琉雅
 // 概要 : 数値の初期化
 //=============================================================================
-
 CModelManager::CModelManager()
 {
 	for (int i = 0; i < MODEL_MAX; i++)
@@ -581,6 +577,10 @@ CModelManager::CModelManager()
 //=============================================================================
 CModelManager::~CModelManager()
 {
+	for (int i = 0; i < MODEL_MAX; i++)
+	{
+		assert(m_apModel[i] == nullptr);
+	}
 }
 
 //=============================================================================
@@ -666,7 +666,7 @@ CModel * CModelManager::LoadXfile(const char * pXFileName)
 		{
 
 			m_apModel[i] = new CModel;
-			strcpy(m_apModel[i]->m_xFilename, &pXFileName[0]);
+			//strcpy(m_apModel[i]->m_xFilename, &pXFileName[0]);
 
 			// Xファイルの読み込み
 			D3DXLoadMeshFromX(pXFileName,
@@ -700,19 +700,13 @@ void CModelManager::ReleaseAll()
 		{
 			if (Manager->m_apModel[i] != nullptr)
 			{
-				if (Manager->m_apModel[i]->pBuffer != NULL)
-				{// 頂点バッファーの解放
-					Manager->m_apModel[i]->pBuffer->Release();
-					Manager->m_apModel[i]->pBuffer = NULL;
-				}
-
-				if (Manager->m_apModel[i]->pMesh != NULL)
-				{// メッシュの解放
-					Manager->m_apModel[i]->pMesh->Release();
-					Manager->m_apModel[i]->pMesh = NULL;
-				}
+				Manager->m_apModel[i]->Uninit();
+				delete Manager->m_apModel[i];
+				Manager->m_apModel[i] = nullptr;
 			}
 		}
+	
+	
 	}
 }
 

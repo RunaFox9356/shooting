@@ -228,10 +228,9 @@ void CBullet::Move()
 	{
 		bool homing = false;
 
-		for (int nList = 0; nList < MAX_LIST; nList++)
-		{
+		
 			CObject**pObject = nullptr;
-			pObject = GetObjectData(nList);
+			pObject = GetObjectData(0);
 			for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
 			{
 				if (pObject[nObject] != nullptr)
@@ -257,7 +256,7 @@ void CBullet::Move()
 					}
 				}
 			}
-		}
+		
 
 		if (!homing)
 		{

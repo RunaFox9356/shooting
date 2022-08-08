@@ -137,6 +137,23 @@ public: /* 定義 */
 
 	CModel();
 	~CModel() {};
+
+	// 終了処理
+	void Uninit() 
+	{
+		if (pBuffer != NULL)
+		{// 頂点バッファーの解放
+			pBuffer->Release();
+			pBuffer = NULL;
+		}
+
+		if (pMesh != NULL)
+		{// メッシュの解放
+			pMesh->Release();
+			pMesh = NULL;
+		}
+	}
+
 	int				nType;					// パーツのタイプ
 	LPD3DXMESH		pMesh;					// メッシュ情報へのポインタ
 	LPD3DXBUFFER	pBuffer;				// マテリアル情報へのポインタ
@@ -166,8 +183,8 @@ public: /* メンバ関数 */
 	CModel* Load(const char *pXFileName);	
 	CModel* LoadXfile(const char *pXFileName);	// 指定の読み込み
 	static void ReleaseAll();
+public: /* メンバ変数 */
 	CModel* m_apModel[MODEL_MAX];
-
 };
 
 

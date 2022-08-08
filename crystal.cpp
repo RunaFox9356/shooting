@@ -71,11 +71,9 @@ void CCrystal::Update()
 		m_move.y = 13.0f;
 		//CObject::Release();
 	}
-	for (int nlist = 0; nlist < MAX_LIST; nlist++)
-	{
 		// “–‚½‚è”»’è
 		CObject**pObject;
-		pObject = GetObjectData(nlist);
+		pObject = GetObjectData(0);
 
 		for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
 		{
@@ -169,7 +167,7 @@ void CCrystal::Update()
 					return;
 				}
 			}
-		}
+		
 	}
 }
 
