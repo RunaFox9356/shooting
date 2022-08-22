@@ -9,9 +9,7 @@
 #include "number.h"
 
 CNumber* pNumber[MAX_SCORE] = {};
-
-
-
+int CScore::m_nScore;
 CScore::CScore()
 {
 }
@@ -25,7 +23,7 @@ CScore::~CScore()
 //===================
 HRESULT CScore::Init()
 {
-	m_posScore = D3DXVECTOR3(30.0f, 50.0f, 0.0f);
+	//m_posScore = D3DXVECTOR3(30.0f, 50.0f, 0.0f);
 
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (int nCntScore = 0; nCntScore < MAX_SCORE; nCntScore++)
@@ -108,18 +106,19 @@ void CScore::Add(int nValue)
 //===================
 //情報取得
 //===================
-int  CScore::Get(void)
+int &CScore::GetScore(void)
 {
 	return m_nScore;
 }
 
-CScore *CScore::Create()
+CScore *CScore::Create(const D3DXVECTOR3 pos)
 {
 	CScore * pObject = nullptr;
 	pObject = new CScore;
 
 	if (pObject != nullptr)
 	{
+		pObject->SetPos(pos);
 		pObject->Init();
 	}
 

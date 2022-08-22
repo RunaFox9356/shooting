@@ -127,6 +127,24 @@ bool CInput::Press(STAN_DART_INPUT_KEY key)
 			return true;
 		}
 		break;
+	case CInput::KEY_DEBUG:
+		if (m_pKeyboard->GetKeyboardTrigger(DIK_F1))
+		{
+			return true;
+		}
+		break;
+	case CInput::KEY_F2:
+		if (m_pKeyboard->GetKeyboardPress(DIK_F2))
+		{
+			return true;
+		}
+		break;
+
+	case CInput::KEY_DELETE:
+		if (m_pKeyboard->GetKeyboardPress(DIK_BACKSPACE))
+		{
+			return true;
+		}
 	default:
 		break;
 	}
@@ -183,6 +201,18 @@ bool CInput::Trigger(STAN_DART_INPUT_KEY key)
 		break;
 	case CInput::KEY_DEBUG:
 		if (m_pKeyboard->GetKeyboardTrigger(DIK_F1))
+		{
+			return true;
+		}
+		break;
+	case CInput::KEY_F2:
+		if (m_pKeyboard->GetKeyboardTrigger(DIK_F2))
+		{
+			return true;
+		}
+		break;
+	case CInput::KEY_DELETE:
+		if (m_pKeyboard->GetKeyboardTrigger(DIK_BACKSPACE))
 		{
 			return true;
 		}

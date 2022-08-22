@@ -24,7 +24,8 @@ CObject *CObject::m_pObject[MAX_LIST][MAX_OBJECT] = {};
 int CObject::m_AllMember = 0; 
 int CObject::m_AllEnemy = 0;
 CScore * CObject::pScore;
- CLife* CObject::pLife;
+CLife* CObject::pLife;
+bool CObject::notBoss = false;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
@@ -165,10 +166,22 @@ void CObject::ModeNotUninit()
 //=============================================================================
 void CObject::AllCreate()
 {
-	CBg::Create();
+	CBg * Bg1 = CBg::Create();
+	Bg1->SetMove(D3DXVECTOR3(0.0001f, 0.0f, 0.0f));
+	Bg1->SetTexture(CTexture::TEXTURE_STARRY);
+	CBg * Bg3 = CBg::Create();
+	Bg3->SetMove(D3DXVECTOR3(0.00001f, 0.0f, 0.0f));
+	Bg3->SetTexture(CTexture::TEXTURE_MOON);
+
+	CBg * Bg2 = CBg::Create();
+	Bg2->SetMove(D3DXVECTOR3(0.001f, 0.0f, 0.0f));
+	Bg2->SetTexture(CTexture::TEXTURE_TOWN);
+
+
 	CEnemy::LoadEnemy("Data/datatest.json");
-	pScore = CScore::Create();
+	pScore = CScore::Create(D3DXVECTOR3(30.0f, 70.0f, 0.0f));
 	pScore->Set(0);
+
 	pLife = CLife::Create(D3DXVECTOR3(300.0f, 150.0f, 0.0f));
 
 }

@@ -14,7 +14,7 @@ class CMagicBox;
 class CParticleManager;
 class CPlayer;
 
-class CGame:public CObject
+class CGame :public CObject
 {
 public:
 	CGame();
@@ -24,7 +24,7 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	static CMagicBox*GetMagicBox();
+	static CMagicBox*GetMagicBox() { return m_MagicBox; };
 	static CParticleManager* GetParticleManager() { return paticleManager; }
 	static CPlayer * GetPlayer() { return m_Player; };
 private:

@@ -61,8 +61,14 @@ HRESULT CResult::Init(void)
 //========================
 void CResult::Uninit(void)
 {
-	// ƒ|ƒŠƒSƒ“‚ÌI—¹ˆ—
-	CObject::ModeNotUninit();
+	/*for (int i = 0; i < 4; i++)
+	{
+		if (m_object2d[i] != nullptr)
+		{
+			m_object2d[i]->Uninit();
+			m_object2d[i]->Release();
+		}
+	}*/
 }
 
 //========================

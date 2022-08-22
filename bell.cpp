@@ -1,6 +1,6 @@
 //============================
 //
-// エネミー設定
+// item設定
 // Author:hamada ryuuga
 //
 //============================
@@ -53,6 +53,7 @@ HRESULT CBell::Init(void)
 
 	m_motionTypeOld = m_motionType;
 	m_rot.y += (D3DX_PI*0.5f);
+
 	return S_OK;
 }
 

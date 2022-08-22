@@ -8,7 +8,7 @@
 #include "number.h"
 #include "manager.h"
 
-CNumber * test[10]={};
+CNumber * test[10] = {};
 
 //=============================================================================
 // コンストラクト関数
@@ -63,10 +63,10 @@ void CNumber::Update()
 		col.P3 -= 1.0f / m_DesTimarMax;
 
 		m_pos.y -= 1.0f;
-		
+
 		CObject2d::SetCollar(col);
 
-		if (m_DesTimar<=0)
+		if (m_DesTimar <= 0)
 		{
 			Release();
 		}

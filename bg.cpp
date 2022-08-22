@@ -27,6 +27,7 @@ CBg::~CBg()
 //------------------------------------
 HRESULT CBg::Init()
 {
+	m_Speed = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	C3dpolygon::Init();
 	return E_NOTIMPL;
 }
@@ -44,6 +45,10 @@ void CBg::Uninit()
 //------------------------------------
 void CBg::Update()
 {
+	//‰ÁŽZ‚Ì’l‚ðŠÖ”‰»
+	m_Speed += m_MoveSpeed;
+
+	C3dpolygon::SetTex(PositionVec4(0.0f+ m_Speed.x, 1.0f+ m_Speed.x,0.0f + m_Speed.y,1.0f + m_Speed.y));
 	C3dpolygon::Update();
 }
 
@@ -81,7 +86,6 @@ CBg *CBg::Create()
 		pObject->Init();
 		pObject->SetSize(D3DXVECTOR3(640.0f, 360.0f,0.0f));
 		pObject->SetPos(D3DXVECTOR3(0.0f, 0.0f,0.0f));
-		pObject->SetTexture(CTexture::TEXTURE_RAND);
 		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.5f));
 
 	}
@@ -104,5 +108,5 @@ void CBg::SetPos(const D3DXVECTOR3 & pos)
 
 void CBg::SetMove(const D3DXVECTOR3 & move)
 {
-//	m_move = move;
+	m_MoveSpeed = move;
 }

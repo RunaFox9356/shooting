@@ -117,6 +117,15 @@ CMagicBox* CMagicBox::Create(D3DXVECTOR3 pos)
 	return object;
 }
 
+CMagicBox::CMagic & CMagicBox::GetcMagic(int number)
+{
+	if (number < MAXMAGIC)
+	{
+		return *cMagic[number];
+	}
+	return *cMagic[0];
+}
+
 
 //=============================================================================
 // ¶¬ŠÖ”

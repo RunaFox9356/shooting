@@ -25,7 +25,6 @@ private:
 	int m_addX;
 	int m_addY;
 	bool Sizcontroller;
-
 };
 
 #endif

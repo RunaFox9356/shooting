@@ -9,9 +9,6 @@
 #include "manager.h"
 #include "object2d.h"
 
-
-
-
 //========================
 // コンストラクター
 //========================
@@ -57,12 +54,21 @@ HRESULT CTitle::Init(void)
 	return S_OK;
 }
 
+//================
 //破棄
+//================
 void CTitle::Uninit(void)
-{
-	// ポリゴンの終了処理
-	CObject::ModeNotUninit();	
+{	
+	for (int i = 0; i < 4; i++)
+	{
+		if (m_object2d[i] !=nullptr)
+		{
+			m_object2d[i]->Uninit();
+			m_object2d[i]->Release();
+		}
+	}
 }
+
 //==================
 //更新処理
 //==================
@@ -106,7 +112,11 @@ void CTitle::Update(void)
 		//モードの設定
 		CManager::SetMode(CManager::MODE_GAME);
 	}
-
+	if (CInputpInput->Trigger(CInput::KEY_F2))
+	{
+		//モードの設定
+		CManager::SetMode(CManager::MODE_NAMESET);
+	}
 	/*if (GetKeyboardPress(DIK_0))
 	{
 		SetFade(MODE_RESULT);

@@ -31,6 +31,11 @@ public:
 	const D3DXVECTOR3 *GetPos() const override;
 	void SetPos(const D3DXVECTOR3 &pos) override;
 	void SetMove(const D3DXVECTOR3 &move)override;
+	
+private:
+
+	D3DXVECTOR3 m_Speed;
+	D3DXVECTOR3 m_MoveSpeed;
 };
 
 #endif

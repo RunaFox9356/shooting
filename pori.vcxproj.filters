@@ -168,6 +168,18 @@
     <ClCompile Include="multiply.cpp">
       <Filter>オブジェクト\モデル系\UI\数字</Filter>
     </ClCompile>
+    <ClCompile Include="ranking.cpp">
+      <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
+    <ClCompile Include="name.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="nemeset.cpp">
+      <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
+    <ClCompile Include="boss.cpp">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gon.h">
@@ -295,6 +307,18 @@
     </ClInclude>
     <ClInclude Include="life.h">
       <Filter>オブジェクト\モデル系\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ranking.h">
+      <Filter>メイン\画面遷移</Filter>
+    </ClInclude>
+    <ClInclude Include="name.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="nemeset.h">
+      <Filter>メイン\画面遷移</Filter>
+    </ClInclude>
+    <ClInclude Include="boss.h">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

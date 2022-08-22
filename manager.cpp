@@ -13,9 +13,11 @@
 #include "game.h"
 #include "title.h"
 #include "result.h"
+#include "nemeset.h"
 
 #include "texture.h"
 
+#include "ranking.h"
 //-----------------------------------------------------------------------------
 // 静的メンバー変数の初期化
 //-----------------------------------------------------------------------------
@@ -106,14 +108,9 @@ void CManager::Uninit()
 //=============================================================================
 void CManager::Update()
 {
-
 	//入力処理の更新処理
 	m_Input->Update();
 	m_cRenderer->Update();
-
-	//m_Game->Update();
-
-
 }
 
 //=============================================================================
@@ -123,7 +120,6 @@ void CManager::Draw()
 {
 	// 描画処理	
 	m_cRenderer->Draw();
-
 }
 
 
@@ -155,6 +151,9 @@ void CManager::SetMode(MODE mode)
 	{
 		m_Game->Release();
 	}
+
+	// ポリゴンの終了処理
+	CObject::ModeNotUninit();
 	
 	switch (mode)
 	{
@@ -167,6 +166,12 @@ void CManager::SetMode(MODE mode)
 	case CManager::MODE_RESULT:
 		m_Game = new CResult;
 		break;
+	case CManager::MODE_RANKING:
+		m_Game = new CRanking;
+		break;
+	case CManager::MODE_NAMESET:
+		m_Game = new CNemeSet;
+		break;
 	default:
 		break;
 	}
@@ -177,6 +182,5 @@ void CManager::SetMode(MODE mode)
 		return ;
 	}
 	m_Game->SetUp(CObject::MODE);
-
 }
 

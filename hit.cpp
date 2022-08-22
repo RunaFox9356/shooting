@@ -91,16 +91,11 @@ CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 {
 	CHit * pObject = nullptr;
 	pObject = new CHit;
-
-	//D3DXVECTOR3 Pos = ScreenCastWorld(
-	//	&pos,			// スクリーン座標
-	//	D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
-
 	
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-		pObject->SetPos(D3DXVECTOR3(pos.x, pos.y-50.0f, 0.0f));
+		pObject->SetPos(D3DXVECTOR3(pos.x, pos.y+50.0f, 0.0f));
  		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
   		pObject->SetAnimation(8,1);
 		int nType = Type;

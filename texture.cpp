@@ -39,13 +39,18 @@ const char* CTexture::s_FileName[] =
 	"data/TEXTURE/MagicCircle4.png",
 	"data/TEXTURE/MagicCircle5.png",
 	"data/TEXTURE/MagicCircle2.png",
-	"Data/TEXTURE/rand.png",		//”wŒi‚P
+	"Data/TEXTURE/star.png",		//”wŒi‚P
+	"Data/TEXTURE/town.png",		//”wŒi‚Q
+	"Data/TEXTURE/moon.png",		//”wŒi‚R
 	"Data/TEXTURE/BG.png",			//‚±‚±‚©‚çTITLE
 	"Data/TEXTURE/GonBG.png",
 	"Data/TEXTURE/Fox.png",
 	"Data/TEXTURE/gamestart.png",
 	"Data/TEXTURE/Getrotation.png",	//‚±‚±‚©‚çƒŠƒUƒ‹ƒg
-	"Data/TEXTURE/siro.jpg"
+	"Data/TEXTURE/siro.jpg",
+	"Data/TEXTURE/wallpaper_00405.jpg",
+	"Data/TEXTURE/ranking_rank.png",
+	"Data/TEXTURE/alphabet_ucase.jpg"
 };
 
 static_assert(sizeof(CTexture::s_FileName) / sizeof(CTexture::s_FileName[0]) == CTexture::TEXTURE_MAX, "aho");

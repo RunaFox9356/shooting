@@ -18,9 +18,13 @@
 #include "bullet.h"
 
 #include "magic.h"
+#include "enemy.h"
 
 #include "multiply.h"
 #include "particle_manager.h"
+#include "ranking.h"
+
+#include "score.h"
 
 CMagicBox* CGame::m_MagicBox = nullptr;
 CParticleManager*CGame::paticleManager = nullptr;
@@ -73,10 +77,8 @@ HRESULT CGame::Init(void)
 //========================
 void CGame::Uninit(void)
 {
-	// ポリゴンの終了処理
-	CObject::ModeNotUninit();
-
 	CModelManager::ReleaseAll();
+	CRanking::SetScore(CScore::GetScore());
 }
 
 //========================
@@ -85,18 +87,30 @@ void CGame::Uninit(void)
 void CGame::Update(void)
 {
 	// 更新処理
-	//CManager::GetRenderer()->Update();
+
 	CInput *CInputpInput = CInput::GetKey();
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
 	{
 		//モードの設定
 		CManager::SetMode(CManager::MODE_RESULT);
+		return;
 	}
-
-	if (GetMaxEnemy() <= 0)
+	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
 		//モードの設定
-		CManager::SetMode(CManager::MODE_RESULT);
+		CManager::SetMode(CManager::MODE_NAMESET);
+		return;
+	}
+	if (GetMaxEnemy() <= 0)
+	{
+		if (GetMaxBoss())
+		{
+			//モードの設定
+			CManager::SetMode(CManager::MODE_NAMESET);
+			return;
+		}
+		CEnemy::SetBoss();
+	
 	}
 	paticleManager->Update();
 }
@@ -107,10 +121,5 @@ void CGame::Update(void)
 void CGame::Draw(void)
 {
 	// 更新処理
-	CManager::GetRenderer()->Draw();
-}
-
-CMagicBox* CGame::GetMagicBox()
-{
-	return m_MagicBox;
+	//CManager::GetRenderer()->Draw();
 }

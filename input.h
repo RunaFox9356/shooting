@@ -29,7 +29,9 @@ public:
 		KEY_RIGHT,
 		KEY_DECISION,
 		KEY_SHOT,
-		KEY_DEBUG
+		KEY_DEBUG,
+		KEY_F2,
+		KEY_DELETE
 	};
 
 	CInput();

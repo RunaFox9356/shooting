@@ -34,6 +34,7 @@ public:
 		MODE_RANKING,		//ƒ‰ƒ“ƒLƒ“ƒO‰æ–Ê
 		MODE_GAMEOVER,
 		MODE_TUTORIAL,
+		MODE_NAMESET,
 		MODE_MAX
 	};
 

@@ -42,7 +42,7 @@ HRESULT CStraight::Init(void)
 
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
-		"Data/system/enemy/FoxPoizun.txt");
+		"Data/system/enemy/ponske.txt");
 
 
 	m_rot.y += (D3DX_PI*0.5f);

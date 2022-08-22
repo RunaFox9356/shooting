@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;./;$(IncludePath)</IncludePath>
+    <LibraryPath>playfab;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -94,11 +94,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\student\Documents\Visual Studio 2015\Projects\pori\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>XPlatCppWindowsDebug.lib;C:\Users\student\Documents\Visual Studio 2015\Projects\pori\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>lib_jsonDebug.lib;XPlatCppWindowsDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -156,6 +157,7 @@
     <ClCompile Include="3dpolygon.cpp" />
     <ClCompile Include="bell.cpp" />
     <ClCompile Include="bg.cpp" />
+    <ClCompile Include="boss.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="crystal.cpp" />
@@ -177,6 +179,8 @@
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="motion.cpp" />
     <ClCompile Include="multiply.cpp" />
+    <ClCompile Include="name.cpp" />
+    <ClCompile Include="nemeset.cpp" />
     <ClCompile Include="number.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="object2d.cpp" />
@@ -186,6 +190,7 @@
     <ClCompile Include="particle_manager.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="raccoon.cpp" />
+    <ClCompile Include="ranking.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="score.cpp" />
@@ -199,6 +204,7 @@
     <ClInclude Include="3dpolygon.h" />
     <ClInclude Include="bell.h" />
     <ClInclude Include="bg.h" />
+    <ClInclude Include="boss.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="crystal.h" />
@@ -220,6 +226,8 @@
     <ClInclude Include="manager.h" />
     <ClInclude Include="motion.h" />
     <ClInclude Include="multiply.h" />
+    <ClInclude Include="name.h" />
+    <ClInclude Include="nemeset.h" />
     <ClInclude Include="number.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="object2d.h" />
@@ -229,6 +237,7 @@
     <ClInclude Include="particle_manager.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="raccoon.h" />
+    <ClInclude Include="ranking.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="result.h" />

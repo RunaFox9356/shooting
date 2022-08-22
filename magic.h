@@ -27,6 +27,8 @@ public:
 	void MagicRelease(void);
 	static CMagicBox* Create(D3DXVECTOR3 pos);
 
+
+	
 private:
 	class CMagic : public CObject2d
 	{
@@ -54,6 +56,8 @@ private:
 	};
 	
 	CMagic *cMagic[MAXMAGIC];
+public:
+	CMagic& GetcMagic(int number);
 };
 #endif
 

@@ -26,16 +26,15 @@ public:
 	void Draw() override;
 	void Set(int nScore);
 	void Add(int nValue);
-	int Get();
-	static CScore*Create();
+	static CScore*Create(const D3DXVECTOR3 pos);
 	void SetPos(const D3DXVECTOR3 &pos) { m_posScore = pos; };
 	const D3DXVECTOR3 *GetPos() const { return &m_posScore; };
+	static int& GetScore();
 
 private:
 
 	 CNumber* m_pNumber[MAX_SCORE];
-	 CNumber * test[MAX_SCORE];
-	 int m_nScore;
+	 static int m_nScore;
 	 D3DXVECTOR3 m_posScore; //スコアの位置
 };
 

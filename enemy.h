@@ -31,7 +31,7 @@ public:
 	{
 		TYPE_RACCOONL = 0,	// ニュートラル
 		TYPE_FOX,			// 歩き
-		TYPE_FOX2,		// 攻撃
+		TYPE_BOSS,		// 攻撃
 		TYPE_FOX3,			// ジャンプ
 		TYPE_FOX4,		// 着地
 		TYPE_MAX
@@ -62,17 +62,15 @@ public:
 	void Update(void)override;	// 更新
 	void Draw()override;	// 描画
 	void Collision();	// 当たり判定
-	static void  CEnemy::LoadEnemy(const char * pFdata);
-	static CEnemy *CEnemy::Create(const int Type);
+	static void  LoadEnemy(const char * pFdata);
+	static CEnemy *Create(const int Type);
 
-
+	static void SetBoss();
 private:
 	//void Collision(void);	// 当たり判定まとめ
 	//void Move(void);		// 移動
 
 private:
 
-	ANIME			m_motionType;					// モーションタイプ(現在)
-	ANIME			m_motionTypeOld;				// モーションタイプ(過去)
 };
 #endif

@@ -51,8 +51,10 @@ public:
 	static void AllCreate();
 	static void ModeNotUninit();
 	static void TypeDraw(EObjectType Type);
-	static CLife* CObject::GetLife();
-	static int& CObject::GetMaxEnemy() { return m_AllEnemy; };
+	static CLife* GetLife();
+	static int& GetMaxEnemy() { return m_AllEnemy; };
+	static bool& GetMaxBoss() { return notBoss; };
+	static void SetBossPop(bool Boss) { notBoss = Boss; };
 	int * GetId();
 	CObject ** GetObjectData(int nCount);
 	void SetUp(EObjectType Type);
@@ -67,6 +69,7 @@ protected:
 	int	m_nID;
 	int m_list;
 	static int m_AllEnemy;
+	static bool notBoss;
 private:
 	//int	m_nID;
 	static int m_AllMember;
