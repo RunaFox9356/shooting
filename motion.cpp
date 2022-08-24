@@ -644,6 +644,12 @@ CModel*  CModelManager::Load(const char *pXFileName)
 	return nullptr;
 }
 
+//=============================================================================
+// Xfileのよみこみ
+// Author : 浜田琉雅
+// 概要 : Xfileのよみこみ
+//=============================================================================
+
 CModel * CModelManager::LoadXfile(const char * pXFileName)
 {
 	for (int i = 0; i < MODEL_MAX; i++)
@@ -705,7 +711,11 @@ void CModelManager::ReleaseAll()
 				Manager->m_apModel[i] = nullptr;
 			}
 		}
-	
+		if (ms_ModelManager != nullptr)
+		{
+			delete ms_ModelManager;
+			ms_ModelManager = nullptr;
+		}
 	
 	}
 }
@@ -713,7 +723,7 @@ void CModelManager::ReleaseAll()
 //=============================================================================
 // モデルのコンストラクタ
 // Author : 浜田琉雅
-// 概要 : 
+// 概要 : 数字の初期化
 //=============================================================================
 CModel::CModel():
 	nType(-1),

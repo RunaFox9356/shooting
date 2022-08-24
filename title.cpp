@@ -8,7 +8,8 @@
 #include "input.h"
 #include "manager.h"
 #include "object2d.h"
-
+#include "player.h"
+#include "fade.h"
 //========================
 // コンストラクター
 //========================
@@ -50,6 +51,13 @@ HRESULT CTitle::Init(void)
 	m_object2d[3]->SetTexture(CTexture::TEXTURE_FOXTITLE);
 	m_object2d[3]->SetSize(CManager::Pos);
 	m_object2d[3]->SetPos(CManager::Pos);
+
+	//m_object[0] = CPlayer::Create();
+	//m_object[0]->SetUp(CObject::PLAYER);
+
+
+
+
 
 	return S_OK;
 }
@@ -102,7 +110,7 @@ void CTitle::Update(void)
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
 		//モードの設定
-		CManager::SetMode(CManager::MODE_GAME);
+		CManager::GetFade()->NextMode(CManager::MODE_GAME);
 	}
 #ifdef _DEBUG
 
@@ -110,21 +118,14 @@ void CTitle::Update(void)
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
 	{
 		//モードの設定
-		CManager::SetMode(CManager::MODE_GAME);
+		CManager::GetFade()->NextMode(CManager::MODE_GAME);
 	}
 	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
 		//モードの設定
-		CManager::SetMode(CManager::MODE_NAMESET);
+		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 	}
-	/*if (GetKeyboardPress(DIK_0))
-	{
-		SetFade(MODE_RESULT);
-	}
-	if (GetKeyboardPress(DIK_9))
-	{
-		SetFade(MODE_GAME);
-	}*/
+
 
 #endif // DEBUG
 }

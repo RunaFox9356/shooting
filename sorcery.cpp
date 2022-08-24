@@ -264,7 +264,7 @@ void CSorcey::Collision()
 				assert(pObject3d != nullptr);
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
-				if (enemyPos->x < 1280.0f - pEnemySize->x)
+				if (enemyPos->x < 590.0f - pEnemySize->x)
 				{
 					float enemySize = 50.0f;
 					enemySize *= pEnemySize->y;

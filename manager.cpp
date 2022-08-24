@@ -13,6 +13,7 @@
 #include "game.h"
 #include "title.h"
 #include "result.h"
+#include "fade.h"
 #include "nemeset.h"
 
 #include "texture.h"
@@ -23,6 +24,7 @@
 //-----------------------------------------------------------------------------
 CRenderer * CManager::m_cRenderer = nullptr; 
 CTexture * CManager::m_pTexture = nullptr;
+CFade*  CManager::m_Fade = nullptr;
 CObject*CManager::m_Game = nullptr;
 const D3DXVECTOR3 CManager::Pos = D3DXVECTOR3(1280.0f * 0.5f, 720.0f * 0.5f, 0.0f);
 //=============================================================================
@@ -71,6 +73,7 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	//ƒ‚[ƒh‚Ìİ’è
 	SetMode(m_mode);
 
+	m_Fade = CFade::Create();
 
 	
 	return S_OK;
@@ -97,6 +100,8 @@ void CManager::Uninit()
 		delete m_cRenderer;
 		m_cRenderer = nullptr;
 	}
+
+
 
 	//“ü—Íˆ—‚ÌI—¹ˆ—
 	m_Input->Uninit();
@@ -138,6 +143,11 @@ CRenderer *CManager::GetRenderer()
 CTexture *CManager::GetTexture()
 {
 	return m_pTexture;
+}
+
+CFade * CManager::GetFade()
+{
+	return m_Fade;
 }
 
 

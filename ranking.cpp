@@ -12,6 +12,7 @@
 #include "texture.h"
 #include "object2d.h"
 #include "name.h"
+#include "fade.h"
 
 #include "playfab/PlayFabError.h"
 #include "playfab/PlayFabClientDataModels.h"
@@ -154,7 +155,7 @@ void CRanking::Update(void)
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
 	//ƒ‚[ƒh‚ÌÝ’è
-			CManager::SetMode(CManager::MODE_TITLE);
+		CManager::GetFade()->NextMode(CManager::MODE_TITLE);
 			return;
 	
 	}

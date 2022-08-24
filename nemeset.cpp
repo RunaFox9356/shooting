@@ -9,6 +9,7 @@
 #include "manager.h"
 #include "object2d.h"
 #include "ranking.h"
+#include "fade.h"
 std::string  CNemeSet::m_PlayName;
 
 //========================
@@ -29,7 +30,7 @@ CNemeSet::~CNemeSet()
 //================
 HRESULT CNemeSet::Init(void)
 {
-
+	m_PlayName = "";
 	m_NowPlay = 0;
 	m_NemePos = D3DXVECTOR3(CManager::Pos.x-300.0f, 100.0f, 0.0f);
 
@@ -88,7 +89,7 @@ void CNemeSet::Update(void)
 			//モードの設定
 			CRanking::SetPlayNeme(m_PlayName);
 
-			CManager::SetMode(CManager::MODE_RANKING);
+			CManager::GetFade()->NextMode(CManager::MODE_RANKING);
 			return;
 		}
 
@@ -109,87 +110,12 @@ void CNemeSet::RankingNeme()
 {
 	CName::ALPHABET Type = m_ListName[1]->GetAlphabet();
 
-	switch (Type)
+	if (Type >= CName::A && Type <= CName::Z)
 	{
-	case CName::A:
-		m_PlayName += "A";
-		break;
-	case CName::B:
-		m_PlayName += "B";
-		break;
-	case CName::C:
-		m_PlayName += "C";
-		break;
-	case CName::D:
-		m_PlayName += "D";
-		break;
-	case CName::E:
-		m_PlayName += "E";
-		break;
-	case CName::F:
-		m_PlayName += "F";
-		break;
-	case CName::G:
-		m_PlayName += "G";
-		break;
-	case CName::H:
-		m_PlayName += "H";
-		break;
-	case CName::I:
-		m_PlayName += "I";
-		break;
-	case CName::J:
-		m_PlayName += "J";
-		break;
-	case CName::K:
-		m_PlayName += "K";
-		break;
-	case CName::L:
-		m_PlayName += "L";
-		break;
-	case CName::M:
-		m_PlayName += "M";
-		break;
-	case CName::N:
-		m_PlayName += "N";
-		break;
-	case CName::O:
-		m_PlayName += "O";
-		break;
-	case CName::P:
-		m_PlayName += "P";
-		break;
-	case CName::Q:
-		m_PlayName += "Q";
-		break;
-	case CName::R:
-		m_PlayName += "R";
-		break;
-	case CName::S:
-		m_PlayName += "S";
-		break;
-	case CName::T:
-		m_PlayName += "T";
-		break;
-	case CName::U:
-		m_PlayName += "U";
-		break;
-	case CName::V:
-		m_PlayName += "V";
-		break;
-	case CName::W:
-		m_PlayName += "W";
-		break;
-	case CName::X:
-		m_PlayName += "X";
-		break;
-	case CName::Y:
-		m_PlayName += "Y";
-		break;
-	case CName::Z:
-		m_PlayName += "Z";
-		break;
-	case CName::MAX:
+		m_PlayName += ('A' + (char)Type);
+	}
+	else if (Type == CName::MAX)
+	{
 		//モードの設定
 		if (m_PlayName != "")
 		{
@@ -202,10 +128,10 @@ void CNemeSet::RankingNeme()
 		{
 			return;
 		}
-		break;
-	default:
+	}
+	else
+	{
 		return;
-		break;
 	}
 
 	m_PlayNameSet[m_NowPlay] = CName::Create();

@@ -72,7 +72,7 @@ void CBullet::Update()
 	{
 		CObject::Release();
 	}
-	if (m_pos.x > SCREEN_WIDTH)
+	if (m_pos.x > SCREEN_WIDTH/2)
 	{
 		CObject::Release();
 	}
@@ -160,7 +160,7 @@ void CBullet::Draw()
 //=============================================================================
 // create関数
 //=============================================================================
-CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move)
+CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move, int magic)
 {
 	CBullet * pObject = nullptr;
 	pObject = new CBullet;
@@ -172,10 +172,9 @@ CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move)
 		pObject->Init();
 		pObject->SetSize(D3DXVECTOR3(50.0f, 50.0f, 0.0f));
 
-		CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
-		pObject->SetType((int)NouPlayer);
+		pObject->SetType((int)magic);
 		//色の設定
-		switch (NouPlayer)
+		switch (magic)
 		{
 		case CPlayer::NOW_FIRE:
 			pObject->SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
@@ -228,52 +227,32 @@ void CBullet::Move()
 	{
 		bool homing = false;
 
-		
-			CObject**pObject = nullptr;
-			pObject = GetObjectData(0);
-			for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
+		CObject**pObject = nullptr;
+		pObject = GetObjectData(0);
+		for (int nObject = 0; nObject < MAX_OBJECT; nObject++)
+		{
+			if (pObject[nObject] != nullptr)
 			{
-				if (pObject[nObject] != nullptr)
+				EObjectType Type = pObject[nObject]->GetType();
+				if (Type == CObject::ENEMY)
 				{
-					EObjectType Type = pObject[nObject]->GetType();
-					if (Type == CObject::ENEMY)
-					{
-						/*D3DXVECTOR3 vec = *pObject->GetPos() - m_pos;
-						float length = D3DXVec3Length(&vec);
+					CEnemy* Enemy = dynamic_cast<CEnemy*>(pObject[nObject]);  // ダウンキャスト
 
-						if (m_Length >= length)
-						{
-							m_Length = length;
-							m_VecLength = vec;
-						}*/
-						CEnemy* Enemy = dynamic_cast<CEnemy*>(pObject[nObject]);  // ダウンキャスト
-
-						D3DXVECTOR3 vecDiff = *Enemy->GetPos() - m_pos;
-						float fLength = D3DXVec3Length(&vecDiff);
-						m_pos = m_pos + ((vecDiff / fLength) * 10.0f);
-						homing = true;
-						break;
-					}
+					D3DXVECTOR3 vecDiff = *Enemy->GetPos() - m_pos;
+					float fLength = D3DXVec3Length(&vecDiff);
+					m_pos = m_pos + ((vecDiff / fLength) * 10.0f);
+					homing = true;
+					break;
 				}
 			}
-		
+		}
 
 		if (!homing)
 		{
 			m_pos += m_move;
 		}
 	}
-
-		/*if (m_Length <= 300.0f)
-		{
-			m_pos += m_VecLength / m_Length * 2.0f;
-		}
-		else
-		{
-			m_pos += m_VecLength / m_Length * 2.0f;
-		}*/
-		
-		break;
+	break;
 	case CPlayer::NOW_STORM:
 		m_pos += m_move;
 		break;

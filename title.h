@@ -22,6 +22,7 @@ public:
 	void Draw() override;
 	
 private:
+	CObject * m_object[4];
 	CObject2d *m_object2d[4];
 	int m_addX;
 	int m_addY;

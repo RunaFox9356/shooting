@@ -161,8 +161,8 @@ void CCrystal::Update()
 					pObject[nObject]->Release();
 					if (Type != CObject::RANKUPBULLET)
 					{
-						CBullet::Create(m_pos, D3DXVECTOR3(15.0f, 3.0f, 0.0f))->SetUp(EObjectType::RANKUPBULLET);
-						CBullet::Create(m_pos, D3DXVECTOR3(15.0f, -3.0f, 0.0f))->SetUp(EObjectType::RANKUPBULLET);
+						CBullet::Create(m_pos, D3DXVECTOR3(15.0f, 3.0f, 0.0f), m_myType)->SetUp(EObjectType::RANKUPBULLET);
+						CBullet::Create(m_pos, D3DXVECTOR3(15.0f, -3.0f, 0.0f), m_myType)->SetUp(EObjectType::RANKUPBULLET);
 					}
 					return;
 				}

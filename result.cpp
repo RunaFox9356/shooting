@@ -14,6 +14,7 @@
 #include "result.h"
 #include "input.h"
 #include "manager.h"
+#include "fade.h"
 
 //========================
 // コンストラクター
@@ -104,14 +105,14 @@ void CResult::Update(void)
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
 		//モードの設定
-		CManager::SetMode(CManager::MODE_TITLE);
+		CManager::GetFade()->NextMode(CManager::MODE_TITLE);
 	}
 #ifdef _DEBUG
 
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
 	{
 		//モードの設定
-		CManager::SetMode(CManager::MODE_TITLE);
+		CManager::GetFade()->NextMode(CManager::MODE_TITLE);
 	}
 
 #endif // DEBUG

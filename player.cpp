@@ -141,40 +141,54 @@ void CPlayer::Move()	//動きセット
 	{	
 		m_move.y += m_MoveSpeed;
 	}
-
+	
 	//弾のクリエイト
 	if (CInputpInput->Press(CInput::KEY_SHOT))
 	{
 		m_Pow++;
-		if (m_Pow >=20)
+		if (m_Pow >= 20)
 		{
 			m_motionType = CObject3d::ANIME_ATTACK;
-	
+
 			m_Pow = 0;
-			switch (m_NowMagic)
+
+			for (int i = 0; i < 3; i++)
 			{
-			case CPlayer::NOW_FIRE:
-				CBullet::Create(m_pos, D3DXVECTOR3(13.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
-				break;
-			case CPlayer::NOW_ICE:
-				CBullet::Create(m_pos, D3DXVECTOR3(15.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
-				break;
-			case CPlayer::NOW_STORM:
-				CBullet::Create(m_pos, D3DXVECTOR3(13.0f, 3.0f, 0.0f))->SetUp(EObjectType::BULLET);
-				CBullet::Create(m_pos, D3DXVECTOR3(15.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
-				CBullet::Create(m_pos, D3DXVECTOR3(13.0f, -3.0f, 0.0f))->SetUp(EObjectType::BULLET);
-				break;
-			case CPlayer::NOW_SUN:
-				CBullet::Create(m_pos, D3DXVECTOR3(30.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
-				CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + 50.0f, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
-				CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 50.0f, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
-	
-				break;
-			case CPlayer::NOW_NON:
-				CBullet::Create(m_pos, D3DXVECTOR3(10.0f, 0.0f, 0.0f))->SetUp(EObjectType::BULLET);
-				break;
-			default:
-				break;
+				int Type = CGame::GetMagicBox()->GetcMagic(i).GetTexture();
+
+				D3DXVECTOR3 pos;
+				pos.y = (i * 50.0f)+50;
+
+				CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + pos.y, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+				CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - pos.y, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+
+
+				switch (Type)
+				{
+				case CPlayer::NOW_FIRE:
+					CBullet::Create(m_pos + pos, D3DXVECTOR3(13.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(m_pos - pos, D3DXVECTOR3(13.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					break;
+				case CPlayer::NOW_ICE:
+					CBullet::Create(m_pos + pos, D3DXVECTOR3(15.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(m_pos - pos, D3DXVECTOR3(15.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					break;
+				case CPlayer::NOW_STORM:
+					CBullet::Create(m_pos + pos, D3DXVECTOR3(13.0f, 3.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(m_pos - pos, D3DXVECTOR3(13.0f, -3.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					break;
+				case CPlayer::NOW_SUN:
+		
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + pos.y, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - pos.y, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+
+					break;
+				case CPlayer::NOW_NON:
+					CBullet::Create(m_pos, D3DXVECTOR3(10.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}

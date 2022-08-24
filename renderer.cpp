@@ -137,13 +137,19 @@ void CRenderer::Uninit()
 		pCamera[0] = nullptr;
 	}
 	// カメラ終了処理
-	if (pCamera[0] != nullptr)
+	if (pCamera[1] != nullptr)
 	{
 		pCamera[1]->Uninit();
 		delete pCamera[1];
 		pCamera[1] = nullptr;
 	}
-	// カメラ終了処理
+
+	if (particle != nullptr)
+	{
+		particle->Uninit();
+		delete particle;
+		particle = nullptr;
+	}
 
 #ifdef _DEBUG
 	// デバッグ情報表示用フォントの破棄

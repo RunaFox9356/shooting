@@ -180,6 +180,9 @@
     <ClCompile Include="boss.cpp">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gon.h">
@@ -319,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="boss.h">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>メイン\画面遷移</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -36,7 +36,7 @@ public:
 
 	
 	const static int MAX_OBJECT = 2560;
-	const static int MAX_LIST = 3;
+	const static int MAX_LIST = 4;
 	CObject(int list = 0);
 	virtual ~CObject();
 	virtual HRESULT Init() = 0;

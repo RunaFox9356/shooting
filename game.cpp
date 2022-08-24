@@ -19,6 +19,7 @@
 
 #include "magic.h"
 #include "enemy.h"
+#include "fade.h"
 
 #include "multiply.h"
 #include "particle_manager.h"
@@ -92,13 +93,14 @@ void CGame::Update(void)
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
 	{
 		//モードの設定
-		CManager::SetMode(CManager::MODE_RESULT);
+		CManager::GetFade()->NextMode(CManager::MODE_RESULT);
+		//CManager::SetMode(CManager::MODE_RESULT);
 		return;
 	}
 	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
 		//モードの設定
-		CManager::SetMode(CManager::MODE_NAMESET);
+		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		return;
 	}
 	if (GetMaxEnemy() <= 0)
@@ -106,7 +108,8 @@ void CGame::Update(void)
 		if (GetMaxBoss())
 		{
 			//モードの設定
-			CManager::SetMode(CManager::MODE_NAMESET);
+
+			CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 			return;
 		}
 		CEnemy::SetBoss();
