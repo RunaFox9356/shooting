@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include "boss.h"
+#include "snake.h"
 #include "camera.h"
 #include "motion.h"
 #include "manager.h"
@@ -20,28 +20,29 @@
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CBoss::CBoss()
+CSnake::CSnake()
 {
 }
 
 //------------------------------------
 // デストラクタ
 //------------------------------------
-CBoss::~CBoss()
+CSnake::~CSnake()
 {
 }
 
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CBoss::Init(void)
+HRESULT CSnake::Init(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
 
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
-		"Data/system/enemy/kuma.txt");
+		"Data/system/enemy/snake.txt");
+
 
 	m_rot.y += (D3DX_PI*0.5f);
 	return S_OK;
@@ -50,45 +51,28 @@ HRESULT CBoss::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CBoss::Uninit(void)
+void CSnake::Uninit(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
-
 }
 
 //------------------------------------
 // 更新
 //------------------------------------
-void CBoss::Update(void)
+void CSnake::Update(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();
-
+	m_motionType = CObject3d::ANIME_NORMAL;
 	//ここにmoveをいれる
-	m_motionType = CObject3d::ANIME_ATTACK;
 
-	if (m_pos.y <= -SCREEN_HEIGHT / 2)
-	{
-		m_pos.y = -SCREEN_HEIGHT / 2;
-		m_move.y *= -1.0f;
-	}
-
-	if (m_pos.y >= SCREEN_HEIGHT / 2)
-	{
-		m_pos.y = SCREEN_HEIGHT / 2;
-		m_move.y *= -1.0f;
-	}
-	if (m_pos.x <= -SCREEN_WIDTH / 2)
-	{
-		m_pos.x = SCREEN_WIDTH;
-	}
 }
 
 //------------------------------------
 // 描画
 //------------------------------------
-void CBoss::Draw(void)
+void CSnake::Draw(void)
 {
 	CEnemy::Draw();
 }
@@ -96,10 +80,10 @@ void CBoss::Draw(void)
 //------------------------------------
 // create
 //------------------------------------
-CBoss *CBoss::Create()
+CSnake *CSnake::Create()
 {
-	CBoss * pObject = nullptr;
-	pObject = new CBoss;
+	CSnake * pObject = nullptr;
+	pObject = new CSnake;
 
 	if (pObject != nullptr)
 	{

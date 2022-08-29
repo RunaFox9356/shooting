@@ -159,23 +159,19 @@ void CPlayer::Move()	//動きセット
 				D3DXVECTOR3 pos;
 				pos.y = (i * 50.0f)+50;
 
-				CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + pos.y, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
-				CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - pos.y, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
-
-
 				switch (Type)
 				{
 				case CPlayer::NOW_FIRE:
-					CBullet::Create(m_pos + pos, D3DXVECTOR3(13.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
-					CBullet::Create(m_pos - pos, D3DXVECTOR3(13.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + pos.y, m_pos.z), D3DXVECTOR3(13.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - pos.y, m_pos.z), D3DXVECTOR3(13.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
 					break;
 				case CPlayer::NOW_ICE:
-					CBullet::Create(m_pos + pos, D3DXVECTOR3(15.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
-					CBullet::Create(m_pos - pos, D3DXVECTOR3(15.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + pos.y, m_pos.z), D3DXVECTOR3(15.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - pos.y, m_pos.z), D3DXVECTOR3(15.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
 					break;
 				case CPlayer::NOW_STORM:
-					CBullet::Create(m_pos + pos, D3DXVECTOR3(13.0f, 3.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
-					CBullet::Create(m_pos - pos, D3DXVECTOR3(13.0f, -3.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + pos.y, m_pos.z), D3DXVECTOR3(13.0f, 3.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - pos.y, m_pos.z), D3DXVECTOR3(13.0f, -3.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
 					break;
 				case CPlayer::NOW_SUN:
 		
@@ -184,10 +180,12 @@ void CPlayer::Move()	//動きセット
 
 					break;
 				case CPlayer::NOW_NON:
-					CBullet::Create(m_pos, D3DXVECTOR3(10.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + pos.y, m_pos.z), D3DXVECTOR3(30.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
 					break;
 				default:
-					break;
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - pos.y, m_pos.z), D3DXVECTOR3(10.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+					CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y + pos.y, m_pos.z), D3DXVECTOR3(10.0f, 0.0f, 0.0f), Type)->SetUp(EObjectType::BULLET);
+				break;
 				}
 			}
 		}
@@ -229,7 +227,6 @@ void CPlayer::Move()	//動きセット
 				particleManager->Create(Pos, 0, CParticleManager::NOW_SUN);
 				break;
 			case CPlayer::NOW_NON:
-
 				break;
 			default:
 				break;
@@ -247,7 +244,6 @@ void CPlayer::Move()	//動きセット
 	m_move.y += (0.0f - m_move.y)*ATTENUATION;
 
 	m_pos += m_move;//移動を加算
-
 
 	//正規化
 	if ( consumption > D3DX_PI)

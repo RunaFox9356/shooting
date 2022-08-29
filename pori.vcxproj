@@ -168,6 +168,7 @@
     <ClCompile Include="life.cpp" />
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="magiccircle.cpp" />
+    <ClCompile Include="maruneko.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="file.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="score.cpp" />
+    <ClCompile Include="snake.cpp" />
     <ClCompile Include="sorcery.cpp" />
     <ClCompile Include="straight.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -216,6 +218,7 @@
     <ClInclude Include="life.h" />
     <ClInclude Include="magic.h" />
     <ClInclude Include="magiccircle.h" />
+    <ClInclude Include="maruneko.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="file.h" />
@@ -244,6 +247,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="score.h" />
+    <ClInclude Include="snake.h" />
     <ClInclude Include="sorcery.h" />
     <ClInclude Include="straight.h" />
     <ClInclude Include="texture.h" />

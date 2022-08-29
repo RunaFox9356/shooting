@@ -36,7 +36,7 @@ CScore *CRanking::m_Ranking[MAX_RANK];
 int CRanking::m_score;
 std::string  CRanking::m_PlayName;
 
-void OnLoginGet(const LoginResult& result, void* customData)
+void OnLoginGet(const LoginResult& , void* )
 {
 	printf("Congratulations, you made your first successful API call!\n");
 	finished = true;
@@ -44,7 +44,7 @@ void OnLoginGet(const LoginResult& result, void* customData)
 	Sleep(1000);
 }
 
-void OnLoginSet(const LoginResult& result, void* customData)
+void OnLoginSet(const LoginResult& , void* )
 {
 	printf("Congratulations, you made your first successful API call!\n");
 	finished = true;
@@ -52,7 +52,7 @@ void OnLoginSet(const LoginResult& result, void* customData)
 	CRanking::SetName();
 }
 
-void OnLoginFail(const PlayFabError& error, void* customData)
+void OnLoginFail(const PlayFabError& error, void*)
 {
 	printf("Something went wrong with your first API call.\n");
 	printf("Here's some debug information:\n");
@@ -182,12 +182,9 @@ void CRanking::GoScore()
 	req.Statistics.push_back(statistic);
 
 	PlayFabClientAPI::UpdatePlayerStatistics(req,
-		[](const ClientModels::UpdatePlayerStatisticsResult& resul, void*customData)
+		[](const ClientModels::UpdatePlayerStatisticsResult& , void*)
 	{//成功時
-		int a = 0;
 
-	}, [](const PlayFabError& error, void*customData)
-	{//失敗時
 	});
 }
 
@@ -220,13 +217,13 @@ void CRanking::GerScore()
 	req.StatisticName = "ScoreFox";//ゲームマネージャーでランキング名のやつ
 
 	PlayFabClientAPI::GetLeaderboard(req,
-		[](const ClientModels::GetLeaderboardResult& resul, void*customData)
+		[](const ClientModels::GetLeaderboardResult& resul, void*)
 	{
 		for (auto item : resul.Leaderboard)
 		{
 			if (item.Position <= 4)
 			{
-				const char * Name = item.DisplayName.c_str();//なまえをキャラに変換
+				//const char * Name = item.DisplayName.c_str();//なまえをキャラに変換
 				// 表示
 				m_Ranking[item.Position]->Set(item.StatValue);	
 			}
@@ -242,13 +239,10 @@ void CRanking::SetName()
 	UpdateUserTitleDisplayNameRequest req;
 
 	req.DisplayName = m_PlayName;
-	PlayFabClientAPI::UpdateUserTitleDisplayName(req, [](const UpdateUserTitleDisplayNameResult result, void* customData)
+	PlayFabClientAPI::UpdateUserTitleDisplayName(req, [](const UpdateUserTitleDisplayNameResult result, void*)
 	{
 		//成功
 
-	}, [](const PlayFabError& error, void* customData)
-	{
-		//失敗
 	});
 }
 
@@ -276,12 +270,10 @@ std::string CRanking::GetMACAddr()
 	}
 
 	char pOutMacAddr[64];
-	std::string macAddr;
 	if (GetAdaptersInfo(adapterInfo, &dwBufLen) == NO_ERROR)
 	{
 		PIP_ADAPTER_INFO pAdapterInfo = adapterInfo;
-		macAddr =
-			sprintf(pOutMacAddr, "%02X:%02X:%02X:%02X:%02X:%02X",
+		sprintf(pOutMacAddr, "%02X:%02X:%02X:%02X:%02X:%02X",
 				pAdapterInfo->Address[0], pAdapterInfo->Address[1],
 				pAdapterInfo->Address[2], pAdapterInfo->Address[3],
 				pAdapterInfo->Address[4], pAdapterInfo->Address[5]);

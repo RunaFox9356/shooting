@@ -29,11 +29,12 @@ public:
 
 	enum TYPE
 	{
-		TYPE_RACCOONL = 0,	// ニュートラル
-		TYPE_FOX,			// 歩き
-		TYPE_BOSS,		// 攻撃
-		TYPE_FOX3,			// ジャンプ
-		TYPE_FOX4,		// 着地
+		TYPE_RACCOONL = 0,	//たぬき
+		TYPE_NEKO,			// ねこ
+		TYPE_SNAKE,
+		TYPE_MARU,			// ジャンプ
+		TYPE_BOSS,			// 攻撃
+		TYPE_FOX4,			// 着地
 		TYPE_MAX
 	};
 

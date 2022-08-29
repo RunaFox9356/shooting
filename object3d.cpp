@@ -174,15 +174,17 @@ void CObject3d::Draw(void)
 		// s—ñŠ|‚¯ŽZŠÖ”(‘æ2ˆø”~‘æ3ˆø”‘æ‚ð‚Pˆø”‚ÉŠi”[)
 		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
 
-		// ƒeƒNƒXƒ`ƒƒ‚ÌÝ’è
-		pDevice->SetTexture(0, NULL);
-
-		if (m_pMotion)
+		if (m_pos.x <=SCREEN_WIDTH / 2.0f+100.0f)
 		{
-			// ƒp[ƒc‚Ì•`‰æÝ’è
-			m_pMotion->SetParts(m_mtxWorld, m_Damegeis);
-		}
+			// ƒeƒNƒXƒ`ƒƒ‚ÌÝ’è
+			pDevice->SetTexture(0, NULL);
 
+			if (m_pMotion)
+			{
+				// ƒp[ƒc‚Ì•`‰æÝ’è
+				m_pMotion->SetParts(m_mtxWorld, m_Damegeis);
+			}
+		}
 		// s—ñŠ|‚¯ŽZŠÖ”(‘æ2ˆø”~‘æ3ˆø”‘æ‚ð‚Pˆø”‚ÉŠi”[)
 		pDevice->SetMaterial(&marDef);
 	}

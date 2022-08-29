@@ -20,6 +20,8 @@
 #include "game.h"
 #include "life.h"
 #include "boss.h"
+#include "snake.h"
+#include "maruneko.h"
 
 namespace nl = nlohmann;
 
@@ -47,8 +49,6 @@ HRESULT CEnemy::Init(void)
 {
 	// Œ»Ý‚Ìƒ‚[ƒVƒ‡ƒ“”Ô†‚Ì•ÛŠÇ
 	CObject3d::Init();
-
-	
 
 	m_motionTypeOld = m_motionType;
 	m_rot.y += (D3DX_PI*0.5f);
@@ -131,8 +131,14 @@ CEnemy *CEnemy::Create(const int Type)
 	case TYPE_RACCOONL:
 		pObject = new CRaccoon;
 		break;
-	case TYPE_FOX:
+	case TYPE_NEKO:
 		pObject = new CStraight;
+		break;
+	case TYPE_SNAKE:
+		pObject = new CSnake;
+		break;
+	case TYPE_MARU:
+		pObject = new CMaru;
 		break;
 	case TYPE_BOSS:
 		pObject = new CBoss;
@@ -145,7 +151,6 @@ CEnemy *CEnemy::Create(const int Type)
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-
 	}
 	return pObject;
 }

@@ -101,27 +101,26 @@ void CBullet::Update()
 					((m_pos.x - m_Size.x) <= (enemyPos->x + pEnemySize->x)) &&
 					((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
 				{
-					CPlayer::NOWMAGIC  NouPlayer = *CPlayer::GetMagic();
-					CHit::Create(*enemyPos, NouPlayer);
-					switch (NouPlayer)
+					CHit::Create(*enemyPos, m_Type);
+					switch (m_Type)
 					{
 					case CPlayer::NOW_FIRE:
 						pObject3d->HitLife(30);
 						break;
 					case CPlayer::NOW_ICE:
-						pObject3d->HitLife(5);
+						pObject3d->HitLife(2);
 						break;
 					case CPlayer::NOW_STORM:
-						pObject3d->HitLife(5);
+						pObject3d->HitLife(3);
 						break;
 					case CPlayer::NOW_SUN:
-						pObject3d->HitLife(5);
+						pObject3d->HitLife(3);
 						break;
 					case CPlayer::NOW_NON:
-						pObject3d->HitLife(5);
+						pObject3d->HitLife(2);
 						break;
 					default:
-						pObject3d->HitLife(5);
+						pObject3d->HitLife(2);
 						break;
 					}
 
@@ -178,6 +177,7 @@ CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move, int magic)
 		{
 		case CPlayer::NOW_FIRE:
 			pObject->SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
+
 			break;
 		case CPlayer::NOW_ICE:
 			pObject->SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
@@ -192,6 +192,7 @@ CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move, int magic)
 			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			break;
 		default:
+				pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			break;
 		}
 	}
@@ -262,7 +263,8 @@ void CBullet::Move()
 	case CPlayer::NOW_NON:
 		m_pos += m_move;
 		break;
-	default:
+	default:	
+		m_pos += m_move;
 		break;
 	}
 
