@@ -126,7 +126,7 @@ CEnemy *CEnemy::Create(const int Type)
 {
 	CEnemy * pObject = nullptr;
 
-
+	pObject->m_EnemyType = (TYPE)Type;
 
 	switch (Type)
 	{
@@ -149,8 +149,6 @@ CEnemy *CEnemy::Create(const int Type)
 		pObject = new CRaccoon;
 		break;
 	}
-
-	pObject->m_EnemyType = (TYPE)Type;
 
 	if (pObject != nullptr)
 	{

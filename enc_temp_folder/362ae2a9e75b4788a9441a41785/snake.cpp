@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include "maruneko.h"
+#include "snake.h"
 #include "camera.h"
 #include "motion.h"
 #include "manager.h"
@@ -20,62 +20,58 @@
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CMaru::CMaru()
+CSnake::CSnake()
 {
 }
 
 //------------------------------------
 // デストラクタ
 //------------------------------------
-CMaru::~CMaru()
+CSnake::~CSnake()
 {
 }
 
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CMaru::Init(void)
+HRESULT CSnake::Init(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
 
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
-		"Data/system/enemy/neko.txt");
+		"Data/system/enemy/snake.txt");
 
 
-	m_rot.y += (D3DX_PI*0.5f);
+	m_rot.y -= (D3DX_PI*0.5f);
 	return S_OK;
 }
 
 //------------------------------------
 // 終了
 //------------------------------------
-void CMaru::Uninit(void)
+void CSnake::Uninit(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
+
 }
 
 //------------------------------------
 // 更新
 //------------------------------------
-void CMaru::Update(void)
+void CSnake::Update(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();
-
-	if (m_pos.x <= CManager::Pos.x/4)
-	{
-		//ここにmoveをいれる
-		m_move.x++;
-	}
+	m_motionType = CObject3d::ANIME_NORMAL;
 }
 
 //------------------------------------
 // 描画
 //------------------------------------
-void CMaru::Draw(void)
+void CSnake::Draw(void)
 {
 	CEnemy::Draw();
 }
@@ -83,15 +79,14 @@ void CMaru::Draw(void)
 //------------------------------------
 // create
 //------------------------------------
-CMaru *CMaru::Create()
+CSnake *CSnake::Create()
 {
-	CMaru * pObject = nullptr;
-	pObject = new CMaru;
+	CSnake * pObject = nullptr;
+	pObject = new CSnake;
 
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-
 	}
 	return pObject;
 }

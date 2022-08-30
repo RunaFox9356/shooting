@@ -27,7 +27,7 @@ public:
 	void Update(void)override;	// XV
 	void Draw()override;	// •`‰æ
 	static CSnake *CSnake::Create();
-	void OnHit() override;
+
 
 private:
 

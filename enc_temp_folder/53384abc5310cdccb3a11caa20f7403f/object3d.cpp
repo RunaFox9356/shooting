@@ -280,7 +280,6 @@ void CObject3d::HitLife(int Damage)
 	m_Invincible = INVINCIBLE;
 	EObjectType Type =  GetType();
 
-	OnHit();
 	if (Type != PLAYER)
 	{
 		if (m_Life <= 0)

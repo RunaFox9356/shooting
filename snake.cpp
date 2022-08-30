@@ -44,7 +44,7 @@ HRESULT CSnake::Init(void)
 		"Data/system/enemy/snake.txt");
 
 
-	m_rot.y += (D3DX_PI*0.5f);
+	m_rot.y -= (D3DX_PI*0.5f);
 	return S_OK;
 }
 
@@ -55,6 +55,7 @@ void CSnake::Uninit(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
+
 }
 
 //------------------------------------
@@ -65,8 +66,6 @@ void CSnake::Update(void)
 	// 現在のモーション番号の保管
 	CEnemy::Update();
 	m_motionType = CObject3d::ANIME_NORMAL;
-	//ここにmoveをいれる
-
 }
 
 //------------------------------------
@@ -90,5 +89,13 @@ CSnake *CSnake::Create()
 		pObject->Init();
 	}
 	return pObject;
+}
+
+//------------------------------------
+// 特殊演出
+//-----------------------------------
+void CSnake::OnHit()
+{
+
 }
 

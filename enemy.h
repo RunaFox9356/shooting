@@ -58,16 +58,19 @@ public:
 	CEnemy();
 	~CEnemy();
 
-	HRESULT Init(void)override;	// ‰Šú‰»
-	void Uninit(void)override;	// ”jŠü
-	void Update(void)override;	// XV
+	HRESULT Init()override;	// ‰Šú‰»
+	void Uninit()override;	// ”jŠü
+	void Update()override;	// XV
 	void Draw()override;	// •`‰æ
 	void Collision();	// “–‚½‚è”»’è
+	TYPE GetType() { return m_EnemyType; };
 	static void  LoadEnemy(const char * pFdata);
 	static CEnemy *Create(const int Type);
 
 	static void SetBoss();
+
 private:
+	TYPE m_EnemyType;
 	//void Collision(void);	// “–‚½‚è”»’è‚Ü‚Æ‚ß
 	//void Move(void);		// ˆÚ“®
 

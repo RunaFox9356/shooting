@@ -34,7 +34,7 @@ CMotion::CMotion(char * pFileName)
 
 	// パーツ数の初期化
 	m_nMaxParts = 0;
-
+	m_nType = 0;
 	// モーションの読み込み
 	LoodSetMotion(pFileName);
 }
@@ -78,16 +78,6 @@ void CMotion::Init(void)
 		(m_parts + i)->pBuffer = Data->pBuffer;
 		(m_parts + i)->nNumMat = Data->nNumMat;
 		(m_parts + i)->pMesh = Data->pMesh;
-
-		//// Xファイルの読み込み
-		//D3DXLoadMeshFromX(m_partsFile[(m_parts + i)->nType].aName,
-		//	D3DXMESH_SYSTEMMEM,
-		//	CManager::GetRenderer()->GetDevice(),
-		//	NULL,
-		//	&(m_parts + i)->pBuffer,
-		//	NULL,
-		//	&(m_parts + i)->nNumMat,
-		//	&(m_parts + i)->pMesh);
 	}
 }
 
@@ -541,7 +531,7 @@ void CMotion::Uninit(void)
 
 	if (m_motion != nullptr)
 	{
-		delete m_motion;
+		delete[] m_motion;
 		m_motion = nullptr;
 	}
 }

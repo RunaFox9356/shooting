@@ -62,7 +62,7 @@ public:
 	void SetLife(int Life);
 	void HitLife(int Damage);
 	DAMEGE& GetDamegeData();
-	virtual void OnHit() {}
+
 	const D3DXVECTOR3 *GetSize() const;
 
 protected:
