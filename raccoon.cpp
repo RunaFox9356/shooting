@@ -22,7 +22,7 @@
 //------------------------------------
 CRaccoon::CRaccoon() 
 {
-	moveSin = 0.0f;
+	m_counter = 50;
 }
 
 //------------------------------------
@@ -66,9 +66,10 @@ void CRaccoon::Update(void)
 	// Œ»İ‚Ìƒ‚[ƒVƒ‡ƒ“”Ô†‚Ì•ÛŠÇ
 	CEnemy::Update();
 
-	moveSin += 0.05f;
-	//‚±‚±‚Émove‚ğ‚¢‚ê‚é
-	m_pos.y += sinf(moveSin);
+	if (m_pos.x <= SCREEN_WIDTH / 2)
+	{
+		EnemyPattern4();
+	}
 
 }
 
@@ -96,5 +97,15 @@ CRaccoon *CRaccoon::Create()
 	return pObject;
 }
 
-
-
+//------------------------------------
+// ‰~‚ğ‚Â‚©‚Á‚ÄˆÚ“®
+//------------------------------------
+void CRaccoon::EnemyPattern4()
+{
+	m_counter++;
+	
+	m_move.y = -sin(D3DX_PI*(m_counter - 100.0f) / 50.0f)*2.5f;
+	m_move.x = -5.0f;
+	
+	m_pos += m_move;
+}

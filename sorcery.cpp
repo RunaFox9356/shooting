@@ -79,7 +79,7 @@ void CSorcey::Draw()
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	C3dpolygon::Draw();
+	//C3dpolygon::Draw();
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
@@ -101,7 +101,6 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 		pObject->SetMove(D3DXVECTOR3(15.0f, 0.0f, 0.0f));
 		pObject->SetPos(D3DXVECTOR3(pos.x+640.0f, pos.y, 0.0f));
 		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
-		pObject->SetSpeed(5);
 		pObject->m_NouPlayer = type;
 
 		switch (type)
@@ -110,6 +109,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 			pObject->SetAnimation(2, 10);
 			pObject->SetTexture(CTexture::TEXTURE_METEO);
 			pObject->SetSize(D3DXVECTOR3(640.0f, 200.0f, 0.0f));
+			pObject->SetSpeed(3);
 			break;
 		case CPlayer::NOW_ICE:	
 			pObject->SetAnimation(1, 8);
@@ -122,18 +122,21 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 			pObject->SetAnimation(1, 8);
 			pObject->SetTexture(CTexture::TEXTURE_TEMPEST);
 			pObject->SetSize(D3DXVECTOR3(640.0f, 300.0f, 0.0f));
+			pObject->SetSpeed(5);
 			break;
 		case CPlayer::NOW_SUN:
 			pObject->SetAnimation(5, 5);
 			pObject->SetTexture(CTexture::TEXTURE_RAIN);
 			pObject->SetSize(D3DXVECTOR3(640.0f, 350.0f, 0.0f));
 			pObject->SetPos(D3DXVECTOR3(pos.x, pos.y, 0.0f));
+			pObject->SetSpeed(4);
 			break;
 		default:
+			pObject->SetSpeed(1);
 			break;
 		}
 	}
-
+	pObject->SetSpeed(30000000);
 	return pObject;
 }
 
@@ -279,7 +282,7 @@ void CSorcey::Collision()
 						switch (m_NouPlayer)
 						{
 						case CPlayer::NOW_FIRE:
-							pObject3d->HitLife(2);
+							pObject3d->HitLife(5);
 							break;
 						case CPlayer::NOW_ICE:
 							pObject3d->HitLife(5);
@@ -288,7 +291,7 @@ void CSorcey::Collision()
 							pObject3d->HitLife(15);
 							break;
 						case CPlayer::NOW_SUN:
-							pObject3d->HitLife(2);
+							pObject3d->HitLife(3);
 							break;
 						default:
 							break;

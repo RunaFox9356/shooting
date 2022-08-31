@@ -76,8 +76,14 @@ void CEnemy::Update(void)
 
 	m_motionType = CObject3d::ANIME_RUN;
 
-	m_pos += m_move;
-
+	if (m_pos.x <= SCREEN_WIDTH/2)
+	{
+		m_pos += m_move;
+	}
+	else
+	{
+		m_pos.x += -5.0f;
+	}
 	if (m_pos.x <= -SCREEN_WIDTH)
 	{
 		CObject::Release();
@@ -125,8 +131,6 @@ void CEnemy::Collision()
 CEnemy *CEnemy::Create(const int Type)
 {
 	CEnemy * pObject = nullptr;
-
-
 
 	switch (Type)
 	{
@@ -178,40 +182,39 @@ void CEnemy::SetBoss()
 //------------------------------------
 void  CEnemy::LoadEnemy(const char * pFdata)
 {
-	std::ifstream ifs(pFdata);
-
-	int nIndex = 0;
-
-	if (ifs)
-	{
-		ifs >> EnemyList;
-		nIndex = EnemyList["INDEX"];
-		D3DXVECTOR3 pos;
-		D3DXVECTOR3 size;
-		D3DXVECTOR3 rot;
-		int Life;
-		int Type;
-		for (int nCntEnemy = 0; nCntEnemy < nIndex; nCntEnemy++)
-		{
-			std::string name = "ENEMY";
-			std::string Number = std::to_string(nCntEnemy);
-			name += Number;
-			
-			pos = D3DXVECTOR3(EnemyList[name]["POS"]["X"], EnemyList[name]["POS"]["Y"], EnemyList[name]["POS"]["Z"]);
-			size = D3DXVECTOR3(EnemyList[name]["SIZE"]["X"], EnemyList[name]["SIZE"]["Y"], EnemyList[name]["SIZE"]["Z"]);
-			rot = D3DXVECTOR3(EnemyList[name]["ROT"]["X"], EnemyList[name]["ROT"]["Y"], EnemyList[name]["ROT"]["Z"]);
-			Life = EnemyList[name]["LIFE"];
-			Type = EnemyList[name]["TYPE"];
-
-			CEnemy * Enemy = CEnemy::Create(Type);
-			Enemy->SetUp(ENEMY); 
-			Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-			Enemy->SetPos(pos);
-			Enemy->SetSize(size);
-			//Enemy->SetRot(rot);
-			Enemy->SetLife(Life);
-		}
-	}
+	//std::ifstream ifs(pFdata);
+	//
+	//int nIndex = 0;
+	//
+	//if (ifs)
+	//{
+	//	ifs >> EnemyList;
+	//	nIndex = EnemyList["INDEX"];
+	//	D3DXVECTOR3 pos;
+	//	D3DXVECTOR3 size;
+	//	D3DXVECTOR3 rot;
+	//	int Life;
+	//	int Type;
+	//	for (int nCntEnemy = 0; nCntEnemy < nIndex; nCntEnemy++)
+	//	{
+	//		std::string name = "ENEMY";
+	//		std::string Number = std::to_string(nCntEnemy);
+	//		name += Number;
+	//		
+	//		pos = D3DXVECTOR3(EnemyList[name]["POS"]["X"], EnemyList[name]["POS"]["Y"], EnemyList[name]["POS"]["Z"]);
+	//		size = D3DXVECTOR3(EnemyList[name]["SIZE"]["X"], EnemyList[name]["SIZE"]["Y"], EnemyList[name]["SIZE"]["Z"]);
+	//		rot = D3DXVECTOR3(EnemyList[name]["ROT"]["X"], EnemyList[name]["ROT"]["Y"], EnemyList[name]["ROT"]["Z"]);
+	//		Life = EnemyList[name]["LIFE"];
+	//		Type = EnemyList[name]["TYPE"];
+	//
+	//		CEnemy * Enemy = CEnemy::Create(Type);
+	//		Enemy->SetUp(ENEMY); 
+	//		Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+	//		Enemy->SetPos(pos);
+	//		Enemy->SetSize(size);
+	//		Enemy->SetLife((int)10* size.x);
+	//	}
+	//}
 }
 
 

@@ -10,9 +10,7 @@
 #include "player.h"
 #include "manager.h"
 #include "enemy.h"
-#include "gon.h"
 #include "bullet.h"
-#include "mesh.h"
 #include "magic.h"
 #include "score.h"
 #include "bg.h"
@@ -172,7 +170,7 @@ void CObject::AllCreate()
 	CBg * Bg3 = CBg::Create();
 	Bg3->SetMove(D3DXVECTOR3(0.00001f, 0.0f, 0.0f));
 	Bg3->SetTexture(CTexture::TEXTURE_MOON);
-
+	
 	CBg * Bg2 = CBg::Create();
 	Bg2->SetMove(D3DXVECTOR3(0.001f, 0.0f, 0.0f));
 	Bg2->SetTexture(CTexture::TEXTURE_TOWN);
@@ -238,7 +236,6 @@ void CObject::Release()
 	{
 		const int nID = m_nID;
 		const int nlist = m_list;
-		m_pObject[nlist][nID]->Uninit();
 		delete m_pObject[nlist][nID];
 		m_pObject[nlist][nID] = nullptr;
 		m_AllMember--;

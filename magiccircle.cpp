@@ -21,7 +21,7 @@ int CMagicCircleManager::CMagicCircle::m_popType = 2;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CMagicCircleManager::CMagicCircle::CMagicCircle() :C3dpolygon(1)
+CMagicCircleManager::CMagicCircle::CMagicCircle() :C3dpolygon(0)
 {
 }
 
@@ -122,8 +122,6 @@ CMagicCircleManager::CMagicCircle *CMagicCircleManager::CMagicCircle::Create(D3D
 	{
 		pObject->SetPos(D3DXVECTOR3(pos.x, pos.y, 0.0f));
 		pObject->Init();
-
-	
 	}
 
 	return pObject;

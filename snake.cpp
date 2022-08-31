@@ -16,6 +16,8 @@
 #include "file.h"
 #include "letter.h"
 
+#include "bell.h"
+
 
 //------------------------------------
 // コンストラクタ
@@ -63,6 +65,7 @@ void CSnake::Uninit(void)
 //------------------------------------
 void CSnake::Update(void)
 {
+	SetLife(100);
 	// 現在のモーション番号の保管
 	CEnemy::Update();
 	m_motionType = CObject3d::ANIME_NORMAL;
@@ -96,6 +99,17 @@ CSnake *CSnake::Create()
 //-----------------------------------
 void CSnake::OnHit()
 {
+	
 
+		D3DXVECTOR3 scale(3.8f, 3.8f, 3.8f);
+		CBell * Bell = CBell::Create();
+		Bell->SetUp(BELL);
+
+		Bell->SetMove(D3DXVECTOR3((float)-(rand() % 10 + 1), (float)(rand() % 10 + 5), 0.0f));
+		Bell->SetPos(m_pos);
+		Bell->SetSize(scale);
+
+		Bell->SetLife(10);
+	
 }
 

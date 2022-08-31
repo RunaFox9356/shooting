@@ -169,10 +169,8 @@
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="magiccircle.cpp" />
     <ClCompile Include="maruneko.cpp" />
-    <ClCompile Include="mesh.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="file.cpp" />
-    <ClCompile Include="gon.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="inputkeyboard.cpp" />
     <ClCompile Include="letter.cpp" />
@@ -219,10 +217,8 @@
     <ClInclude Include="magic.h" />
     <ClInclude Include="magiccircle.h" />
     <ClInclude Include="maruneko.h" />
-    <ClInclude Include="mesh.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="file.h" />
-    <ClInclude Include="gon.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="inputkeyboard.h" />
     <ClInclude Include="letter.h" />

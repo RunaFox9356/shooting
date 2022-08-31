@@ -105,7 +105,7 @@ void CBullet::Update()
 					switch (m_Type)
 					{
 					case CPlayer::NOW_FIRE:
-						pObject3d->HitLife(30);
+						pObject3d->HitLife(5);
 						break;
 					case CPlayer::NOW_ICE:
 						pObject3d->HitLife(2);
@@ -147,7 +147,7 @@ void CBullet::Draw()
 
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
- 	C3dpolygon::Draw();
+ 	//C3dpolygon::Draw();
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);

@@ -80,6 +80,21 @@ void CGame::Uninit(void)
 {
 	CModelManager::ReleaseAll();
 	CRanking::SetScore(CScore::GetScore());
+
+	if (paticleManager != nullptr)
+	{
+		paticleManager->Uninit();
+		delete paticleManager;
+		paticleManager = nullptr;
+
+	}
+
+	if (m_MagicBox != nullptr)
+	{
+		m_MagicBox->Uninit();
+		m_MagicBox = nullptr;
+	}
+
 }
 
 //========================
@@ -112,7 +127,7 @@ void CGame::Update(void)
 			CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 			return;
 		}
-		CEnemy::SetBoss();
+		//CEnemy::SetBoss();
 	
 	}
 	paticleManager->Update();

@@ -18,6 +18,7 @@
 #include "score.h"
 #include "game.h"
 #include "hit.h"
+
 int CCrystal::m_popType = 2;
 LPDIRECT3DTEXTURE9	CCrystal::m_pTexture;
 
@@ -184,7 +185,7 @@ void CCrystal::Draw()
 
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, m_rot);
 
-	C3dpolygon::Draw();
+	//C3dpolygon::Draw();
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);

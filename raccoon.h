@@ -30,8 +30,8 @@ public:
 
 
 private:
-	float moveSin;
-
+	int m_counter;
+	void CRaccoon::EnemyPattern4();
 
 };
 #endif

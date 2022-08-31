@@ -92,6 +92,7 @@ void C3dpolygon::Uninit()
 		m_pVtxBuff->Release();
 		m_pVtxBuff = nullptr;
 	}
+	Release();
 }
 
 //=============================================================================
@@ -101,6 +102,8 @@ void C3dpolygon::Update()
 {
 	m_nTimer++;
 	m_rot.z = -D3DXToRadian(TIMER);
+
+
 }
 
 //=============================================================================

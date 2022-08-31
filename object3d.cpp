@@ -95,6 +95,7 @@ void CObject3d::Uninit(void)
 		delete m_pMotion;
 		m_pMotion = nullptr;
 	}
+	Release();
 }
 
 //------------------------------------
@@ -303,7 +304,7 @@ void CObject3d::HitLife(int Damage)
 				Bell->SetLife(10);
 			}
 			m_drop++;
-			if (m_drop >= 5)
+			if (m_drop >= CreateDrop)
 			{
 				m_drop = 0;
 				CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));

@@ -57,9 +57,6 @@
     <ClCompile Include="bullet.cpp">
       <Filter>オブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="gon.cpp">
-      <Filter>オブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="file.cpp">
       <Filter>システム</Filter>
     </ClCompile>
@@ -89,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>メイン</Filter>
-    </ClCompile>
-    <ClCompile Include="mesh.cpp">
-      <Filter>オブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="3dpolygon.cpp">
       <Filter>オブジェクト</Filter>
@@ -191,9 +185,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gon.h">
-      <Filter>オブジェクト</Filter>
-    </ClInclude>
     <ClInclude Include="object.h">
       <Filter>オブジェクト</Filter>
     </ClInclude>
@@ -232,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>メイン</Filter>
-    </ClInclude>
-    <ClInclude Include="mesh.h">
-      <Filter>オブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="3dpolygon.h">
       <Filter>オブジェクト</Filter>

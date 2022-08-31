@@ -20,7 +20,8 @@ class CObject3d : public CObject
 {
 private:
 	//polygon‚ÌŠg‘åƒTƒCƒY
-	static const D3DXVECTOR3 m_Vtx[4];
+	static const D3DXVECTOR3 m_Vtx[4];	
+	static const int CreateDrop = 10;
 	static int m_drop;
 	
 
