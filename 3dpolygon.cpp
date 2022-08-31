@@ -13,7 +13,7 @@
 #include "camera.h"
 #include "hamada.h"
 
-
+int C3dpolygon::MaxPolygon;
 const D3DXVECTOR3 C3dpolygon::m_Vtx[4] =
 {
 	D3DXVECTOR3(-1.0f, +1.0f, 0.0f),
@@ -45,7 +45,9 @@ HRESULT C3dpolygon::Init()
 	m_Size = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
 	m_nScale = 10.0f;
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
+	MaxPolygon++;
+	m_pos.z = -0.01f*MaxPolygon;
+	
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 
 	m_texture = CTexture::TEXTURE_NONE;
@@ -111,6 +113,7 @@ void C3dpolygon::Update()
 //=============================================================================
 void C3dpolygon::Draw()
 {
+	
 	//デバイスへのポインタ
 	//デバイスの取得
  	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
@@ -153,7 +156,8 @@ const D3DXVECTOR3 *C3dpolygon::GetPos() const
 //=============================================================================
 void C3dpolygon::SetPos(const D3DXVECTOR3 &pos)
 {
-	m_pos = pos;
+	m_pos.x = pos.x;
+	m_pos.y = pos.y;
 }
 
 //--------------------------------------------------

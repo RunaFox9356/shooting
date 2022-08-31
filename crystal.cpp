@@ -105,7 +105,7 @@ void CCrystal::Update()
 						GetScore()->Add(1000);
 					}
 
-					CObject::Release();
+					Uninit();
 
 					return;
 				}
@@ -185,7 +185,7 @@ void CCrystal::Draw()
 
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, m_rot);
 
-	//C3dpolygon::Draw();
+	C3dpolygon::Draw();
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);

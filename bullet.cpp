@@ -70,11 +70,11 @@ void CBullet::Update()
 
 	if (m_pos.y > SCREEN_HEIGHT)
 	{
-		CObject::Release();
+		Uninit();
 	}
 	if (m_pos.x > SCREEN_WIDTH/2)
 	{
-		CObject::Release();
+		Uninit();
 	}
 	CObject**pObject;
 	pObject = GetObjectData(0);
@@ -125,7 +125,7 @@ void CBullet::Update()
 					}
 
 					// 解放
-					CObject::Release();
+					Uninit();
 					return;
 				}
 			}
@@ -147,7 +147,7 @@ void CBullet::Draw()
 
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
- 	//C3dpolygon::Draw();
+ 	C3dpolygon::Draw();
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);

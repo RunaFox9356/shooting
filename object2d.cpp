@@ -103,7 +103,6 @@ void CObject2d::Uninit()
 		m_pVtxBuff->Release();
 		m_pVtxBuff = nullptr;
 	}
-	Release();
 }
 
 //=============================================================================

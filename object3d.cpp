@@ -309,8 +309,8 @@ void CObject3d::HitLife(int Damage)
 				m_drop = 0;
 				CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
 			}
-			// ‰ð•ú
-			CObject::Release();
+			Uninit();
+		
 		}
 
 	}

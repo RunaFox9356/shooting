@@ -48,7 +48,7 @@ protected:
 	D3DXMATRIX m_mtxWorld;					// マトリックス
 	int  m_nTimer;
 private:
-
+	static int MaxPolygon;
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = nullptr;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 

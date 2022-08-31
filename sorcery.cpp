@@ -79,7 +79,7 @@ void CSorcey::Draw()
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	//C3dpolygon::Draw();
+	C3dpolygon::Draw();
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
@@ -136,7 +136,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 			break;
 		}
 	}
-	pObject->SetSpeed(30000000);
+
 	return pObject;
 }
 
@@ -180,7 +180,7 @@ void CSorcey::PlayAnimation()
 			{
 				particleManager->Release(0);
 			}
-			CObject::Release();
+			Uninit();
 			return;
 		}
 	}
@@ -242,7 +242,7 @@ void CSorcey::Move()
 
 	if (m_pos.x > (float)SCREEN_WIDTH)
 	{
-		CObject::Release();
+		Uninit();
 		particleManager->Release(0);
 		return;
 	}

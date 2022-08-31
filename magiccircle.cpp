@@ -21,7 +21,7 @@ int CMagicCircleManager::CMagicCircle::m_popType = 2;
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CMagicCircleManager::CMagicCircle::CMagicCircle() :C3dpolygon(0)
+CMagicCircleManager::CMagicCircle::CMagicCircle() :C3dpolygon(1)
 {
 }
 
@@ -68,7 +68,8 @@ void CMagicCircleManager::CMagicCircle::Update()
 	}
 	CPlayer* cPlayer = CGame::GetPlayer();  // ダウンキャスト
 	const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
-	m_pos = *PlayerPos;
+	
+	SetPos(*PlayerPos);
 
 
 	CParticleManager* particleManager = CGame::GetParticleManager();

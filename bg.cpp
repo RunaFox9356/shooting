@@ -65,7 +65,7 @@ void CBg::Draw()
 
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
-	//C3dpolygon::Draw();
+	C3dpolygon::Draw();
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
@@ -85,7 +85,7 @@ CBg *CBg::Create()
 	{
 		pObject->Init();
 		pObject->SetSize(D3DXVECTOR3(640.0f, 360.0f,0.0f));
-		pObject->SetPos(D3DXVECTOR3(0.0f, 0.0f,0.0f));
+		pObject->SetPos(D3DXVECTOR3(0.0f, 0.0f,100.0f));
 		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.5f));
 
 	}

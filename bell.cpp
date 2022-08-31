@@ -113,8 +113,8 @@ void CBell::Update(void)
 				{
 
 					GetScore()->Add(10 * (*CMultiply::GetRate() + 1));
-
-					CObject::Release();
+					Uninit();
+				
 
 					return;
 				}
@@ -139,7 +139,7 @@ void CBell::Update(void)
 
 	if (m_pos.x <= -1280.0f)
 	{
-		CObject::Release();
+		Uninit();
 	}
 }
 
