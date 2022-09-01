@@ -61,13 +61,16 @@ void CLife::Update()
 	{
 		SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 1.0f));
 	}
-	if (m_pos.x <= CPlayer::MAXLIFE*0.1f)
+	if (m_pos.x <= CPlayer::MAXLIFE*0.15f+5.0f)
 	{
 		SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
 	}
 
 
+	m_move.x += (0.0f - m_move.x)* 0.5f;//（目的の値-現在の値）＊減衰係数
 
+	m_Size.x += m_move.x;
+	m_pos.x += m_move.x;
 }
 
 //------------------------------------
@@ -125,13 +128,15 @@ void CLife::SetPos(const D3DXVECTOR3 & pos)
 
 void CLife::SetMove(const D3DXVECTOR3 & move)
 {
-	//	m_move = move;
+		m_move = move;
 }
 
 void CLife::SetDamage(const int Damage)
 {
-	m_Size.x -= Damage;
-	m_pos.x -= Damage;
+
+
+	m_move.x -= Damage;
+	//m_pos.x -= Damage;
 	CPlayer* cPlayer = CGame::GetPlayer();
 	cPlayer->HitLife(Damage);
 }

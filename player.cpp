@@ -190,9 +190,29 @@ void CPlayer::Move()	//“®‚«ƒZƒbƒg
 			}
 		}
 	}
+
+
  	else
 	{
 		m_Pow = 20;
+	}
+
+	if (m_pos.y <= -SCREEN_HEIGHT / 2 + 20.0f)
+	{
+		m_pos.y = (-SCREEN_HEIGHT / 2)+20.0f;
+	}
+
+	if (m_pos.y >= SCREEN_HEIGHT / 2 - 100.0f)
+	{
+		m_pos.y = SCREEN_HEIGHT / 2 - 100.0f;
+	}
+	if (m_pos.x <= -SCREEN_WIDTH / 2 + 100.0f)
+	{
+		m_pos.x = -SCREEN_WIDTH*0.5f + 100.0f;
+	}
+	if (m_pos.x >= SCREEN_WIDTH / 2 - 80.0f)
+	{
+		m_pos.x = SCREEN_WIDTH*0.5f - 80.0f;
 	}
 
 	//	•KŽE‹Z

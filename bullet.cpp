@@ -92,14 +92,17 @@ void CBullet::Update()
 				const D3DXVECTOR3 *enemyPos = pObject3d->GetPos();
 				const D3DXVECTOR3 *pEnemySize = pObject3d->GetSize();
 
-				float enemySize = 30.0f;
-				enemySize *= pEnemySize->y;
+				float enemySizeY = 30.0f;
+				float enemySizeX = 15.0f;
+
+				enemySizeY *= pEnemySize->y;
+				enemySizeX *= pEnemySize->x;
 
 				//“–‚½‚è”»’è
-				if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
-					((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
-					((m_pos.x - m_Size.x) <= (enemyPos->x + pEnemySize->x)) &&
-					((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
+				if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySizeY)) &&
+					((m_pos.y + m_Size.y) >= (enemyPos->y - enemySizeY)) &&
+					((m_pos.x - m_Size.x) <= (enemyPos->x + enemySizeX)) &&
+					((m_pos.x + m_Size.x) >= (enemyPos->x - enemySizeX)))
 				{
 					CHit::Create(*enemyPos, m_Type);
 					switch (m_Type)

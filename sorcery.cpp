@@ -270,12 +270,13 @@ void CSorcey::Collision()
 				if (enemyPos->x < 590.0f - pEnemySize->x)
 				{
 					float enemySize = 50.0f;
+					float enemySizeX = 15.0f;
 					enemySize *= pEnemySize->y;
-
+					enemySizeX *= pEnemySize->x;
 					if (((m_pos.y - m_Size.y) <= (enemyPos->y + enemySize)) &&
 						((m_pos.y + m_Size.y) >= (enemyPos->y - enemySize)) &&
-						((m_pos.x - m_Size.x) <= (enemyPos->x + pEnemySize->x)) &&
-						((m_pos.x + m_Size.x) >= (enemyPos->x - pEnemySize->x)))
+						((m_pos.x - m_Size.x) <= (enemyPos->x + enemySizeX)) &&
+						((m_pos.x + m_Size.x) >= (enemyPos->x - enemySizeX)))
 					{
 
 						CHit::Create(*enemyPos, m_NouPlayer);

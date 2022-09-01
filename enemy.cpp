@@ -118,7 +118,7 @@ void CEnemy::Collision()
 			((m_pos.x + Size) >= (PlayerPos->x - Size)))
 		{
 
-			CObject::GetLife()->CLife::SetDamage(10);
+			CObject::GetLife()->CLife::SetDamage(50);
 
 			return;
 		}
