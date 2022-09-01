@@ -10,9 +10,11 @@
 #define _OBJECT_H_			// 二重インクルード防止のマクロ定義
 
 #include "renderer.h"
-
+#include "file.h"
 class CScore;
 class CLife;
+
+
 
 class CObject
 {
@@ -63,7 +65,7 @@ public:
 	EObjectType GetType();
 
 	CScore*GetScore();
-
+	
 protected:
 	static CObject *m_pObject[MAX_LIST][MAX_OBJECT];
 	int	m_nID;
@@ -76,7 +78,6 @@ private:
 	EObjectType m_Type;
 	static CScore * pScore;
 	static CLife* pLife;
-
 
 };
 #endif

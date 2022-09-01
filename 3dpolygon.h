@@ -40,6 +40,7 @@ public:
 	void SetCollar(PositionVec4 Collar);
 	LPDIRECT3DVERTEXBUFFER9 &GetVtx();
 
+	static void PolygonReset() { m_MaxPolygon = 0; };
 protected:
 	float m_nScale;
 	D3DXVECTOR3 m_rot;
@@ -48,7 +49,7 @@ protected:
 	D3DXMATRIX m_mtxWorld;					// マトリックス
 	int  m_nTimer;
 private:
-	static int MaxPolygon;
+	static int m_MaxPolygon;
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = nullptr;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
 

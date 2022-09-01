@@ -43,7 +43,7 @@ HRESULT CMaru::Init(void)
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		"Data/system/enemy/neko.txt");
 
-
+	backOn = false;
 	m_rot.y += (D3DX_PI*0.5f);
 	return S_OK;
 }
@@ -69,6 +69,13 @@ void CMaru::Update(void)
 	{
 		//‚±‚±‚Émove‚ð‚¢‚ê‚é
 		m_move.x++;
+		backOn = true;
+	}
+
+	if (m_pos.x >= CManager::Pos.x  && backOn)
+	{
+		//‚±‚±‚Émove‚ð‚¢‚ê‚é
+		Uninit();
 	}
 }
 

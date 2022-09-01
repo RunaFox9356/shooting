@@ -127,7 +127,7 @@ void CGame::Update(void)
 			CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 			return;
 		}
-		//CEnemy::SetBoss();
+		CEnemy::SetBoss();
 	
 	}
 	paticleManager->Update();

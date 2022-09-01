@@ -13,6 +13,7 @@
 #include "particle.h"
 #include "file.h"
 #include "camera.h"
+#include "3dpolygon.h"
 
  CCamera* CRenderer::pCamera[2];
  CLight*  CRenderer::pLight;
@@ -180,6 +181,8 @@ void CRenderer::Uninit()
 //=============================================================================
 void CRenderer::Update()
 {
+
+	C3dpolygon::PolygonReset();
 	// ƒ|ƒŠƒSƒ“‚ÌXVˆ—
 	pCamera[0]->Update();
 

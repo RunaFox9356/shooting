@@ -53,6 +53,7 @@ public: /* ’è‹` */
 		TEXTURE_RANKINBG,
 		TEXTURE_RANKIN,
 		TEXTURE_ALPHABET,
+		TEXTURE_HPCOVER,
 		TEXTURE_MAX,
 		TEXTURE_NONE,	// Žg—p‚µ‚È‚¢
 	};

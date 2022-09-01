@@ -33,6 +33,12 @@ CLife::~CLife()
 HRESULT CLife::Init()
 {
 	CObject2d::Init();
+
+	m_object2d = CObject2d::Create();
+	m_object2d->SetTexture(CTexture::TEXTURE_HPCOVER);
+	m_object2d->SetSize(D3DXVECTOR3((float)CPlayer::MAXLIFE, 20.0f, 0.0f));
+	m_object2d->SetPos(m_pos);
+
 	return E_NOTIMPL;
 }
 
@@ -91,9 +97,9 @@ CLife *CLife::Create(const D3DXVECTOR3 & pos)
 
 	if (pObject != nullptr)
 	{
+		pObject->SetPos(pos);
 		pObject->Init();
 		pObject->SetSize(D3DXVECTOR3((float)CPlayer::MAXLIFE, 20.0f, 0.0f));
-		pObject->SetPos(pos);
 		
 		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 	}

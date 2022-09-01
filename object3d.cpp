@@ -22,6 +22,8 @@
 #include "multiply.h"
 #include "bell.h"
 #include "player.h"
+#include "manager.h"
+#include "fade.h"
 
 int CObject3d::m_drop = 0;
 //------------------------------------
@@ -57,7 +59,7 @@ CObject3d::CObject3d() :
 	/*memset(&m_motion, 0, sizeof(m_motion));*/
 	// ワールドマトリックスの初期化
 	// 行列初期化関数(第1引数の行列を単位行列に初期化)
-\
+
 }
 
 //------------------------------------
@@ -318,7 +320,7 @@ void CObject3d::HitLife(int Damage)
 	{
 		if (m_Life <= 0)
 		{
-			CManager::SetMode(CManager::MODE_RESULT);
+			CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		}
 	}
 }
