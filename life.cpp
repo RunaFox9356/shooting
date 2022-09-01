@@ -34,10 +34,10 @@ HRESULT CLife::Init()
 {
 	CObject2d::Init();
 
-	m_object2d = CObject2d::Create();
-	m_object2d->SetTexture(CTexture::TEXTURE_HPCOVER);
-	m_object2d->SetSize(D3DXVECTOR3((float)CPlayer::MAXLIFE, 20.0f, 0.0f));
-	m_object2d->SetPos(m_pos);
+	m_object2d[0] = CObject2d::Create(1);
+	m_object2d[0]->SetTexture(CTexture::TEXTURE_HPCOVER);
+	m_object2d[0]->SetSize(D3DXVECTOR3((float)CPlayer::MAXLIFE+5, 50.0f, 0.0f));
+	m_object2d[0]->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y-20.0f, m_pos.z));
 
 	return E_NOTIMPL;
 }
@@ -65,7 +65,9 @@ void CLife::Update()
 	{
 		SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
 	}
-	//CLife::SetDamage(1);
+
+
+
 }
 
 //------------------------------------
@@ -80,6 +82,7 @@ void CLife::Draw()
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
 	CObject2d::Draw();
+
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);

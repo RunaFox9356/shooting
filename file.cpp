@@ -16,7 +16,7 @@
 static int index = 0;
 namespace nl = nlohmann;
 
-nl::json j;//リストの生成
+nl::json Effect;//リストの生成
 
 //============================
 // 全部出力（置くだけ）
@@ -25,37 +25,37 @@ void OutputStatus()
 {
 	/*DataEffect = GetImguiParticle();
 
-	j["POS"] = {{ "X", DataEffect.pos.x} ,{ "Y", DataEffect.pos.y} ,{ "Z", DataEffect.pos.z } };
-	j["POSMAX"] = {{ "X", DataEffect.maxPopPos.x } ,{ "Y", DataEffect.maxPopPos.y } ,{ "Z", DataEffect.maxPopPos.z } };
-	j["POSMIN"] = {{ "X", DataEffect.minPopPos.x } ,{ "Y", DataEffect.minPopPos.y } ,{ "Z", DataEffect.minPopPos.z } };
-	j["MOVE"] = { { "X", DataEffect.move.x } ,{ "Y", DataEffect.move.y } ,{ "Z", DataEffect.move.z } };
-	j["MOVETRANSITION"] = { { "X", DataEffect.moveTransition.x } ,{ "Y", DataEffect.moveTransition.y } ,{ "Z", DataEffect.moveTransition.z } };
-	j["ROT"] = { {"X", DataEffect.rot.x} ,{ "Y", DataEffect.rot.y },{ "Z", DataEffect.rot.z } };
-	
-	j["COL"] = { { "R", DataEffect.color.col.r }, {"G" ,DataEffect.color.col.g} ,{ "B", DataEffect.color.col.b } ,{ "A", DataEffect.color.col.a } };
-	j["COLRANDAMMAX"] = { { "R", DataEffect.color.colRandamMax.r },{ "G" ,DataEffect.color.colRandamMax.g } ,{ "B", DataEffect.color.colRandamMax.b } ,{ "A", DataEffect.color.colRandamMax.a } };
-	j["COLRANDAMMIN"] = { { "R", DataEffect.color.colRandamMin.r },{ "G" ,DataEffect.color.colRandamMin.g } ,{ "B", DataEffect.color.colRandamMin.b } ,{ "A", DataEffect.color.colRandamMin.a } };
-	j["COLTRANSITION"] = { { "R", DataEffect.color.colTransition.r },{ "G" ,DataEffect.color.colTransition.g } ,{ "B", DataEffect.color.colTransition.b } ,{ "A", DataEffect.color.colTransition.a } };
-	j["DESTCOL"] = { { "R", DataEffect.color.destCol.r },{ "G" ,DataEffect.color.destCol.g } ,{ "B", DataEffect.color.destCol.b } ,{ "A", DataEffect.color.destCol.a } };
-	j["ENDTIME"] = DataEffect.color.nEndTime;
-	j["CNTTRANSITIONTIME"] = DataEffect.color.nCntTransitionTime;
-	j["BCOLTRANSITION"] = DataEffect.color.bColTransition;
-	j["COLRANDOM"] = DataEffect.color.bColRandom;
-	j["RANDOMTRANSITIONTIME"] = DataEffect.color.bRandomTransitionTime;
-	
-	j["TYPE"] = DataEffect.type;
-	j["WIDTH"] = DataEffect.fWidth;
-	j["HEIGHT"] = DataEffect.fHeight;
-	j["ANGLE"] = DataEffect.fAngle;
-	j["ATTENUATION"] = DataEffect.fAttenuation;
-	j["RADIUS"] = DataEffect.fRadius;
-	j["WEIGHT"] = DataEffect.fWeight;
-	j["WEIGHTTRANSITION"] = DataEffect.fWeightTransition;
-	j["LIFE"] = DataEffect.nLife;
-	j["BACKROT"] = DataEffect.bBackrot;
-	j["SCALE"] = DataEffect.fScale;
+	Effect["POS"] = {{ "X", DataEffect.pos.x} ,{ "Y", DataEffect.pos.y} ,{ "Z", DataEffect.pos.z } };
+	Effect["POSMAX"] = {{ "X", DataEffect.maxPopPos.x } ,{ "Y", DataEffect.maxPopPos.y } ,{ "Z", DataEffect.maxPopPos.z } };
+	Effect["POSMIN"] = {{ "X", DataEffect.minPopPos.x } ,{ "Y", DataEffect.minPopPos.y } ,{ "Z", DataEffect.minPopPos.z } };
+	Effect["MOVE"] = { { "X", DataEffect.move.x } ,{ "Y", DataEffect.move.y } ,{ "Z", DataEffect.move.z } };
+	Effect["MOVETRANSITION"] = { { "X", DataEffect.moveTransition.x } ,{ "Y", DataEffect.moveTransition.y } ,{ "Z", DataEffect.moveTransition.z } };
+	Effect["ROT"] = { {"X", DataEffect.rot.x} ,{ "Y", DataEffect.rot.y },{ "Z", DataEffect.rot.z } };
 
-	auto jobj = j.dump();
+	Effect["COL"] = { { "R", DataEffect.color.col.r }, {"G" ,DataEffect.color.col.g} ,{ "B", DataEffect.color.col.b } ,{ "A", DataEffect.color.col.a } };
+	Effect["COLRANDAMMAX"] = { { "R", DataEffect.color.colRandamMax.r },{ "G" ,DataEffect.color.colRandamMax.g } ,{ "B", DataEffect.color.colRandamMax.b } ,{ "A", DataEffect.color.colRandamMax.a } };
+	Effect["COLRANDAMMIN"] = { { "R", DataEffect.color.colRandamMin.r },{ "G" ,DataEffect.color.colRandamMin.g } ,{ "B", DataEffect.color.colRandamMin.b } ,{ "A", DataEffect.color.colRandamMin.a } };
+	Effect["COLTRANSITION"] = { { "R", DataEffect.color.colTransition.r },{ "G" ,DataEffect.color.colTransition.g } ,{ "B", DataEffect.color.colTransition.b } ,{ "A", DataEffect.color.colTransition.a } };
+	Effect["DESTCOL"] = { { "R", DataEffect.color.destCol.r },{ "G" ,DataEffect.color.destCol.g } ,{ "B", DataEffect.color.destCol.b } ,{ "A", DataEffect.color.destCol.a } };
+	Effect["ENDTIME"] = DataEffect.color.nEndTime;
+	Effect["CNTTRANSITIONTIME"] = DataEffect.color.nCntTransitionTime;
+	Effect["BCOLTRANSITION"] = DataEffect.color.bColTransition;
+	Effect["COLRANDOM"] = DataEffect.color.bColRandom;
+	Effect["RANDOMTRANSITIONTIME"] = DataEffect.color.bRandomTransitionTime;
+
+	Effect["TYPE"] = DataEffect.type;
+	Effect["WIDTH"] = DataEffect.fWidth;
+	Effect["HEIGHT"] = DataEffect.fHeight;
+	Effect["ANGLE"] = DataEffect.fAngle;
+	Effect["ATTENUATION"] = DataEffect.fAttenuation;
+	Effect["RADIUS"] = DataEffect.fRadius;
+	Effect["WEIGHT"] = DataEffect.fWeight;
+	Effect["WEIGHTTRANSITION"] = DataEffect.fWeightTransition;
+	Effect["LIFE"] = DataEffect.nLife;
+	Effect["BACKROT"] = DataEffect.bBackrot;
+	Effect["SCALE"] = DataEffect.fScale;
+
+	auto jobj = Effect.dump();
 	std::ofstream writing_file;
 	const std::string pathToJSON = "data/FILE/DataEffectOutput.json";
 	writing_file.open(pathToJSON, std::ios::out);
@@ -74,38 +74,38 @@ void LoadJson(const char* cUrl)
 
 		//StringToWString(UTF8toSjis(j["name"]));
 		//DataSet.unionsname = StringToWString(UTF8toSjis(j["unions"] ["name"]));
-		ifs >> j;
+		ifs >> Effect;
 
-		particleInfo.maxPopPos = D3DXVECTOR3(j["POSMAX"]["X"], j["POSMAX"]["Y"], j["POSMAX"]["Z"]);
-		particleInfo.minPopPos = D3DXVECTOR3(j["POSMIN"]["X"], j["POSMIN"]["Y"], j["POSMIN"]["Z"]);
+		particleInfo.maxPopPos = D3DXVECTOR3(Effect["POSMAX"]["X"], Effect["POSMAX"]["Y"], Effect["POSMAX"]["Z"]);
+		particleInfo.minPopPos = D3DXVECTOR3(Effect["POSMIN"]["X"], Effect["POSMIN"]["Y"], Effect["POSMIN"]["Z"]);
 		//こっちで構造体にデータを入れてます//文字は変換つけないとばぐるぞ＾＾これ-＞UTF8toSjis()
-		particleInfo.move = D3DXVECTOR3(j["MOVE"]["X"], j["MOVE"]["Y"], j["MOVE"]["Z"]);
-		particleInfo.rot = D3DXVECTOR3(j["ROT"]["X"], j["ROT"]["Y"], j["ROT"]["Z"]);
-		particleInfo.moveTransition = D3DXVECTOR3(j["MOVETRANSITION"]["X"], j["MOVETRANSITION"]["Y"], j["MOVETRANSITION"]["Z"]);;
+		particleInfo.move = D3DXVECTOR3(Effect["MOVE"]["X"], Effect["MOVE"]["Y"], Effect["MOVE"]["Z"]);
+		particleInfo.rot = D3DXVECTOR3(Effect["ROT"]["X"], Effect["ROT"]["Y"], Effect["ROT"]["Z"]);
+		particleInfo.moveTransition = D3DXVECTOR3(Effect["MOVETRANSITION"]["X"], Effect["MOVETRANSITION"]["Y"], Effect["MOVETRANSITION"]["Z"]);;
 
-		particleInfo.color.colBigin = D3DXCOLOR(j["COL"]["R"], j["COL"]["G"], j["COL"]["B"], j["COL"]["A"]);
-		particleInfo.color.colRandamMax = D3DXCOLOR(j["COLRANDAMMAX"]["R"], j["COLRANDAMMAX"]["G"], j["COLRANDAMMAX"]["B"], j["COLRANDAMMAX"]["A"]);
-		particleInfo.color.colRandamMin = D3DXCOLOR(j["COLRANDAMMIN"]["R"], j["COLRANDAMMIN"]["G"], j["COLRANDAMMIN"]["B"], j["COLRANDAMMIN"]["A"]);
-		particleInfo.color.colTransition = D3DXCOLOR(j["COLTRANSITION"]["R"], j["COLTRANSITION"]["G"], j["COLTRANSITION"]["B"], j["COLTRANSITION"]["A"]);
-		particleInfo.color.destCol = D3DXCOLOR(j["DESTCOL"]["R"], j["DESTCOL"]["G"], j["DESTCOL"]["B"], j["DESTCOL"]["A"]);
-		particleInfo.color.nEndTime = j["ENDTIME"];
-		particleInfo.color.nCntTransitionTime = j["CNTTRANSITIONTIME"];
-		particleInfo.color.bColTransition = j["BCOLTRANSITION"];
-		particleInfo.color.bColRandom = j["COLRANDOM"];
-		particleInfo.color.bRandomTransitionTime = j["RANDOMTRANSITIONTIME"];
+		particleInfo.color.colBigin = D3DXCOLOR(Effect["COL"]["R"], Effect["COL"]["G"], Effect["COL"]["B"], Effect["COL"]["A"]);
+		particleInfo.color.colRandamMax = D3DXCOLOR(Effect["COLRANDAMMAX"]["R"], Effect["COLRANDAMMAX"]["G"], Effect["COLRANDAMMAX"]["B"], Effect["COLRANDAMMAX"]["A"]);
+		particleInfo.color.colRandamMin = D3DXCOLOR(Effect["COLRANDAMMIN"]["R"], Effect["COLRANDAMMIN"]["G"], Effect["COLRANDAMMIN"]["B"], Effect["COLRANDAMMIN"]["A"]);
+		particleInfo.color.colTransition = D3DXCOLOR(Effect["COLTRANSITION"]["R"], Effect["COLTRANSITION"]["G"], Effect["COLTRANSITION"]["B"], Effect["COLTRANSITION"]["A"]);
+		particleInfo.color.destCol = D3DXCOLOR(Effect["DESTCOL"]["R"], Effect["DESTCOL"]["G"], Effect["DESTCOL"]["B"], Effect["DESTCOL"]["A"]);
+		particleInfo.color.nEndTime = Effect["ENDTIME"];
+		particleInfo.color.nCntTransitionTime = Effect["CNTTRANSITIONTIME"];
+		particleInfo.color.bColTransition = Effect["BCOLTRANSITION"];
+		particleInfo.color.bColRandom = Effect["COLRANDOM"];
+		particleInfo.color.bRandomTransitionTime = Effect["RANDOMTRANSITIONTIME"];
 
-		particleInfo.type = j["TYPE"];
-		particleInfo.fWidth = j["WIDTH"];
-		particleInfo.fHeight = j["HEIGHT"];
-		particleInfo.fRadius = j["RADIUS"];
-		particleInfo.fAngle = j["ANGLE"];
-		particleInfo.fWeight = j["WEIGHT"];
-		particleInfo.nLife = j["LIFE"];
-		particleInfo.fAttenuation = j["ATTENUATION"];
-		particleInfo.fWeightTransition = j["WEIGHTTRANSITION"];
-		particleInfo.nLife = j["LIFE"];
-		particleInfo.bBackrot = j["BACKROT"];
-		particleInfo.fScale = j["SCALE"];
+		particleInfo.type = Effect["TYPE"];
+		particleInfo.fWidth = Effect["WIDTH"];
+		particleInfo.fHeight = Effect["HEIGHT"];
+		particleInfo.fRadius = Effect["RADIUS"];
+		particleInfo.fAngle = Effect["ANGLE"];
+		particleInfo.fWeight = Effect["WEIGHT"];
+		particleInfo.nLife = Effect["LIFE"];
+		particleInfo.fAttenuation = Effect["ATTENUATION"];
+		particleInfo.fWeightTransition = Effect["WEIGHTTRANSITION"];
+		particleInfo.nLife = Effect["LIFE"];
+		particleInfo.bBackrot = Effect["BACKROT"];
+		particleInfo.fScale = Effect["SCALE"];
 
 		static bool chack = true;
 

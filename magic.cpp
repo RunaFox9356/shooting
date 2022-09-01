@@ -34,8 +34,8 @@ HRESULT CMagicBox::CMagic::Init()
 	m_DivisionX = 8;
 	m_DivisionY = 1;
 	m_DivisionMAX = m_DivisionY*m_DivisionX;
-	m_CounterAnim = 0;
-	m_PatternAnim = 0;
+	m_CounterAnim = 3;
+	m_PatternAnim = 3;
 
 	//表示座標を更新
 	SetTex(PositionVec4(
@@ -65,7 +65,7 @@ void CMagicBox::CMagic::Update()
 	CObject2d::Update();
 
 	//アニメーション設定
-	m_CounterAnim++;
+	//m_CounterAnim++;
 	if ((m_CounterAnim % 10) == 0)//ここで速度調整
 	{
 		m_PatternAnim = (m_PatternAnim + 1) % m_DivisionMAX;

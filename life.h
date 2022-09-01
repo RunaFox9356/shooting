@@ -33,8 +33,12 @@ public:
 	void SetMove(const D3DXVECTOR3 &move)override;
 	
 	void SetDamage(const int Damage);
+
+
 private:
-	CObject2d *m_object2d;
+
+	CObject2d *m_object2d[2];
+
 };
 
 #endif

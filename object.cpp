@@ -177,10 +177,10 @@ void CObject::AllCreate()
 
 
 	CEnemy::LoadEnemy("Data/datatest.json");
-	pScore = CScore::Create(D3DXVECTOR3(900.0f, 70.0f, 0.0f));
+	pScore = CScore::Create(D3DXVECTOR3(900.0f, 100.0f, 0.0f));
 	pScore->Set(0);
 
-	pLife = CLife::Create(D3DXVECTOR3(300.0f, 150.0f, 0.0f));
+	pLife = CLife::Create(D3DXVECTOR3(300.0f, 100.0f, 0.0f));
 
 }
 

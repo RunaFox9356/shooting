@@ -159,6 +159,7 @@ void CManager::SetMode(MODE mode)
 	
 	if (m_Game != nullptr)
 	{
+		m_Game->Uninit();
 		m_Game->Release();
 	}
 

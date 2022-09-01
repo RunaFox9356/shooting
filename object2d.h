@@ -27,7 +27,7 @@ private:
 	static const D3DXVECTOR3 m_Vtx[4];
 
 public:
-	static CObject2d *CObject2d::Create();
+	static CObject2d *Create(int list = 0);
 
 	CObject2d(int list = 0);
 	~CObject2d() override;
@@ -61,6 +61,8 @@ protected:
 private:
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型
+
+
 };
 
 #endif

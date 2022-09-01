@@ -169,10 +169,10 @@ void CObject2d::Draw()
 //=============================================================================
 // createä÷êî
 //=============================================================================
-CObject2d *CObject2d::Create()
+CObject2d *CObject2d::Create(int list)
 {
 	CObject2d * pObject = nullptr;
-	pObject = new CObject2d;
+	pObject = new CObject2d(list);
 
 	if (pObject != nullptr)
 	{

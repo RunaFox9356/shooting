@@ -12,7 +12,6 @@
 #include "renderer.h"
 #include "object3d.h"
 
-
 class  CMotion;
 
 class CEnemy : public CObject3d
@@ -69,8 +68,6 @@ public:
 	static CEnemy *Create(const int Type);
 
 	static void SetBoss();
-
-	static void Set()
 
 private:
 	TYPE m_EnemyType;

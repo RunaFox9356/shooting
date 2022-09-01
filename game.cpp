@@ -69,7 +69,7 @@ HRESULT CGame::Init(void)
 
 	m_Player = CPlayer::Create();
 	m_Player->SetUp(CObject::PLAYER);
-	
+	SetBossPop(false);
 	return S_OK;
 }
 
