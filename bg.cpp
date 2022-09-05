@@ -8,6 +8,8 @@
 #include "bg.h"
 #include "hamada.h"
 #include "manager.h"
+
+D3DXVECTOR3 CBg::m_KillSpeed;
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -28,6 +30,8 @@ CBg::~CBg()
 HRESULT CBg::Init()
 {
 	m_Speed = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_AddSpeed = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_KillSpeed = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	C3dpolygon::Init();
 	return E_NOTIMPL;
 }
@@ -46,10 +50,27 @@ void CBg::Uninit()
 void CBg::Update()
 {
 	//加算の値を関数化
-	m_Speed += m_MoveSpeed;
+	m_Speed +=( m_MoveSpeed + m_KillSpeed+ m_AddSpeed);
 
+	if (m_KillSpeed.x > 0.0f)
+	{
+		m_KillSpeed.x -= 0.001f;
+		if (m_KillSpeed <= 0)
+		{
+			m_KillSpeed.x = 0;
+		}
+	}
+	if (m_AddSpeed.x >  0.0f)
+	{
+		m_AddSpeed.x--;
+		if (m_AddSpeed <= 0)
+		{
+			m_AddSpeed.x = 0;
+		}
+	}
 	C3dpolygon::SetTex(PositionVec4(0.0f+ m_Speed.x, 1.0f+ m_Speed.x,0.0f + m_Speed.y,1.0f + m_Speed.y));
 	C3dpolygon::Update();
+
 }
 
 //------------------------------------
@@ -109,4 +130,14 @@ void CBg::SetPos(const D3DXVECTOR3 & pos)
 void CBg::SetMove(const D3DXVECTOR3 & move)
 {
 	m_MoveSpeed = move;
+}
+
+void CBg::SetKillMove(const D3DXVECTOR3 & move)
+{
+	m_KillSpeed = move;
+}
+
+D3DXVECTOR3 CBg::GetKillMove()
+{
+	return m_KillSpeed;
 }

@@ -28,7 +28,6 @@ public:
 	void Draw()override;	// •`‰æ
 	static CBoss *CBoss::Create();
 
-
 private:
 
 

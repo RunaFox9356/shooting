@@ -11,6 +11,7 @@
 #include "utility.h"
 #include "manager.h"
 #include "hamada.h"
+#include "sound.h"
 
 //=============================================================================
 // コンストラクト関数
@@ -101,20 +102,25 @@ CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 		int nType = Type;
 		switch (nType)
 		{
-		case CPlayer::NOW_FIRE:		
+		case CPlayer::NOW_FIRE:	
 			pObject->SetTexture(CTexture::TEXTURE_FIRE);
+			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
 			break;
 		case CPlayer::NOW_ICE:		
 			pObject->SetTexture(CTexture::TEXTURE_ICE);
+			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
 			break;
 		case CPlayer::NOW_STORM:		
 			pObject->SetTexture(CTexture::TEXTURE_STORM);
+			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
 			break;
 		case CPlayer::NOW_SUN:
 			pObject->SetTexture(CTexture::TEXTURE_THUNDER);
+			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
 			break;
 		case CPlayer::NOW_NON:
 			pObject->SetTexture(CTexture::TEXTURE_HIT);
+			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
 			break;
 		default:
 			pObject->SetTexture(CTexture::TEXTURE_LIGHT);

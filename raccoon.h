@@ -28,7 +28,6 @@ public:
 	void Draw()override;	// •`‰æ
 	static CRaccoon *CRaccoon::Create();
 
-
 private:
 	int m_counter;
 	void CRaccoon::EnemyPattern4();

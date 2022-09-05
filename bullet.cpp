@@ -16,6 +16,7 @@
 #include "hamada.h"
 #include "enemy.h"
 #include "hit.h"
+#include "bg.h"
 #include <assert.h>
 
 
@@ -71,10 +72,12 @@ void CBullet::Update()
 	if (m_pos.y > SCREEN_HEIGHT)
 	{
 		Uninit();
+		return;
 	}
 	if (m_pos.x > SCREEN_WIDTH/2)
 	{
 		Uninit();
+		return;
 	}
 	CObject**pObject;
 	pObject = GetObjectData(0);
@@ -126,7 +129,9 @@ void CBullet::Update()
 						pObject3d->HitLife(2);
 						break;
 					}
-
+					//D3DXVECTOR3 BGmove = CBg::GetKillMove();
+					//BGmove.x += 0.001f;
+					//CBg::SetKillMove(BGmove);
 					// ‰ð•ú
 					Uninit();
 					return;

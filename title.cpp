@@ -10,6 +10,8 @@
 #include "object2d.h"
 #include "player.h"
 #include "fade.h"
+#include "sound.h"
+
 //========================
 // コンストラクター
 //========================
@@ -56,7 +58,7 @@ HRESULT CTitle::Init(void)
 	//m_object[0]->SetUp(CObject::PLAYER);
 
 
-
+	CManager::GetSound()->Play(CSound::LABEL_BGM_TITLE);
 
 
 	return S_OK;
@@ -66,7 +68,8 @@ HRESULT CTitle::Init(void)
 //破棄
 //================
 void CTitle::Uninit(void)
-{	
+{
+	CManager::GetSound()->Stop();
 	for (int i = 0; i < 4; i++)
 	{
 		if (m_object2d[i] !=nullptr)
@@ -82,7 +85,7 @@ void CTitle::Uninit(void)
 //==================
 void CTitle::Update(void)
 {
-
+	
 	if (m_addY <= 10)
 	{
 		Sizcontroller = true;

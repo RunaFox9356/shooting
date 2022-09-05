@@ -43,7 +43,7 @@ HRESULT CBoss::Init(void)
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		"Data/system/enemy/kuma.txt");
 
-	m_rot.y += (D3DX_PI*0.5f);
+	m_rot.y += -(D3DX_PI*0.5f);
 	return S_OK;
 }
 
@@ -70,18 +70,20 @@ void CBoss::Update(void)
 
 	if (m_pos.y <= -SCREEN_HEIGHT / 2)
 	{
-		m_pos.y = -SCREEN_HEIGHT / 2;
+		m_pos.y = SCREEN_HEIGHT / 2;
 		m_move.y *= -1.0f;
 	}
 
-	if (m_pos.y >= SCREEN_HEIGHT / 2)
+	if (m_pos.y >= SCREEN_HEIGHT / 2-250.0f)
 	{
-		m_pos.y = SCREEN_HEIGHT / 2;
+		m_pos.y = -SCREEN_HEIGHT / 2;
 		m_move.y *= -1.0f;
 	}
 	if (m_pos.x <= -SCREEN_WIDTH / 2)
 	{
 		m_pos.x = SCREEN_WIDTH;
+
+		m_pos.y += SCREEN_HEIGHT / 5;
 	}
 }
 

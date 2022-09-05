@@ -183,6 +183,9 @@
     <ClCompile Include="maruneko.cpp">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -325,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="maruneko.h">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>システム</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

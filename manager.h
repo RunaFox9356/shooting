@@ -18,6 +18,7 @@ class CObject;
 class CResult;
 class CTitle;
 class CFade;
+class CSound;
 
 class CManager
 {
@@ -50,14 +51,15 @@ public:
 	static CTexture* GetTexture();	// テクスチャの情報の取得
 	static CFade* GetFade();	// テクスチャの情報の取得
 	static void SetMode(CManager::MODE mode);
-	
+	static CSound * CManager::GetSound();
 //	static CManager* GetInstance();
 private:
 	static CTexture *m_pTexture;
 	static CRenderer * m_cRenderer;
 	static CFade* m_Fade;
-	CInput *m_Input;
 	static CObject*m_Game;
+	static CSound*m_Sound;
+	CInput *m_Input;
 	MODE m_mode;
 
 };

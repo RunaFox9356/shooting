@@ -15,6 +15,7 @@
 #include "input.h"
 #include "manager.h"
 #include "fade.h"
+#include "sound.h"
 
 //========================
 // コンストラクター
@@ -53,7 +54,7 @@ HRESULT CResult::Init(void)
 	m_object2d[2]->SetSize(D3DXVECTOR3(500.0f, 200.0f, 0.0f));
 	m_object2d[2]->SetPos(CManager::Pos);
 	m_object2d[2]->SetMove(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
-
+	CManager::GetSound()->Play(CSound::LABEL_BGM_RESET);
 	return S_OK;
 }
 
@@ -62,6 +63,7 @@ HRESULT CResult::Init(void)
 //========================
 void CResult::Uninit(void)
 {
+	CManager::GetSound()->Stop();
 	/*for (int i = 0; i < 4; i++)
 	{
 		if (m_object2d[i] != nullptr)

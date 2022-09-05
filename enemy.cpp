@@ -212,7 +212,7 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 			Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
 			Enemy->SetPos(pos);
 			Enemy->SetSize(size);
-			Enemy->SetLife((int)10* size.x);
+			Enemy->SetLife(10* (int)size.x);
 		}
 	}
 }

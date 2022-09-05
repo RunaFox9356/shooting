@@ -26,6 +26,7 @@
 #include "ranking.h"
 
 #include "score.h"
+#include "sound.h"
 
 CMagicBox* CGame::m_MagicBox = nullptr;
 CParticleManager*CGame::paticleManager = nullptr;
@@ -70,6 +71,7 @@ HRESULT CGame::Init(void)
 	m_Player = CPlayer::Create();
 	m_Player->SetUp(CObject::PLAYER);
 	SetBossPop(false);
+	CManager::GetSound()->Play(CSound::LABEL_BGM_GAME);
 	return S_OK;
 }
 
@@ -78,6 +80,7 @@ HRESULT CGame::Init(void)
 //========================
 void CGame::Uninit(void)
 {
+	CManager::GetSound()->Stop();
 	CModelManager::ReleaseAll();
 	CRanking::SetScore(CScore::GetScore());
 

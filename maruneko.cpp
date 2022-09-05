@@ -98,7 +98,6 @@ CMaru *CMaru::Create()
 	if (pObject != nullptr)
 	{
 		pObject->Init();
-
 	}
 	return pObject;
 }

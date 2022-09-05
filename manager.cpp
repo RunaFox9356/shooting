@@ -15,6 +15,7 @@
 #include "result.h"
 #include "fade.h"
 #include "nemeset.h"
+#include "sound.h"
 
 #include "texture.h"
 
@@ -26,6 +27,7 @@ CRenderer * CManager::m_cRenderer = nullptr;
 CTexture * CManager::m_pTexture = nullptr;
 CFade*  CManager::m_Fade = nullptr;
 CObject*CManager::m_Game = nullptr;
+CSound*CManager::m_Sound = nullptr;
 const D3DXVECTOR3 CManager::Pos = D3DXVECTOR3(1280.0f * 0.5f, 720.0f * 0.5f, 0.0f);
 //=============================================================================
 // コンストラクト関数
@@ -64,6 +66,14 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 		return E_FAIL;
 	}
 
+	m_Sound = nullptr;
+	m_Sound = new CSound;
+
+	//入力処理の初期化処理
+	if (FAILED(m_Sound->Init(hWnd)))
+	{
+		return E_FAIL;
+	}
 
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
@@ -100,9 +110,14 @@ void CManager::Uninit()
 		delete m_cRenderer;
 		m_cRenderer = nullptr;
 	}
+	if (m_Sound != nullptr)
+	{// 終了処理
 
-
-
+		m_Sound->Uninit();
+		delete m_Sound;
+		m_Sound = nullptr;
+	}
+	
 	//入力処理の終了処理
 	m_Input->Uninit();
 
@@ -145,9 +160,20 @@ CTexture *CManager::GetTexture()
 	return m_pTexture;
 }
 
+//=============================================================================
+// GetFade
+//=============================================================================
 CFade * CManager::GetFade()
 {
 	return m_Fade;
+}
+
+//=============================================================================
+// GetSound
+//=============================================================================
+CSound * CManager::GetSound()
+{
+	return m_Sound;
 }
 
 
