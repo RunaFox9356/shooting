@@ -49,18 +49,19 @@ public:
 
 	static CRenderer *GetRenderer();
 	static CTexture* GetTexture();	// テクスチャの情報の取得
-	static CFade* GetFade();	// テクスチャの情報の取得
+	static CFade* GetFade();	// 
+	static MODE* GetMode();	//
 	static void SetMode(CManager::MODE mode);
 	static CSound * CManager::GetSound();
-//	static CManager* GetInstance();
+
 private:
 	static CTexture *m_pTexture;
 	static CRenderer * m_cRenderer;
 	static CFade* m_Fade;
 	static CObject*m_Game;
 	static CSound*m_Sound;
+	static MODE m_mode;
 	CInput *m_Input;
-	MODE m_mode;
 
 };
 

@@ -51,6 +51,7 @@ public:
 	void SetSize(D3DXVECTOR3 Size) { m_Size = Size; };
 	D3DXVECTOR3 &GetMove() { return m_move; };
 	LPDIRECT3DVERTEXBUFFER9 &GetVtx() { return m_pVtxBuff; };
+
 protected:
 	int  m_nTimer;
 	float m_nScale;

@@ -24,12 +24,16 @@ protected:
 	static const D3DXVECTOR3 m_Vtx[4];
 
 public:
+
+	static C3dpolygon *Create(int list = 0);
+
 	C3dpolygon(int list = 0);
 	~C3dpolygon() override;
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
+
 	virtual const D3DXVECTOR3 *GetPos() const;
 	virtual void SetPos(const D3DXVECTOR3 &pos);
 	virtual void SetMove(const D3DXVECTOR3 &move) = 0;

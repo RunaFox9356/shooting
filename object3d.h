@@ -12,9 +12,8 @@
 #include "renderer.h"
 #include "object.h"
 #include "main.h"
+#include "motion.h"
 
-
-class  CMotion;
 
 class CObject3d : public CObject
 {
@@ -53,16 +52,23 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
+
 	virtual void SetPos(const D3DXVECTOR3 &pos) ;
 	virtual void SetMove(const D3DXVECTOR3 &move);
 	virtual const D3DXVECTOR3 *GetPos() const ;
+
 	void Set(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, char *filename);
-	const D3DXVECTOR3 *GetRot() const;
+
 	void SetRot(D3DXVECTOR3 &Rot);
 	void SetSize(D3DXVECTOR3 &Size);
 	void SetLife(int Life);
+
+	const D3DXVECTOR3 *GetRot() const;
+
+
 	void HitLife(int Damage);
 	DAMEGE& GetDamegeData();
+
 	virtual void OnHit() {}
 	const D3DXVECTOR3 *GetSize() const;
 
@@ -76,6 +82,7 @@ protected:
 	DAMEGE			m_Damegeis;
 private:
 	D3DXVECTOR3 m_nScale;
+	CMotion::MODELCOLLAR m_ModelCollar;
 
 	LPDIRECT3DTEXTURE9	m_pTexture = NULL;
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
@@ -97,6 +104,7 @@ private:
 	int				m_type;						// タイプ
 	int				m_shadow;					// 影番号
 	int				m_invincible;				// 無敵時間
+	int				m_damagecollar;				// ダメージ点滅
 	float			m_consumption;				// 計算用
 
 	bool			m_bMotionBlend;				// モーションブレンド

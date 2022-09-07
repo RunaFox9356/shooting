@@ -71,8 +71,9 @@ public:
 
 private:
 	TYPE m_EnemyType;
+	void TitleMove();
 	//void Collision(void);	// “–‚½‚è”»’è‚Ü‚Æ‚ß
-	//void Move(void);		// ˆÚ“®
+	void Move(void);		// ˆÚ“®
 
 private:
 

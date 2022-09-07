@@ -28,6 +28,7 @@ CTexture * CManager::m_pTexture = nullptr;
 CFade*  CManager::m_Fade = nullptr;
 CObject*CManager::m_Game = nullptr;
 CSound*CManager::m_Sound = nullptr;
+CManager::MODE CManager::m_mode;
 const D3DXVECTOR3 CManager::Pos = D3DXVECTOR3(1280.0f * 0.5f, 720.0f * 0.5f, 0.0f);
 //=============================================================================
 // コンストラクト関数
@@ -78,7 +79,7 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
 	
-	m_mode = CManager::MODE_GAME;	//現在のモード
+	m_mode = CManager::MODE_TITLE;	//現在のモード
 
 	//モードの設定
 	SetMode(m_mode);
@@ -168,6 +169,11 @@ CFade * CManager::GetFade()
 	return m_Fade;
 }
 
+CManager::MODE * CManager::GetMode()
+{
+	return &m_mode;
+}
+
 //=============================================================================
 // GetSound
 //=============================================================================
@@ -182,7 +188,7 @@ CSound * CManager::GetSound()
 //========================
 void CManager::SetMode(MODE mode)
 {
-	
+	m_mode = mode;
 	if (m_Game != nullptr)
 	{
 		m_Game->Uninit();
@@ -220,4 +226,6 @@ void CManager::SetMode(MODE mode)
 	}
 	m_Game->SetUp(CObject::MODE);
 }
+
+
 

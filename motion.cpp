@@ -86,7 +86,7 @@ void CMotion::Init(void)
 // Author : 唐﨑結斗
 // 概要 : 行列を利用して、パーツの親子関係と描画設定を行う
 //=============================================================================
-void CMotion::SetParts(D3DXMATRIX mtxWorld, CObject3d::DAMEGE Type)
+void CMotion::SetParts(D3DXMATRIX mtxWorld, CMotion::MODELCOLLAR Type)
 {
 
 		D3DXMATRIX mtxRot;
@@ -153,19 +153,33 @@ void CMotion::SetParts(D3DXMATRIX mtxWorld, CObject3d::DAMEGE Type)
 		DWORD ambient;
 		pDevice->GetRenderState(D3DRS_AMBIENT, &ambient);
 
-		if (Type == CObject3d::DAMEGE_DAMAGE)
-		{
-			pDevice->SetRenderState(D3DRS_AMBIENT, 0xffff0000);//あか
-		}
 
-		//pDevice->SetRenderState(D3DRS_AMBIENT, 0xff6666ff); // ほんのり青
+		switch (Type)
+		{
+		case CMotion::LET:
+			pDevice->SetRenderState(D3DRS_AMBIENT, 0xffff0000);//あか
+			break;
+		case CMotion::BLUE:
+			pDevice->SetRenderState(D3DRS_AMBIENT, 0xff6666ff); // ほんのり青
+			break;
+		case CMotion::YELLOW:
+			pDevice->SetRenderState(D3DRS_AMBIENT, 0x00ffff00); // ほんのり黄色
+			break;
+		case CMotion::GREEN:
+			pDevice->SetRenderState(D3DRS_AMBIENT, 0x0000ff00); // ほんのり緑
+			break;
+		case CMotion::NON:
+			break;
+		case CMotion::MAX:
+			break;
+		default:
+			break;
+		}
+		//
 
 		for (int nCntMat = 0; nCntMat < (int)(m_parts + i)->nNumMat; nCntMat++)
 		{
 			pMat[nCntMat].MatD3D.Ambient = pMat[nCntMat].MatD3D.Diffuse;
-			//pMat[nCntMat].MatD3D.Ambient.r *= 2.0f;
-			//pMat[nCntMat].MatD3D.Ambient.g *= 0.2f;
-			//pMat[nCntMat].MatD3D.Ambient.b *= 0.2f;
 			// マテリアルの設定
 			pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 

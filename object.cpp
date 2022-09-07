@@ -167,14 +167,18 @@ void CObject::AllCreate()
 	CBg * Bg1 = CBg::Create();
 	Bg1->SetMove(D3DXVECTOR3(0.0001f, 0.0f, 0.0f));
 	Bg1->SetTexture(CTexture::TEXTURE_STARRY);
-	CBg * Bg3 = CBg::Create();
-	Bg3->SetMove(D3DXVECTOR3(0.00001f, 0.0f, 0.0f));
-	Bg3->SetTexture(CTexture::TEXTURE_MOON);
-	
+	Bg1->SetBgType(CBg::MOVE);
+
 	CBg * Bg2 = CBg::Create();
 	Bg2->SetMove(D3DXVECTOR3(0.001f, 0.0f, 0.0f));
 	Bg2->SetTexture(CTexture::TEXTURE_TOWN);
+	Bg2->SetBgType(CBg::MOVE);
 
+	CBg * Bg3 = CBg::Create();
+	Bg3->SetMove(D3DXVECTOR3(0.00001f, 0.0f, 0.0f));
+	Bg3->SetTexture(CTexture::TEXTURE_MOON);
+	Bg3->SetBgType(CBg::STOP);
+	
 
 	CEnemy::LoadEnemy("Data/datatest.json");
 	pScore = CScore::Create(D3DXVECTOR3(900.0f, 100.0f, 0.0f));

@@ -13,7 +13,7 @@
 //***************************************************************************
 #include"main.h"
 #include "renderer.h"
-#include "object3d.h"
+
 
 
 //=============================================================================
@@ -24,6 +24,16 @@
 class CMotion
 {
 public:
+
+	enum MODELCOLLAR
+	{
+		LET = 0,
+		BLUE,
+		YELLOW,
+		GREEN,
+		NON,
+		MAX
+	};
 	//***************************************************************************
 	// 定数定義
 	//***************************************************************************
@@ -103,7 +113,7 @@ public:
 	void Init(void);
 
 	// パーツの設定
-	void SetParts(D3DXMATRIX mtxWorld, CObject3d::DAMEGE Type);							// マテリアルデータ
+	void SetParts(D3DXMATRIX mtxWorld, CMotion::MODELCOLLAR Type);							// マテリアルデータ
 
 	// モーションの再生
 	bool PlayMotion(const int nCntMotionSet);
@@ -169,6 +179,8 @@ public: /* 定義 */
 class CModelManager
 {
 public: /* 定義 */
+
+
 	static const int MODEL_MAX = 100;
 
 private:

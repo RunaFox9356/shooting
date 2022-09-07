@@ -24,6 +24,7 @@
 #include "player.h"
 #include "manager.h"
 #include "fade.h"
+#include "sound.h"
 
 int CObject3d::m_drop = 0;
 //------------------------------------
@@ -76,6 +77,9 @@ CObject3d::~CObject3d()
 HRESULT CObject3d::Init(void)
 {
 	D3DXVECTOR3 *Camerarot = CRenderer::GetCamera()->GetRot();
+
+	m_ModelCollar = CMotion::NON;
+	m_damagecollar = 0;
 
 	//ƒJƒƒ‰‚Ìƒf[ƒ^Žæ“¾
 	m_rotMove = D3DXVECTOR3(D3DX_PI + Camerarot->y, D3DX_PI * 0.5f + Camerarot->y, 0.0f);
@@ -137,9 +141,30 @@ void CObject3d::Update(void)
 	}
 
 	m_Invincible--;
+
 	if (m_Invincible <= 0)
 	{
 		m_Damegeis = DAMEGE_NORMAL;
+	}
+
+	if (m_Damegeis == DAMEGE_DAMAGE)
+	{
+	//Damage‚­‚ç‚Á‚Ä‚é‚Æ‚«‚Ì“_–Åˆ—
+		if (m_damagecollar == 1)
+		{
+			m_ModelCollar = CMotion::LET;			
+		}
+		if (m_damagecollar == 30)
+		{
+			m_ModelCollar = CMotion::NON;	
+		}
+		if (m_damagecollar == 60)
+		{
+			m_damagecollar = 0;
+
+		}
+		m_damagecollar++;
+	
 	}
 }
 
@@ -185,13 +210,15 @@ void CObject3d::Draw(void)
 			if (m_pMotion)
 			{
 				// ƒp[ƒc‚Ì•`‰æÝ’è
-				m_pMotion->SetParts(m_mtxWorld, m_Damegeis);
+				m_pMotion->SetParts(m_mtxWorld, m_ModelCollar);
 			}
 		}
 		// s—ñŠ|‚¯ŽZŠÖ”(‘æ2ˆø”~‘æ3ˆø”‘æ‚ð‚Pˆø”‚ÉŠi”[)
 		pDevice->SetMaterial(&marDef);
 	
 }
+
+
 //------------------------------------
 // POS‚¾‚¯ƒZƒbƒg
 //------------------------------------
@@ -285,20 +312,21 @@ void CObject3d::HitLife(int Damage)
 
 	OnHit();
 	if (Type != PLAYER)
-	{
+	{//PlayerˆÈŠO‚Ìˆ—
+		CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
 		if (m_Life <= 0)
-		{
-
+		{//LIFE‚ªs‚«‚½‚Æ‚«
+	
 			CMultiply::SetRate((1 + *CMultiply::GetRate()));
 			CMultiply::list(*CMultiply::GetRate(), m_pos, true);
 
 			for (int i = 0; i < 5; i++)
 			{
+				//ƒXƒRƒA‚ÌÝ’è‚ÆPointItem‚Ì¶¬•Ý’è
 				GetScore()->Add(50);
 				D3DXVECTOR3 scale(3.8f, 3.8f, 3.8f);
 				CBell * Bell = CBell::Create();
 				Bell->SetUp(BELL);
-
 				Bell->SetMove(D3DXVECTOR3((float)-(rand() % 10 + 1), (float)(rand() % 10 + 5), 0.0f));
 				Bell->SetPos(m_pos);
 				Bell->SetSize(scale);
@@ -311,6 +339,7 @@ void CObject3d::HitLife(int Damage)
 				m_drop = 0;
 				CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
 			}
+			//object‚Ì”jŠü
 			Uninit();
 		
 		}
@@ -320,6 +349,7 @@ void CObject3d::HitLife(int Damage)
 	{
 		if (m_Life <= 0)
 		{
+			//LIFE‚ªs‚«‚½‚Æ‚«Player‚È‚ç‰æ–Ê‘JˆÚ
 			CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		}
 	}

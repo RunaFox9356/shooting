@@ -99,28 +99,29 @@ CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 		pObject->SetPos(D3DXVECTOR3(pos.x, pos.y+50.0f, 0.0f));
  		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
   		pObject->SetAnimation(8,1);
+		//CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
 		int nType = Type;
 		switch (nType)
 		{
 		case CPlayer::NOW_FIRE:	
 			pObject->SetTexture(CTexture::TEXTURE_FIRE);
-			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
+		
 			break;
 		case CPlayer::NOW_ICE:		
 			pObject->SetTexture(CTexture::TEXTURE_ICE);
-			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
+			
 			break;
 		case CPlayer::NOW_STORM:		
 			pObject->SetTexture(CTexture::TEXTURE_STORM);
-			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
+			
 			break;
 		case CPlayer::NOW_SUN:
 			pObject->SetTexture(CTexture::TEXTURE_THUNDER);
-			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
+		
 			break;
 		case CPlayer::NOW_NON:
 			pObject->SetTexture(CTexture::TEXTURE_HIT);
-			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
+			
 			break;
 		default:
 			pObject->SetTexture(CTexture::TEXTURE_LIGHT);

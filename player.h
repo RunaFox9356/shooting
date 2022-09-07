@@ -65,6 +65,8 @@ public:
 private:
 	
 	void Move();		// ˆÚ“®
+	void TitleMove();
+
 	int m_Pow;
 	float m_MoveSpeed;
 	static NOWMAGIC m_NowMagic;			//Œ»İ‚Ì–‚–@

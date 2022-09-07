@@ -49,12 +49,19 @@ void CBg::Uninit()
 //------------------------------------
 void CBg::Update()
 {
-	//加算の値を関数化
-	m_Speed +=( m_MoveSpeed + m_KillSpeed+ m_AddSpeed);
-
+	if (BgType == MOVE)
+	{
+		//加算の値を関数化
+		m_Speed += (m_MoveSpeed + m_KillSpeed + m_AddSpeed);
+	}
+	else
+	{	//加算の値を関数化
+		m_Speed += (m_MoveSpeed);
+	}
 	if (m_KillSpeed.x > 0.0f)
 	{
-		m_KillSpeed.x -= 0.001f;
+		m_KillSpeed.x -= m_KillSpeed.x*0.01f;
+
 		if (m_KillSpeed <= 0)
 		{
 			m_KillSpeed.x = 0;
@@ -80,9 +87,9 @@ void CBg::Draw()
 {
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 	//アルファブレンディングを加算合成に設定
-	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	//pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	//pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	//pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
 	m_mtxWorld = *hmd::giftmtx(&m_mtxWorld, m_pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 

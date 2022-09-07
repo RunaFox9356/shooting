@@ -11,6 +11,11 @@
 #include"main.h"
 #include "object2d.h"
 
+
+class CBg;
+class CPlayer;
+class CEnemy;
+class C3dpolygon;
 class CTitle :public CObject
 {
 public:
@@ -22,7 +27,10 @@ public:
 	void Draw() override;
 	
 private:
-	CObject * m_object[4];
+	CPlayer * m_Player;
+	CEnemy * m_Enemy[10];
+	CBg *m_object3d[4];
+	C3dpolygon *m_3dpolygon[4];
 	CObject2d *m_object2d[4];
 	int m_addX;
 	int m_addY;

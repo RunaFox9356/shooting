@@ -79,9 +79,10 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		nDigits = 8;
 	}
 
+	//倍率の減少率
 	if (m_Decrease)
 	{
-		m_RateWait = 200;
+		m_RateWait = 1000;
 	}
 	else
 	{
@@ -93,18 +94,21 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		if (Fastratio[i] == nullptr)
 		{//数字のデータをなかったらつくる
 			Fastratio[i] = CNumber::Create();
-			Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
-			
+			Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));	
 		}
 
 		aPosTexU[i] = 0;
 		
 	}
+
+	//一つの桁数をいれる
 	for (int i = nDigits; i >= 0; i--)
 	{
 		aPosTexU[i] = (nModScore % 10);
    		nModScore /= 10;
 	}
+
+
 	D3DXVECTOR3 ratiopos = Pos;
 
 	// 数字の位置を計算
@@ -171,11 +175,10 @@ void CMultiply::SetRate(int Rete)
 {
 	if (m_Rate <= 256)
 	{
+		m_Decrease = false;
 		m_Rate = Rete;
 		CMultiply::FastSet(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f));
 	}
-	m_Decrease = false;
-	
 }
 
 CMultiply::CMultiply()
@@ -211,6 +214,7 @@ void CMultiply::Update()
 	if (m_Rate > 0)
 	{
 		m_RateWait--;
+	
 		if (m_RateWait <= 0)
 		{
 

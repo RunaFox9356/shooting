@@ -15,11 +15,14 @@
 
 class CBg : public C3dpolygon
 {
-private:
-	//polygonの拡大サイズ
-	static const D3DXVECTOR3 m_Vtx[4];
-
 public:
+	enum BgType
+	{
+		MOVE = 0,	// 動くやーつ
+		STOP,		// 動かないやーつ
+		MAX			// あんただれや？
+	};
+
 	static CBg *CBg::Create();
 
 	CBg(const int list);
@@ -33,12 +36,14 @@ public:
 	void SetMove(const D3DXVECTOR3 &move)override;
 	static void SetKillMove(const D3DXVECTOR3 & move);
 	static D3DXVECTOR3 GetKillMove();
+	void SetBgType(const BgType &Type) { BgType = Type; };
 private:
 
 	D3DXVECTOR3 m_Speed;
 	D3DXVECTOR3 m_MoveSpeed;
 	static D3DXVECTOR3 m_KillSpeed;
 	D3DXVECTOR3 m_AddSpeed;
+	BgType BgType;
 };
 
 #endif

@@ -27,6 +27,7 @@
 
 #include "score.h"
 #include "sound.h"
+#include "bg.h"
 
 CMagicBox* CGame::m_MagicBox = nullptr;
 CParticleManager*CGame::paticleManager = nullptr;
@@ -50,8 +51,11 @@ CGame::~CGame()
 //========================
 HRESULT CGame::Init(void)
 {
+	m_GameCount = 0;
+	m_SpeedUp = 300;
 
 	srand((unsigned int)time(NULL)); // 現在時刻の情報で初期化
+
 	paticleManager = new CParticleManager;
 	// パーティクル
 	if (FAILED(paticleManager->Init()))
@@ -105,8 +109,14 @@ void CGame::Uninit(void)
 //========================
 void CGame::Update(void)
 {
+	m_GameCount++;
 	// 更新処理
-
+	if (m_GameCount == m_SpeedUp)
+	{
+		m_GameCount = 0;
+		m_SpeedUp += 250;
+		CBg::SetKillMove(D3DXVECTOR3(0.05f, 0.0f, 0.0f));
+	}
 	CInput *CInputpInput = CInput::GetKey();
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
 	{

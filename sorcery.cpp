@@ -13,6 +13,7 @@
 #include "utility.h"
 #include "hit.h"
 #include "game.h"
+#include "sound.h"
 
 
 //=============================================================================
@@ -102,7 +103,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 		pObject->SetPos(D3DXVECTOR3(pos.x+640.0f, pos.y, 0.0f));
 		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		pObject->m_NouPlayer = type;
-
+		
 		switch (type)
 		{
 		case CPlayer::NOW_FIRE:	
@@ -110,18 +111,21 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 			pObject->SetTexture(CTexture::TEXTURE_METEO);
 			pObject->SetSize(D3DXVECTOR3(640.0f, 200.0f, 0.0f));
 			pObject->SetSpeed(3);
+			CManager::GetSound()->Play(CSound::LABEL_SE_FLARE);
 			break;
 		case CPlayer::NOW_ICE:	
 			pObject->SetAnimation(1, 8);
 			pObject->SetTexture(CTexture::TEXTURE_ICEAREA);
 			pObject->SetSize(D3DXVECTOR3(100.0f, 100.0f, 0.0f));
 			pObject->SetPos(D3DXVECTOR3(pos.x, pos.y, 0.0f));
+			CManager::GetSound()->Play(CSound::LABEL_SE_ICE);
 			pObject->SetSpeed(10);
 			break;
 		case CPlayer::NOW_STORM:
 			pObject->SetAnimation(1, 8);
 			pObject->SetTexture(CTexture::TEXTURE_TEMPEST);
 			pObject->SetSize(D3DXVECTOR3(640.0f, 300.0f, 0.0f));
+			CManager::GetSound()->Play(CSound::LABEL_SE_STORM);
 			pObject->SetSpeed(5);
 			break;
 		case CPlayer::NOW_SUN:
@@ -129,6 +133,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 			pObject->SetTexture(CTexture::TEXTURE_RAIN);
 			pObject->SetSize(D3DXVECTOR3(640.0f, 350.0f, 0.0f));
 			pObject->SetPos(D3DXVECTOR3(pos.x, pos.y, 0.0f));
+			CManager::GetSound()->Play(CSound::LABEL_SE_SUN);
 			pObject->SetSpeed(4);
 			break;
 		default:

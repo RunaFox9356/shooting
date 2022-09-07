@@ -32,7 +32,7 @@ private:
 	static CMagicBox* m_MagicBox;
 	static CPlayer* m_Player;
 	static CParticleManager* paticleManager;	// パーティクルマネジャー
-
-
+	int m_GameCount;
+	int m_SpeedUp;
 };
 #endif

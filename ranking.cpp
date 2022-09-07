@@ -155,7 +155,7 @@ void CRanking::Update(void)
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
 	//ƒ‚[ƒh‚ÌÝ’è
-		CManager::GetFade()->NextMode(CManager::MODE_TITLE);
+		CManager::GetFade()->NextMode(CManager::MODE_RESULT);
 			return;
 	
 	}
