@@ -45,7 +45,7 @@ public:
 		void Uninit() override;
 		void Update() override;
 		void Draw() override;
-		static CMagicCircle *CMagicCircle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move);
+		static CMagicCircle *CMagicCircle::Create(D3DXVECTOR3 pos);
 		void SetMove(const D3DXVECTOR3 &move)override;
 		void SetType(const int&myType);
 		void SetDefaultSize(const D3DXVECTOR3&Size) { m_DefaultSize = Size; };

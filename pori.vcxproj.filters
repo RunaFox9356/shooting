@@ -186,6 +186,12 @@
     <ClCompile Include="sound.cpp">
       <Filter>システム</Filter>
     </ClCompile>
+    <ClCompile Include="tutorial.cpp">
+      <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
+    <ClCompile Include="inputcontroller.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -330,6 +336,12 @@
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClInclude>
     <ClInclude Include="sound.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="tutorial.h">
+      <Filter>メイン\画面遷移</Filter>
+    </ClInclude>
+    <ClInclude Include="inputcontroller.h">
       <Filter>システム</Filter>
     </ClInclude>
   </ItemGroup>

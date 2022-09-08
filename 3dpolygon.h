@@ -36,7 +36,7 @@ public:
 
 	virtual const D3DXVECTOR3 *GetPos() const;
 	virtual void SetPos(const D3DXVECTOR3 &pos);
-	virtual void SetMove(const D3DXVECTOR3 &move) = 0;
+	virtual void SetMove(const D3DXVECTOR3 &move) { move; };
 	
 	void SetTexture(CTexture::TEXTURE texture);
 	void SetTex(PositionVec4 Tex);

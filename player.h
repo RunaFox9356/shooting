@@ -66,7 +66,8 @@ private:
 	
 	void Move();		// 移動
 	void TitleMove();
-
+	void ResetMove();
+	void TutorialMove();	//動きセット
 	int m_Pow;
 	float m_MoveSpeed;
 	static NOWMAGIC m_NowMagic;			//現在の魔法

@@ -20,6 +20,7 @@
 #include "texture.h"
 
 #include "ranking.h"
+#include "tutorial.h"
 //-----------------------------------------------------------------------------
 // Ã“Iƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
 //-----------------------------------------------------------------------------
@@ -214,6 +215,9 @@ void CManager::SetMode(MODE mode)
 		break;
 	case CManager::MODE_NAMESET:
 		m_Game = new CNemeSet;
+		break;
+	case CManager::MODE_TUTORIAL:
+		m_Game = new CTutorial;
 		break;
 	default:
 		break;

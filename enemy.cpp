@@ -76,15 +76,27 @@ void CEnemy::Update(void)
 
 	m_motionType = CObject3d::ANIME_RUN;
 
-	if (*CManager::GetMode() == CManager::MODE_GAME)
+
+	switch (*CManager::GetMode())
 	{
+	case CManager::MODE_TITLE:
+		TitleMove();	//動きセット
+		break;
+	case CManager::MODE_GAME:
 		Move();	//動きセット
 		Collision();
+		break;
+	case CManager::MODE_RESULT:
+		ResetMove();
+		break;
+	case CManager::MODE_RANKING:
+		break;
+	case CManager::MODE_TUTORIAL:
+		break;
+	default:
+		break;
 	}
-	if (*CManager::GetMode() == CManager::MODE_TITLE)
-	{
-		TitleMove();	//動きセット
-	}
+	
 
 	
 
@@ -257,5 +269,26 @@ void CEnemy::Move(void)
 	{
 		Uninit();
 		//m_pos.x = SCREEN_WIDTH;
+	}
+}
+//------------------------------------
+// TitleのときのMove
+//------------------------------------
+void CEnemy::ResetMove()
+{
+	m_pos.x += m_move.x;
+
+	//  if (m_pos.y < -SCREEN_HEIGHT*0.5f)
+	//	{
+	//		m_pos.y = (SCREEN_HEIGHT *0.5f) - 100.0f;
+	//	}
+	if (m_pos.y > SCREEN_HEIGHT *0.5f - 100.0f)
+	{
+		m_pos.y = -SCREEN_HEIGHT*0.5f;
+	}
+
+	if (m_pos.x <= -SCREEN_WIDTH*0.5f - 200.0f)
+	{
+		m_pos.x = SCREEN_WIDTH*0.5f + 200.0f;
 	}
 }

@@ -16,6 +16,8 @@
 #include "player.h"
 #include "game.h"
 #include "particle_manager.h"
+#include "tutorial.h"
+
 int CMagicCircleManager::CMagicCircle::m_popType = 2;
 
 //=============================================================================
@@ -66,13 +68,28 @@ void CMagicCircleManager::CMagicCircle::Update()
 
 		SetSize(m_Size);
 	}
-	CPlayer* cPlayer = CGame::GetPlayer();  // ダウンキャスト
+
+	CParticleManager* particleManager = nullptr;
+
+
+	CPlayer* cPlayer = nullptr;
+	if (*CManager::GetMode() == CManager::MODE_GAME)
+	{
+		cPlayer = CGame::GetPlayer();  // ダウンキャスト
+		particleManager = CGame::GetParticleManager();
+		
+	}
+	else if (*CManager::GetMode() == CManager::MODE_TUTORIAL)
+	{
+		cPlayer = CTutorial::GetPlayer();  // ダウンキャスト
+		particleManager = CTutorial::GetParticleManager();
+	}
+
 	const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 	
 	SetPos(*PlayerPos);
 
 
-	CParticleManager* particleManager = CGame::GetParticleManager();
 	if (particleManager->GetEmitter().size() == 0)
 	{
 		m_isEndAnimation = false;
@@ -114,7 +131,7 @@ void CMagicCircleManager::CMagicCircle::Draw()
 //=============================================================================
 // create関数
 //=============================================================================
-CMagicCircleManager::CMagicCircle *CMagicCircleManager::CMagicCircle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move)
+CMagicCircleManager::CMagicCircle *CMagicCircleManager::CMagicCircle::Create(D3DXVECTOR3 pos)
 {
 	CMagicCircle * pObject = nullptr;
 	pObject = new CMagicCircle;
@@ -155,40 +172,72 @@ CMagicCircleManager * CMagicCircleManager::Create(D3DXVECTOR3 pos)
 	for (int i = 0; i < 3; i++)
 	{
 		object->MagicCircle[i] = nullptr;
-		object->MagicCircle[i] = CMagicCircle::Create(pos, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-		
+		object->MagicCircle[i] = CMagicCircle::Create(pos);
+
 		if (object->MagicCircle[i] != nullptr)
 		{
 			object->MagicCircle[i]->Init();
 			object->MagicCircle[i]->SetPos(pos);
 			object->MagicCircle[i]->SetDecreasingRate(30.0f + (20.0f*i));
-			object->MagicCircle[i]->SetTexture((CTexture::TEXTURE)((int)CTexture::TEXTURE_MAGICCIRCLE1+ rand() % 4 + 0));
+			object->MagicCircle[i]->SetTexture((CTexture::TEXTURE)((int)CTexture::TEXTURE_MAGICCIRCLE1 + rand() % 4 + 0));
 			object->MagicCircle[i]->SetSize(D3DXVECTOR3(1.0f + (10.0f*i), 1.0f + (10.0f*i), 0.0f));
-			object->MagicCircle[i]->SetDefaultSize(D3DXVECTOR3(100.0f+(70.0f*i), 100.0f + (70.0f * i), 0.0f));
+			object->MagicCircle[i]->SetDefaultSize(D3DXVECTOR3(100.0f + (70.0f*i), 100.0f + (70.0f * i), 0.0f));
 			//object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			//色の設定
 
-	
-			switch (CGame::GetMagicBox()->GetcMagic(i).GetTexture())
+			if (*CManager::GetMode() == CManager::MODE_GAME)
 			{
-			case CTexture::TEXTURE_FIRE:
-				object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 0.2f, 0.2f, 0.8f));
-				break;
-			case CTexture::TEXTURE_ICE:
-				object->MagicCircle[i]->SetCollar(PositionVec4(0.2f, 0.2f, 1.0f, 0.8f));
-				break;
-			case CTexture::TEXTURE_STORM:
-				object->MagicCircle[i]->SetCollar(PositionVec4(0.0f, 1.0f, 0.2f, 0.8f));
-				break;
-			case CTexture::TEXTURE_THUNDER:
-				object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 0.2f, 0.8f));
-				break;
-			default:
-				object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
-				break;
+				switch (CGame::GetMagicBox()->GetcMagic(i).GetTexture())
+				{
+				case CTexture::TEXTURE_FIRE:
+					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 0.2f, 0.2f, 0.8f));
+					break;
+				case CTexture::TEXTURE_ICE:
+					object->MagicCircle[i]->SetCollar(PositionVec4(0.2f, 0.2f, 1.0f, 0.8f));
+					break;
+				case CTexture::TEXTURE_STORM:
+					object->MagicCircle[i]->SetCollar(PositionVec4(0.0f, 1.0f, 0.2f, 0.8f));
+					break;
+				case CTexture::TEXTURE_THUNDER:
+					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 0.2f, 0.8f));
+					break;
+				default:
+					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+					break;
+				}
 			}
-		}
-	}
+			else if (*CManager::GetMode() == CManager::MODE_TUTORIAL)
+			{
+				switch (CTutorial::GetMagicBox()->GetcMagic(i).GetTexture())
+				{
+				case CTexture::TEXTURE_FIRE:
+					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 0.2f, 0.2f, 0.8f));
+					break;
+				case CTexture::TEXTURE_ICE:
+					object->MagicCircle[i]->SetCollar(PositionVec4(0.2f, 0.2f, 1.0f, 0.8f));
+					break;
+				case CTexture::TEXTURE_STORM:
+					object->MagicCircle[i]->SetCollar(PositionVec4(0.0f, 1.0f, 0.2f, 0.8f));
+					break;
+				case CTexture::TEXTURE_THUNDER:
+					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 0.2f, 0.8f));
+					break;
+				default:
+					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+					break;
+				}
+			}
+			else
+			{
+				object = nullptr;
+			}
 
+
+
+
+		}
+
+		
+	}
 	return object;
 }

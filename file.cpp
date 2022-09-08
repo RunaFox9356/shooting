@@ -12,6 +12,7 @@
 #include "texture.h"
 #include "particle_manager.h"
 #include "game.h"
+#include "tutorial.h"
 
 static int index = 0;
 namespace nl = nlohmann;
@@ -115,7 +116,25 @@ void LoadJson(const char* cUrl)
 			{
 				index = 0;
 			}
-			CGame::GetParticleManager()->SetBundledData(loadData, index);
+			switch (*CManager::GetMode())
+			{
+			case CManager::MODE_TITLE:
+			
+				break;
+			case CManager::MODE_GAME:
+				CGame::GetParticleManager()->SetBundledData(loadData, index);			
+				break;
+			case CManager::MODE_RESULT:
+			
+				break;
+			case CManager::MODE_RANKING:
+				break;
+			case CManager::MODE_TUTORIAL:
+				CTutorial::GetParticleManager()->SetBundledData(loadData, index);
+				break;
+			default:
+				break;
+			}
 			index++;
 		}
 		else

@@ -152,12 +152,20 @@ void CRanking::Update(void)
 
 	CInput *CInputpInput = CInput::GetKey();
 
+	
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
-	//モードの設定
-		CManager::GetFade()->NextMode(CManager::MODE_RESULT);
+		//モードの設定
+		if (m_score == 0)
+		{
+			CManager::GetFade()->NextMode(CManager::MODE_TITLE);
 			return;
-	
+		}
+		else
+		{
+			CManager::GetFade()->NextMode(CManager::MODE_RESULT);
+			return;
+		}
 	}
 }
 

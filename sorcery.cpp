@@ -14,7 +14,7 @@
 #include "hit.h"
 #include "game.h"
 #include "sound.h"
-
+#include "tutorial.h"
 
 //=============================================================================
 // コンストラクト関数
@@ -166,7 +166,15 @@ void CSorcey::SetSpeed(const int &Speed)
 //=============================================================================
 void CSorcey::PlayAnimation()
 {
-	CParticleManager* particleManager = CGame::GetParticleManager();
+	CParticleManager* particleManager = nullptr;
+	if (*CManager::GetMode() == CManager::MODE_GAME)
+	{
+		particleManager = CGame::GetParticleManager();
+	}
+	else if (*CManager::GetMode() == CManager::MODE_TUTORIAL)
+	{
+		particleManager = CTutorial::GetParticleManager();
+	}
 	m_PatternAnimX++;
 
 	if (m_PatternAnimX > m_DivisionX)
@@ -207,8 +215,23 @@ void CSorcey::PlayAnimation()
 void CSorcey::Move()
 {
 	D3DXVECTOR3 Imguipos, PlayerPos;
-	CParticleManager* particleManager = CGame::GetParticleManager();
-	CPlayer *Data = CGame::GetPlayer();
+
+	CParticleManager* particleManager = nullptr;
+
+	CPlayer *Data = nullptr;
+
+	if (*CManager::GetMode() == CManager::MODE_GAME)
+	{
+		particleManager = CGame::GetParticleManager();
+		Data = CGame::GetPlayer();
+	}
+	else if (*CManager::GetMode() == CManager::MODE_TUTORIAL)
+	{
+		 particleManager = CTutorial::GetParticleManager();
+		 Data = CTutorial::GetPlayer();
+	}
+
+
 
 	if (particleManager->GetEmitter().size() != 0)
 	{

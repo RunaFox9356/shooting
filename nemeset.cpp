@@ -73,12 +73,16 @@ void CNemeSet::Update(void)
 	CInput *CInputpInput = CInput::GetKey();
 	if (CInputpInput->Trigger(CInput::KEY_DELETE))
 	{
-		if (m_PlayNameSet[m_NowPlay] != nullptr)
+		if (m_NowPlay > 0)
 		{
-			m_NowPlay--;
-			m_PlayNameSet[m_NowPlay]->Uninit();
-			m_PlayNameSet[m_NowPlay]->Release();
-			m_NemePos.x -= 60.0f;
+			if (m_PlayNameSet[m_NowPlay] != nullptr)
+			{
+				m_NowPlay--;
+				m_PlayNameSet[m_NowPlay]->Uninit();
+				m_PlayNameSet[m_NowPlay]->Release();
+				m_PlayName = m_PlayName.substr(0, m_PlayName.length() - 1);
+				m_NemePos.x -= 120.0f;
+			}
 		}
 	}
 

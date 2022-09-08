@@ -74,6 +74,7 @@ HRESULT CGame::Init(void)
 
 	m_Player = CPlayer::Create();
 	m_Player->SetUp(CObject::PLAYER);
+
 	SetBossPop(false);
 	CManager::GetSound()->Play(CSound::LABEL_BGM_GAME);
 	return S_OK;
