@@ -177,6 +177,13 @@ bool CInput::Press(STAN_DART_INPUT_KEY key)
 		{
 			return true;
 		}
+		break;
+	case CInput::KEY_RELOAD:
+		if (m_pKeyboard->GetKeyboardPress(DIK_R))
+		{
+			return true;
+		}
+		break;
 	default:
 		break;
 	}
@@ -258,6 +265,12 @@ bool CInput::Trigger(STAN_DART_INPUT_KEY key)
 			return true;
 		}
 		break;
+	case CInput::KEY_RELOAD:
+		if (m_pKeyboard->GetKeyboardTrigger(DIK_R))
+		{
+			return true;
+		}
+		break;	
 	default:
 		break;
 	}

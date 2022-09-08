@@ -22,6 +22,8 @@
 #include "bg.h"
 #include "magic.h"
 #include "particle_manager.h"
+#include "score.h"
+#include "life.h"
 
 CMagicBox* CTutorial::m_MagicBox;	
 CParticleManager* CTutorial::paticleManager;
@@ -33,6 +35,7 @@ CPlayer * CTutorial::m_Player;
 CTutorial::CTutorial()
 {
 }
+
 //========================
 // デストラクト
 //========================
@@ -49,7 +52,7 @@ HRESULT CTutorial::Init(void)
 	BGPos.x = 0.0f;
 	BGPos.y = 0.0f;
 	BGPos.z -= 0.0f;
-
+	m_Magic = 2;
 	m_Bg[0] = CBg::Create();
 	m_Bg[0]->SetTexture(CTexture::TEXTURE_TUTORIAL);
 	m_Bg[0]->SetSize(CManager::Pos);
@@ -68,12 +71,16 @@ HRESULT CTutorial::Init(void)
 		return E_FAIL;
 	}
 
+	CScore* pScore = CScore::Create(D3DXVECTOR3(900.0f, 100.0f, 0.0f));
+	pScore->Set(0);
 
-	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(150.0f, 1620.0f, 0.0f));
+	CLife*pLife = CLife::Create(D3DXVECTOR3(300.0f, 100.0f, 0.0f));
 
-	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_FIRE);
-	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_ICE);
+	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(150.0f, 620.0f, 0.0f));
+
 	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_THUNDER);
+	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_ICE);
+	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_FIRE);
 
 	return S_OK;
 
@@ -119,16 +126,24 @@ void CTutorial::Update(void)
 	paticleManager->Update();
 
 	CInput *CInputpInput = CInput::GetKey();
-	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
+	if (CInputpInput->Trigger(CInput::KEY_DELETE))
 	{
 		//モードの設定
 		CManager::GetFade()->NextMode(CManager::MODE_TITLE);
 	}
 
-	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
+	if (CInputpInput->Trigger(CInput::KEY_RELOAD))
 	{
+		if (paticleManager->GetEmitter().size() == 0)
+		{
+			m_Magic++; 
+			if (m_Magic >= 6)
+			{
+				m_Magic = 2;
+			}
+			m_MagicBox->CMagicBox::Magicplay((CTexture::TEXTURE)m_Magic);
+		}
 
-		m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_FIRE);
 	}
 #ifdef _DEBUG
 

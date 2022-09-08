@@ -41,9 +41,7 @@ private:
 	
 	CEnemy * m_Enemy[10];
 	CBg *m_Bg[4];
-	int m_addX;
-	int m_addY;
-	bool Sizcontroller;
+	int m_Magic;
 
 
 };

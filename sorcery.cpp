@@ -19,7 +19,7 @@
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
-CSorcey::CSorcey() :C3dpolygon(0)
+CSorcey::CSorcey() :C3dpolygon(1)
 {
 }
 
@@ -100,7 +100,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 	{
 		pObject->Init();
 		pObject->SetMove(D3DXVECTOR3(15.0f, 0.0f, 0.0f));
-		pObject->SetPos(D3DXVECTOR3(pos.x+640.0f, pos.y, 0.0f));
+		pObject->SetPos(D3DXVECTOR3(pos.x+640.0f, pos.y, 100.0f));
 		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		pObject->m_NouPlayer = type;
 		
@@ -109,7 +109,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 		case CPlayer::NOW_FIRE:	
 			pObject->SetAnimation(2, 10);
 			pObject->SetTexture(CTexture::TEXTURE_METEO);
-			pObject->SetSize(D3DXVECTOR3(640.0f, 200.0f, 0.0f));
+			pObject->SetSize(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 			pObject->SetSpeed(3);
 			CManager::GetSound()->Play(CSound::LABEL_SE_FLARE);
 			break;

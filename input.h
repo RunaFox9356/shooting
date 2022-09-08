@@ -31,6 +31,7 @@ public:
 		KEY_SHOT,
 		KEY_DEBUG,
 		KEY_F2,
+		KEY_RELOAD,
 		KEY_DELETE
 	};
 
