@@ -29,9 +29,12 @@
 #include "sound.h"
 #include "bg.h"
 
+#include "pause.h"
+
 CMagicBox* CGame::m_MagicBox = nullptr;
-CParticleManager*CGame::paticleManager = nullptr;
+CParticleManager*CGame::m_PaticleManager = nullptr;
 CPlayer*CGame::m_Player = nullptr;
+CPause *CGame::m_Pause = nullptr;
 
 //========================
 // コンストラクター
@@ -56,9 +59,9 @@ HRESULT CGame::Init(void)
 
 	srand((unsigned int)time(NULL)); // 現在時刻の情報で初期化
 
-	paticleManager = new CParticleManager;
+	m_PaticleManager = new CParticleManager;
 	// パーティクル
-	if (FAILED(paticleManager->Init()))
+	if (FAILED(m_PaticleManager->Init()))
 	{
 		return E_FAIL;
 	}
@@ -77,6 +80,11 @@ HRESULT CGame::Init(void)
 
 	SetBossPop(false);
 	CManager::GetSound()->Play(CSound::LABEL_BGM_GAME);
+
+	m_Pause = new CPause;
+	m_Pause->Init();
+	m_Pause->SetUp(CObject::PAUSE);
+
 	return S_OK;
 }
 
@@ -89,11 +97,11 @@ void CGame::Uninit(void)
 	CModelManager::ReleaseAll();
 	CRanking::SetScore(CScore::GetScore());
 
-	if (paticleManager != nullptr)
+	if (m_PaticleManager != nullptr)
 	{
-		paticleManager->Uninit();
-		delete paticleManager;
-		paticleManager = nullptr;
+		m_PaticleManager->Uninit();
+		delete m_PaticleManager;
+		m_PaticleManager = nullptr;
 
 	}
 
@@ -101,6 +109,12 @@ void CGame::Uninit(void)
 	{
 		m_MagicBox->Uninit();
 		m_MagicBox = nullptr;
+	}
+
+	if (m_Pause != nullptr)
+	{
+		m_Pause->Uninit();
+		m_Pause = nullptr;
 	}
 
 }
@@ -118,7 +132,12 @@ void CGame::Update(void)
 		m_SpeedUp += 250;
 		CBg::SetKillMove(D3DXVECTOR3(0.05f, 0.0f, 0.0f));
 	}
+
+
+
 	CInput *CInputpInput = CInput::GetKey();
+
+	
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
 	{
 		//モードの設定
@@ -144,7 +163,7 @@ void CGame::Update(void)
 		CEnemy::SetBoss();
 	
 	}
-	paticleManager->Update();
+	m_PaticleManager->Update();
 }
 
 //========================

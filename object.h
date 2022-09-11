@@ -30,6 +30,7 @@ public:
 		BELL,
 		MODE,
 		RANKUPBULLET,
+		PAUSE,
 		MAX,
 		NONE
 	};

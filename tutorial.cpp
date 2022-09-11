@@ -26,7 +26,7 @@
 #include "life.h"
 
 CMagicBox* CTutorial::m_MagicBox;	
-CParticleManager* CTutorial::paticleManager;
+CParticleManager* CTutorial::m_PaticleManager;
 CPlayer * CTutorial::m_Player;
 
 //========================
@@ -53,10 +53,11 @@ HRESULT CTutorial::Init(void)
 	BGPos.y = 0.0f;
 	BGPos.z -= 0.0f;
 	m_Magic = 2;
+
 	m_Bg[0] = CBg::Create();
 	m_Bg[0]->SetTexture(CTexture::TEXTURE_TUTORIAL);
 	m_Bg[0]->SetSize(CManager::Pos);
-	m_Bg[0]->SetPos(BGPos);
+
 	m_Bg[0]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 	m_Player = nullptr;
@@ -64,9 +65,9 @@ HRESULT CTutorial::Init(void)
 	m_Player->SetUp(CObject::PLAYER);
 
 
-	paticleManager = new CParticleManager;
+	m_PaticleManager = new CParticleManager;
 	// パーティクル
-	if (FAILED(paticleManager->Init()))
+	if (FAILED(m_PaticleManager->Init()))
 	{
 		return E_FAIL;
 	}
@@ -105,11 +106,11 @@ void CTutorial::Uninit(void)
 		m_MagicBox = nullptr;
 	}
 
-	if (paticleManager != nullptr)
+	if (m_PaticleManager != nullptr)
 	{
-		paticleManager->Uninit();
-		delete paticleManager;
-		paticleManager = nullptr;
+		m_PaticleManager->Uninit();
+		delete m_PaticleManager;
+		m_PaticleManager = nullptr;
 
 	}
 
@@ -123,7 +124,7 @@ void CTutorial::Uninit(void)
 void CTutorial::Update(void)
 {
 	
-	paticleManager->Update();
+	m_PaticleManager->Update();
 
 	CInput *CInputpInput = CInput::GetKey();
 	if (CInputpInput->Trigger(CInput::KEY_DELETE))
@@ -134,14 +135,15 @@ void CTutorial::Update(void)
 
 	if (CInputpInput->Trigger(CInput::KEY_RELOAD))
 	{
-		if (paticleManager->GetEmitter().size() == 0)
+		if (m_PaticleManager->GetEmitter().size() == 0)
 		{
+			m_MagicBox->CMagicBox::Magicplay((CTexture::TEXTURE)m_Magic);
 			m_Magic++; 
 			if (m_Magic >= 6)
 			{
 				m_Magic = 2;
 			}
-			m_MagicBox->CMagicBox::Magicplay((CTexture::TEXTURE)m_Magic);
+			
 		}
 
 	}

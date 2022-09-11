@@ -32,6 +32,7 @@ public:
 		KEY_DEBUG,
 		KEY_F2,
 		KEY_RELOAD,
+		KEY_PAUSE,
 		KEY_DELETE
 	};
 

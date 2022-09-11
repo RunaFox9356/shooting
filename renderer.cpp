@@ -188,7 +188,7 @@ void CRenderer::Update()
 
 	CObject::AllUpdate();
 
-	pCamera[1]->Update();
+	//pCamera[1]->Update();
 
 	pLight->Update();
 

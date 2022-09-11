@@ -192,6 +192,9 @@
     <ClCompile Include="inputcontroller.cpp">
       <Filter>システム</Filter>
     </ClCompile>
+    <ClCompile Include="pause.cpp">
+      <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -343,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="inputcontroller.h">
       <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="pause.h">
+      <Filter>メイン\画面遷移</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

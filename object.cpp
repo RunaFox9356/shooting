@@ -16,7 +16,8 @@
 #include "bg.h"
 #include "life.h"
 #include <assert.h>
-
+#include "game.h"
+#include "pause.h"
 
 CObject *CObject::m_pObject[MAX_LIST][MAX_OBJECT] = {};
 int CObject::m_AllMember = 0; 
@@ -58,9 +59,29 @@ void CObject::AllUpdate()
 	{
 		for (int i = 0; i < MAX_OBJECT; i++)
 		{
+
 			if (m_pObject[j][i] != nullptr)
 			{
-				m_pObject[j][i]->Update();
+
+				CPause * pPause= CGame::GetPause();
+				if (pPause == nullptr)
+				{
+					m_pObject[j][i]->Update();
+				}
+				else
+				{
+					if (pPause->Get())
+					{
+						if (m_pObject[j][i]->m_Type == PAUSE)
+						{
+							m_pObject[j][i]->Update();
+						}		
+					}
+					else
+					{
+						m_pObject[j][i]->Update();
+					}
+				}
 			}
 		}
 	}
@@ -223,6 +244,9 @@ void CObject::SetUp(EObjectType Type)
 		break;
 	case EObjectType::MODE:
 		m_Type = MODE;
+		break;
+	case EObjectType::PAUSE:
+		m_Type = PAUSE;
 		break;
 	default:
 		break;
