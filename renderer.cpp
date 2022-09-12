@@ -14,6 +14,8 @@
 #include "file.h"
 #include "camera.h"
 #include "3dpolygon.h"
+#include "pause.h"
+#include "game.h"
 
  CCamera* CRenderer::pCamera[2];
  CLight*  CRenderer::pLight;
@@ -181,18 +183,30 @@ void CRenderer::Uninit()
 //=============================================================================
 void CRenderer::Update()
 {
+	CPause * pPause = CGame::GetPause();
+	
+		C3dpolygon::PolygonReset();
+		// ポリゴンの更新処理
+		pCamera[0]->Update();
+	
+		//pCamera[1]->Update();
 
-	C3dpolygon::PolygonReset();
-	// ポリゴンの更新処理
-	pCamera[0]->Update();
-
-	CObject::AllUpdate();
-
-	//pCamera[1]->Update();
-
-	pLight->Update();
-
-
+		pLight->Update();
+		if (pPause == nullptr)
+		{
+			CObject::AllUpdate();
+		}
+		else
+		{
+			if (pPause->Get())
+			{
+				CObject::TypeUpdate(CObject::PAUSE);
+			}
+			else
+			{
+				CObject::AllUpdate();
+			}
+		}
 }
 
 //=============================================================================
@@ -214,12 +228,12 @@ void CRenderer::Draw()
 	{
 
 
-		pCamera[0]->Set(0);
-		CObject::TypeDraw(CObject::BG);
-
+		//pCamera[0]->Set(0);
+		//CObject::TypeDraw(CObject::BG);
 		pCamera[1]->Set(1);
-		CObject::TypeDraw(CObject::NONE);
-		
+		CObject::AllDraw();
+
+	
 
 #ifdef _DEBUG
 		// FPS表示

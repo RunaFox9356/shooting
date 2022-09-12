@@ -61,6 +61,7 @@ private:
 	static CObject*m_Game;
 	static CSound*m_Sound;
 	static MODE m_mode;
+
 	CInput *m_Input;
 
 };

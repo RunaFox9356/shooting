@@ -13,6 +13,7 @@
 
 class CScore;
 class CLife;
+class CBg;
 
 class CObject
 {
@@ -47,6 +48,7 @@ public:
 
 
 	static void AllUpdate();
+	static void TypeUpdate(EObjectType Type);
 	static void AllDraw();
 	static void AllUninit();
 	static void AllCreate();
@@ -55,6 +57,7 @@ public:
 	static CLife* GetLife();
 	static int& GetMaxEnemy() { return m_AllEnemy; };
 	static bool& GetMaxBoss() { return notBoss; };
+	static CBg* GetBg(int number) { return  Bg[number]; };
 	static void SetBossPop(bool Boss) { notBoss = Boss; };
 	int * GetId();
 	CObject ** GetObjectData(int nCount);
@@ -73,10 +76,11 @@ protected:
 	static bool notBoss;
 private:
 	//int	m_nID;
-	static int m_AllMember;
 	EObjectType m_Type;
+	static int m_AllMember;
 	static CScore * pScore;
 	static CLife* pLife;
+	static CBg * Bg[3];
 
 
 };

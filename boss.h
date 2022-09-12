@@ -29,8 +29,11 @@ public:
 	static CBoss *CBoss::Create();
 
 private:
+	void Move();
 
-
-
+	int m_keepCount;
+	bool m_Stop;
+	bool m_Go;
+	float m_Speed;
 };
 #endif

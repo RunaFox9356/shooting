@@ -42,7 +42,8 @@ private:
 	CEnemy * m_Enemy[10];
 	CBg *m_Bg[4];
 	int m_Magic;
-
+	CScore*pScore;
+	CLife*pLife;
 
 };
 

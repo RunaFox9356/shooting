@@ -25,6 +25,7 @@ int CObject::m_AllEnemy = 0;
 CScore * CObject::pScore;
 CLife* CObject::pLife;
 bool CObject::notBoss = false;
+CBg * CObject::Bg[3];
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
@@ -62,30 +63,33 @@ void CObject::AllUpdate()
 
 			if (m_pObject[j][i] != nullptr)
 			{
+				m_pObject[j][i]->Update();
+			}
+		}
+	}
+}
 
-				CPause * pPause= CGame::GetPause();
-				if (pPause == nullptr)
+//=============================================================================
+// Typeのupdate関数
+//=============================================================================
+void CObject::TypeUpdate(EObjectType Type)
+{
+	for (int j = 0; j < MAX_LIST; j++)
+	{
+		for (int i = 0; i < MAX_OBJECT; i++)
+		{
+
+			if (m_pObject[j][i] != nullptr)
+			{
+				if (m_pObject[j][i]->m_Type == Type)
 				{
 					m_pObject[j][i]->Update();
-				}
-				else
-				{
-					if (pPause->Get())
-					{
-						if (m_pObject[j][i]->m_Type == PAUSE)
-						{
-							m_pObject[j][i]->Update();
-						}		
-					}
-					else
-					{
-						m_pObject[j][i]->Update();
-					}
 				}
 			}
 		}
 	}
 }
+
 //=============================================================================
 // AllDraw関数
 //=============================================================================
@@ -103,6 +107,7 @@ void CObject::AllDraw()
 	}
 }
 
+
 //=============================================================================
 // NotBGDraw関数
 //=============================================================================
@@ -112,24 +117,12 @@ void CObject::TypeDraw(EObjectType Type)
 	{
 		for (int i = 0; i < MAX_OBJECT; i++)
 		{
-			if (Type == BG)
+
+			if (m_pObject[j][i] != nullptr)
 			{
-				if (m_pObject[j][i] != nullptr)
+				if (m_pObject[j][i]->m_Type == Type)
 				{
-					if (m_pObject[j][i]->m_Type == BG)
-					{
-						m_pObject[j][i]->Draw();
-					}
-				}
-			}
-			else
-			{
-				if (m_pObject[j][i] != nullptr)
-				{
-					if (m_pObject[j][i]->m_Type != BG)
-					{
-						m_pObject[j][i]->Draw();
-					}
+					m_pObject[j][i]->Draw();
 				}
 			}
 		}
@@ -185,20 +178,19 @@ void CObject::ModeNotUninit()
 //=============================================================================
 void CObject::AllCreate()
 {
-	CBg * Bg1 = CBg::Create();
-	Bg1->SetMove(D3DXVECTOR3(0.0001f, 0.0f, 0.0f));
-	Bg1->SetTexture(CTexture::TEXTURE_STARRY);
-	Bg1->SetBgType(CBg::MOVE);
+	Bg[0] = CBg::Create();
+	Bg[0]->SetMove(D3DXVECTOR3(0.0001f, 0.0f, 0.0f));
+	Bg[0]->SetTexture(CTexture::TEXTURE_STARRY);
+	Bg[0]->SetBgType(CBg::MOVE);
 
-	CBg * Bg2 = CBg::Create();
-	Bg2->SetMove(D3DXVECTOR3(0.001f, 0.0f, 0.0f));
-	Bg2->SetTexture(CTexture::TEXTURE_TOWN);
-	Bg2->SetBgType(CBg::MOVE);
+	Bg[1] = CBg::Create();
+	Bg[1]->SetMove(D3DXVECTOR3(0.001f, 0.0f, 0.0f));
+	Bg[1]->SetTexture(CTexture::TEXTURE_TOWN);
+	Bg[1]->SetBgType(CBg::MOVE);
 
-	CBg * Bg3 = CBg::Create();
-	Bg3->SetMove(D3DXVECTOR3(0.00001f, 0.0f, 0.0f));
-	Bg3->SetTexture(CTexture::TEXTURE_MOON);
-	Bg3->SetBgType(CBg::STOP);
+	Bg[2] = CBg::Create();
+	Bg[2]->SetTexture(CTexture::TEXTURE_MOON);
+	Bg[2]->SetBgType(CBg::STOP);
 	
 
 	CEnemy::LoadEnemy("Data/datatest.json");

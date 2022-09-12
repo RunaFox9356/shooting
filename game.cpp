@@ -126,7 +126,7 @@ void CGame::Update(void)
 {
 	m_GameCount++;
 	// XVˆ—
-	if (m_GameCount == m_SpeedUp)
+	if (m_GameCount == m_SpeedUp&&!GetMaxBoss())
 	{
 		m_GameCount = 0;
 		m_SpeedUp += 250;
