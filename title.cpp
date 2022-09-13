@@ -125,63 +125,63 @@ HRESULT CTitle::Init(void)
 
 	
 	//GonFoxのTITLE文字
-	m_object2d[0] = CObject2d::Create(1);
-	m_object2d[0]->SetTexture(CTexture::TEXTURE_TITLE);
-	m_object2d[0]->SetSize(CManager::Pos);
-	m_object2d[0]->SetPos(CManager::Pos);
-	m_object2d[0]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+	m_list[0] = CObject2d::Create(1);
+	m_list[0]->SetTexture(CTexture::TEXTURE_TITLE);
+	m_list[0]->SetSize(CManager::Pos);
+	m_list[0]->SetPos(CManager::Pos);
+	m_list[0]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 	
 	//ゲームスタートの文字
-	m_object2d[1] = CObject2d::Create(1);
-	m_object2d[1]->SetTexture(CTexture::TEXTURE_FOXTITLE);
-	m_object2d[1]->SetSize(CManager::Pos);
-	m_object2d[1]->SetPos(CManager::Pos);
-	m_object2d[1]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+	m_list[1] = CObject2d::Create(1);
+	m_list[1]->SetTexture(CTexture::TEXTURE_FOXTITLE);
+	m_list[1]->SetSize(CManager::Pos);
+	m_list[1]->SetPos(CManager::Pos);
+	m_list[1]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 
 	//モード選択時の背景黒くするやつ
-	m_object2d[2] = CObject2d::Create(2);
-	m_object2d[2]->SetTexture(CTexture::TEXTURE_NONE);
-	m_object2d[2]->SetSize(CManager::Pos);
-	m_object2d[2]->SetPos(CManager::Pos);
-	m_object2d[2]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
+	fade = CObject2d::Create(2);
+	fade->SetTexture(CTexture::TEXTURE_NONE);
+	fade->SetSize(CManager::Pos);
+	fade->SetPos(CManager::Pos);
+	fade->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
 	
 	//ゲームの文字
-	m_object2d[3] = CObject2d::Create(2);
-	m_object2d[3]->SetTexture(CTexture::TEXTURE_TITLEGAME);
-	m_object2d[3]->SetSize(CManager::Pos);
-	m_object2d[3]->SetPos(CManager::Pos);
-	m_object2d[3]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
+	m_object2d[0] = CObject2d::Create(2);
+	m_object2d[0]->SetTexture(CTexture::TEXTURE_TITLEGAME);
+	m_object2d[0]->SetSize(CManager::Pos);
+	m_object2d[0]->SetPos(CManager::Pos);
+	m_object2d[0]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
 
 	float y = 100.0f;
 
 	//チュートリアルの文字
-	m_object2d[4] = CObject2d::Create(2);
-	m_object2d[4]->SetTexture(CTexture::TEXTURE_TITLETUTORIAL);
-	m_object2d[4]->SetSize(CManager::Pos);
-	m_object2d[4]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y+y, 0.0f));
-	m_object2d[4]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
+	m_object2d[1] = CObject2d::Create(2);
+	m_object2d[1]->SetTexture(CTexture::TEXTURE_TITLETUTORIAL);
+	m_object2d[1]->SetSize(CManager::Pos);
+	m_object2d[1]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y+y, 0.0f));
+	m_object2d[1]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
 	y += 100.0f;
 
 	//ランキングの文字
-	m_object2d[5] = CObject2d::Create(2);
-	m_object2d[5]->SetTexture(CTexture::TEXTURE_TITLERANKIN);
-	m_object2d[5]->SetSize(CManager::Pos);
-	m_object2d[5]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y + y, 0.0f));
-	m_object2d[5]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
+	m_object2d[2] = CObject2d::Create(2);
+	m_object2d[2]->SetTexture(CTexture::TEXTURE_TITLERANKIN);
+	m_object2d[2]->SetSize(CManager::Pos);
+	m_object2d[2]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y + y, 0.0f));
+	m_object2d[2]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
 	y += 100.0f;
 
 	//おわりの文字
-	m_object2d[6] = CObject2d::Create(2);
-	m_object2d[6]->SetTexture(CTexture::TEXTURE_TITLEEND);
-	m_object2d[6]->SetSize(CManager::Pos);
-	m_object2d[6]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y + y, 0.0f));
-	m_object2d[6]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
+	m_object2d[3] = CObject2d::Create(2);
+	m_object2d[3]->SetTexture(CTexture::TEXTURE_TITLEEND);
+	m_object2d[3]->SetSize(CManager::Pos);
+	m_object2d[3]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y + y, 0.0f));
+	m_object2d[3]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
 	CManager::GetSound()->Play(CSound::LABEL_BGM_TITLE);
 
@@ -248,7 +248,7 @@ void CTitle::Update(void)
 	m_Bg[1]->SetSize(CManager::Pos *0.8f + addPos);
 
 	//点滅させる
-	m_object2d[1]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, m_alpha));
+	m_list[1]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, m_alpha));
 
 	CInput *CInputpInput = CInput::GetKey();
 
@@ -256,7 +256,7 @@ void CTitle::Update(void)
 	{
 	
 		if (ModeSelect)
-		{		
+		{//一回押された	
 			switch (NextMode)
 			{
 			case MODE::MODE_GAME:
@@ -281,13 +281,17 @@ void CTitle::Update(void)
 		}
 		else
 		{
-			m_object2d[2]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.5f));
+			//画面黒くする
+			fade->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.5f));
 
-			for (int i = 3; i < 7; i++)
+			//文字を出し
+			for (int i = 0; i < 4; i++)
 			{
 				m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			}
-			m_object2d[NextMode + 2]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+			//今使ってるやつを明るく
+			m_object2d[NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 			ModeSelect = true;
 		}
 
@@ -297,24 +301,23 @@ void CTitle::Update(void)
 		if (CInputpInput->Trigger(CInput::KEY_UP))
 		{
 			//モード選択
-			m_object2d[NextMode + 2]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+			m_object2d[NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 
 			NextMode = (MODE)(NextMode - 1);
 
 
-			if (NextMode <= MODE::MODE_MIN)
+			if (NextMode < MODE::MODE_GAME)
 			{
 				NextMode = MODE::MODE_END;
 			}
 
-			
-
-			m_object2d[NextMode + 2]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+	
+			m_object2d[NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 		if (CInputpInput->Trigger(CInput::KEY_DOWN))
 		{
 			//モード選択
-			m_object2d[NextMode + 2]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+			m_object2d[NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 
 			NextMode = (MODE)(NextMode + 1);
 
@@ -323,7 +326,7 @@ void CTitle::Update(void)
 				NextMode = MODE::MODE_GAME;
 			}
 
-			m_object2d[NextMode + 2]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			m_object2d[NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 	}
 #ifdef _DEBUG

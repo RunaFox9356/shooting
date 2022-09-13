@@ -47,10 +47,12 @@ HRESULT CBoss::Init(void)
 
 	CGame::GetBg(1)->SetMove(D3DXVECTOR3(-0.01f, 0.0f, 0.0f));
 
+	m_PopPos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	m_Stop = false;
 	m_Go = false;
 	m_keepCount = 0;
+	m_SamonEnemy = 0;
 
 	CBg::SetKillMove(D3DXVECTOR3(0.05f, 0.0f, 0.0f));
 
@@ -132,6 +134,16 @@ void CBoss::Move(void)
 			m_Go = true;
 			m_move.x = -5.0f;
 			m_Speed = 0.0f;
+			for (int i = 0; i < 3; i++)
+			{
+				CEnemy * Enemy = CEnemy::Create(m_SamonEnemy);
+				Enemy->SetUp(ENEMY);
+				Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+				Enemy->SetPos(D3DXVECTOR3(SCREEN_WIDTH*0.5f + (50.0f*i), m_pos.y, 0.0f));
+				Enemy->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+				Enemy->SetLife(30);
+			}
+
 		}
 	}
 	if (m_Go)
@@ -145,16 +157,18 @@ void CBoss::Move(void)
 	}
 	
 
-	if (m_pos.y <= -SCREEN_HEIGHT / 2)
+	if (m_pos.y < -SCREEN_HEIGHT / 2)
 	{
-		m_pos.y = SCREEN_HEIGHT / 2;
+		m_pos.y = SCREEN_HEIGHT / 2 ;
 		m_move.y *= -1.0f;
+
 	}
 
-	if (m_pos.y >= SCREEN_HEIGHT / 2 - 250.0f)
+	if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
 	{
-		m_pos.y = -SCREEN_HEIGHT / 2;
+		m_pos.y = -SCREEN_HEIGHT / 2-10.0f;
 		m_move.y *= -1.0f;
+		
 	}
 	if (m_pos.x <= -SCREEN_WIDTH / 2)
 	{
@@ -165,6 +179,7 @@ void CBoss::Move(void)
 		m_keepCount = 0;
 		m_move.x = -5.0f;
 	}
+
 
 }
 

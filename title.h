@@ -23,8 +23,7 @@ class CTitle :public CObject
 	//画面(モード)の種類
 	enum MODE
 	{
-		MODE_MIN = 0,
-		MODE_GAME,			//ゲーム画面	
+		MODE_GAME = 0,			//ゲーム画面	
 		MODE_TUTORIAL,
 		MODE_RANKING,		//ランキング画面
 		MODE_END,
@@ -41,10 +40,18 @@ public:
 	
 private:
 	CPlayer * m_Player;
+
 	CEnemy * m_Enemy[10];
+
 	CBg *m_Bg[4];
+
 	C3dpolygon *m_3dpolygon[4];
+
 	CObject2d *m_object2d[10];
+
+	CObject2d *m_list[2];
+
+	CObject2d *fade;
 	int m_addX;
 	int m_addY;
 	

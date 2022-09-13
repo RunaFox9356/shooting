@@ -170,8 +170,6 @@ void CPause::Update(void)
 				m_NextMode = MODE::MODE_TITLE;
 			}
 
-
-
 			m_object2d[m_NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 		if (CInputpInput->Trigger(CInput::KEY_DOWN))

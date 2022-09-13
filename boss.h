@@ -35,5 +35,8 @@ private:
 	bool m_Stop;
 	bool m_Go;
 	float m_Speed;
+
+	int m_SamonEnemy;
+	D3DXVECTOR3 m_PopPos;
 };
 #endif
