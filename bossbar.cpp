@@ -5,18 +5,18 @@
 //
 //============================
 
-#include "life.h"
+#include "bossbar.h"
 #include "hamada.h"
 #include "manager.h"
 #include "player.h"
 #include "game.h"
 
 
-const D3DXVECTOR3 CLife::m_Vtx[4];
+
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CLife::CLife(int list) :CObject2d(list)
+CBossbar::CBossbar(int list) :CObject2d(list)
 {
 	m_object2d[0] = nullptr;
 }
@@ -24,22 +24,22 @@ CLife::CLife(int list) :CObject2d(list)
 //------------------------------------
 // デストラクタ
 //------------------------------------
-CLife::~CLife()
+CBossbar::~CBossbar()
 {
 }
 
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CLife::Init()
+HRESULT CBossbar::Init()
 {
 	CObject2d::Init();
 
 	m_object2d[0] = CObject2d::Create(1);
-	m_object2d[0]->SetTexture(CTexture::TEXTURE_HPCOVER);
+	m_object2d[0]->SetTexture(CTexture::TEXTURE_BOSSHP);
 
-	m_object2d[0]->SetSize(D3DXVECTOR3(m_Life+5, 50.0f, 0.0f));
-	m_object2d[0]->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y-20.0f, m_pos.z));
+	m_object2d[0]->SetSize(D3DXVECTOR3((m_Life * 0.1f) + 7, 50.0f, 0.0f));
+	m_object2d[0]->SetPos(D3DXVECTOR3(m_pos.x + 6, m_pos.y - 20.0f, m_pos.z));
 
 	return E_NOTIMPL;
 }
@@ -47,43 +47,45 @@ HRESULT CLife::Init()
 //------------------------------------
 // 終了
 //------------------------------------
-void CLife::Uninit()
+void CBossbar::Uninit()
 {
 	if (m_object2d[0] != nullptr)
 	{
 		m_object2d[0]->Uninit();
 		m_object2d[0] = nullptr;
 	}
+	
 	CObject2d::Uninit();
+
 }
 
 //------------------------------------
 // 更新
 //------------------------------------
-void CLife::Update()
+void CBossbar::Update()
 {
 
 	CObject2d::Update();
-	if (m_pos.x <= CPlayer::MAXLIFE*0.5f)
+	if (m_Life <= BOSSHP / 2.0f)
 	{
 		SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 1.0f));
 	}
-	if (m_pos.x <= CPlayer::MAXLIFE*0.15f+5.0f)
+	if (m_Life <= BOSSHP/10.0f)
 	{
 		SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
 	}
 
 
 	m_move.x += (0.0f - m_move.x)* 0.5f;//（目的の値-現在の値）＊減衰係数
-
+	
 	m_Size.x += m_move.x;
-	m_pos.x += m_move.x;
+	m_pos.x -= m_move.x;
 }
 
 //------------------------------------
 // 描画
 //------------------------------------
-void CLife::Draw()
+void CBossbar::Draw()
 {
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 	//アルファブレンディングを加算合成に設定
@@ -103,18 +105,18 @@ void CLife::Draw()
 //------------------------------------
 // create
 //------------------------------------
-CLife *CLife::Create(const D3DXVECTOR3 & pos,float Life)
+CBossbar *CBossbar::Create(const D3DXVECTOR3 & pos, float Life)
 {
-	CLife * pObject = nullptr;
-	pObject = new CLife(1);
+	CBossbar * pObject = nullptr;
+	pObject = new CBossbar(1);
 
 	if (pObject != nullptr)
 	{
 		pObject->SetPos(pos);
 		pObject->m_Life = Life;
 		pObject->Init();
-		pObject->SetSize(D3DXVECTOR3(Life, 20.0f, 0.0f));
-		
+		pObject->SetSize(D3DXVECTOR3(Life*0.1f, 20.0f, 0.0f));
+
 		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 	}
 
@@ -124,25 +126,23 @@ CLife *CLife::Create(const D3DXVECTOR3 & pos,float Life)
 //------------------------------------
 // Get＆Set 
 //------------------------------------
-const D3DXVECTOR3 * CLife::GetPos() const
+const D3DXVECTOR3 * CBossbar::GetPos() const
 {
 	return &m_pos;
 }
 
-void CLife::SetPos(const D3DXVECTOR3 & pos)
+void CBossbar::SetPos(const D3DXVECTOR3 & pos)
 {
 	m_pos = pos;
 }
 
-void CLife::SetMove(const D3DXVECTOR3 & move)
+void CBossbar::SetMove(const D3DXVECTOR3 & move)
 {
 	m_move = move;
 }
 
-void CLife::SetDamage(const int Damage)
+void CBossbar::SetDamage(const int Damage)
 {
-	m_move.x -= Damage;
-	//m_pos.x -= Damage;
-	CPlayer* cPlayer = CGame::GetPlayer();
-	cPlayer->HitLife(Damage);
+	m_move.x -= Damage*0.1f;
+	m_Life -= Damage;
 }

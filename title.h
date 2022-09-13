@@ -47,7 +47,7 @@ private:
 
 	C3dpolygon *m_3dpolygon[4];
 
-	CObject2d *m_object2d[10];
+	CObject2d *m_object2d[4];
 
 	CObject2d *m_list[2];
 

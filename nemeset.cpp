@@ -17,6 +17,26 @@ std::string  CNemeSet::m_PlayName;
 //========================
 CNemeSet::CNemeSet()
 {
+
+	if (m_object2d[0] != nullptr)
+	{
+		m_object2d[0] = nullptr;
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (m_ListName[i] != nullptr)
+		{
+			m_ListName[i] = nullptr;
+		}
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		if (m_PlayNameSet[i] != nullptr)
+		{
+			m_PlayNameSet[i] = nullptr;
+		}
+	}
 }
 //========================
 // デストラクト
@@ -63,6 +83,32 @@ HRESULT CNemeSet::Init(void)
 //================
 void CNemeSet::Uninit(void)
 {
+
+	if (m_object2d[0] != nullptr)
+	{
+		m_object2d[0]->Uninit();
+		m_object2d[0] = nullptr;
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (m_ListName[i] != nullptr)
+		{
+
+			m_ListName[i]->Uninit();
+			m_ListName[i] = nullptr;
+		}
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		if (m_PlayNameSet[i] != nullptr)
+		{
+
+			m_PlayNameSet[i]->Uninit();
+			m_PlayNameSet[i] = nullptr;
+		}
+	}
+
 }
 
 //==================

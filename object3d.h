@@ -63,6 +63,7 @@ public:
 	void SetSize(D3DXVECTOR3 &Size);
 	void SetLife(int Life);
 
+	int GetLife() { return m_Life; };
 	const D3DXVECTOR3 *GetRot() const;
 
 

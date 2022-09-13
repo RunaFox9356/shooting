@@ -195,6 +195,9 @@
     <ClCompile Include="pause.cpp">
       <Filter>メイン\画面遷移</Filter>
     </ClCompile>
+    <ClCompile Include="bossbar.cpp">
+      <Filter>オブジェクト\モデル系\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="pause.h">
       <Filter>メイン\画面遷移</Filter>
+    </ClInclude>
+    <ClInclude Include="bossbar.h">
+      <Filter>オブジェクト\モデル系\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

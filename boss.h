@@ -14,11 +14,20 @@
 #include "object3d.h"
 
 class  CMotion;
+class  CBossbar;
 
 class CBoss : public CEnemy
 {
 
 public:
+	enum Pattern
+	{
+		MOVE = 0,
+		POP,
+		RUSH,
+		MAX
+	};
+
 	CBoss();
 	~CBoss();
 
@@ -26,8 +35,8 @@ public:
 	void Uninit(void)override;	// îjä¸
 	void Update(void)override;	// çXêV
 	void Draw()override;	// ï`âÊ
+	void CBoss::OnHit()override;
 	static CBoss *CBoss::Create();
-
 private:
 	void Move();
 
@@ -37,6 +46,10 @@ private:
 	float m_Speed;
 
 	int m_SamonEnemy;
+	int m_PatternCount;
 	D3DXVECTOR3 m_PopPos;
+	Pattern m_PatternMode;
+	CBossbar *m_Life;
+	int m_MaxLife;
 };
 #endif

@@ -75,7 +75,7 @@ HRESULT CTutorial::Init(void)
 	CScore* pCScore = CScore::Create(D3DXVECTOR3(900.0f, 100.0f, 0.0f));
 	pCScore->Set(0);
 
-	CLife*pCLife = CLife::Create(D3DXVECTOR3(300.0f, 100.0f, 0.0f));
+	CLife*pCLife = CLife::Create(D3DXVECTOR3(300.0f, 100.0f, 0.0f),300);
 
 	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(150.0f, 620.0f, 0.0f));
 

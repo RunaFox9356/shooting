@@ -196,6 +196,7 @@ HRESULT CTitle::Init(void)
 void CTitle::Uninit(void)
 {
 	CManager::GetSound()->Stop();
+
 	for (int i = 0; i < 4; i++)
 	{
 		if (m_Bg[i] !=nullptr)
@@ -204,10 +205,46 @@ void CTitle::Uninit(void)
 			m_Bg[i] = nullptr;
 		}
 	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (m_object2d[i] != nullptr)
+		{
+			m_object2d[i]->Uninit();
+			m_object2d[i] = nullptr;
+		}
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		if (m_list[i] != nullptr)
+		{
+			m_list[i]->Uninit();
+			m_list[i] = nullptr;
+		}
+	}
+
 	if (m_Player != nullptr)
 	{
 		m_Player->Uninit();
 		m_Player = nullptr;
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (m_Enemy[i] != nullptr)
+		{
+			m_Enemy[i]->Uninit();
+			m_Enemy[i] = nullptr;
+		}
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		if (m_3dpolygon[i] != nullptr)
+		{
+			m_3dpolygon[i]->Uninit();
+			m_3dpolygon[i] = nullptr;
+		}
 	}
 	CModelManager::ReleaseAll();
 }

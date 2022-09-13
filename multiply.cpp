@@ -201,8 +201,8 @@ void CMultiply::Uninit()
 			return;
 		}
 
+		Fastratio[nCntScore]->Uninit();
 		Fastratio[nCntScore] = nullptr;
-		
 	}
 }
 

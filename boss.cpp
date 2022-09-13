@@ -19,7 +19,7 @@
 #include "letter.h"
 
 #include "hamada.h"
-
+#include "bossbar.h"
 
 
 //------------------------------------
@@ -47,14 +47,18 @@ HRESULT CBoss::Init(void)
 
 	CGame::GetBg(1)->SetMove(D3DXVECTOR3(-0.01f, 0.0f, 0.0f));
 
-	m_PopPos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_PopPos = D3DXVECTOR3(SCREEN_WIDTH / 2, 150.0f, 0.0f);
 
 	m_Stop = false;
 	m_Go = false;
 	m_keepCount = 0;
 	m_SamonEnemy = 0;
-
+	m_PatternCount = 0;
+	m_PatternMode = MOVE;
+	m_MaxLife = 3000;
 	CBg::SetKillMove(D3DXVECTOR3(0.05f, 0.0f, 0.0f));
+
+	m_Life = CBossbar::Create(D3DXVECTOR3(970.0f, 100.0f, 0.0f), 3000);
 
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
@@ -86,9 +90,6 @@ void CBoss::Update(void)
 	Move();
 
 	m_motionType = CObject3d::ANIME_ATTACK;
-
-
-
 }
 
 //------------------------------------
@@ -110,6 +111,8 @@ CBoss *CBoss::Create()
 	if (pObject != nullptr)
 	{
 		pObject->Init();
+		
+
 	}
 	return pObject;
 }
@@ -120,66 +123,117 @@ CBoss *CBoss::Create()
 void CBoss::Move(void)
 {
 
-	if (m_pos.x <= 300.0f&&!m_Go)
+	if (m_PatternMode == MOVE)
 	{
-		m_Stop = true;
-		m_move.x = 0.5f;
-	}
-	if (m_Stop)
-	{
-		m_keepCount++;
-		if (m_keepCount >= 60)
+		if (m_pos.x <= 300.0f && !m_Go)
 		{
-			m_Stop = false;
-			m_Go = true;
-			m_move.x = -5.0f;
-			m_Speed = 0.0f;
-			for (int i = 0; i < 3; i++)
+			m_Stop = true;
+			m_move.x = 0.5f;
+		}
+		if (m_Stop)
+		{
+			m_keepCount++;
+			if (m_keepCount >= 60)
 			{
-				CEnemy * Enemy = CEnemy::Create(m_SamonEnemy);
-				Enemy->SetUp(ENEMY);
-				Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-				Enemy->SetPos(D3DXVECTOR3(SCREEN_WIDTH*0.5f + (50.0f*i), m_pos.y, 0.0f));
-				Enemy->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
-				Enemy->SetLife(30);
+				m_Stop = false;
+				m_Go = true;
+				m_move.x = -5.0f;
+				m_Speed = 0.0f;
+				m_PatternCount++;
+				if (m_PatternCount >= 3)
+				{
+					m_PatternCount = 0;
+					m_PatternMode = POP;
+
+				}
 			}
-
 		}
-	}
-	if (m_Go)
-	{
-		m_Speed += 0.05f;
-		if (m_Speed >= 1.0f)
+		if (m_Go)
 		{
-			m_Speed = 1.0f;
+			m_Speed += 0.05f;
+			if (m_Speed >= 1.0f)
+			{
+				m_Speed = 1.0f;
+			}
+			m_move.x = -50.0f *  hmd::easeInSine(m_Speed);
 		}
-		m_move.x = -50.0f *  hmd::easeInSine(m_Speed);
+
+
+		if (m_pos.y < -SCREEN_HEIGHT / 2)
+		{
+			m_pos.y = SCREEN_HEIGHT / 2;
+			m_move.y *= -1.0f;
+
+		}
+
+		if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
+		{
+			m_pos.y = -SCREEN_HEIGHT / 2 - 10.0f;
+			m_move.y *= -1.0f;
+
+		}
+		if (m_pos.x <= -SCREEN_WIDTH / 2)
+		{
+			m_pos.x = SCREEN_WIDTH;
+
+			m_pos.y += SCREEN_HEIGHT / 5;
+			m_Go = false;
+			m_keepCount = 0;
+			m_move.x = -5.0f;
+		}
 	}
-	
-
-	if (m_pos.y < -SCREEN_HEIGHT / 2)
+	if (m_PatternMode == POP)
 	{
-		m_pos.y = SCREEN_HEIGHT / 2 ;
-		m_move.y *= -1.0f;
-
-	}
-
-	if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
-	{
-		m_pos.y = -SCREEN_HEIGHT / 2-10.0f;
-		m_move.y *= -1.0f;
 		
+		m_keepCount++;
+
+		if (m_keepCount >= 150)
+		{
+			m_keepCount = 0;
+			for (int j = 0; j < 2; j++)
+			{	
+				m_PopPos.y *= -1.0f;
+				for (int i = 0; i < 5; i++)
+				{
+					CEnemy * Enemy = CEnemy::Create(0);
+					Enemy->SetUp(ENEMY);
+					Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*50.0f), m_PopPos.y, 0.0f));
+					Enemy->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+					Enemy->SetLife(10);
+				}
+				for (int i = 0; i < 5; i++)
+				{
+					CEnemy * Enemy = CEnemy::Create(1);
+					Enemy->SetUp(ENEMY);
+					Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*80.0f), m_PopPos.y-50.0f, 0.0f));
+					Enemy->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+					Enemy->SetLife(10);
+				}
+			}
+			m_PatternCount++;
+			if (m_PatternCount >= 2)
+			{
+				m_PatternCount = 0;
+				m_PatternMode = MOVE;
+
+			}
+		}
 	}
-	if (m_pos.x <= -SCREEN_WIDTH / 2)
+	if (m_PatternMode == RUSH)
 	{
-		m_pos.x = SCREEN_WIDTH;
 
-		m_pos.y += SCREEN_HEIGHT / 5;
-		m_Go = false;
-		m_keepCount = 0;
-		m_move.x = -5.0f;
 	}
-
-
 }
 
+
+//------------------------------------
+// “ÁŽê‰‰o
+//-----------------------------------
+void CBoss::OnHit()
+{
+	int Damage = m_MaxLife - GetLife();
+	m_MaxLife = GetLife();
+   	m_Life->SetDamage(Damage);
+}

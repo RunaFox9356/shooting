@@ -26,7 +26,7 @@ private:
 
 	void RankingNeme();
 
-	CObject2d *m_object2d[4];
+	CObject2d *m_object2d[1];
 
 	static std::string m_PlayName;
 

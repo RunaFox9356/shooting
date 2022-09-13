@@ -187,9 +187,7 @@ void CRenderer::Update()
 	
 		C3dpolygon::PolygonReset();
 		// ポリゴンの更新処理
-		pCamera[0]->Update();
 	
-		//pCamera[1]->Update();
 
 		pLight->Update();
 		if (pPause == nullptr)
@@ -226,14 +224,8 @@ void CRenderer::Draw()
 	// Direct3Dによる描画の開始
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
 	{
-
-
-		//pCamera[0]->Set(0);
-		//CObject::TypeDraw(CObject::BG);
-		pCamera[1]->Set(1);
-		CObject::AllDraw();
-
-	
+		pCamera[0]->Set(0);
+		CObject::AllDraw();	
 
 #ifdef _DEBUG
 		// FPS表示
@@ -273,5 +265,5 @@ void  CRenderer::DrawFPS()
 //=============================================================================
 CCamera *CRenderer::GetCamera()
 {
-	return pCamera[1];
+	return pCamera[0];
 }

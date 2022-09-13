@@ -47,7 +47,6 @@ void  CScore::Uninit(void)
 		if (pNumber[i] != nullptr)
 		{
 			pNumber[i]->Uninit();
-			delete pNumber[i];
 			pNumber[i] = nullptr;
 		}
 	}

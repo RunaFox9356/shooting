@@ -192,12 +192,11 @@ void CObject::AllCreate()
 	Bg[2]->SetTexture(CTexture::TEXTURE_MOON);
 	Bg[2]->SetBgType(CBg::STOP);
 	
-
-	CEnemy::LoadEnemy("Data/datatest.json");
-	pScore = CScore::Create(D3DXVECTOR3(900.0f, 100.0f, 0.0f));
+	CEnemy::LoadEnemy("Data/system/popList.json");
+	pScore = CScore::Create(D3DXVECTOR3(500.0f, 30.0f, 0.0f));
 	pScore->Set(0);
 
-	pLife = CLife::Create(D3DXVECTOR3(300.0f, 100.0f, 0.0f));
+	pLife = CLife::Create(D3DXVECTOR3(350.0f, 100.0f, 0.0f),300);
 
 }
 
