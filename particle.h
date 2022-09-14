@@ -6,7 +6,10 @@
 #ifndef _PARTICLE_H_		//このマクロが定義されてなかったら
 #define _PARTICLE_H_		//2重インクルード防止のマクロ定義
 
+#pragma push_macro("new")
+#undef new
 #include <d3dx9.h>
+#pragma pop_macro("new")
 #include "object2d.h"
 
 //-------------------------------------------------

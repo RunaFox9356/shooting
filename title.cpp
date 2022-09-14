@@ -196,8 +196,7 @@ HRESULT CTitle::Init(void)
 void CTitle::Uninit(void)
 {
 	CManager::GetSound()->Stop();
-
-	for (int i = 0; i < 4; i++)
+	/*for (int i = 0; i < 4; i++)
 	{
 		if (m_Bg[i] !=nullptr)
 		{
@@ -245,7 +244,7 @@ void CTitle::Uninit(void)
 			m_3dpolygon[i]->Uninit();
 			m_3dpolygon[i] = nullptr;
 		}
-	}
+	}*/
 	CModelManager::ReleaseAll();
 }
 

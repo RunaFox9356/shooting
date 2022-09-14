@@ -129,19 +129,7 @@ inline HRESULT CRanking::Init(void)
 //========================
 void CRanking::Uninit(void)
 {
-	/*for (int i = 0; i < 4; i++)
-	{
-		if (m_object2d[i] != nullptr)
-		{
-			m_object2d[i]->Uninit();
-			m_object2d[i]->Release();
-		}
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		m_Ranking[i]->Uninit();
-		m_Ranking[i]->Release();
-	}*/
+	
 }
 
 //========================

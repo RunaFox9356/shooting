@@ -12,7 +12,7 @@
 #include "game.h"
 
 
-const D3DXVECTOR3 CLife::m_Vtx[4];
+
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -33,13 +33,15 @@ CLife::~CLife()
 //------------------------------------
 HRESULT CLife::Init()
 {
-	CObject2d::Init();
+	
 
 	m_object2d[0] = CObject2d::Create(1);
 	m_object2d[0]->SetTexture(CTexture::TEXTURE_HPCOVER);
-
+	
 	m_object2d[0]->SetSize(D3DXVECTOR3(m_Life+5, 50.0f, 0.0f));
 	m_object2d[0]->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y-20.0f, m_pos.z));
+
+	CObject2d::Init();
 
 	return E_NOTIMPL;
 }
@@ -49,11 +51,7 @@ HRESULT CLife::Init()
 //------------------------------------
 void CLife::Uninit()
 {
-	if (m_object2d[0] != nullptr)
-	{
-		m_object2d[0]->Uninit();
-		m_object2d[0] = nullptr;
-	}
+	
 	CObject2d::Uninit();
 }
 
@@ -113,11 +111,12 @@ CLife *CLife::Create(const D3DXVECTOR3 & pos,float Life)
 		pObject->SetPos(pos);
 		pObject->m_Life = Life;
 		pObject->Init();
-		pObject->SetSize(D3DXVECTOR3(Life, 20.0f, 0.0f));
-		
+		pObject->SetSize(D3DXVECTOR3(pObject->m_Life, 20.0f, 0.0f));
 		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
+		pObject->SetTexture(CTexture::TEXTURE_NONE);
+		pObject->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	}
-
+	
 	return pObject;
 }
 

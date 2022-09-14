@@ -112,14 +112,14 @@ HRESULT CResult::Init(void)
 void CResult::Uninit(void)
 {
 	CManager::GetSound()->Stop();
-	for (int i = 0; i < 4; i++)
-	{
-		if (m_Bg[i] != nullptr)
-		{
-			m_Bg[i]->Uninit();
-			
-		}
-	}
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	if (m_Bg[i] != nullptr)
+	//	{
+	//		m_Bg[i]->Uninit();
+	//		
+	//	}
+	//}
 	CModelManager::ReleaseAll();
 }
 

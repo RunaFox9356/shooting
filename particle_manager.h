@@ -10,7 +10,6 @@
 //=========================================
 // include
 //=========================================
-#include <d3dx9.h>
 #include <vector>
 #include "particle.h"
 #include "particle_emitter.h"

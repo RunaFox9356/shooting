@@ -16,8 +16,7 @@
 class CLife : public CObject2d
 {
 private:
-	//polygon‚ÌŠg‘åƒTƒCƒY
-	static const D3DXVECTOR3 m_Vtx[4];
+
 
 public:
 	static CLife *Create(const D3DXVECTOR3 & pos, float Life);

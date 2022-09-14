@@ -95,7 +95,6 @@ void CBossbar::Draw()
 
 	CObject2d::Draw();
 
-
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -116,7 +115,8 @@ CBossbar *CBossbar::Create(const D3DXVECTOR3 & pos, float Life)
 		pObject->m_Life = Life;
 		pObject->Init();
 		pObject->SetSize(D3DXVECTOR3(Life*0.1f, 20.0f, 0.0f));
-
+		pObject->SetTexture(CTexture::TEXTURE_NONE);
+		pObject->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 	}
 

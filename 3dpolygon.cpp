@@ -45,7 +45,7 @@ HRESULT C3dpolygon::Init()
 	m_Size = D3DXVECTOR3(50.0f, 50.0f, 0.0f);
 	m_nScale = 10.0f;
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
+	m_nTimer = 0;
 	
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 

@@ -13,8 +13,6 @@
 #include "input.h"
 #include "manager.h"
 
-#define _CRTDBG_MAP_ALLOC
-#include <crtdbg.h>
 
 //*****************************************************************************
 // プロトタイプ宣言

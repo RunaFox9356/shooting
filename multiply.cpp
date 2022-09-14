@@ -14,6 +14,7 @@ int CMultiply::m_Rate;
 int CMultiply::m_RateWait;
 bool CMultiply::m_Decrease;
 CNumber * CMultiply::Fastratio[MAXRATE] = {};
+
 //=============================================================================
 // ƒZƒbƒgŠÖ”
 //=============================================================================

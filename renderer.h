@@ -22,7 +22,10 @@
 //*****************************************************************************
 #include <Windows.h>
 #include <tchar.h> // _T
+#pragma push_macro("new")
+#undef new
 #include <d3dx9.h>
+#pragma pop_macro("new")
 #include <string>
 
 
