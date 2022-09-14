@@ -30,6 +30,7 @@
 #include "bg.h"
 
 #include "pause.h"
+#include "dangerous.h"
 
 CMagicBox* CGame::m_MagicBox = nullptr;
 CParticleManager*CGame::m_PaticleManager = nullptr;
@@ -147,8 +148,8 @@ void CGame::Update(void)
 	}
 	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
-		//ƒ‚[ƒh‚ÌÝ’è
-		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
+		CDangerousManager::BossPopStaging();
+		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		return;
 	}
 	if (GetMaxEnemy() <= 0)
@@ -160,7 +161,7 @@ void CGame::Update(void)
 			CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 			return;
 		}
-		CEnemy::SetBoss();
+		CDangerousManager::BossPopStaging(); 
 	
 	}
 	m_PaticleManager->Update();

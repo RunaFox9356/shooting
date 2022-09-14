@@ -61,10 +61,10 @@ HRESULT CPlayer::Init(void)
 	CObject3d::Init();
 	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), "Data/system/Gon/Fox.txt");
 	m_motionTypeOld = m_motionType;
-
+	D3DXVECTOR3	Size(2.0f, 2.0f, 2.0f);
 	m_MoveSpeed = 7.0f;
 	m_rot.y += (-D3DX_PI*0.5f);
-	SetSize(D3DXVECTOR3(2.0f,2.0f,2.0f));
+	SetSize(Size);
 	SetLife(CPlayer::MAXLIFE);
 	return S_OK;
 }

@@ -177,14 +177,14 @@ CEnemy *CEnemy::Create(const int Type)
 //------------------------------------
 void CEnemy::SetBoss()
 {
-
+	D3DXVECTOR3 Size(5.0f, 5.0f, 5.0f);
 	CEnemy * Model = CEnemy::Create(TYPE_BOSS);
 	Model->SetUp(ENEMY);
 	Model->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-	Model->SetPos(D3DXVECTOR3(CManager::Pos.x*2.0f, 0.0f,0.0f));
-	Model->SetSize(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
+	Model->SetPos(D3DXVECTOR3(CManager::Pos.x*2.5f, 0.0f,0.0f));
+	Model->SetSize(Size);
 	Model->SetLife(3000);
-	CObject::SetBossPop(true);
+	
 }
 
 //------------------------------------
@@ -216,7 +216,7 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 			rot = D3DXVECTOR3(EnemyList[name]["ROT"]["X"], EnemyList[name]["ROT"]["Y"], EnemyList[name]["ROT"]["Z"]);
 			Life = EnemyList[name]["LIFE"];
 			Type = EnemyList[name]["TYPE"];
-	
+			
 			CEnemy * Enemy = CEnemy::Create(Type);
 			Enemy->SetUp(ENEMY); 
 			Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));

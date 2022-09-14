@@ -43,8 +43,9 @@ HRESULT CResult::Init(void)
 	BGPos.x = 0.0f;
 	BGPos.y = 0.0f;
 	BGPos.z -= 30.0f;
+	D3DXVECTOR3 Rot(0.0f, 1.57f, 0.0f);
 
-
+	D3DXVECTOR3 Size(3.8f, 3.8f, 3.8f);
 
 	m_Bg[0] = CBg::Create();
 	m_Bg[0]->SetTexture(CTexture::TEXTURE_ENDBG);
@@ -73,8 +74,8 @@ HRESULT CResult::Init(void)
 	m_Enemy[0]->SetUp(ENEMY);
 	m_Enemy[0]->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_Enemy[0]->SetPos(D3DXVECTOR3(-CManager::Pos.x + 70.0f, CManager::Pos.y -350.0f, 0.0f));
-	m_Enemy[0]->SetRot(D3DXVECTOR3(0.0f, 1.57f, 0.0f));
-	m_Enemy[0]->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+	m_Enemy[0]->SetRot(Rot);
+	m_Enemy[0]->SetSize(Size);
 	m_Enemy[0]->SetLife(10);
 
 
@@ -82,8 +83,8 @@ HRESULT CResult::Init(void)
 	m_Enemy[1]->SetUp(ENEMY);
 	m_Enemy[1]->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_Enemy[1]->SetPos(D3DXVECTOR3(-CManager::Pos.x - 70.0f, CManager::Pos.y, 0.0f));
-	m_Enemy[1]->SetRot(D3DXVECTOR3(0.0f, 1.57f, 0.0f));
-	m_Enemy[1]->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+	m_Enemy[1]->SetRot(Rot);
+	m_Enemy[1]->SetSize(Size);
 	m_Enemy[1]->SetLife(10);
 
 
@@ -91,7 +92,7 @@ HRESULT CResult::Init(void)
 	m_Enemy[2]->SetUp(ENEMY);
 	m_Enemy[2]->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_Enemy[2]->SetPos(D3DXVECTOR3(CManager::Pos.x - 70.0f, CManager::Pos.y, 0.0f));
-	m_Enemy[2]->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+	m_Enemy[2]->SetSize(Size);
 	m_Enemy[2]->SetLife(10);
 
 
@@ -99,7 +100,7 @@ HRESULT CResult::Init(void)
 	m_Enemy[3]->SetUp(ENEMY);
 	m_Enemy[3]->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_Enemy[3]->SetPos(D3DXVECTOR3(CManager::Pos.x + 70.0f, CManager::Pos.y - 350.0f, 0.0f));
-	m_Enemy[3]->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+	m_Enemy[3]->SetSize(Size);
 	m_Enemy[3]->SetLife(10);
 
 	return S_OK;

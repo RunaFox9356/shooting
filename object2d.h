@@ -59,6 +59,7 @@ protected:
 	D3DXVECTOR3 m_move; //polygonの位置
 	D3DXVECTOR3 m_pos; //polygonの位置
 	PositionVec4 m_col;	// 色
+	D3DXMATRIX m_mtxWorld;					// マトリックス
 private:
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;
 	CTexture::TEXTURE m_texture;	// テクスチャの列挙型

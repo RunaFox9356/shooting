@@ -191,7 +191,8 @@ void CBoss::Move(void)
 		{
 			m_keepCount = 0;
 			for (int j = 0; j < 2; j++)
-			{	
+			{
+				D3DXVECTOR3 Size(3.8f, 3.8f, 3.8f);
 				m_PopPos.y *= -1.0f;
 				for (int i = 0; i < 5; i++)
 				{
@@ -199,7 +200,7 @@ void CBoss::Move(void)
 					Enemy->SetUp(ENEMY);
 					Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
 					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*50.0f), m_PopPos.y, 0.0f));
-					Enemy->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+					Enemy->SetSize(Size);
 					Enemy->SetLife(10);
 				}
 				for (int i = 0; i < 5; i++)
@@ -208,7 +209,7 @@ void CBoss::Move(void)
 					Enemy->SetUp(ENEMY);
 					Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
 					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*80.0f), m_PopPos.y-50.0f, 0.0f));
-					Enemy->SetSize(D3DXVECTOR3(3.8f, 3.8f, 3.8f));
+					Enemy->SetSize(Size);
 					Enemy->SetLife(10);
 				}
 			}
