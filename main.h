@@ -16,6 +16,7 @@
 #define CHECK_MEM_LEAK
 #endif // _DEBUG
 
+//ïÅíiégópã÷é~
 #ifdef CHECK_MEM_LEAK
 #define new new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
 #endif // CHECK_MEM_LEAK
