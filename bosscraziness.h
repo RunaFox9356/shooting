@@ -51,6 +51,6 @@ private:
 	Pattern m_PatternMode;
 	CBossbar *m_Life;
 	int m_MaxLife;
-
+	int m_RushCount;
 };
 #endif

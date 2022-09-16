@@ -55,6 +55,7 @@ HRESULT CBossCraziness::Init(void)
 	m_keepCount = 0;
 	m_SamonEnemy = 0;
 	m_PatternCount = 0;
+	m_RushCount = 0;
 	m_PatternMode = MOVE;
 	m_MaxLife = 3000;
 
@@ -167,7 +168,7 @@ void CBossCraziness::Move(void)
 
 		if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
 		{
-			m_pos.y = -SCREEN_HEIGHT / 2 - 10.0f;
+			m_pos.y = -SCREEN_HEIGHT / 2 - 250.0f;
 			m_move.y *= -1.0f;
 
 		}
@@ -216,7 +217,7 @@ void CBossCraziness::Move(void)
 			if (m_PatternCount >= 2)
 			{
 				m_PatternCount = 0;
-				m_PatternMode = MOVE;
+				m_PatternMode = RUSH;
 
 			}
 		}
@@ -224,6 +225,25 @@ void CBossCraziness::Move(void)
 	if (m_PatternMode == RUSH)
 	{
 
+		m_Speed += 0.05f;
+		if (m_Speed >= 1.0f)
+		{
+			m_Speed = 1.0f;
+		}
+		m_move.x = -50.0f *  hmd::easeInSine(m_Speed);
+
+		if (m_pos.x <= -SCREEN_WIDTH / 2)
+		{
+			m_pos.x = SCREEN_WIDTH;
+			m_pos.y += SCREEN_HEIGHT / 5;
+			m_move.x = -5.0f;
+			m_RushCount++;
+			if (m_RushCount >= 3)
+			{
+				m_RushCount = 0;
+				m_PatternMode = MOVE;
+			}
+		}
 	}
 }
 

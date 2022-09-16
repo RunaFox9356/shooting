@@ -83,7 +83,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	//î{ó¶ÇÃå∏è≠ó¶
 	if (m_Decrease)
 	{
-		m_RateWait = 1000;
+		m_RateWait = 6000;
 	}
 	else
 	{
@@ -219,14 +219,14 @@ void CMultiply::Update()
 		if (m_RateWait <= 0)
 		{
 
-			m_Decrease = true;
+			m_Decrease = false;
 			m_Rate--;
 			if (m_Rate <= 0)
 			{
 				m_Rate = 0;
 			}
 			
-			CMultiply::FastSet(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f));
+			//CMultiply::FastSet(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f));
 		}
 	}
 

@@ -31,6 +31,7 @@
 
 #include "pause.h"
 #include "dangerous.h"
+#include "text.h"
 
 CMagicBox* CGame::m_MagicBox = nullptr;
 CParticleManager*CGame::m_PaticleManager = nullptr;
@@ -148,7 +149,8 @@ void CGame::Update(void)
 	}
 	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
-		CDangerousManager::BossPopStaging();
+		CText::Create(CText::GON, "ƒ‚ƒ“ƒnƒ“‚½‚Ì‚µ‚¢...");
+		//CDangerousManager::BossPopStaging();
 		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		return;
 	}

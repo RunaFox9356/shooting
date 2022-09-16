@@ -204,6 +204,9 @@
     <ClCompile Include="bosscraziness.cpp">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
+    <ClCompile Include="text.cpp">
+      <Filter>オブジェクト\モデル系\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -367,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="bosscraziness.h">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>オブジェクト\モデル系\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
