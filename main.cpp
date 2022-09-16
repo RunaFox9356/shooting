@@ -221,6 +221,3 @@ int Gettime(void)
 }
 
 #endif // _DEBUG
-
-
-

@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include "boss.h"
+#include "bosscraziness.h"
 #include "camera.h"
 #include "motion.h"
 #include "manager.h"
@@ -26,21 +26,21 @@
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CBoss::CBoss()
+CBossCraziness::CBossCraziness()
 {
 }
 
 //------------------------------------
 // デストラクタ
 //------------------------------------
-CBoss::~CBoss()
+CBossCraziness::~CBossCraziness()
 {
 }
 
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CBoss::Init(void)
+HRESULT CBossCraziness::Init(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
@@ -57,6 +57,7 @@ HRESULT CBoss::Init(void)
 	m_PatternCount = 0;
 	m_PatternMode = MOVE;
 	m_MaxLife = 3000;
+
 	CBg::SetKillMove(D3DXVECTOR3(0.05f, 0.0f, 0.0f));
 
 	m_Life = CBossbar::Create(D3DXVECTOR3(970.0f, 100.0f, 0.0f), 3000);
@@ -72,7 +73,7 @@ HRESULT CBoss::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CBoss::Uninit(void)
+void CBossCraziness::Uninit(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
@@ -81,7 +82,7 @@ void CBoss::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CBoss::Update(void)
+void CBossCraziness::Update(void)
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();
@@ -95,7 +96,7 @@ void CBoss::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CBoss::Draw(void)
+void CBossCraziness::Draw(void)
 {
 	CEnemy::Draw();
 }
@@ -103,10 +104,10 @@ void CBoss::Draw(void)
 //------------------------------------
 // create
 //------------------------------------
-CBoss *CBoss::Create()
+CBossCraziness *CBossCraziness::Create()
 {
-	CBoss * pObject = nullptr;
-	pObject = new CBoss;
+	CBossCraziness * pObject = nullptr;
+	pObject = new CBossCraziness;
 
 	if (pObject != nullptr)
 	{
@@ -118,7 +119,7 @@ CBoss *CBoss::Create()
 //------------------------------------
 // Move
 //------------------------------------
-void CBoss::Move(void)
+void CBossCraziness::Move(void)
 {
 	if (m_PatternMode == MOVE)
 	{
@@ -181,7 +182,7 @@ void CBoss::Move(void)
 	}
 	if (m_PatternMode == POP)
 	{
-		
+
 		m_keepCount++;
 
 		if (m_keepCount >= 150)
@@ -205,7 +206,7 @@ void CBoss::Move(void)
 					CEnemy * Enemy = CEnemy::Create(1);
 					Enemy->SetUp(ENEMY);
 					Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*80.0f), m_PopPos.y-50.0f, 0.0f));
+					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*80.0f), m_PopPos.y - 50.0f, 0.0f));
 					Enemy->SetSize(Size);
 					Enemy->SetLife(10);
 				}
@@ -229,15 +230,14 @@ void CBoss::Move(void)
 //------------------------------------
 // 特殊演出
 //-----------------------------------
-void CBoss::OnHit()
+void CBossCraziness::OnHit()
 {
 	int Damage = m_MaxLife - GetLife();
 	m_MaxLife = GetLife();
-   	m_Life->SetDamage(Damage);
+	m_Life->SetDamage(Damage);
 	if (GetLife() <= 0)
 	{
-		CEnemy::SetBossCraziness();
-		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
+		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 	}
-	
+
 }

@@ -22,6 +22,8 @@
 #include "boss.h"
 #include "snake.h"
 #include "maruneko.h"
+#include "life.h"
+#include "bosscraziness.h"
 
 namespace nl = nlohmann;
 
@@ -71,35 +73,36 @@ void CEnemy::Uninit(void)
 //------------------------------------
 void CEnemy::Update(void)
 {
-	// 現在のモーション番号の保管
-	CObject3d::Update();
+		// 現在のモーション番号の保管
+		CObject3d::Update();
 
-	m_motionType = CObject3d::ANIME_RUN;
+		m_motionType = CObject3d::ANIME_RUN;
 
 
-	switch (*CManager::GetMode())
-	{
-	case CManager::MODE_TITLE:
-		TitleMove();	//動きセット
-		break;
-	case CManager::MODE_GAME:
-		Move();	//動きセット
-		Collision();
-		break;
-	case CManager::MODE_RESULT:
-		ResetMove();
-		break;
-	case CManager::MODE_RANKING:
-		break;
-	case CManager::MODE_TUTORIAL:
-		break;
-	default:
-		break;
-	}
-	
+		switch (*CManager::GetMode())
+		{
+		case CManager::MODE_TITLE:
+			TitleMove();	//動きセット
+			break;
+		case CManager::MODE_GAME:
 
-	
+			if (CLife::GetMaxLife())
+			{
+				Move();	//動きセット
+				Collision();
+			}
+			break;
 
+		case CManager::MODE_RESULT:
+			ResetMove();
+			break;
+		case CManager::MODE_RANKING:
+			break;
+		case CManager::MODE_TUTORIAL:
+			break;
+		default:
+			break;
+		}
 }
 
 //------------------------------------
@@ -159,6 +162,9 @@ CEnemy *CEnemy::Create(const int Type)
 	case TYPE_BOSS:
 		pObject = new CBoss;
 		break;
+	case TYPE_CRAZINESS:
+		pObject = new CBossCraziness;
+		break;
 	default:
 		pObject = new CRaccoon;
 		break;
@@ -181,10 +187,25 @@ void CEnemy::SetBoss()
 	CEnemy * Model = CEnemy::Create(TYPE_BOSS);
 	Model->SetUp(ENEMY);
 	Model->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-	Model->SetPos(D3DXVECTOR3(CManager::Pos.x*2.5f, 0.0f,0.0f));
+	Model->SetPos(D3DXVECTOR3(CManager::Pos.x*3.5f, 0.0f,0.0f));
 	Model->SetSize(Size);
 	Model->SetLife(3000);
 	
+}
+
+//------------------------------------
+// Boss
+//------------------------------------
+void CEnemy::SetBossCraziness()
+{
+	D3DXVECTOR3 Size(5.0f, 5.0f, 5.0f);
+	CEnemy * Model = CEnemy::Create(TYPE_CRAZINESS);
+	Model->SetUp(ENEMY);
+	Model->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+	Model->SetPos(D3DXVECTOR3(CManager::Pos.x*3.5f, 0.0f, 0.0f));
+	Model->SetSize(Size);
+	Model->SetLife(3000);
+
 }
 
 //------------------------------------
@@ -257,19 +278,21 @@ void CEnemy::TitleMove()
 //------------------------------------
 void CEnemy::Move(void)
 {
-	if (m_pos.x <= SCREEN_WIDTH / 2)
-	{
-		m_pos += m_move;
-	}
-	else
-	{
-		m_pos.x += -5.0f;
-	}
-	if (m_pos.x <= -SCREEN_WIDTH)
-	{
-		Uninit();
-		//m_pos.x = SCREEN_WIDTH;
-	}
+	
+		if (m_pos.x <= SCREEN_WIDTH / 2)
+		{
+			m_pos += m_move;
+		}
+		else
+		{
+			m_pos.x += -5.0f;
+		}
+		if (m_pos.x <= -SCREEN_WIDTH)
+		{
+			Uninit();
+			//m_pos.x = SCREEN_WIDTH;
+		}
+	
 }
 //------------------------------------
 // TitleのときのMove

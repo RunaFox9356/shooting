@@ -26,7 +26,6 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	void SetRot(D3DXVECTOR3 Rot) { m_rot = Rot; };
 
 private:
 	int  m_nTimer;
@@ -52,7 +51,6 @@ private:
 private:
 	int  m_nTimer;
 	CDangerous *m_object2d[Max];
-	D3DXVECTOR3 m_rot;
 	D3DXVECTOR3 m_BackMove;
 	int m_PopTime;
 	int m_PopTimeCount;

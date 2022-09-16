@@ -161,6 +161,7 @@
     <ClCompile Include="bg.cpp" />
     <ClCompile Include="boss.cpp" />
     <ClCompile Include="bossbar.cpp" />
+    <ClCompile Include="bosscraziness.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="crystal.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="bg.h" />
     <ClInclude Include="boss.h" />
     <ClInclude Include="bossbar.h" />
+    <ClInclude Include="bosscraziness.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="crystal.h" />

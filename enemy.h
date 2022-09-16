@@ -32,9 +32,9 @@ public:
 		TYPE_RACCOONL = 0,	//‚½‚Ê‚«
 		TYPE_NEKO,			// ‚Ë‚±
 		TYPE_SNAKE,
-		TYPE_MARU,			// ƒWƒƒƒ“ƒv
-		TYPE_BOSS,			// UŒ‚
-		TYPE_FOX4,			// ’…’n
+		TYPE_MARU,			//
+		TYPE_BOSS,			// 
+		TYPE_CRAZINESS,			//
 		TYPE_MAX
 	};
 
@@ -67,6 +67,7 @@ public:
 	static void  LoadEnemy(const char * pFdata);
 	static CEnemy *Create(const int Type);
 
+	static void SetBossCraziness();
 	static void SetBoss();
 
 private:

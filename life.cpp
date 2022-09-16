@@ -12,7 +12,7 @@
 #include "game.h"
 
 
-
+bool CLife::m_MaxHp;
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -33,13 +33,13 @@ CLife::~CLife()
 //------------------------------------
 HRESULT CLife::Init()
 {
-	
-
+	m_MaxHp = false;
+	m_MaxLife = 0;
 	m_object2d[0] = CObject2d::Create(1);
 	m_object2d[0]->SetTexture(CTexture::TEXTURE_HPCOVER);
 	
 	m_object2d[0]->SetSize(D3DXVECTOR3(m_Life+5, 50.0f, 0.0f));
-	m_object2d[0]->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y-20.0f, m_pos.z));
+	m_object2d[0]->SetPos(D3DXVECTOR3(m_SetUpPos.x, m_SetUpPos.y-20.0f, m_SetUpPos.z));
 
 	CObject2d::Init();
 
@@ -50,8 +50,7 @@ HRESULT CLife::Init()
 // 終了
 //------------------------------------
 void CLife::Uninit()
-{
-	
+{	
 	CObject2d::Uninit();
 }
 
@@ -60,22 +59,34 @@ void CLife::Uninit()
 //------------------------------------
 void CLife::Update()
 {
-
 	CObject2d::Update();
-	if (m_pos.x <= CPlayer::MAXLIFE*0.5f)
+	
+	
+	if (m_MaxLife <= CPlayer::MAXLIFE)
+	{
+		m_MaxLife+=3;
+		SetDamage(-3);
+	}
+	else
+	{
+		m_MaxHp =true;
+	}
+
+	
+	if (m_Life <= CPlayer::MAXLIFE / 2.0f)
 	{
 		SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 1.0f));
 	}
-	if (m_pos.x <= CPlayer::MAXLIFE*0.15f+5.0f)
+	if (m_Life <= CPlayer::MAXLIFE / 10.0f)
 	{
 		SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
 	}
-
-
+	
 	m_move.x += (0.0f - m_move.x)* 0.5f;//（目的の値-現在の値）＊減衰係数
 
 	m_Size.x += m_move.x;
 	m_pos.x += m_move.x;
+		
 }
 
 //------------------------------------
@@ -90,7 +101,6 @@ void CLife::Draw()
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
 	CObject2d::Draw();
-
 
 	//αブレンディングを元に戻す
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
@@ -108,13 +118,15 @@ CLife *CLife::Create(const D3DXVECTOR3 & pos,float Life)
 
 	if (pObject != nullptr)
 	{
-		pObject->SetPos(pos);
+		pObject->m_SetUpPos = pos;
+		pObject->SetPos(D3DXVECTOR3(47.0f, pos.y, pos.z));	
 		pObject->m_Life = Life;
 		pObject->Init();
-		pObject->SetSize(D3DXVECTOR3(pObject->m_Life, 20.0f, 0.0f));
+		pObject->SetSize(D3DXVECTOR3(0.0f, 20.0f, 0.0f));
 		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 		pObject->SetTexture(CTexture::TEXTURE_NONE);
 		pObject->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+		
 	}
 	
 	return pObject;
@@ -142,6 +154,11 @@ void CLife::SetDamage(const int Damage)
 {
 	m_move.x -= Damage;
 	//m_pos.x -= Damage;
-	CPlayer* cPlayer = CGame::GetPlayer();
-	cPlayer->HitLife(Damage);
+	if (Damage >= 0)
+	{
+		CPlayer* cPlayer = CGame::GetPlayer();
+		cPlayer->HitLife(Damage);
+	}
+	
 }
+

@@ -156,12 +156,11 @@ void CGame::Update(void)
 	{
 		if (GetMaxBoss())
 		{
-			//ƒ‚[ƒh‚ÌÝ’è
-
-			CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
-			return;
 		}
-		CDangerousManager::BossPopStaging(); 
+		else
+		{
+			CDangerousManager::BossPopStaging(); 
+		}
 	
 	}
 	m_PaticleManager->Update();

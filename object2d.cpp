@@ -37,7 +37,7 @@ CObject2d::~CObject2d()
 //=============================================================================
 HRESULT CObject2d::Init()
 {
-
+	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_nScale = 10.0f;
 
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
@@ -122,11 +122,12 @@ void CObject2d::Update()
 
 	//マトリックス作成
 	D3DXMatrixIdentity(&mtx);
-
+	D3DXMatrixRotationYawPitchRoll(&mtx, 0.0f, 0.0f, m_rot.z);
 	//頂点座標
 	for (int i = 0; i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&addPos[i], &m_Vtx[i], &mtx);
+
 		pVtx[i].pos.x = m_pos.x + (addPos[i].x * m_Size.x);//<-サイズ変更
 		pVtx[i].pos.y = m_pos.y + (addPos[i].y * m_Size.y);//<-サイズ変更
 		pVtx[i].pos.z = 0.0f;

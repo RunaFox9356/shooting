@@ -311,7 +311,7 @@ void CTitle::Update(void)
 				break;
 			case MODE::MODE_END:
 				//ƒQ[ƒ€‚ÌI—¹
-				exit(0);
+				PostQuitMessage(0);
 				break;
 			default:
 				break;

@@ -12,7 +12,7 @@
 #include "game.h"
 
 
-
+bool CBossbar::m_MaxHp;
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -34,12 +34,12 @@ CBossbar::~CBossbar()
 HRESULT CBossbar::Init()
 {
 	CObject2d::Init();
-
+	m_MaxLife = 0;
 	m_object2d[0] = CObject2d::Create(1);
 	m_object2d[0]->SetTexture(CTexture::TEXTURE_BOSSHP);
 
 	m_object2d[0]->SetSize(D3DXVECTOR3((m_Life * 0.1f) + 7, 50.0f, 0.0f));
-	m_object2d[0]->SetPos(D3DXVECTOR3(m_pos.x + 6, m_pos.y - 20.0f, m_pos.z));
+	m_object2d[0]->SetPos(D3DXVECTOR3(m_SetUpPos.x + 6, m_pos.y - 20.0f, m_pos.z));
 
 	return E_NOTIMPL;
 }
@@ -66,6 +66,16 @@ void CBossbar::Update()
 {
 
 	CObject2d::Update();
+
+	if (m_MaxLife <= BOSSHP)
+	{
+		m_MaxLife += 10;
+		SetDamage(-10);
+	}
+	else
+	{
+		m_MaxHp = true;
+	}
 	if (m_Life <= BOSSHP / 2.0f)
 	{
 		SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 1.0f));
@@ -74,7 +84,6 @@ void CBossbar::Update()
 	{
 		SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
 	}
-
 
 	m_move.x += (0.0f - m_move.x)* 0.5f;//（目的の値-現在の値）＊減衰係数
 	
@@ -111,13 +120,16 @@ CBossbar *CBossbar::Create(const D3DXVECTOR3 & pos, float Life)
 
 	if (pObject != nullptr)
 	{
-		pObject->SetPos(pos);
+
+		pObject->m_SetUpPos = pos;
+		pObject->SetPos(D3DXVECTOR3(1272.0f, pos.y, pos.z));
 		pObject->m_Life = Life;
 		pObject->Init();
-		pObject->SetSize(D3DXVECTOR3(Life*0.1f, 20.0f, 0.0f));
+		pObject->SetSize(D3DXVECTOR3(0.0f, 20.0f, 0.0f));
+		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 		pObject->SetTexture(CTexture::TEXTURE_NONE);
 		pObject->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
+
 	}
 
 	return pObject;

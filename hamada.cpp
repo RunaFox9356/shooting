@@ -11,6 +11,7 @@ namespace hmd
 {
 	D3DXMATRIX *giftmtx(D3DXMATRIX *pOut,D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 	float easeInSine(float X);
+	float easeInQuad(float X);
 }
 
 
@@ -36,8 +37,16 @@ D3DXMATRIX *hmd::giftmtx(D3DXMATRIX *pOut, D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 	return pOut;
 }
 
+
+//
+//イージング
+//
 float hmd::easeInSine(float X)
 {
 	return 1 - cos((X * D3DX_PI) / 2);
 }
 
+float hmd::easeInQuad(float X)
+{
+	return X * X;
+}

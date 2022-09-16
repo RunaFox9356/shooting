@@ -201,6 +201,9 @@
     <ClCompile Include="dangerous.cpp">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
+    <ClCompile Include="bosscraziness.cpp">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -360,6 +363,9 @@
       <Filter>オブジェクト\モデル系\UI</Filter>
     </ClInclude>
     <ClInclude Include="dangerous.h">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClInclude>
+    <ClInclude Include="bosscraziness.h">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClInclude>
   </ItemGroup>

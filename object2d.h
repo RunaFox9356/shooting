@@ -51,6 +51,7 @@ public:
 	void SetSize(D3DXVECTOR3 Size) { m_Size = Size; };
 	D3DXVECTOR3 &GetMove() { return m_move; };
 	LPDIRECT3DVERTEXBUFFER9 &GetVtx() { return m_pVtxBuff; };
+	void SetRot(D3DXVECTOR3 Rot) { m_rot = Rot; };
 
 protected:
 	int  m_nTimer;
@@ -59,6 +60,7 @@ protected:
 	D3DXVECTOR3 m_move; //polygonの位置
 	D3DXVECTOR3 m_pos; //polygonの位置
 	PositionVec4 m_col;	// 色
+	D3DXVECTOR3 m_rot;
 	D3DXMATRIX m_mtxWorld;					// マトリックス
 private:
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = NULL;

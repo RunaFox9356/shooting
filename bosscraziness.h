@@ -4,8 +4,8 @@
 // Author:hamada ryuuga
 //
 //============================
-#ifndef _BOSS_H_
-#define _BOSS_H_
+#ifndef _BOSSCRAZINESS_H_
+#define _BOSSCRAZINESS_H_
 
 #include "main.h"
 #include "motion.h"
@@ -16,7 +16,7 @@
 class  CMotion;
 class  CBossbar;
 
-class CBoss : public CEnemy
+class CBossCraziness : public CEnemy
 {
 
 public:
@@ -28,15 +28,15 @@ public:
 		MAX
 	};
 
-	CBoss();
-	~CBoss();
+	CBossCraziness();
+	~CBossCraziness();
 
 	HRESULT Init(void)override;	// èâä˙âª
 	void Uninit(void)override;	// îjä¸
 	void Update(void)override;	// çXêV
 	void Draw()override;	// ï`âÊ
-	void CBoss::OnHit()override;
-	static CBoss *CBoss::Create();
+	void CBossCraziness::OnHit()override;
+	static CBossCraziness *CBossCraziness::Create();
 private:
 	void Move();
 

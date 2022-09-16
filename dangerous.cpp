@@ -17,7 +17,10 @@
 //------------------------------------
 CDangerousManager::CDangerousManager(int list) :CObject2d(list)
 {
-	m_object2d[0] = nullptr;
+	for (int i = 0; i < Max; i++)
+	{
+		m_object2d[i] = nullptr;
+	}
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 }
 
@@ -37,7 +40,6 @@ HRESULT CDangerousManager::Init()
 
 	m_PopTimeCount = 0;
 	m_PopOn = false;
-	
 	
 	return E_NOTIMPL;
 }
@@ -63,7 +65,7 @@ void CDangerousManager::Update()
 		if (!m_PopOn)
 		{
 			D3DXVECTOR3 Pos(0.0f, m_pos.y, 0.0f);
-			D3DXVECTOR3 Rot(0.0f, 0.0f, 1.57f);
+			D3DXVECTOR3 Rot(0.0f, 0.0f, 0.0f);
 			for (int i = 0; i < Max; i++)
 			{
 				m_object2d[i] = CDangerous::Create(Pos);
@@ -79,19 +81,15 @@ void CDangerousManager::Update()
 		for (int i = 0; i < Max; i++)
 		{
 			m_object2d[i]->SetMove(m_move);
+			
+			float a = sinf((float)m_PopTimeCount*0.08f);
+			m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, a));	
 		}
 	}
-	if (m_PopTimeCount >= m_PopTime+60)
+	if (m_PopTimeCount >= m_PopTime+300)
 	{
 		SetMove(-m_BackMove);
 	}
-	if (m_PopTimeCount >= BossPop)
-	{
-	
-	
-		
-	}
-
 }
 
 //------------------------------------
@@ -99,7 +97,6 @@ void CDangerousManager::Update()
 //------------------------------------
 void CDangerousManager::Draw()
 {
-
 }
 
 //------------------------------------
@@ -115,8 +112,8 @@ CDangerousManager *CDangerousManager::Create(const D3DXVECTOR3 & pos, const int 
 		pObject->SetPos(pos);
 		pObject->Init();
 		pObject->m_PopTime = PopTime;
-		pObject->SetMove(D3DXVECTOR3(500.0f, 0.0f, 0.0f));
-		pObject->m_BackMove = D3DXVECTOR3(500.0f, 0.0f, 0.0f);
+		pObject->SetMove(D3DXVECTOR3(520.0f, 0.0f, 0.0f));
+		pObject->m_BackMove = D3DXVECTOR3(520.0f, 0.0f, 0.0f);
 	}
 
 	return pObject;
@@ -126,17 +123,15 @@ CDangerousManager *CDangerousManager::Create(const D3DXVECTOR3 & pos, const int 
 //------------------------------------
 void CDangerousManager::BossPopStaging()
 {
-
 	CDangerousManager::Create(D3DXVECTOR3(0.0f, 125.0f, 0.0f),0);
 
-	CDangerousManager::Create(D3DXVECTOR3(0.0f, 370.0f, 0.0f),60);
+	CDangerousManager::Create(D3DXVECTOR3(0.0f, 370.0f, 0.0f),0);
 
-	CDangerousManager::Create(D3DXVECTOR3(0.0f, 620.0f, 0.0f),120);
+	CDangerousManager::Create(D3DXVECTOR3(0.0f, 620.0f, 0.0f),0);
 
 	CObject::SetBossPop(true);
-
 	CEnemy::SetBoss();
-
+	
 }
 //------------------------------------
 // コンストラクタ
@@ -160,7 +155,6 @@ HRESULT CDangerous::Init()
 {
 	CObject2d::Init();
 
-	
 	return E_NOTIMPL;
 }
 

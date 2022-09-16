@@ -62,7 +62,7 @@ HRESULT C3dpolygon::Init()
 
 	VERTEX_3D*pVtx;		//頂点情報へのポインタ
 
-						//頂点バッファをロックし、頂点情報へのポインタを取得
+	//頂点バッファをロックし、頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	//rhwの設定
@@ -240,7 +240,7 @@ void C3dpolygon::SetCollar(PositionVec4 Collar)
 {
 	VERTEX_3D *pVtx; //頂点へのポインタ
 
-					 //頂点バッファをロックし頂点情報へのポインタを取得
+	//頂点バッファをロックし頂点情報へのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	//テクスチャの座標設定
@@ -249,7 +249,6 @@ void C3dpolygon::SetCollar(PositionVec4 Collar)
 	pVtx[1].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
 	pVtx[2].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
 	pVtx[3].col = D3DXCOLOR(Collar.P0, Collar.P1, Collar.P2, Collar.P3);
-
 
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();

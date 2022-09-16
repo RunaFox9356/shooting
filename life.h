@@ -32,10 +32,13 @@ public:
 	void SetMove(const D3DXVECTOR3 &move)override;
 	
 	void SetDamage(const int Damage);
-
+	static bool GetMaxLife() { return m_MaxHp; };
 
 private:
 	float m_Life;
+	float m_MaxLife;
+	static bool m_MaxHp;
+	D3DXVECTOR3 m_SetUpPos;
 	CObject2d *m_object2d[1];
 
 };
