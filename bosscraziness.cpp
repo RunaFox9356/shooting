@@ -62,11 +62,11 @@ HRESULT CBossCraziness::Init(void)
 
 	m_Life = CBossbar::Create(D3DXVECTOR3(970.0f, 100.0f, 0.0f), 3000);
 
-	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+	CObject3d::Set(D3DXVECTOR3(0.0f, 0.0f, 120.0f),
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
-		"Data/system/enemy/kuma.txt");
+		"Data/system/enemy/Kumakai.txt");
 
-	m_rot.y += -(D3DX_PI*0.5f);
+	m_rot.y += (D3DX_PI*0.5f);
 	return S_OK;
 }
 
@@ -90,7 +90,7 @@ void CBossCraziness::Update(void)
 	//‚±‚±‚Émove‚ð‚¢‚ê‚é
 	Move();
 
-	m_motionType = CObject3d::ANIME_ATTACK;
+	
 }
 
 //------------------------------------
@@ -123,6 +123,7 @@ void CBossCraziness::Move(void)
 {
 	if (m_PatternMode == MOVE)
 	{
+		m_motionType = CObject3d::ANIME_RUN;
 		if (m_pos.x <= 300.0f && !m_Go)
 		{
 			m_Stop = true;
@@ -182,7 +183,7 @@ void CBossCraziness::Move(void)
 	}
 	if (m_PatternMode == POP)
 	{
-
+		m_motionType = CObject3d::ANIME_ATTACK;
 		m_keepCount++;
 
 		if (m_keepCount >= 150)

@@ -202,7 +202,7 @@ void CEnemy::SetBossCraziness()
 	CEnemy * Model = CEnemy::Create(TYPE_CRAZINESS);
 	Model->SetUp(ENEMY);
 	Model->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-	Model->SetPos(D3DXVECTOR3(CManager::Pos.x*3.5f, 0.0f, 0.0f));
+	Model->SetPos(D3DXVECTOR3(CManager::Pos.x*3.5f, 350.0f, 0.0f));
 	Model->SetSize(Size);
 	Model->SetLife(3000);
 
@@ -238,12 +238,12 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 			Life = EnemyList[name]["LIFE"];
 			Type = EnemyList[name]["TYPE"];
 			
-			CEnemy * Enemy = CEnemy::Create(Type);
-			Enemy->SetUp(ENEMY); 
-			Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-			Enemy->SetPos(pos);
-			Enemy->SetSize(size);
-			Enemy->SetLife(10* (int)size.x);
+			//CEnemy * Enemy = CEnemy::Create(Type);
+			//Enemy->SetUp(ENEMY); 
+			//Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+			//Enemy->SetPos(pos);
+			//Enemy->SetSize(size);
+			//Enemy->SetLife(10* (int)size.x);
 		}
 	}
 }
