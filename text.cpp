@@ -8,7 +8,7 @@
 #include "text.h"
 #include "manager.h"
 #include "renderer.h"
-
+#include <Shlwapi.h>
 //=============================================================================
 // コンストラクト関数
 //=============================================================================
@@ -36,6 +36,16 @@ HRESULT CText::Init()
 	SetTex(PositionVec4(
 		0.0f, 1.0f, 0.0f, 1.0f));
 
+	
+	// フォントを使えるようにする
+	DESIGNVECTOR design;
+
+	AddFontResourceEx(
+		"data/font/FZゴンタかな.otf", //ttfファイルへのパス
+		FR_PRIVATE,
+		&design
+	);
+
 	// デバッグ情報表示用フォントの生成
 	D3DXCreateFont(CManager::GetRenderer()->GetDevice(), 38, 0, 0, 0, FALSE, SHIFTJIS_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("FZゴンタかな"), &m_pFont);
@@ -52,6 +62,15 @@ HRESULT CText::Init()
 void CText::Uninit()
 {
 	CObject2d::Uninit();
+
+	DESIGNVECTOR design;
+
+	RemoveFontResourceEx(
+		TEXT("Data/font/FZゴンタかな.otf"), //ttfファイルへのパス
+		FR_PRIVATE,
+		&design
+	);
+
 }
 
 
@@ -116,6 +135,7 @@ void CText::Draw()
 	wsprintf(str, _T(m_Text.c_str()));
 
 	m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
+
 
 	// 新規深度値 <= Zバッファ深度値 (初期設定)
 	pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);

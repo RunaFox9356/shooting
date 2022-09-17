@@ -36,7 +36,7 @@ HRESULT CPause::Init(void)
 	m_OnPause = false;
 	//ƒ‚[ƒh‘I‘ðŽž‚Ì”wŒi•‚­‚·‚é‚â‚Â
 	m_Bg = CObject2d::Create(2);
-	m_Bg->SetTexture(CTexture::TEXTURE_NONE);
+	m_Bg->SetTexture(CTexture::TEXTURE_PAUSEBG);
 	m_Bg->SetSize(D3DXVECTOR3(450.0f, CManager::Pos.y, 0.0f));
 	m_Bg->SetPos(CManager::Pos);
 	m_Bg->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
@@ -99,7 +99,7 @@ void CPause::Update(void)
 		if (m_OnPause)
 		{
 			Set();
-			m_Bg->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
+			m_Bg->SetCollar(PositionVec4(0.3f, 0.3f, 0.3f, 0.0f));
 			for (int i = 0; i < 4; i++)
 			{
 				m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
@@ -110,7 +110,7 @@ void CPause::Update(void)
 		{
 			m_NextMode = 0;
 			Set();
-			m_Bg->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.8f));
+			m_Bg->SetCollar(PositionVec4(0.3f, 0.3f, 0.3f, 0.8f));
 			for (int i = 0; i < 4; i++)
 			{
 				m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
@@ -144,7 +144,7 @@ void CPause::Update(void)
 
 		if (m_OnPause)
 		{
-			m_Bg->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.5f));
+			m_Bg->SetCollar(PositionVec4(0.3f, 0.3f, 0.30f, 0.5f));
 			for (int i = 0; i < 3; i++)
 			{
 				m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
