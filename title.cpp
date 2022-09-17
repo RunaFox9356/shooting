@@ -150,24 +150,25 @@ HRESULT CTitle::Init(void)
 	fade->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
 	
+
+	float y = 120.0f;
+
 	//ゲームの文字
 	m_object2d[0] = CObject2d::Create(2);
 	m_object2d[0]->SetTexture(CTexture::TEXTURE_TITLEGAME);
 	m_object2d[0]->SetSize(CManager::Pos);
-	m_object2d[0]->SetPos(CManager::Pos);
+	m_object2d[0]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y - y, 0.0f));
 	m_object2d[0]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
-
-	float y = 100.0f;
 
 	//チュートリアルの文字
 	m_object2d[1] = CObject2d::Create(2);
 	m_object2d[1]->SetTexture(CTexture::TEXTURE_TITLETUTORIAL);
 	m_object2d[1]->SetSize(CManager::Pos);
-	m_object2d[1]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y+y, 0.0f));
+	m_object2d[1]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y, 0.0f));
 	m_object2d[1]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
-	y += 100.0f;
+
 
 	//ランキングの文字
 	m_object2d[2] = CObject2d::Create(2);
@@ -176,7 +177,7 @@ HRESULT CTitle::Init(void)
 	m_object2d[2]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y + y, 0.0f));
 	m_object2d[2]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
-	y += 100.0f;
+	y += 120.0f;
 
 	//おわりの文字
 	m_object2d[3] = CObject2d::Create(2);
@@ -256,38 +257,43 @@ void CTitle::Uninit(void)
 void CTitle::Update(void)
 {
 	//きつねをもちもちさせるやつ
-	if (m_addY <= 10)
-	{
-		Sizcontroller = true;
+	if (!ModeSelect)
+	{//一回押された	
+		if (m_addY <= 10)
+		{
+			Sizcontroller = true;
+		}
+
+		if (m_addY >= 50)
+		{
+			Sizcontroller = false;
+		}
+
+		float a;
+		if (Sizcontroller)
+		{
+			m_addY++;
+			m_addX--;
+			a = sinf((float)m_alpha);
+			m_alpha -= 1.0f / 60;
+
+		}
+		else
+		{
+			m_addY--;
+			m_addX++;
+			a = sinf((float)m_alpha);
+			m_alpha += 1.0f / 60;
+		}
+
+
+		//きつねをもちもちさせるやつ
+		D3DXVECTOR3 addPos = D3DXVECTOR3(1.0f + (float)m_addX, 1.0f + (float)m_addY, 0.0f);
+		m_Bg[1]->SetSize(CManager::Pos *0.8f + addPos);
+
+		//点滅させる
+		m_list[1]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, a));
 	}
-	
-	if (m_addY >= 50)
-	{
-		Sizcontroller = false;
-	}
-
-
-	if (Sizcontroller)
-	{
-		m_addY++;
-		m_addX--;
-		m_alpha -= 1.0f / 40;
-
-	}
-	else
-	{
-		m_addY--;
-		m_addX++;
-		m_alpha += 1.0f / 40;
-	}
-
-	//きつねをもちもちさせるやつ
-	D3DXVECTOR3 addPos = D3DXVECTOR3(1.0f + (float)m_addX, 1.0f + (float)m_addY, 0.0f);
-	m_Bg[1]->SetSize(CManager::Pos *0.8f + addPos);
-
-	//点滅させる
-	m_list[1]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, m_alpha));
-
 	CInput *CInputpInput = CInput::GetKey();
 
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))

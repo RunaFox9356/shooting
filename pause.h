@@ -41,7 +41,7 @@ private:
 	bool m_OnPause;
 	int m_NextMode;
 	CObject2d *m_Bg;
-	CObject2d *m_object2d[3];
+	CObject2d *m_object2d[4];
 
 };
 

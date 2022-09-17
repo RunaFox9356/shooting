@@ -30,14 +30,15 @@ public:
 		FADEMAX
 	};
 
-	HRESULT Init(void)override;	// ‰Šú‰»
-	void Uninit(void)override;	// ”jŠü
-	void Update(void)override;	// XV
+	HRESULT Init()override;	// ‰Šú‰»
+	void Uninit()override;	// ”jŠü
+	void Update()override;	// XV
 	void Draw()override;	// •`‰æ
 	static CFade* Create();
 	void CFade::NextMode(CManager::MODE nextMode);
 
 private:
+
 	float m_FadeSp;
 	float m_FadeSet;
 	bool m_Bake;

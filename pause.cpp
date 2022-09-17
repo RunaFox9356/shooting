@@ -37,7 +37,7 @@ HRESULT CPause::Init(void)
 	//モード選択時の背景黒くするやつ
 	m_Bg = CObject2d::Create(2);
 	m_Bg->SetTexture(CTexture::TEXTURE_NONE);
-	m_Bg->SetSize(CManager::Pos);
+	m_Bg->SetSize(D3DXVECTOR3(450.0f, CManager::Pos.y, 0.0f));
 	m_Bg->SetPos(CManager::Pos);
 	m_Bg->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
@@ -67,6 +67,14 @@ HRESULT CPause::Init(void)
 	m_object2d[2]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y + y, 0.0f));
 	m_object2d[2]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 
+
+	//ランキングの文字
+	m_object2d[3] = CObject2d::Create(2);
+	m_object2d[3]->SetTexture(CTexture::TEXTURE_PAUSEMENU);
+	m_object2d[3]->SetSize(D3DXVECTOR3(300.0f, 100.0f, 0.0f));
+	m_object2d[3]->SetPos(D3DXVECTOR3(CManager::Pos.x, CManager::Pos.y - y, 0.0f));
+	m_object2d[3]->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
+
 	return S_OK;
 }
 
@@ -92,7 +100,7 @@ void CPause::Update(void)
 		{
 			Set();
 			m_Bg->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 4; i++)
 			{
 				m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 			}
@@ -103,7 +111,7 @@ void CPause::Update(void)
 			m_NextMode = 0;
 			Set();
 			m_Bg->SetCollar(PositionVec4(0.0f, 0.0f, 0.0f, 0.8f));
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 4; i++)
 			{
 				m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			}

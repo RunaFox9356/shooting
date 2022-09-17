@@ -1,6 +1,6 @@
 //============================
 //
-// テキスト
+// テキスト表示するべんり
 // Author:hamada ryuuga
 //
 //============================
@@ -73,7 +73,10 @@ void CText::Update()
 			if (m_AddLetter <= m_TextSize)
 			{
 				m_Text+=m_ALLText[m_AddLetter];
-				m_Text += m_ALLText[m_AddLetter+1];
+				if (m_AddLetter + 1 <= m_TextSize)
+				{
+					m_Text += m_ALLText[m_AddLetter + 1];
+				}
 				m_AddLetter+=2;
 			}
 			m_AddCount = 0;
@@ -125,14 +128,15 @@ void CText::Draw()
 //=============================================================================
 // 生成関数
 //=============================================================================
-CText *CText::Create(Type talkType, char * Text)
+CText *CText::Create(Type talkType,int DeleteTime, int SpeedText, char * Text)
 {
 	CText * pObject = nullptr;
-	pObject = new CText(2);
+	pObject = new CText(3);
 
 	if (pObject != nullptr)
 	{
 		pObject->Init();
+
 		switch (talkType)
 		{
 		case CText::GON:
@@ -149,8 +153,8 @@ CText *CText::Create(Type talkType, char * Text)
 		pObject->SetPos(D3DXVECTOR3(640.0f, 500.0f, 0.0f));
 		pObject->SetSize(D3DXVECTOR3(640.0f, 200.0f, 0.0f));
 
-		pObject->Releasetimer(120);
-		pObject->TextLetter(Text);
+		pObject->Releasetimer(DeleteTime);
+		pObject->TextLetter(Text, SpeedText);
 	}
 
 	return pObject;
@@ -170,10 +174,10 @@ void CText::Releasetimer(int nTimar)
 //=============================================================================
 // けすまでの時間設定関数
 //=============================================================================
-void CText::TextLetter(char * Text)
+void CText::TextLetter(char * Text, int SpeedText)
 {
 	m_ALLText = Text;
 	m_TextSize = m_ALLText.size();
-	m_Addnumber = m_DesTimarMax / m_TextSize;
+	m_Addnumber = SpeedText;
 	m_AddLetter = 0;
 }

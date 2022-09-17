@@ -135,8 +135,6 @@ void CGame::Update(void)
 		CBg::SetKillMove(D3DXVECTOR3(0.05f, 0.0f, 0.0f));
 	}
 
-
-
 	CInput *CInputpInput = CInput::GetKey();
 
 	
@@ -149,7 +147,7 @@ void CGame::Update(void)
 	}
 	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
-		CText::Create(CText::GON, "ƒ‚ƒ“ƒnƒ“‚½‚Ì‚µ‚¢...");
+		CText::Create(CText::GON,120, 10, "ƒ‚ƒ“ƒnƒ“‚½‚Ì‚µ‚¢...");
 		//CDangerousManager::BossPopStaging();
 		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		return;

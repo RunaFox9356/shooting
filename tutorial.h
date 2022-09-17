@@ -42,9 +42,13 @@ private:
 	CEnemy * m_Enemy[10];
 	CBg *m_Bg[4];
 	int m_Magic;
+	int m_NextTaskCount;//次のタスクまでのカウント
 	CScore*pScore;
 	CLife*pLife;
-
+	bool m_MoveClear;
+	bool m_AttackClear;
+	bool m_MagicClear;
+	
 };
 
 #endif

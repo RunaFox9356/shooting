@@ -57,6 +57,7 @@ const char* CTexture::s_FileName[] =
 	"Data/TEXTURE/alphabet_ucase.png",
 	"Data/TEXTURE/cover.png",
 	"Data/TEXTURE/tutoria.png",
+	"Data/TEXTURE/pause004.png",
 	"Data/TEXTURE/pause000.png",
 	"Data/TEXTURE/pause001.png",
 	"Data/TEXTURE/pause002.png",

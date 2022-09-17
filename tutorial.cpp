@@ -25,6 +25,7 @@
 #include "score.h"
 #include "life.h"
 
+#include "text.h"
 CMagicBox* CTutorial::m_MagicBox;	
 CParticleManager* CTutorial::m_PaticleManager;
 CPlayer * CTutorial::m_Player;
@@ -48,6 +49,10 @@ CTutorial::~CTutorial()
 //========================
 HRESULT CTutorial::Init(void)
 {
+	m_MoveClear = false;
+	m_AttackClear = false;
+	m_MagicClear = false;
+	m_NextTaskCount = 0;
 	D3DXVECTOR3 BGPos;
 	BGPos.x = 0.0f;
 	BGPos.y = 0.0f;
@@ -72,10 +77,13 @@ HRESULT CTutorial::Init(void)
 		return E_FAIL;
 	}
 
-	CScore* pCScore = CScore::Create(D3DXVECTOR3(900.0f, 100.0f, 0.0f));
-	pCScore->Set(0);
+	pScore = CScore::Create(D3DXVECTOR3(500.0f, 30.0f, 0.0f));
+	pScore->Set(0);
 
-	CLife::Create(D3DXVECTOR3(300.0f, 100.0f, 0.0f),300);
+	pLife = CLife::Create(D3DXVECTOR3(350.0f, 100.0f, 0.0f), 300);
+
+
+	CText::Create(CText::GON, 300,10, "まずはイドウをしてみよう！");
 
 	m_MagicBox = CMagicBox::Create(D3DXVECTOR3(150.0f, 620.0f, 0.0f));
 
@@ -123,7 +131,7 @@ void CTutorial::Uninit(void)
 //========================
 void CTutorial::Update(void)
 {
-	
+	m_NextTaskCount++;
 	m_PaticleManager->Update();
 
 	CInput *CInputpInput = CInput::GetKey();
@@ -143,9 +151,34 @@ void CTutorial::Update(void)
 			{
 				m_Magic = 2;
 			}
-			
 		}
 
+	}
+	if (m_NextTaskCount >= 300)
+	{
+		if (!m_MoveClear
+			&& (CInputpInput->Press(CInput::KEY_UP)
+				|| CInputpInput->Press(CInput::KEY_DOWN)
+				|| CInputpInput->Press(CInput::KEY_RIGHT)
+				|| CInputpInput->Press(CInput::KEY_LEFT))
+			)
+		{
+			CText::Create(CText::GON, 300,10, "ナイス！！うまいぜ！\nつぎはショットしてみよう！");
+			m_MoveClear = true;
+			m_NextTaskCount = 0;
+		}
+		else if (!m_AttackClear && CInputpInput->Press(CInput::KEY_SHOT))
+		{
+			CText::Create(CText::GON, 300,10, "ナイス！！うまいぜ！\nつぎはマホウをハツドウしてみよう！");
+			m_AttackClear = true;
+			m_NextTaskCount = 0;
+		}
+		else if (!m_MagicClear && CInputpInput->Trigger(CInput::KEY_DECISION))
+		{
+			CText::Create(CText::GON, 500,10, "ナイス！！うまいぜ！\nさあこれでチュートリアルはおわり！\nぶっとばしにいこう！");
+			m_MagicClear = true;
+			m_NextTaskCount = 0;
+		}
 	}
 #ifdef _DEBUG
 
