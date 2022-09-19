@@ -22,6 +22,7 @@
 #include "bossbar.h"
 #include "manager.h"
 #include "fade.h"
+#include "sound.h"
 
 //------------------------------------
 // コンストラクタ
@@ -65,6 +66,10 @@ HRESULT CBoss::Init(void)
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		"Data/system/enemy/kuma.txt");
 
+	CManager::GetSound()->Stop(CSound::LABEL_BGM_GAME);
+	CManager::GetSound()->Play(CSound::LABEL_BGM_BOSS1);
+	CManager::GetSound()->Play(CSound::LABEL_SE_KIKEN);
+
 	m_rot.y += -(D3DX_PI*0.5f);
 	return S_OK;
 }
@@ -90,6 +95,8 @@ void CBoss::Update(void)
 	Move();
 
 	m_motionType = CObject3d::ANIME_ATTACK;
+	
+
 }
 
 //------------------------------------
@@ -132,16 +139,21 @@ void CBoss::Move(void)
 			m_keepCount++;
 			if (m_keepCount >= 60)
 			{
+				
 				m_Stop = false;
 				m_Go = true;
 				m_move.x = -5.0f;
 				m_Speed = 0.0f;
 				m_PatternCount++;
+
 				if (m_PatternCount >= 3)
 				{
 					m_PatternCount = 0;
 					m_PatternMode = POP;
-
+				}
+				else
+				{
+					CManager::GetSound()->Play(CSound::LABEL_SE_RAION);
 				}
 			}
 		}
@@ -186,6 +198,7 @@ void CBoss::Move(void)
 
 		if (m_keepCount >= 150)
 		{
+			CManager::GetSound()->Play(CSound::LABEL_SE_TAIKO);
 			m_keepCount = 0;
 			for (int j = 0; j < 2; j++)
 			{

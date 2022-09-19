@@ -28,15 +28,27 @@ public:
 		LABEL_NONE = -1,
 		LABEL_BGM_TITLE = 0,	// タイトル
 		LABEL_BGM_GAME,
+		LABEL_BGM_BOSS1,
+		LABEL_BGM_BOSS2,
 		LABEL_BGM_RESET,
-		LABEL_SE_HIT,			// 決定音
-		LABEL_SE_SHOT,			// 決定音
-		LABEL_SE_FLARE,			// 決定音
-		LABEL_SE_ICE,			// 決定音
-		LABEL_SE_STORM,			// 決定音
-		LABEL_SE_SUN,			// 決定音
-		LABEL_SE_MOVE,			// 決定音
-		LABEL_MAX,
+		LABEL_BGM_TUTORIAL,
+		LABEL_BGM_RANKING,
+		LABEL_SE_HIT,			// HIT
+		LABEL_SE_SHOT,			// SHOT
+		LABEL_SE_FLARE,			// FLARE
+		LABEL_SE_ICE,			// ICE
+		LABEL_SE_STORM,			// 
+		LABEL_SE_SUN,			// 
+		LABEL_SE_MOVE,			// 
+		LABEL_SE_NO,			// キャンセル
+		LABEL_SE_ON,			// 決定
+		LABEL_SE_KIKEN,			// 
+		LABEL_SE_TAIKO,				// 
+		LABEL_SE_RAION,				// 
+		LABEL_SE_ROBO,				
+		LABEL_SE_BOOTH,				// 
+		LABEL_SE_YOBI,				// 
+		LABEL_MAX,	
 	};
 
 	struct SParam

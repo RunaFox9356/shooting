@@ -298,7 +298,7 @@ void CTitle::Update(void)
 
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
-	
+		CManager::GetSound()->Play(CSound::LABEL_SE_ON);
 		if (ModeSelect)
 		{//一回押された	
 			switch (NextMode)
@@ -344,6 +344,7 @@ void CTitle::Update(void)
 	{
 		if (CInputpInput->Trigger(CInput::KEY_UP))
 		{
+			CManager::GetSound()->Play(CSound::LABEL_SE_NO);
 			//モード選択
 			m_object2d[NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 
@@ -360,6 +361,7 @@ void CTitle::Update(void)
 		}
 		if (CInputpInput->Trigger(CInput::KEY_DOWN))
 		{
+			CManager::GetSound()->Play(CSound::LABEL_SE_NO);
 			//モード選択
 			m_object2d[NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 

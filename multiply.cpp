@@ -126,7 +126,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		Fastratio[nCntScore]->SetSize(D3DXVECTOR3(30.0f, 30.0f, 0.0f));
 		
 		//数値が０かつ減少中なら０を消す
-		if (aPosTexU[nCntScore] == 0 && m_Decrease == true)
+		/*if (aPosTexU[nCntScore] == 0 && m_Decrease == true)
 		{
 			if (nCntScore != nDigits)
 			{
@@ -136,10 +136,10 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		}
 		else
 		{
-			Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
-		}
+			
+		}*/
 		
-		
+		Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		
 		// 数字のテクスチャの位置を調整
 		Fastratio[nCntScore]->SetTex(PositionVec4(
@@ -223,7 +223,7 @@ void CMultiply::Update()
 				m_Rate = 0;
 			}
 			
-			//CMultiply::FastSet(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f));
+			CMultiply::FastSet(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f));
 		}
 	}
 

@@ -23,6 +23,8 @@
 #include "manager.h"
 #include "fade.h"
 
+#include "sound.h"
+
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -67,6 +69,9 @@ HRESULT CBossCraziness::Init(void)
 		D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		"Data/system/enemy/Kumakai.txt");
 
+	CManager::GetSound()->Stop(CSound::LABEL_BGM_BOSS1);
+	CManager::GetSound()->Play(CSound::LABEL_BGM_BOSS2);
+	CManager::GetSound()->Play(CSound::LABEL_SE_ROBO);
 	m_rot.y += (D3DX_PI*0.5f);
 	return S_OK;
 }
@@ -135,6 +140,7 @@ void CBossCraziness::Move(void)
 			m_keepCount++;
 			if (m_keepCount >= 60)
 			{
+				
 				m_Stop = false;
 				m_Go = true;
 				m_move.x = -5.0f;
@@ -145,6 +151,10 @@ void CBossCraziness::Move(void)
 					m_PatternCount = 0;
 					m_PatternMode = POP;
 
+				}
+				else
+				{
+					CManager::GetSound()->Play(CSound::LABEL_SE_BOOTH);
 				}
 			}
 		}
@@ -158,18 +168,17 @@ void CBossCraziness::Move(void)
 			m_move.x = -50.0f *  hmd::easeInSine(m_Speed);
 		}
 
-
 		if (m_pos.y < -SCREEN_HEIGHT / 2)
 		{
 			m_pos.y = SCREEN_HEIGHT / 2;
-			m_move.y *= -1.0f;
+		
 
 		}
 
 		if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
 		{
-			m_pos.y = -SCREEN_HEIGHT / 2 - 250.0f;
-			m_move.y *= -1.0f;
+			m_pos.y = -SCREEN_HEIGHT / 2 + 250.0f;
+		
 
 		}
 		if (m_pos.x <= -SCREEN_WIDTH / 2)
@@ -189,6 +198,8 @@ void CBossCraziness::Move(void)
 
 		if (m_keepCount >= 150)
 		{
+			CManager::GetSound()->Play(CSound::LABEL_SE_YOBI);
+			
 			m_keepCount = 0;
 			for (int j = 0; j < 2; j++)
 			{
@@ -234,6 +245,7 @@ void CBossCraziness::Move(void)
 
 		if (m_pos.x <= -SCREEN_WIDTH / 2)
 		{
+			CManager::GetSound()->Play(CSound::LABEL_SE_BOOTH);
 			m_pos.x = SCREEN_WIDTH;
 			m_pos.y += SCREEN_HEIGHT / 5;
 			m_move.x = -5.0f;
@@ -244,6 +256,21 @@ void CBossCraziness::Move(void)
 				m_PatternMode = MOVE;
 			}
 		}
+
+		if (m_pos.y < -SCREEN_HEIGHT / 2)
+		{
+			m_pos.y = SCREEN_HEIGHT / 2;
+			m_move.y *= -1.0f;
+
+		}
+
+		if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
+		{
+			m_pos.y = -SCREEN_HEIGHT / 2 + 250.0f;
+			m_move.y *= -1.0f;
+
+		}
+
 	}
 }
 

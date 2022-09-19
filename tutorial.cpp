@@ -91,6 +91,8 @@ HRESULT CTutorial::Init(void)
 	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_ICE);
 	m_MagicBox->CMagicBox::Magicplay(CTexture::TEXTURE_FIRE);
 
+	CManager::GetSound()->Play(CSound::LABEL_BGM_TUTORIAL);
+
 	return S_OK;
 
 }
@@ -122,7 +124,7 @@ void CTutorial::Uninit(void)
 
 	}
 
-
+	CManager::GetSound()->Stop();
 	CModelManager::ReleaseAll();
 }
 
@@ -163,7 +165,7 @@ void CTutorial::Update(void)
 				|| CInputpInput->Press(CInput::KEY_LEFT))
 			)
 		{
-			CText::Create(CText::GON, 300,10, "ナイス！！うまいぜ！\nつぎはショットしてみよう！");
+			CText::Create(CText::GON, 300,10, "ナイス！！うまいぜ！\nタマをうってみよう！");
 			m_MoveClear = true;
 			m_NextTaskCount = 0;
 		}

@@ -26,6 +26,8 @@
 
 #include <thread>
 
+#include "sound.h"
+
 #pragma comment(lib, "iphlpapi.lib")
 
 
@@ -86,6 +88,7 @@ CRanking::~CRanking()
 //========================
 inline HRESULT CRanking::Init(void)
 {
+	CManager::GetSound()->Play(CSound::LABEL_BGM_RANKING);
 	
 	CRanking::OnlineSetScore();
 	
@@ -148,7 +151,7 @@ inline HRESULT CRanking::Init(void)
 //========================
 void CRanking::Uninit(void)
 {
-	
+	CManager::GetSound()->Stop();
 }
 
 //========================
