@@ -32,11 +32,12 @@ public:
 	void Uninit();
 	void Update();
 	void Draw();
-	
+
+	static void APIUp();
 	static void GoScore();
 	static void OnlineSetScore();
 	static void SetScore(int nScore);
-	static void GerScore();
+	static void GetScore();
 	static void SetName();
 	static void SetPlayNeme(const std::string PlayName) { m_PlayName = PlayName; };
 	static std::string GetMACAddr();
@@ -54,6 +55,8 @@ private:
 
 	D3DXVECTOR3 m_NemePos;
 	int m_NowPlay;
+
+	bool OnrankingSet;
 };
 
 

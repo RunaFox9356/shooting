@@ -24,6 +24,8 @@
 #include <iphlpapi.h>
 #include <string>
 
+#include <thread>
+
 #pragma comment(lib, "iphlpapi.lib")
 
 
@@ -40,7 +42,9 @@ void OnLoginGet(const LoginResult& , void* )
 {
 	printf("Congratulations, you made your first successful API call!\n");
 	finished = true;
-	CRanking::GerScore();
+	CRanking::GetScore();
+
+	
 	Sleep(1000);
 }
 
@@ -48,8 +52,10 @@ void OnLoginSet(const LoginResult& , void* )
 {
 	printf("Congratulations, you made your first successful API call!\n");
 	finished = true;
+	
 	CRanking::GoScore();
 	CRanking::SetName();
+	
 }
 
 void OnLoginFail(const PlayFabError& error, void*)
@@ -80,7 +86,9 @@ CRanking::~CRanking()
 //========================
 inline HRESULT CRanking::Init(void)
 {
+	
 	CRanking::OnlineSetScore();
+	
 
 	m_NowPlay = 0;
 	m_NemePos = D3DXVECTOR3(30.0f, 100.0f, 0.0f);
@@ -95,6 +103,12 @@ inline HRESULT CRanking::Init(void)
 	m_object2d[1]->SetTexture(CTexture::TEXTURE_RANKIN);
 	m_object2d[1]->SetSize(D3DXVECTOR3(100.0f, 300.0f, 0.0f));
 	m_object2d[1]->SetPos(D3DXVECTOR3(CManager::Pos.x - 120.0f, 350.0f, 0.0f));
+
+	m_object2d[2] = CObject2d::Create();
+	m_object2d[2]->SetTexture(CTexture::TEXTURE_RANKINTITLEOFF);
+	m_object2d[2]->SetSize(D3DXVECTOR3(200.0f, 100.0f, 0.0f));
+	m_object2d[2]->SetPos(D3DXVECTOR3(200.0f, 150.0f, 0.0f));
+
 
 	finished = false;
 
@@ -116,10 +130,15 @@ inline HRESULT CRanking::Init(void)
 	request.CreateAccount = true;
 	request.CustomId = GetMACAddr();
 
+
+
+
 	PlayFabClientAPI::LoginWithCustomID(request, OnLoginGet, OnLoginFail);
 
-	while (PlayFabClientAPI::Update() != 0)
-		Sleep(1);
+	
+	std::thread Up(CRanking::APIUp);
+	//Ø‚è—£‚·
+	Up.detach();
 
 	return E_NOTIMPL;
 }
@@ -140,6 +159,10 @@ void CRanking::Update(void)
 
 	CInput *CInputpInput = CInput::GetKey();
 
+	if (finished)
+	{
+		m_object2d[2]->SetTexture(CTexture::TEXTURE_RANKINTITLEON);
+	}
 	
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
@@ -189,7 +212,6 @@ void CRanking::GoScore()
 //========================
 void CRanking::OnlineSetScore()
 {
-	finished = false;
 
 	PlayFabSettings::staticSettings->titleId = ("323A0");
 
@@ -204,9 +226,9 @@ void CRanking::OnlineSetScore()
 }
 
 //========================
-// GerScore
+// GetScore
 //========================
-void CRanking::GerScore()
+void CRanking::GetScore()
 {
 	GetLeaderboardRequest req;
 
@@ -225,6 +247,7 @@ void CRanking::GerScore()
 			}
 		}
 	});
+	finished = true;
 }
 
 //========================
@@ -291,4 +314,11 @@ std::string CRanking::GetMACAddr()
 void CRanking::SetScore(int nScore)
 {
 	m_score = nScore;
+}
+
+void CRanking::APIUp()
+{
+	Sleep(2000);
+	while (PlayFabClientAPI::Update() != 0)
+		Sleep(1);
 }

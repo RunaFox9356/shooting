@@ -77,6 +77,7 @@ void  CScore::Set(int nScore)
 
 	m_nScore = nScore;
 
+
 	int nModScore = m_nScore;
 
 	for (int i = 7; i >= 0; i--)
@@ -88,6 +89,16 @@ void  CScore::Set(int nScore)
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (nCntScore = 0; nCntScore < MAX_SCORE; nCntScore++)
 	{
+		//if (aPosTexU[nCntScore] != 0)
+		//{
+		//	m_pNumber[nCntScore]->SetSpeed(5.0f);
+		//	m_pNumber[nCntScore]->SetNumber(aPosTexU[nCntScore]);
+		//}
+		//else
+		//{
+		//	m_pNumber[nCntScore]->SetSpeed(0.0f);
+		//	m_pNumber[nCntScore]->SetNumber(0);
+		//}
 		m_pNumber[nCntScore]->SetTex(PositionVec4(
 	 	0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
 	}

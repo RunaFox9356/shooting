@@ -28,6 +28,8 @@ CNumber::~CNumber()
 //=============================================================================
 HRESULT CNumber::Init()
 {
+	m_MyNumber = 0;
+	m_Speed = 0.0f;
 	CObject2d::Init();
 	CObject2d::SetTexture(CTexture::TEXTURE_SCORE);
 	col = PositionVec4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -70,6 +72,11 @@ void CNumber::Update()
 			Release();
 		}
 	}
+
+	//m_Speed += (0.0f - m_Speed)* 0.5f;//（目的の値-現在の値）＊減衰係数
+
+	//SetTex(PositionVec4(
+	//	0.1f*m_MyNumber, 0.1f*m_MyNumber + 0.1f, 0.0f+ m_Speed, 1.0f+ m_Speed));
 
 }
 

@@ -1,6 +1,6 @@
 //============================
 //
-// NUMBER
+// NUME
 // Author:hamada ryuuga
 //
 //============================
@@ -37,7 +37,7 @@ HRESULT CName::Init()
 	m_DivisionY = 4;
 	m_DivisionMAX = m_DivisionX*m_DivisionY;
 	m_Type = A;
-
+	SetCollar(PositionVec4(0.8f, 0.0f, 0.0f, 1.0f));
 	int X = m_Type%m_DivisionX;
 	int Y = m_Type/m_DivisionX;
 	float DivisionX = (1.0f / m_DivisionX);
@@ -83,7 +83,37 @@ void CName::Update()
 			{
 				nextType = 0;
 			}
+		
+			switch (nextType/4)
+			{
+			case 0:
+				SetCollar(PositionVec4(0.8f, 0.0f, 0.0f, 1.0f));
+				break;
+			case 1:
+				SetCollar(PositionVec4(0.8f, 0.0f, 0.8f, 1.0f));
+				break;
+			case 2:
+				SetCollar(PositionVec4(0.0f, 0.0f, 0.8f, 1.0f));
+				
+				break;
+			case 3:
+				SetCollar(PositionVec4(0.0f, 0.8f, 0.8f, 1.0f));
+				break;
+			case 4:
+				SetCollar(PositionVec4(0.0f, 0.8f, 0.0f, 1.0f));
+				break;
+			case 5:
+				SetCollar(PositionVec4(0.0f, 0.8f, 0.8f, 1.0f));
+				break;
+			case 6:
+				SetCollar(PositionVec4(0.8f, 0.8f, 0.0f, 1.0f));
+				break;
+			default:
+				SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+				break;
+			}
 			SetAlphabet((ALPHABET)nextType);
+
 		}
 		if (CInputpInput->Trigger(CInput::KEY_LEFT))
 		{
@@ -91,6 +121,34 @@ void CName::Update()
 			if (nextType <= -1)
 			{
 				nextType = 26;
+			}
+			switch (nextType / 4)
+			{
+			case 0:
+				SetCollar(PositionVec4(0.8f, 0.0f, 0.0f, 1.0f));
+				break;
+			case 1:
+				SetCollar(PositionVec4(0.8f, 0.0f, 0.8f, 1.0f));
+				break;
+			case 2:
+				SetCollar(PositionVec4(0.0f, 0.0f, 0.8f, 1.0f));
+
+				break;
+			case 3:
+				SetCollar(PositionVec4(0.0f, 0.8f, 0.8f, 1.0f));
+				break;
+			case 4:
+				SetCollar(PositionVec4(0.0f, 0.8f, 0.0f, 1.0f));
+				break;
+			case 5:
+				SetCollar(PositionVec4(0.0f, 0.8f, 0.8f, 1.0f));
+				break;
+			case 6:
+				SetCollar(PositionVec4(0.8f, 0.8f, 0.0f, 1.0f));
+				break;
+			default:
+				SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+				break;
 			}
 			SetAlphabet((ALPHABET)nextType);
 		}
@@ -129,6 +187,7 @@ CName *CName::Create()
 	if (pObject != nullptr)
 	{
 		pObject->Init();
+
 		pObject->SetTexture(CTexture::TEXTURE_ALPHABET);
 	}
 
@@ -142,6 +201,35 @@ void CName::SetAlphabet(const ALPHABET Alphabet)
 {
 	m_Type = Alphabet;
 
+	switch (m_Type / 4)
+	{
+	case 0:
+		SetCollar(PositionVec4(0.8f, 0.0f, 0.0f, 1.0f));
+		break;
+	case 1:
+		SetCollar(PositionVec4(0.8f, 0.0f, 0.8f, 1.0f));
+		break;
+	case 2:
+		SetCollar(PositionVec4(0.0f, 0.0f, 0.8f, 1.0f));
+
+		break;
+	case 3:
+		SetCollar(PositionVec4(0.0f, 0.8f, 0.8f, 1.0f));
+		break;
+	case 4:
+		SetCollar(PositionVec4(0.0f, 0.8f, 0.0f, 1.0f));
+		break;
+	case 5:
+		SetCollar(PositionVec4(0.0f, 0.8f, 0.8f, 1.0f));
+		break;
+	case 6:
+		SetCollar(PositionVec4(0.8f, 0.8f, 0.0f, 1.0f));
+		break;
+	default:
+		SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		break;
+
+	}
 	int X = m_Type%m_DivisionX;
 	int Y = m_Type / m_DivisionX;
 	float DivisionX = (1.0f / m_DivisionX);

@@ -59,6 +59,10 @@ HRESULT CNemeSet::Init(void)
 	m_object2d[0]->SetSize(CManager::Pos);
 	m_object2d[0]->SetPos(CManager::Pos);
 
+	m_object2d[1] = CObject2d::Create();
+	m_object2d[1]->SetTexture(CTexture::TEXTURE_NAMETITLE);
+	m_object2d[1]->SetSize(D3DXVECTOR3(500.0f, 175.0f, 0.0f));
+	m_object2d[1]->SetPos(D3DXVECTOR3(CManager::Pos.x, 575.0f, 0.0f));
 
 	m_ListName[0] = CName::Create();
 	m_ListName[0]->SetSize(D3DXVECTOR3(50.0f, 50.0f, 0.0f));
@@ -84,30 +88,6 @@ HRESULT CNemeSet::Init(void)
 void CNemeSet::Uninit(void)
 {
 
-	if (m_object2d[0] != nullptr)
-	{
-		m_object2d[0]->Uninit();
-		m_object2d[0] = nullptr;
-	}
-
-	for (int i = 0; i < 3; i++)
-	{
-		if (m_ListName[i] != nullptr)
-		{
-
-			m_ListName[i]->Uninit();
-			m_ListName[i] = nullptr;
-		}
-	}
-	for (int i = 0; i < 10; i++)
-	{
-		if (m_PlayNameSet[i] != nullptr)
-		{
-
-			m_PlayNameSet[i]->Uninit();
-			m_PlayNameSet[i] = nullptr;
-		}
-	}
 
 }
 

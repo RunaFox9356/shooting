@@ -52,8 +52,10 @@ const char* CTexture::s_FileName[] =
 	"Data/TEXTURE/end.png",			
 	"Data/TEXTURE/Getrotation.png",	//ここからリザルト
 	"Data/TEXTURE/siro.jpg",
-	"Data/TEXTURE/wallpaper_00405.jpg",
+	"Data/TEXTURE/wallpaper_00405.jpg",//ここからランキング
 	"Data/TEXTURE/ranking_rank.png",
+	"Data/TEXTURE/ranking000.png",
+	"Data/TEXTURE/ranking001.png",
 	"Data/TEXTURE/alphabet_ucase.png",
 	"Data/TEXTURE/cover.png",
 	"Data/TEXTURE/tutoria.png",
@@ -65,7 +67,8 @@ const char* CTexture::s_FileName[] =
 	"Data/TEXTURE/Bosscover.png",
 	"Data/TEXTURE/controller.png",
 	"Data/TEXTURE/gonText.png",
-	"Data/TEXTURE/kumaText.png"
+	"Data/TEXTURE/kumaText.png",
+	"Data/TEXTURE/NameSet000.png"
 };
 
 static_assert(sizeof(CTexture::s_FileName) / sizeof(CTexture::s_FileName[0]) == CTexture::TEXTURE_MAX, "aho");

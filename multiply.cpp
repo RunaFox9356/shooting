@@ -138,10 +138,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		{
 			Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
-		if (aPosTexU[nCntScore] == 9 && m_Decrease == true)
-		{
-			Fastratio[nCntScore+1]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
-		}
+		
 		
 		
 		// 数字のテクスチャの位置を調整

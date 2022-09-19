@@ -25,12 +25,15 @@ public:
 	void Draw() override;
 	static CNumber* Create();
 	
-	
+	void SetSpeed(float Speed) { m_Speed = Speed; }
+	void SetNumber(int Number) { m_MyNumber = Number; }
 	void Releasetimer(int nTimar);
 private:
 	PositionVec4 col;
+	float m_Speed;
 	int m_DesTimarMax;
 	int m_DesTimar;
+	int m_MyNumber;
 	bool isRelease;
 	
 };

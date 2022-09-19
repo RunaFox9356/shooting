@@ -26,13 +26,14 @@ private:
 
 	void RankingNeme();
 
-	CObject2d *m_object2d[1];
+	CObject2d *m_object2d[2];
 
 	static std::string m_PlayName;
 
 	CName*m_ListName[3];
 	CName*m_PlayNameSet[10];
 
+	D3DXVECTOR3 Collar;
 	D3DXVECTOR3 m_NemePos;
 
 	int m_NowPlay;
