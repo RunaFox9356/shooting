@@ -27,6 +27,8 @@ public:
 	
 	void SetSpeed(float Speed) { m_Speed = Speed; }
 	void SetNumber(int Number) { m_MyNumber = Number; }
+	void SetMove(bool Move) { m_Move = Move; }
+	
 	void Releasetimer(int nTimar);
 private:
 	PositionVec4 col;
@@ -34,7 +36,8 @@ private:
 	int m_DesTimarMax;
 	int m_DesTimar;
 	int m_MyNumber;
-	bool isRelease;
+	bool m_isRelease;
+	bool m_Move;
 	
 };
 

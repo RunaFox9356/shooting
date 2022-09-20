@@ -37,7 +37,8 @@ using namespace ClientModels;
 bool finished = false;
 
 CScore *CRanking::m_Ranking[MAX_RANK];
-int CRanking::m_score;
+int CRanking::m_Score;
+bool CRanking::m_Stop;
 std::string  CRanking::m_PlayName;
 
 void OnLoginGet(const LoginResult& , void* )
@@ -88,6 +89,15 @@ CRanking::~CRanking()
 //========================
 inline HRESULT CRanking::Init(void)
 {
+
+	D3DXVECTOR3 pos = D3DXVECTOR3(CManager::Pos.x, 100.0f, 0.0f);
+	for (int i = 0; i < MAX_RANK - 1; i++)
+	{
+		m_Ranking[i] = CScore::Create(pos);
+		m_Ranking[i]->Set(0);
+		pos.y += 100.0f;
+	}
+
 	CManager::GetSound()->Play(CSound::LABEL_BGM_RANKING);
 	
 	CRanking::OnlineSetScore();
@@ -97,44 +107,35 @@ inline HRESULT CRanking::Init(void)
 	m_NemePos = D3DXVECTOR3(30.0f, 100.0f, 0.0f);
 
 
-	m_object2d[0] = CObject2d::Create();
-	m_object2d[0]->SetTexture(CTexture::TEXTURE_RANKINBG);
-	m_object2d[0]->SetSize(CManager::Pos);
-	m_object2d[0]->SetPos(CManager::Pos);
+	m_Object2d[0] = CObject2d::Create();
+	m_Object2d[0]->SetTexture(CTexture::TEXTURE_RANKINBG);
+	m_Object2d[0]->SetSize(CManager::Pos);
+	m_Object2d[0]->SetPos(CManager::Pos);
 
-	m_object2d[1] = CObject2d::Create();
-	m_object2d[1]->SetTexture(CTexture::TEXTURE_RANKIN);
-	m_object2d[1]->SetSize(D3DXVECTOR3(100.0f, 300.0f, 0.0f));
-	m_object2d[1]->SetPos(D3DXVECTOR3(CManager::Pos.x - 120.0f, 350.0f, 0.0f));
+	m_Object2d[1] = CObject2d::Create();
+	m_Object2d[1]->SetTexture(CTexture::TEXTURE_RANKIN);
+	m_Object2d[1]->SetSize(D3DXVECTOR3(100.0f, 300.0f, 0.0f));
+	m_Object2d[1]->SetPos(D3DXVECTOR3(CManager::Pos.x - 120.0f, 350.0f, 0.0f));
 
-	m_object2d[2] = CObject2d::Create();
-	m_object2d[2]->SetTexture(CTexture::TEXTURE_RANKINTITLEOFF);
-	m_object2d[2]->SetSize(D3DXVECTOR3(200.0f, 100.0f, 0.0f));
-	m_object2d[2]->SetPos(D3DXVECTOR3(200.0f, 150.0f, 0.0f));
+	m_Object2d[2] = CObject2d::Create();
+	m_Object2d[2]->SetTexture(CTexture::TEXTURE_RANKINTITLEOFF);
+	m_Object2d[2]->SetSize(D3DXVECTOR3(200.0f, 100.0f, 0.0f));
+	m_Object2d[2]->SetPos(D3DXVECTOR3(200.0f, 150.0f, 0.0f));
 
 
 	finished = false;
-
+	m_Stop = false;
 	
-	D3DXVECTOR3 pos = D3DXVECTOR3(CManager::Pos.x, 100.0f, 0.0f);
-	for (int i = 0; i < MAX_RANK-1; i++)
-	{
-		m_Ranking[i] = CScore::Create(pos);
-		m_Ranking[i]->Set(0);
-		pos.y += 100.0f;
-	}
+	
 
 	m_Ranking[5] = CScore::Create(pos);
-	m_Ranking[5]->Set(m_score);
+	m_Ranking[5]->Set(m_Score);
 
 	PlayFabSettings::staticSettings->titleId = ("323A0");
 
 	LoginWithCustomIDRequest request;
 	request.CreateAccount = true;
 	request.CustomId = GetMACAddr();
-
-
-
 
 	PlayFabClientAPI::LoginWithCustomID(request, OnLoginGet, OnLoginFail);
 
@@ -152,6 +153,7 @@ inline HRESULT CRanking::Init(void)
 void CRanking::Uninit(void)
 {
 	CManager::GetSound()->Stop();
+	m_Stop = true;
 }
 
 //========================
@@ -164,13 +166,13 @@ void CRanking::Update(void)
 
 	if (finished)
 	{
-		m_object2d[2]->SetTexture(CTexture::TEXTURE_RANKINTITLEON);
+		m_Object2d[2]->SetTexture(CTexture::TEXTURE_RANKINTITLEON);
 	}
 	
 	if (CInputpInput->Trigger(CInput::KEY_DECISION))
 	{
 		//モードの設定
-		if (m_score == 0)
+		if (m_Score == 0)
 		{
 			CManager::GetFade()->NextMode(CManager::MODE_TITLE);
 			return;
@@ -199,7 +201,7 @@ void CRanking::GoScore()
 	StatisticUpdate statistic;
 	statistic.StatisticName = "ScoreFox";//ゲームマネージャーでランキング名のやつ
 
-	statistic.Value = m_score;//小さい順にするためにの-１かける
+	statistic.Value = m_Score;//小さい順にするためにの-１かける
 
 	req.Statistics.push_back(statistic);
 
@@ -224,8 +226,7 @@ void CRanking::OnlineSetScore()
 
 	PlayFabClientAPI::LoginWithCustomID(request, OnLoginSet, OnLoginFail);
 
-	while (PlayFabClientAPI::Update() != 0)
-		Sleep(1);
+	
 }
 
 //========================
@@ -316,12 +317,12 @@ std::string CRanking::GetMACAddr()
 //========================
 void CRanking::SetScore(int nScore)
 {
-	m_score = nScore;
+	m_Score = nScore;
 }
 
 void CRanking::APIUp()
 {
 	Sleep(2000);
-	while (PlayFabClientAPI::Update() != 0)
+	while (PlayFabClientAPI::Update() != 0 && !m_Stop)
 		Sleep(1);
 }

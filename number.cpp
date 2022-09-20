@@ -36,8 +36,9 @@ HRESULT CNumber::Init()
 
 	SetTex(PositionVec4(
 		0.0f, 0.1f, 0.0f, 1.0f));
-	isRelease = false;
+	m_isRelease = false;
 	m_DesTimar = 0;
+	m_Move = true;
 	return S_OK;
 }
 
@@ -57,7 +58,7 @@ void CNumber::Update()
 {
 	CObject2d::Update();
 
-	if (isRelease)
+	if (m_isRelease)
 	{
 		m_DesTimar--;
 
@@ -69,15 +70,17 @@ void CNumber::Update()
 
 		if (m_DesTimar <= 0)
 		{
-			Release();
+			Uninit();
+			return;
 		}
 	}
+	if (m_Move)
+	{
+		m_Speed += (0.0f - m_Speed)* 0.5f;//（目的の値-現在の値）＊減衰係数
 
-	//m_Speed += (0.0f - m_Speed)* 0.5f;//（目的の値-現在の値）＊減衰係数
-
-	//SetTex(PositionVec4(
-	//	0.1f*m_MyNumber, 0.1f*m_MyNumber + 0.1f, 0.0f+ m_Speed, 1.0f+ m_Speed));
-
+		SetTex(PositionVec4(
+			0.1f*m_MyNumber, 0.1f*m_MyNumber + 0.1f, 0.0f + m_Speed, 1.0f + m_Speed));
+	}
 }
 
 //=============================================================================
@@ -126,6 +129,6 @@ void CNumber::Releasetimer(int nTimar)
 {
 	m_DesTimar = nTimar;
 	m_DesTimarMax = m_DesTimar;
-	isRelease = true;
+	m_isRelease = true;
 }
 

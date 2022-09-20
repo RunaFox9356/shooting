@@ -8,7 +8,7 @@
 #include "manager.h"
 #include "number.h"
 
-CNumber* pNumber[MAX_SCORE] = {};
+
 int CScore::m_nScore;
 CScore::CScore()
 {
@@ -42,13 +42,10 @@ HRESULT CScore::Init()
 //===================
 void  CScore::Uninit(void)
 {
-	for (int i = 0; i < MAX_SCORE; i++)
+	for (int nCntScore = 0; nCntScore < MAX_SCORE; nCntScore++)
 	{
-		if (pNumber[i] != nullptr)
-		{
-			pNumber[i]->Uninit();
-			pNumber[i] = nullptr;
-		}
+		m_pNumber[nCntScore]->Uninit();
+		m_pNumber[nCntScore] = nullptr;
 	}
 
 }
@@ -89,16 +86,16 @@ void  CScore::Set(int nScore)
 	//頂点バッファをロックし頂点情報へのポインタを取得
 	for (nCntScore = 0; nCntScore < MAX_SCORE; nCntScore++)
 	{
-		//if (aPosTexU[nCntScore] != 0)
-		//{
-		//	m_pNumber[nCntScore]->SetSpeed(5.0f);
-		//	m_pNumber[nCntScore]->SetNumber(aPosTexU[nCntScore]);
-		//}
-		//else
-		//{
-		//	m_pNumber[nCntScore]->SetSpeed(0.0f);
-		//	m_pNumber[nCntScore]->SetNumber(0);
-		//}
+		if (aPosTexU[nCntScore] != 0)
+		{
+			m_pNumber[nCntScore]->SetSpeed(5.0f);
+			m_pNumber[nCntScore]->SetNumber(aPosTexU[nCntScore]);
+		}
+		else
+		{
+			m_pNumber[nCntScore]->SetSpeed(0.0f);
+			m_pNumber[nCntScore]->SetNumber(0);
+		}
 		m_pNumber[nCntScore]->SetTex(PositionVec4(
 	 	0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
 	}

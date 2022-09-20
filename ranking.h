@@ -44,11 +44,11 @@ public:
 
 private:
 
-	static int m_score;
+	static int m_Score;
 	static CScore *m_Ranking[MAX_RANK];
 	static std::string m_PlayName;
 
-	CObject2d *m_object2d[4];
+	CObject2d *m_Object2d[4];
 
 	CName*m_ListName[3];
 	CName*m_PlayNameSet[10];
@@ -56,7 +56,8 @@ private:
 	D3DXVECTOR3 m_NemePos;
 	int m_NowPlay;
 
-	bool OnrankingSet;
+	bool m_OnrankingSet;
+	static bool m_Stop;
 };
 
 

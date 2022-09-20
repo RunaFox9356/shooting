@@ -238,12 +238,12 @@ void  CEnemy::LoadEnemy(const char * pFdata)
 			Life = EnemyList[name]["LIFE"];
 			Type = EnemyList[name]["TYPE"];
 			
-			//CEnemy * Enemy = CEnemy::Create(Type);
-			//Enemy->SetUp(ENEMY); 
-			//Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-			//Enemy->SetPos(pos);
-			//Enemy->SetSize(size);
-			//Enemy->SetLife(10* (int)size.x);
+			CEnemy * Enemy = CEnemy::Create(Type);
+			Enemy->SetUp(ENEMY); 
+			Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
+			Enemy->SetPos(pos);
+			Enemy->SetSize(size);
+			Enemy->SetLife(10* (int)size.x);
 		}
 	}
 }

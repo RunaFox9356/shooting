@@ -44,7 +44,7 @@ private:
 	int m_AddCount;//文字が加算されるまでのカウント
 	int m_AddLetter;//何文字目入れるか指定
 
-	bool isRelease;
+	bool m_isRelease;
 
 	LPD3DXFONT m_pFont = nullptr;
 

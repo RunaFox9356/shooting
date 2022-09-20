@@ -50,10 +50,11 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 		ratio[nCntScore]->SetPos(ratiopos);
 		ratiopos += D3DXVECTOR3(50.0f, 0.0f, 0.0f);
 		ratio[nCntScore]->SetSize(D3DXVECTOR3(30.0f, 30.0f, 0.0f));
-	
-
+		ratio[nCntScore]->SetNumber(aPosTexU[nCntScore]);
+		ratio[nCntScore]->SetMove(false);
 		ratio[nCntScore]->SetTex(PositionVec4(
 			0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
+
 		if (extinction)
 		{
 			ratio[nCntScore]->Releasetimer(90);
@@ -96,6 +97,7 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		{//数字のデータをなかったらつくる
 			Fastratio[i] = CNumber::Create();
 			Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));	
+
 		}
 
 		aPosTexU[i] = 0;
@@ -126,24 +128,13 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		Fastratio[nCntScore]->SetSize(D3DXVECTOR3(30.0f, 30.0f, 0.0f));
 		
 		//数値が０かつ減少中なら０を消す
-		/*if (aPosTexU[nCntScore] == 0 && m_Decrease == true)
-		{
-			if (nCntScore != nDigits)
-			{
-				Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
-			}
-
-		}
-		else
-		{
-			
-		}*/
-		
+	
+		Fastratio[nCntScore]->SetNumber(aPosTexU[nCntScore]);
 		Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		
 		// 数字のテクスチャの位置を調整
-		Fastratio[nCntScore]->SetTex(PositionVec4(
-			0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
+		//Fastratio[nCntScore]->SetTex(PositionVec4(
+		//	0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
 
 	}
 	return nullptr;

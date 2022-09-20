@@ -313,7 +313,12 @@ void CObject3d::HitLife(int Damage)
 	OnHit();
 	if (Type != PLAYER)
 	{//PlayerˆÈŠO‚Ìˆ—
-		CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
+		if (m_drop % 3 == 0)
+		{//‰¹ŠÇ—
+			CManager::GetSound()->Stop(CSound::LABEL_SE_HIT);
+			CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
+		}
+		
 		if (m_Life <= 0)
 		{//LIFE‚ªs‚«‚½‚Æ‚«
 	
@@ -336,6 +341,7 @@ void CObject3d::HitLife(int Damage)
 			m_drop++;
 			if (m_drop >= CreateDrop)
 			{
+			
 				m_drop = 0;
 				CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
 			}
