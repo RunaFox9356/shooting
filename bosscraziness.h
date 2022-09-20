@@ -47,6 +47,8 @@ private:
 
 	int m_SamonEnemy;
 	int m_PatternCount;
+
+	int m_Sound;
 	D3DXVECTOR3 m_PopPos;
 	Pattern m_PatternMode;
 	CBossbar *m_Life;

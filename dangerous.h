@@ -37,7 +37,7 @@ class CDangerousManager : public CObject2d
 public:
 	static const int Max = 10;
 	static const int  BossPop = 480;
-	static CDangerousManager *Create(const D3DXVECTOR3 & pos, const int PopTime);
+	static CDangerousManager *Create(const D3DXVECTOR3 & pos, const int PopTime, const int m_DesTime);
 	static void BossPopStaging();
 
 private:
@@ -54,6 +54,7 @@ private:
 	D3DXVECTOR3 m_BackMove;
 	int m_PopTime;
 	int m_PopTimeCount;
+	int m_DesTime;
 	bool m_PopOn;
 
 };

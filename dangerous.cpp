@@ -86,7 +86,7 @@ void CDangerousManager::Update()
 			m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, a));	
 		}
 	}
-	if (m_PopTimeCount >= m_PopTime+300)
+	if (m_PopTimeCount >= m_PopTime+ m_DesTime)
 	{
 		SetMove(-m_BackMove);
 	}
@@ -102,7 +102,7 @@ void CDangerousManager::Draw()
 //------------------------------------
 // create
 //------------------------------------
-CDangerousManager *CDangerousManager::Create(const D3DXVECTOR3 & pos, const int PopTime)
+CDangerousManager *CDangerousManager::Create(const D3DXVECTOR3 & pos, const int PopTime,const int DesTime)
 {
 	CDangerousManager * pObject = nullptr;
 	pObject = new CDangerousManager(1);
@@ -112,6 +112,7 @@ CDangerousManager *CDangerousManager::Create(const D3DXVECTOR3 & pos, const int 
 		pObject->SetPos(pos);
 		pObject->Init();
 		pObject->m_PopTime = PopTime;
+		pObject->m_DesTime = DesTime;
 		pObject->SetMove(D3DXVECTOR3(520.0f, 0.0f, 0.0f));
 		pObject->m_BackMove = D3DXVECTOR3(520.0f, 0.0f, 0.0f);
 	}
@@ -123,11 +124,11 @@ CDangerousManager *CDangerousManager::Create(const D3DXVECTOR3 & pos, const int 
 //------------------------------------
 void CDangerousManager::BossPopStaging()
 {
-	CDangerousManager::Create(D3DXVECTOR3(0.0f, 125.0f, 0.0f),0);
+	CDangerousManager::Create(D3DXVECTOR3(0.0f, 125.0f, 0.0f),0,300);
 
-	CDangerousManager::Create(D3DXVECTOR3(0.0f, 370.0f, 0.0f),0);
+	CDangerousManager::Create(D3DXVECTOR3(0.0f, 370.0f, 0.0f),0, 300);
 
-	CDangerousManager::Create(D3DXVECTOR3(0.0f, 620.0f, 0.0f),0);
+	CDangerousManager::Create(D3DXVECTOR3(0.0f, 620.0f, 0.0f),0, 300);
 
 	CObject::SetBossPop(true);
 	CEnemy::SetBoss();

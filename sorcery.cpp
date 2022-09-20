@@ -312,16 +312,16 @@ void CSorcey::Collision()
 						switch (m_NouPlayer)
 						{
 						case CPlayer::NOW_FIRE:
-							pObject3d->HitLife(5);
+							pObject3d->HitLife(6);
 							break;
 						case CPlayer::NOW_ICE:
 							pObject3d->HitLife(5);
 							break;
 						case CPlayer::NOW_STORM:
-							pObject3d->HitLife(15);
+							pObject3d->HitLife(10);
 							break;
 						case CPlayer::NOW_SUN:
-							pObject3d->HitLife(3);
+							pObject3d->HitLife(6);
 							break;
 						default:
 							break;

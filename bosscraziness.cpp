@@ -24,6 +24,8 @@
 #include "fade.h"
 
 #include "sound.h"
+#include "utility.h"
+#include "dangerous.h"
 
 //------------------------------------
 // コンストラクタ
@@ -52,6 +54,7 @@ HRESULT CBossCraziness::Init(void)
 
 	m_PopPos = D3DXVECTOR3(SCREEN_WIDTH / 2, 150.0f, 0.0f);
 
+	m_Sound = 0;
 	m_Stop = false;
 	m_Go = false;
 	m_keepCount = 0;
@@ -127,11 +130,18 @@ CBossCraziness *CBossCraziness::Create()
 //------------------------------------
 void CBossCraziness::Move(void)
 {
+	D3DXVECTOR3 Pos = ScreenCastWorld(
+		&m_pos,			// スクリーン座標
+		D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
 	if (m_PatternMode == MOVE)
 	{
 		m_motionType = CObject3d::ANIME_RUN;
 		if (m_pos.x <= 300.0f && !m_Go)
 		{
+			if (m_PatternCount < 2)
+			{
+				CDangerousManager::Create(D3DXVECTOR3(0.0f, Pos.y - 150.0f, 0.0f), 0, 100);
+			}
 			m_Stop = true;
 			m_move.x = 0.5f;
 		}
@@ -150,7 +160,7 @@ void CBossCraziness::Move(void)
 				{
 					m_PatternCount = 0;
 					m_PatternMode = POP;
-
+					CManager::GetSound()->Play(CSound::LABEL_SE_YOBI);
 				}
 				else
 				{
@@ -171,8 +181,6 @@ void CBossCraziness::Move(void)
 		if (m_pos.y < -SCREEN_HEIGHT / 2)
 		{
 			m_pos.y = SCREEN_HEIGHT / 2;
-		
-
 		}
 
 		if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
@@ -195,10 +203,11 @@ void CBossCraziness::Move(void)
 	{
 		m_motionType = CObject3d::ANIME_ATTACK;
 		m_keepCount++;
+		
 
 		if (m_keepCount >= 150)
 		{
-			CManager::GetSound()->Play(CSound::LABEL_SE_YOBI);
+	
 			
 			m_keepCount = 0;
 			for (int j = 0; j < 2; j++)
@@ -216,10 +225,10 @@ void CBossCraziness::Move(void)
 				}
 				for (int i = 0; i < 5; i++)
 				{
-					CEnemy * Enemy = CEnemy::Create(1);
+					CEnemy * Enemy = CEnemy::Create(0);
 					Enemy->SetUp(ENEMY);
 					Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
-					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*80.0f), m_PopPos.y - 50.0f, 0.0f));
+					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*80.0f), m_PopPos.y, 0.0f));
 					Enemy->SetSize(Size);
 					Enemy->SetLife(10);
 				}
@@ -235,7 +244,7 @@ void CBossCraziness::Move(void)
 	}
 	if (m_PatternMode == RUSH)
 	{
-
+		
 		m_Speed += 0.05f;
 		if (m_Speed >= 1.0f)
 		{
@@ -245,6 +254,7 @@ void CBossCraziness::Move(void)
 
 		if (m_pos.x <= -SCREEN_WIDTH / 2)
 		{
+		
 			CManager::GetSound()->Play(CSound::LABEL_SE_BOOTH);
 			m_pos.x = SCREEN_WIDTH;
 			m_pos.y += SCREEN_HEIGHT / 5;
@@ -254,6 +264,10 @@ void CBossCraziness::Move(void)
 			{
 				m_RushCount = 0;
 				m_PatternMode = MOVE;
+			}
+			else
+			{
+				CDangerousManager::Create(D3DXVECTOR3(0.0f, Pos.y - 150.0f, 0.0f), 0, 100);
 			}
 		}
 
@@ -283,6 +297,14 @@ void CBossCraziness::OnHit()
 	int Damage = m_MaxLife - GetLife();
 	m_MaxLife = GetLife();
 	m_Life->SetDamage(Damage);
+
+	m_Sound++;
+	if (m_Sound >= 10)
+	{
+		m_Sound = 0;
+		CManager::GetSound()->Play(CSound::LABEL_SE_ICE);
+	}
+
 	if (GetLife() <= 0)
 	{
 		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);

@@ -41,6 +41,7 @@ HRESULT CBossbar::Init()
 	m_object2d[0]->SetSize(D3DXVECTOR3((m_Life * 0.1f) + 7, 50.0f, 0.0f));
 	m_object2d[0]->SetPos(D3DXVECTOR3(m_SetUpPos.x + 6, m_pos.y - 20.0f, m_pos.z));
 
+	m_Life = 0;
 	return E_NOTIMPL;
 }
 
@@ -74,7 +75,12 @@ void CBossbar::Update()
 	}
 	else
 	{
+		SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 		m_MaxHp = true;
+	}
+	if (m_Life >= BOSSHP*0.5)
+	{
+		SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 	}
 	if (m_Life <= BOSSHP / 2.0f)
 	{

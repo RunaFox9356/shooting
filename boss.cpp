@@ -23,6 +23,9 @@
 #include "manager.h"
 #include "fade.h"
 #include "sound.h"
+#include "utility.h"
+
+#include "dangerous.h"
 
 //------------------------------------
 // コンストラクタ
@@ -70,6 +73,7 @@ HRESULT CBoss::Init(void)
 	CManager::GetSound()->Play(CSound::LABEL_BGM_BOSS1);
 	CManager::GetSound()->Play(CSound::LABEL_SE_KIKEN);
 
+	m_Sound = 0;
 	m_rot.y += -(D3DX_PI*0.5f);
 	return S_OK;
 }
@@ -131,15 +135,29 @@ void CBoss::Move(void)
 	{
 		if (m_pos.x <= 300.0f && !m_Go)
 		{
+
+			D3DXVECTOR3 Pos = ScreenCastWorld(
+				&m_pos,			// スクリーン座標
+				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
+
+			if (m_PatternCount < 2)
+			{
+				CDangerousManager::Create(D3DXVECTOR3(0.0f, Pos.y - 150.0f, 0.0f), 0, 100);
+			}
+
 			m_Stop = true;
 			m_move.x = 0.5f;
 		}
 		if (m_Stop)
 		{
+			if (m_keepCount == 0)
+			{
+				
+			}
 			m_keepCount++;
 			if (m_keepCount >= 60)
 			{
-				
+				m_keepCount = 0;
 				m_Stop = false;
 				m_Go = true;
 				m_move.x = -5.0f;
@@ -244,9 +262,16 @@ void CBoss::Move(void)
 //-----------------------------------
 void CBoss::OnHit()
 {
+
 	int Damage = m_MaxLife - GetLife();
 	m_MaxLife = GetLife();
    	m_Life->SetDamage(Damage);
+	m_Sound++;
+	if (m_Sound >= 10)
+	{
+		CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
+	}
+	
 	if (GetLife() <= 0)
 	{
 		CEnemy::SetBossCraziness();
