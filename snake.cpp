@@ -112,4 +112,3 @@ void CSnake::OnHit()
 		Bell->SetLife(10);
 	
 }
-

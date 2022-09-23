@@ -74,7 +74,7 @@ HRESULT CBoss::Init(void)
 	CManager::GetSound()->Play(CSound::LABEL_SE_KIKEN);
 
 	m_Sound = 0;
-	m_rot.y += -(D3DX_PI*0.5f);
+	m_rot.y += (D3DX_PI*0.5f);
 	return S_OK;
 }
 
@@ -98,7 +98,7 @@ void CBoss::Update(void)
 	//ここにmoveをいれる
 	Move();
 
-	m_motionType = CObject3d::ANIME_ATTACK;
+
 	
 
 }
@@ -135,7 +135,7 @@ void CBoss::Move(void)
 	{
 		if (m_pos.x <= 300.0f && !m_Go)
 		{
-
+			m_motionType = CObject3d::ANIME_RUN;
 			D3DXVECTOR3 Pos = ScreenCastWorld(
 				&m_pos,			// スクリーン座標
 				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
@@ -157,6 +157,7 @@ void CBoss::Move(void)
 			m_keepCount++;
 			if (m_keepCount >= 60)
 			{
+				m_motionType = CObject3d::ANIME_ATTACK;
 				m_keepCount = 0;
 				m_Stop = false;
 				m_Go = true;
@@ -222,7 +223,7 @@ void CBoss::Move(void)
 			{
 				D3DXVECTOR3 Size(3.8f, 3.8f, 3.8f);
 				m_PopPos.y *= -1.0f;
-				for (int i = 0; i < 5; i++)
+				for (int i = 0; i < 3; i++)
 				{
 					CEnemy * Enemy = CEnemy::Create(0);
 					Enemy->SetUp(ENEMY);
@@ -231,7 +232,7 @@ void CBoss::Move(void)
 					Enemy->SetSize(Size);
 					Enemy->SetLife(10);
 				}
-				for (int i = 0; i < 5; i++)
+				for (int i = 0; i < 3; i++)
 				{
 					CEnemy * Enemy = CEnemy::Create(1);
 					Enemy->SetUp(ENEMY);
@@ -241,12 +242,12 @@ void CBoss::Move(void)
 					Enemy->SetLife(10);
 				}
 			}
+
 			m_PatternCount++;
 			if (m_PatternCount >= 2)
 			{
 				m_PatternCount = 0;
 				m_PatternMode = MOVE;
-
 			}
 		}
 	}

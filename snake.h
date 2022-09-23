@@ -30,8 +30,6 @@ public:
 	void OnHit() override;
 
 private:
-
-
-
 };
+
 #endif

@@ -133,31 +133,36 @@ void CBossCraziness::Move(void)
 	D3DXVECTOR3 Pos = ScreenCastWorld(
 		&m_pos,			// スクリーン座標
 		D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));
+
 	if (m_PatternMode == MOVE)
 	{
+		
 		m_motionType = CObject3d::ANIME_RUN;
 		if (m_pos.x <= 300.0f && !m_Go)
-		{
+		{//止まる処理
 			if (m_PatternCount < 2)
-			{
+			{//警報ならす
 				CDangerousManager::Create(D3DXVECTOR3(0.0f, Pos.y - 150.0f, 0.0f), 0, 100);
 			}
 			m_Stop = true;
 			m_move.x = 0.5f;
 		}
+
+		//一定間隔で止まる
 		if (m_Stop)
 		{
 			m_keepCount++;
 			if (m_keepCount >= 60)
 			{
-				
+				//走り出す
 				m_Stop = false;
 				m_Go = true;
 				m_move.x = -5.0f;
 				m_Speed = 0.0f;
 				m_PatternCount++;
+
 				if (m_PatternCount >= 3)
-				{
+				{//敵を呼び出すモードに以降
 					m_PatternCount = 0;
 					m_PatternMode = POP;
 					CManager::GetSound()->Play(CSound::LABEL_SE_YOBI);
@@ -168,6 +173,7 @@ void CBossCraziness::Move(void)
 				}
 			}
 		}
+
 		if (m_Go)
 		{
 			m_Speed += 0.05f;
@@ -186,9 +192,8 @@ void CBossCraziness::Move(void)
 		if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
 		{
 			m_pos.y = -SCREEN_HEIGHT / 2 + 250.0f;
-		
-
 		}
+
 		if (m_pos.x <= -SCREEN_WIDTH / 2)
 		{
 			m_pos.x = SCREEN_WIDTH;
@@ -199,8 +204,9 @@ void CBossCraziness::Move(void)
 			m_move.x = -5.0f;
 		}
 	}
+
 	if (m_PatternMode == POP)
-	{
+	{//敵を呼び出すモード
 		m_motionType = CObject3d::ANIME_ATTACK;
 		m_keepCount++;
 		
@@ -225,7 +231,7 @@ void CBossCraziness::Move(void)
 				}
 				for (int i = 0; i < 5; i++)
 				{
-					CEnemy * Enemy = CEnemy::Create(0);
+					CEnemy * Enemy = CEnemy::Create(1);
 					Enemy->SetUp(ENEMY);
 					Enemy->SetMove(D3DXVECTOR3(-5.0f, 0.0f, 0.0f));
 					Enemy->SetPos(D3DXVECTOR3(m_PopPos.x + (i*80.0f), m_PopPos.y, 0.0f));
@@ -238,13 +244,12 @@ void CBossCraziness::Move(void)
 			{
 				m_PatternCount = 0;
 				m_PatternMode = RUSH;
-
 			}
 		}
 	}
+
 	if (m_PatternMode == RUSH)
-	{
-		
+	{//Rushモード	
 		m_Speed += 0.05f;
 		if (m_Speed >= 1.0f)
 		{
@@ -275,16 +280,13 @@ void CBossCraziness::Move(void)
 		{
 			m_pos.y = SCREEN_HEIGHT / 2;
 			m_move.y *= -1.0f;
-
 		}
 
 		if (m_pos.y > SCREEN_HEIGHT / 2 - 250.0f)
 		{
 			m_pos.y = -SCREEN_HEIGHT / 2 + 250.0f;
 			m_move.y *= -1.0f;
-
 		}
-
 	}
 }
 
@@ -309,5 +311,6 @@ void CBossCraziness::OnHit()
 	{
 		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 	}
+
 
 }

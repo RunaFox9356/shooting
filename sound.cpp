@@ -23,7 +23,7 @@ const CSound::SParam CSound::PARAM[] =
 	{ "data/BGM/bgm006.wav", -1 },				// リザルト
 	{ "data/BGM/rizaruto.wav", -1 },			// チュートリアル
 	{ "data/BGM/Chattotata.wav", -1 },			// ランキング
-	{ "data/SE/hit000.wav", 0},					// 
+	{ "data/SE/hit.wav", 0},					// 
 	{ "data/SE/ショット.wav", 0 },				// 
 	{ "data/SE/火炎魔法3.wav", 0 },				// 
 	{ "data/SE/wallHit.wav", 0 },				// 

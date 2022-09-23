@@ -51,8 +51,6 @@ CManager::~CManager()
 //=============================================================================
 HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 {
-	
-
 	m_cRenderer = new CRenderer;
 
 	m_Input = CInput::Create();
@@ -100,7 +98,6 @@ void CManager::Uninit()
 
 	if (m_pTexture != nullptr)
 	{// I—¹ˆ—
-
 		m_pTexture->ReleaseAll();
 		delete m_pTexture;
 		m_pTexture = nullptr;
@@ -170,6 +167,10 @@ CFade * CManager::GetFade()
 	return m_Fade;
 }
 
+
+//=============================================================================
+// GetMode
+//=============================================================================
 CManager::MODE * CManager::GetMode()
 {
 	return &m_mode;

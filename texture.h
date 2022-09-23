@@ -74,6 +74,7 @@ public: /* ’è‹` */
 		TEXTURE_GONBOX,
 		TEXTURE_MASUOBOX,
 		TEXTURE_NAMETITLE,
+		TEXTURE_GOLD,
 		TEXTURE_MAX,
 		TEXTURE_NONE,	// Žg—p‚µ‚È‚¢
 	};

@@ -207,6 +207,9 @@
     <ClCompile Include="text.cpp">
       <Filter>オブジェクト\モデル系\UI</Filter>
     </ClCompile>
+    <ClCompile Include="bossdeath.cpp">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -373,6 +376,9 @@
     </ClInclude>
     <ClInclude Include="text.h">
       <Filter>オブジェクト\モデル系\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="bossdeath.h">
+      <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
