@@ -33,6 +33,8 @@
 #include "dangerous.h"
 #include "text.h"
 
+#include "bossdeath.h"
+
 CMagicBox* CGame::m_MagicBox = nullptr;
 CParticleManager*CGame::m_PaticleManager = nullptr;
 CPlayer*CGame::m_Player = nullptr;
@@ -147,9 +149,10 @@ void CGame::Update(void)
 	}
 	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
+		CDeathManager::Create(10, 25);
 		//CText::Create(CText::GON,120, 10, "ƒ‚ƒ“ƒnƒ“‚½‚Ì‚µ‚¢...");
 		//CDangerousManager::BossPopStaging();
-		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
+		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		return;
 	}
 	if (GetMaxEnemy() <= 0)

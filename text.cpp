@@ -70,7 +70,7 @@ void CText::Uninit()
 		FR_PRIVATE,
 		&design
 	);
-
+	
 }
 
 

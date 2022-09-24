@@ -36,7 +36,7 @@ public:
 
 	virtual const D3DXVECTOR3 *GetPos() const;
 	virtual void SetPos(const D3DXVECTOR3 &pos);
-	virtual void SetMove(const D3DXVECTOR3 &move) { move; };
+	virtual void SetMove(const D3DXVECTOR3 &move) { m_Move = move; };
 	
 	void SetTexture(CTexture::TEXTURE texture);
 	void SetTex(PositionVec4 Tex);
@@ -52,6 +52,7 @@ protected:
 	D3DXVECTOR3 m_Size;
 	D3DXMATRIX m_mtxWorld;					// マトリックス
 	int  m_nTimer;
+	D3DXVECTOR3  m_Move;
 private:
 	static int m_MaxPolygon;
 	LPDIRECT3DVERTEXBUFFER9	m_pVtxBuff = nullptr;

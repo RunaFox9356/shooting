@@ -48,6 +48,7 @@ public:
 		LABEL_SE_ROBO,				
 		LABEL_SE_BOOTH,				// 
 		LABEL_SE_YOBI,				// 
+		LABEL_SE_GOLD,				// 
 		LABEL_MAX,	
 	};
 

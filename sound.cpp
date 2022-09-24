@@ -23,7 +23,7 @@ const CSound::SParam CSound::PARAM[] =
 	{ "data/BGM/bgm006.wav", -1 },				// リザルト
 	{ "data/BGM/rizaruto.wav", -1 },			// チュートリアル
 	{ "data/BGM/Chattotata.wav", -1 },			// ランキング
-	{ "data/SE/hit.wav", 0},					// 
+	{ "data/SE/hit003.wav", 0},					// 
 	{ "data/SE/ショット.wav", 0 },				// 
 	{ "data/SE/火炎魔法3.wav", 0 },				// 
 	{ "data/SE/wallHit.wav", 0 },				// 
@@ -38,6 +38,8 @@ const CSound::SParam CSound::PARAM[] =
 	{ "data/SE/ロボット起動2.wav", 0 },			//
 	{ "data/SE/ブースタージャンプ1.wav", 0 },	//
 	{ "data/SE/携帯電話の呼び出し音.wav", 0 },	//
+	{ "data/SE/決定ボタンを押す16.wav", 0 },	//
+	
 };
 
 static_assert(sizeof(CSound::PARAM) / sizeof(CSound::PARAM[0]) == CSound::LABEL_MAX, "aho");

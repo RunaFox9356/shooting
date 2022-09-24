@@ -27,6 +27,8 @@
 #include "utility.h"
 #include "dangerous.h"
 
+#include "bossdeath.h"
+
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -309,7 +311,8 @@ void CBossCraziness::OnHit()
 
 	if (GetLife() <= 0)
 	{
-		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
+		CDeathManager::Create(30, 25);
+		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 	}
 
 
