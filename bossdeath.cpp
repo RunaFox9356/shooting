@@ -256,7 +256,7 @@ void CDeathManager::Update()
 	}
 	else if (m_GetGold + m_MissGold >= m_PopMax &&GoNextMode == false)
 	{//ボーナスなし
-		text = CText::Create(CText::GON, 360, 10, "たくさんゲットしたのじゃ！ないずじゃ！！");
+		text = CText::Create(CText::GON, 360, 10, "たくさんゲットしたのじゃ！ないすじゃ！！");
 		GoNextMode = true;
 		m_TextCount = 0;
 	}
