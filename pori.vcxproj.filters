@@ -396,5 +396,8 @@
     <Image Include="gonn.ico">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="gonnGif.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
 </Project>

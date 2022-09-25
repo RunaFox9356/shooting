@@ -19,6 +19,7 @@
 #include "game.h"
 #include "hit.h"
 
+#include "tutorial.h"
 int CCrystal::m_popType = 2;
 LPDIRECT3DTEXTURE9	CCrystal::m_pTexture;
 
@@ -86,6 +87,10 @@ void CCrystal::Update()
 			if (Type == CObject::PLAYER)
 			{	// Player‚Æ‚Ì“–‚½‚è”»’è
 				CPlayer* cPlayer = CGame::GetPlayer();
+				if (cPlayer == nullptr)
+				{
+					cPlayer = CTutorial::GetPlayer();
+				}
 				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 				float Size = 50.0f;
 
@@ -97,7 +102,18 @@ void CCrystal::Update()
 				{
 					if (m_Hit <= 30)
 					{
-						CGame::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
+						switch (*CManager::GetMode())
+						{			
+						case CManager::MODE_GAME:
+							CGame::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
+							break;
+						case CManager::MODE_TUTORIAL:
+							CTutorial::GetMagicBox()->Magicplay((CTexture::TEXTURE)m_myType);
+							break;
+						default:
+							break;
+						}
+					
 						GetScore()->Add(200);
 					}
 					else

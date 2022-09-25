@@ -105,9 +105,12 @@ void  CScore::Set(int nScore)
 //‰ÁZ
 //===================
 void CScore::Add(int nValue)
-{
-	m_nScore += nValue;
-	Set(m_nScore);
+{//ƒXƒRƒA‚Ìİ’è‚ÆPointItem‚Ì¶¬•İ’è
+	if (*CManager::GetMode() == CManager::MODE_GAME)
+	{
+		m_nScore += nValue;
+		Set(m_nScore);
+	}
 }
 
 //===================

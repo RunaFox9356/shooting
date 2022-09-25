@@ -10,8 +10,6 @@
 
 #include "object2d.h"
 
-
-
 class CText : public CObject2d
 {
 public:
@@ -23,7 +21,6 @@ public:
 		MAX
 	};
 
-
 	CText(int list);
 	~CText();
 	HRESULT Init() override;
@@ -31,7 +28,6 @@ public:
 	void Update() override;
 	void Draw() override;
 	static CText* Create(Type talkType, int DeleteTime, int SpeedText,char * Text);
-
 
 	void Releasetimer(int nTimar);
 private:

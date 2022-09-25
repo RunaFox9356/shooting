@@ -38,7 +38,6 @@ private:
 	static int m_MissGold;
 	CText* text;
 	bool GoNextMode;
-
 };
 
 class  CDeath : public C3dpolygon

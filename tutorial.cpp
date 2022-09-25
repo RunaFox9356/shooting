@@ -26,9 +26,12 @@
 #include "life.h"
 
 #include "text.h"
+
+#include "crystal.h"
 CMagicBox* CTutorial::m_MagicBox;	
 CParticleManager* CTutorial::m_PaticleManager;
 CPlayer * CTutorial::m_Player;
+
 
 //========================
 // コンストラクター
@@ -93,6 +96,14 @@ HRESULT CTutorial::Init(void)
 
 	CManager::GetSound()->Play(CSound::LABEL_BGM_TUTORIAL);
 
+	D3DXVECTOR3 Size(3.8f, 3.8f, 3.8f);
+	m_Enemy = CEnemy::Create(1);
+	m_Enemy->SetUp(ENEMY);
+	m_Enemy->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	m_Enemy->SetPos(D3DXVECTOR3(550, 0.0f, 0.0f));
+	m_Enemy->SetSize(Size);
+	m_Enemy->SetLife(1000000);
+
 	return S_OK;
 
 }
@@ -147,15 +158,30 @@ void CTutorial::Update(void)
 	{
 		if (m_PaticleManager->GetEmitter().size() == 0)
 		{
-			m_MagicBox->CMagicBox::Magicplay((CTexture::TEXTURE)m_Magic);
+
+			CCrystal::Create(D3DXVECTOR3(550, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 2.0f, 0.0f));
+		/*	m_MagicBox->CMagicBox::Magicplay((CTexture::TEXTURE)m_Magic);
 			m_Magic++; 
 			if (m_Magic >= 6)
 			{
 				m_Magic = 2;
-			}
+			}*/
 		}
 
 	}
+	if (m_Enemy->GetLife() <= 0)
+	{
+		D3DXVECTOR3 Size(3.8f, 3.8f, 3.8f);
+		m_Enemy = CEnemy::Create(1);
+		m_Enemy->SetUp(ENEMY);
+		m_Enemy->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+		m_Enemy->SetPos(D3DXVECTOR3(550, 0.0f, 0.0f));
+		m_Enemy->SetSize(Size);
+		m_Enemy->SetLife(1000000);
+	}
+
+
+
 	if (m_NextTaskCount >= 300)
 	{
 		if (!m_MoveClear
@@ -165,19 +191,19 @@ void CTutorial::Update(void)
 				|| CInputpInput->Press(CInput::KEY_LEFT))
 			)
 		{
-			CText::Create(CText::GON, 300,10, "ナイス！！うまいぜ！\nタマをうってみよう！");
+			CText::Create(CText::GON, 300,10, "ナイス！！うまいのじゃ！\nタマをうってみるのじゃ！");
 			m_MoveClear = true;
 			m_NextTaskCount = 0;
 		}
-		else if (!m_AttackClear && CInputpInput->Press(CInput::KEY_SHOT))
+		else if (!m_AttackClear && CInputpInput->Press(CInput::KEY_SHOT)&& m_MoveClear)
 		{
-			CText::Create(CText::GON, 300,10, "ナイス！！うまいぜ！\nつぎはマホウをハツドウしてみよう！");
+			CText::Create(CText::GON, 300,10, "ナイス！！うまいのじゃ！\nつぎはマホウをハツドウしてみのじゃ！");
 			m_AttackClear = true;
 			m_NextTaskCount = 0;
 		}
-		else if (!m_MagicClear && CInputpInput->Trigger(CInput::KEY_DECISION))
+		else if (!m_MagicClear && CInputpInput->Trigger(CInput::KEY_DECISION)&& m_AttackClear)
 		{
-			CText::Create(CText::GON, 500,10, "ナイス！！うまいぜ！\nさあこれでチュートリアルはおわり！\nぶっとばしにいこう！");
+			CText::Create(CText::GON, 500,10, "ナイス！！うまいのじゃ！\nさあこれでチュートリアルはおわりじゃ！\nぶっとばしにいくのじゃ！");
 			m_MagicClear = true;
 			m_NextTaskCount = 0;
 		}

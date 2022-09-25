@@ -36,6 +36,7 @@ CSorcey::~CSorcey()
 HRESULT CSorcey::Init() 
 {
 	C3dpolygon::Init();
+	m_CounterAnim = 0;
 	return S_OK;
 }
 
@@ -168,6 +169,7 @@ void CSorcey::SetSpeed(const int &Speed)
 void CSorcey::PlayAnimation()
 {
 	CParticleManager* particleManager = nullptr;
+
 	if (*CManager::GetMode() == CManager::MODE_GAME)
 	{
 		particleManager = CGame::GetParticleManager();
@@ -176,12 +178,14 @@ void CSorcey::PlayAnimation()
 	{
 		particleManager = CTutorial::GetParticleManager();
 	}
+
 	m_PatternAnimX++;
 
 	if (m_PatternAnimX > m_DivisionX)
 	{
 		if (m_NouPlayer == CPlayer::NOW_ICE&&m_PatternAnimY == 0)
 		{
+			// 氷ならアニメーション追加生成
 			CSorcey::Create(D3DXVECTOR3(m_pos.x + 200.0f, m_pos.y, m_pos.z), CPlayer::NOW_ICE)->SetUp(EObjectType::SORCERY);
 		}
 
@@ -191,7 +195,7 @@ void CSorcey::PlayAnimation()
 		{
 			m_PatternAnimY = 0;
 			if (particleManager->GetEmitter().size() != 0 && m_NouPlayer != CPlayer::NOW_ICE)
-			{
+			{//	氷以外ならカウントが完了したらパーティクル消す
 				particleManager->Release(0);
 			}
 			Uninit();
@@ -231,8 +235,6 @@ void CSorcey::Move()
 		 particleManager = CTutorial::GetParticleManager();
 		 Data = CTutorial::GetPlayer();
 	}
-
-
 
 	if (particleManager->GetEmitter().size() != 0)
 	{
@@ -307,7 +309,6 @@ void CSorcey::Collision()
 						((m_pos.x - m_Size.x) <= (enemyPos->x + enemySizeX)) &&
 						((m_pos.x + m_Size.x) >= (enemyPos->x - enemySizeX)))
 					{
-
 						CHit::Create(*enemyPos, m_NouPlayer);
 						switch (m_NouPlayer)
 						{

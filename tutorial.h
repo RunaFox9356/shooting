@@ -37,14 +37,16 @@ public:
 
 private:
 	CObject2d *m_object2d[4];
-
 	
-	CEnemy * m_Enemy[10];
+	CEnemy * m_Enemy;
 	CBg *m_Bg[4];
-	int m_Magic;
-	int m_NextTaskCount;//次のタスクまでのカウント
 	CScore*pScore;
 	CLife*pLife;
+
+	int m_Magic;
+	int m_NextTaskCount;//次のタスクまでのカウント
+
+	//CLEARタスク一覧表
 	bool m_MoveClear;
 	bool m_AttackClear;
 	bool m_MagicClear;

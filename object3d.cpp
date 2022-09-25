@@ -145,6 +145,7 @@ void CObject3d::Update(void)
 	if (m_Invincible <= 0)
 	{
 		m_Damegeis = DAMEGE_NORMAL;
+		m_ModelCollar = CMotion::NON;
 	}
 
 	if (m_Damegeis == DAMEGE_DAMAGE)
@@ -327,8 +328,10 @@ void CObject3d::HitLife(int Damage)
 
 			for (int i = 0; i < 5; i++)
 			{
-				//ƒXƒRƒA‚ÌÝ’è‚ÆPointItem‚Ì¶¬•Ý’è
+				
 				GetScore()->Add(50);
+				
+				
 				D3DXVECTOR3 scale(3.8f, 3.8f, 3.8f);
 				CBell * Bell = CBell::Create();
 				Bell->SetUp(BELL);
@@ -340,8 +343,7 @@ void CObject3d::HitLife(int Damage)
 			}
 			m_drop++;
 			if (m_drop >= CreateDrop)
-			{
-			
+			{	
 				m_drop = 0;
 				CCrystal::Create(m_pos, D3DXVECTOR3(0.0f, 2.0f, 0.0f));
 			}

@@ -275,6 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="gonn.ico" />
+    <Image Include="gonnGif.ico" />
     <Image Include="ico00001.ico" />
     <Image Include="icon1.ico" />
   </ItemGroup>

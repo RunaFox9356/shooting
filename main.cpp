@@ -173,6 +173,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case IDA_EXIT:
 			DestroyWindow(hWnd);
 			break;
+		case ID_40004:
+			MessageBox(hWnd, "2022/9/25マスター版", "バージョン1.00", MB_OK);
+			break;
 		default:
 			return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		}
