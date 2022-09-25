@@ -35,7 +35,7 @@ CRaccoon::~CRaccoon()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CRaccoon::Init(void)
+HRESULT CRaccoon::Init()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
@@ -52,7 +52,7 @@ HRESULT CRaccoon::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CRaccoon::Uninit(void)
+void CRaccoon::Uninit()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
@@ -61,7 +61,7 @@ void CRaccoon::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CRaccoon::Update(void)
+void CRaccoon::Update()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();

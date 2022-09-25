@@ -47,7 +47,7 @@ CEnemy::~CEnemy()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CEnemy::Init(void)
+HRESULT CEnemy::Init()
 {
 	// 現在のモーション番号の保管
 	CObject3d::Init();
@@ -60,7 +60,7 @@ HRESULT CEnemy::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CEnemy::Uninit(void)
+void CEnemy::Uninit()
 {
 	m_AllEnemy--;
 	
@@ -71,7 +71,7 @@ void CEnemy::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CEnemy::Update(void)
+void CEnemy::Update()
 {
 		// 現在のモーション番号の保管
 		CObject3d::Update();
@@ -109,7 +109,7 @@ void CEnemy::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CEnemy::Draw(void)
+void CEnemy::Draw()
 {
 	CObject3d::Draw();
 }

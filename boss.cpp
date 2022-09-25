@@ -44,7 +44,7 @@ CBoss::~CBoss()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CBoss::Init(void)
+HRESULT CBoss::Init()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
@@ -81,7 +81,7 @@ HRESULT CBoss::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CBoss::Uninit(void)
+void CBoss::Uninit()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
@@ -90,7 +90,7 @@ void CBoss::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CBoss::Update(void)
+void CBoss::Update()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();
@@ -106,7 +106,7 @@ void CBoss::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CBoss::Draw(void)
+void CBoss::Draw()
 {
 	CEnemy::Draw();
 }

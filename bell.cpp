@@ -42,7 +42,7 @@ CBell::~CBell()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CBell::Init(void)
+HRESULT CBell::Init()
 {
 	// 現在のモーション番号の保管
 	CObject3d::Init();
@@ -60,7 +60,7 @@ HRESULT CBell::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CBell::Uninit(void)
+void CBell::Uninit()
 {
 	// 現在のモーション番号の保管
 	CObject3d::Uninit();
@@ -69,7 +69,7 @@ void CBell::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CBell::Update(void)
+void CBell::Update()
 {
 	// 現在のモーション番号の保管
 	CObject3d::Update();
@@ -146,7 +146,7 @@ void CBell::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CBell::Draw(void)
+void CBell::Draw()
 {
 	CObject3d::Draw();
 }

@@ -35,7 +35,7 @@ CStraight::~CStraight()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CStraight::Init(void)
+HRESULT CStraight::Init()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
@@ -52,7 +52,7 @@ HRESULT CStraight::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CStraight::Uninit(void)
+void CStraight::Uninit()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
@@ -61,7 +61,7 @@ void CStraight::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CStraight::Update(void)
+void CStraight::Update()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();
@@ -72,7 +72,7 @@ void CStraight::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CStraight::Draw(void)
+void CStraight::Draw()
 {
 	CEnemy::Draw();
 }

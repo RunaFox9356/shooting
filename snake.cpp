@@ -36,7 +36,7 @@ CSnake::~CSnake()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CSnake::Init(void)
+HRESULT CSnake::Init()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
@@ -53,7 +53,7 @@ HRESULT CSnake::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CSnake::Uninit(void)
+void CSnake::Uninit()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
@@ -63,7 +63,7 @@ void CSnake::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CSnake::Update(void)
+void CSnake::Update()
 {
 	SetLife(100);
 	// 現在のモーション番号の保管
@@ -74,7 +74,7 @@ void CSnake::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CSnake::Draw(void)
+void CSnake::Draw()
 {
 	CEnemy::Draw();
 }

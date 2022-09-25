@@ -55,7 +55,7 @@ CPlayer::~CPlayer()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CPlayer::Init(void)
+HRESULT CPlayer::Init()
 {
 	// 現在のモーション番号の保管
 	CObject3d::Init();
@@ -72,7 +72,7 @@ HRESULT CPlayer::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CPlayer::Uninit(void)
+void CPlayer::Uninit()
 {
 	// 現在のモーション番号の保管
 	CObject3d::Uninit();
@@ -81,7 +81,7 @@ void CPlayer::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CPlayer::Update(void)
+void CPlayer::Update()
 {
 
 	switch (*CManager::GetMode())
@@ -111,7 +111,7 @@ void CPlayer::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CPlayer::Draw(void)
+void CPlayer::Draw()
 {
 	CObject3d::Draw();
 }

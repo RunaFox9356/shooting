@@ -34,7 +34,7 @@ CMaru::~CMaru()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CMaru::Init(void)
+HRESULT CMaru::Init()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
@@ -51,7 +51,7 @@ HRESULT CMaru::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CMaru::Uninit(void)
+void CMaru::Uninit()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
@@ -60,7 +60,7 @@ void CMaru::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CMaru::Update(void)
+void CMaru::Update()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();
@@ -82,7 +82,7 @@ void CMaru::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CMaru::Draw(void)
+void CMaru::Draw()
 {
 	CEnemy::Draw();
 }

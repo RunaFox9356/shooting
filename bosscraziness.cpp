@@ -46,7 +46,7 @@ CBossCraziness::~CBossCraziness()
 //------------------------------------
 // 初期化
 //------------------------------------
-HRESULT CBossCraziness::Init(void)
+HRESULT CBossCraziness::Init()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Init();
@@ -84,7 +84,7 @@ HRESULT CBossCraziness::Init(void)
 //------------------------------------
 // 終了
 //------------------------------------
-void CBossCraziness::Uninit(void)
+void CBossCraziness::Uninit()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Uninit();
@@ -93,7 +93,7 @@ void CBossCraziness::Uninit(void)
 //------------------------------------
 // 更新
 //------------------------------------
-void CBossCraziness::Update(void)
+void CBossCraziness::Update()
 {
 	// 現在のモーション番号の保管
 	CEnemy::Update();
@@ -107,7 +107,7 @@ void CBossCraziness::Update(void)
 //------------------------------------
 // 描画
 //------------------------------------
-void CBossCraziness::Draw(void)
+void CBossCraziness::Draw()
 {
 	CEnemy::Draw();
 }

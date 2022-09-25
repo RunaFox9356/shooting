@@ -210,6 +210,9 @@
     <ClCompile Include="bossdeath.cpp">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
+    <ClCompile Include="explosion.cpp">
+      <Filter>オブジェクト\モデル系</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -379,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="bossdeath.h">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
+    </ClInclude>
+    <ClInclude Include="explosion.h">
+      <Filter>オブジェクト\モデル系</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
