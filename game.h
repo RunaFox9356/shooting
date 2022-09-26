@@ -12,7 +12,8 @@
 class CMagicBox;
 class CParticleManager;
 class CPlayer;
-class CPause;
+class CPause; 
+class CMultiply;
 
 class CGame :public CObject
 {
@@ -28,12 +29,15 @@ public:
 	static CParticleManager* GetParticleManager() { return m_PaticleManager; }
 	static CPlayer * GetPlayer() { return m_Player; };
 	static CPause * GetPause() { return m_Pause; };
+	static CMultiply * GetMultiply() { return m_Multiply; };
+	
 private:
 
 	static CMagicBox* m_MagicBox;
 	static CPlayer* m_Player;
 	static CParticleManager* m_PaticleManager;	// パーティクルマネジャー
 	static CPause *m_Pause;
+	static CMultiply* m_Multiply;
 	int m_GameCount;
 	int m_SpeedUp;
 };

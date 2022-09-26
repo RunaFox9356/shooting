@@ -33,7 +33,7 @@
 CMagicBox* CTutorial::m_MagicBox;	
 CParticleManager* CTutorial::m_PaticleManager;
 CPlayer * CTutorial::m_Player;
-
+CMultiply* CTutorial::m_Multiply;
 
 //========================
 // コンストラクター
@@ -106,7 +106,9 @@ HRESULT CTutorial::Init(void)
 	m_Enemy->SetSize(Size);
 	m_Enemy->SetLife(1000);
 
-	CMultiply::SetRate(0);
+	m_Multiply = CMultiply::Create(0, D3DXVECTOR3(150.0f, 200.0f, 0.0f), false, false);
+	m_Multiply->SetRateFast(0);
+
 	return S_OK;
 
 }

@@ -17,6 +17,8 @@ class CEnemy;
 class CBg;
 class CMagicBox;
 class CParticleManager;
+class CMultiply;
+
 class CTutorial :public CObject
 {
 public:
@@ -30,19 +32,19 @@ public:
 	static CParticleManager* GetParticleManager() { return m_PaticleManager; }
 	static CMagicBox*GetMagicBox() { return m_MagicBox; };
 	static CPlayer * GetPlayer() { return m_Player; };
+	static CMultiply*GetMultiply() { return m_Multiply; };
 
-	static CParticleManager* m_PaticleManager;	// パーティクルマネジャー
-	static CMagicBox* m_MagicBox;
-	static CPlayer * m_Player;
 
 private:
 	CObject2d *m_object2d[4];
-	
 	CEnemy * m_Enemy;
 	CBg *m_Bg[4];
 	CScore*pScore;
 	CLife*pLife;
-
+	static CParticleManager* m_PaticleManager;	// パーティクルマネジャー
+	static CMagicBox* m_MagicBox;
+	static CPlayer * m_Player;
+	static CMultiply* m_Multiply;
 	int m_Magic;
 	int m_NextTaskCount;//次のタスクまでのカウント
 

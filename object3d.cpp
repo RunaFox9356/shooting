@@ -25,7 +25,9 @@
 #include "manager.h"
 #include "fade.h"
 #include "sound.h"
+#include "game.h"
 
+#include "tutorial.h"
 int CObject3d::m_drop = 0;
 //------------------------------------
 // コンストラクタ
@@ -323,8 +325,17 @@ void CObject3d::HitLife(int Damage)
 		if (m_Life <= 0)
 		{//LIFEが尽きたとき
 	
-			CMultiply::SetRate((1 + *CMultiply::GetRate()));
-			CMultiply::Create(*CMultiply::GetRate(), m_pos, true);
+			switch (*CManager::GetMode())
+			{
+			case CManager::MODE_GAME:
+				CGame::GetMultiply()->SetRate((1 + *CMultiply::GetRate()));
+				break;
+			case CManager::MODE_TUTORIAL:
+				CTutorial::GetMultiply()->SetRate((1 + *CMultiply::GetRate()));
+				break;
+			}
+		
+			CMultiply::Create(*CMultiply::GetRate(), m_pos, true,true);
 
 			for (int i = 0; i < 5; i++)
 			{

@@ -78,7 +78,7 @@ void CEnemy::Update()
 
 		m_motionType = CObject3d::ANIME_RUN;
 
-
+	
 		switch (*CManager::GetMode())
 		{
 		case CManager::MODE_TITLE:

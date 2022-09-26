@@ -35,10 +35,12 @@
 
 #include "bossdeath.h"
 
+
 CMagicBox* CGame::m_MagicBox = nullptr;
 CParticleManager*CGame::m_PaticleManager = nullptr;
 CPlayer*CGame::m_Player = nullptr;
 CPause *CGame::m_Pause = nullptr;
+CMultiply* CGame::m_Multiply = nullptr;
 
 //========================
 // コンストラクター
@@ -89,7 +91,9 @@ HRESULT CGame::Init(void)
 	m_Pause->Init();
 	m_Pause->SetUp(CObject::PAUSE);
 
-	CMultiply::SetRate(0);
+	
+	m_Multiply = CMultiply::Create(0, D3DXVECTOR3(150.0f, 200.0f, 0.0f),false,false);
+	m_Multiply->SetRateFast(0);
 	return S_OK;
 }
 
@@ -178,3 +182,4 @@ void CGame::Draw(void)
 	// 更新処理
 	//CManager::GetRenderer()->Draw();
 }
+

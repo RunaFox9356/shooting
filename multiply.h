@@ -43,11 +43,12 @@ public:
 	 void Update() override;
 	 void Draw() override {};
 
-	void set(int Number, D3DXVECTOR3 Pos, bool extinction);
+	void set(int Number, D3DXVECTOR3 Pos, bool extinction, bool b3D);
 	static void FastSet(int Number, D3DXVECTOR3 Pos);
 
-	static CMultiply* Create(int Number, D3DXVECTOR3 Pos ,bool extinction);
-	static void  SetRate(int Rete) ;
+	static CMultiply* Create(int Number, D3DXVECTOR3 Pos ,bool extinction,bool b3D);
+	void  SetRate(int Rate) ;
+	void  SetRateFast(int Rate) { m_Rate = Rate; };
 	static int*  GetRate() { return &m_Rate; };
 
 private:
