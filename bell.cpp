@@ -18,6 +18,7 @@
 #include "player.h"
 #include "multiply.h"
 
+#include "input.h"
 
 const int CBell::BOUNDPOWER = 10;
 
@@ -93,9 +94,14 @@ void CBell::Update()
 				D3DXVECTOR3 vecPlayerDist = *PlayerPos - m_pos;
 				float distPlayer = D3DXVec3Length(&vecPlayerDist);
 				
-				if ((PlayerPos->y >= 50.0f || PlayerPos->y <= -270.0f) && 620.0f >= m_pos.x)
+				if (((m_pos.y - Size *10) <= (PlayerPos->y +  Size * 10)) &&
+					((m_pos.y + Size * 10) >= (PlayerPos->y - Size * 10)) &&
+					((m_pos.x - Size * 10) <= (PlayerPos->x + Size * 10)) &&
+					((m_pos.x + Size * 10) >= (PlayerPos->x - Size * 10)))
 				{
+					
 					m_dist = true;
+					
 				}
 				if (m_dist)
 				{

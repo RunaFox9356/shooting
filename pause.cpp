@@ -94,7 +94,7 @@ void CPause::Update(void)
 	
 	CInput *CInputpInput = CInput::GetKey();
 
-	if (CInputpInput->Trigger(CInput::KEY_PAUSE))
+	if (CInputpInput->Trigger(CInput::KEY_PAUSE)&& *CManager::GetFade()->GetFade() == CFade::FADENON)
 	{
 		if (m_OnPause)
 		{
@@ -131,6 +131,11 @@ void CPause::Update(void)
 				break;
 			case MODE::MODE_RETURN:
 				//モードの設定
+				m_Bg->SetCollar(PositionVec4(0.3f, 0.3f, 0.3f, 0.0f));
+				for (int i = 0; i < 4; i++)
+				{
+					m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
+				}
 				break;
 			case MODE::MODE_TITLE:
 				//モードの設定

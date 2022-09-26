@@ -86,10 +86,17 @@ void CCrystal::Update()
 			EObjectType Type = pObject[nObject]->GetType();
 			if (Type == CObject::PLAYER)
 			{	// Player‚Æ‚Ì“–‚½‚è”»’è
-				CPlayer* cPlayer = CGame::GetPlayer();
-				if (cPlayer == nullptr)
+				CPlayer* cPlayer = nullptr;
+				switch (*CManager::GetMode())
 				{
+				case CManager::MODE_GAME:
+					cPlayer = CGame::GetPlayer();
+					break;
+				case CManager::MODE_TUTORIAL:
 					cPlayer = CTutorial::GetPlayer();
+					break;
+				default:
+					break;
 				}
 				const D3DXVECTOR3 *PlayerPos = cPlayer->GetPos();
 				float Size = 50.0f;

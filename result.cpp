@@ -82,7 +82,7 @@ HRESULT CResult::Init(void)
 	m_Enemy[1] = CEnemy::Create(2);
 	m_Enemy[1]->SetUp(ENEMY);
 	m_Enemy[1]->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	m_Enemy[1]->SetPos(D3DXVECTOR3(-CManager::Pos.x - 70.0f, CManager::Pos.y, 0.0f));
+	m_Enemy[1]->SetPos(D3DXVECTOR3(-CManager::Pos.x + 70.0f, CManager::Pos.y, 0.0f));
 	m_Enemy[1]->SetRot(Rot);
 	m_Enemy[1]->SetSize(Size);
 	m_Enemy[1]->SetLife(10);
@@ -99,7 +99,7 @@ HRESULT CResult::Init(void)
 	m_Enemy[3] = CEnemy::Create(2);
 	m_Enemy[3]->SetUp(ENEMY);
 	m_Enemy[3]->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	m_Enemy[3]->SetPos(D3DXVECTOR3(CManager::Pos.x + 70.0f, CManager::Pos.y - 350.0f, 0.0f));
+	m_Enemy[3]->SetPos(D3DXVECTOR3(CManager::Pos.x - 70.0f, CManager::Pos.y - 350.0f, 0.0f));
 	m_Enemy[3]->SetSize(Size);
 	m_Enemy[3]->SetLife(10);
 

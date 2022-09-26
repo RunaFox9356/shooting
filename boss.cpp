@@ -27,6 +27,8 @@
 
 #include "dangerous.h"
 
+#include "explosion.h"
+
 //------------------------------------
 // コンストラクタ
 //------------------------------------
@@ -276,7 +278,12 @@ void CBoss::OnHit()
 	if (GetLife() <= 0)
 	{
 		CEnemy::SetBossCraziness();
+
+ 		//CExplosion::Create(m_pos, 0);
+		//CExplosion::Create(m_pos, 10);
+  		//CExplosion::Create(m_pos, 20);
+		SetMove(D3DXVECTOR3(5.0f, 0.0f, 0.0f));
 		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 	}
-	
+
 }

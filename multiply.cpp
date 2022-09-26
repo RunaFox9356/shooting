@@ -1,6 +1,6 @@
 //============================
 //
-// 倍率
+// 倍率//これは開発初期につくった失敗作
 // Author:hamada ryuuga
 //
 //============================
@@ -13,7 +13,7 @@
 int CMultiply::m_Rate;
 int CMultiply::m_RateWait;
 bool CMultiply::m_Decrease;
-CNumber * CMultiply::Fastratio[MAXRATE] = {};
+CNumber * CMultiply::Fastratio[KETA] = {};
 
 //=============================================================================
 // セット関数
@@ -26,7 +26,7 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 
 	nDigits = (int)log10f((float)nModScore);
 
-	for (int i = 0; i < RATE; i++)
+	for (int i = 0; i < KETA-1; i++)
 	{
 		ratio[i] = nullptr;
 	}
@@ -66,9 +66,9 @@ void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction)
 //=============================================================================
 //スコアの設置
 //=============================================================================
-CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
+void CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 {
-	int aPosTexU[100];
+	int aPosTexU[3];
 	int nModScore = Number;
 	int nDigits;
 
@@ -78,8 +78,9 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	}
 	else
 	{
-		nDigits = 8;
+		nDigits = 0;
 	}
+
 
 	//倍率の減少率
 	if (m_Decrease)
@@ -88,17 +89,15 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	}
 	else
 	{
-		m_RateWait = 6000;	
+		m_RateWait = 6000;
 	}
 
-	for (int i = RATE; i >= 0; i--)
+	for (int i = KETA-1; i >= 0; i--)
 	{
-		if (Fastratio[i] == nullptr)
-		{//数字のデータをなかったらつくる
+	
 			Fastratio[i] = CNumber::Create();
 			Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));	
-
-		}
+		
 
 		aPosTexU[i] = 0;
 		
@@ -110,8 +109,6 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		aPosTexU[i] = (nModScore % 10);
    		nModScore /= 10;
 	}
-
-
 	D3DXVECTOR3 ratiopos = Pos;
 
 	// 数字の位置を計算
@@ -130,23 +127,26 @@ CMultiply* CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 		//数値が０かつ減少中なら０を消す
 	
 		Fastratio[nCntScore]->SetNumber(aPosTexU[nCntScore]);
-		Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
-		
-		// 数字のテクスチャの位置を調整
-		//Fastratio[nCntScore]->SetTex(PositionVec4(
-		//	0.1f*aPosTexU[nCntScore], 0.1f*aPosTexU[nCntScore] + 0.1f, 0.0f, 1.0f));
+		if (Number != 0)
+		{
+			Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+		else
+		{
+			Fastratio[nCntScore]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
+		}
+	
+
 
 	}
-	return nullptr;
 }
 
 //=============================================================================
 // 数字を表示する関数
 //=============================================================================
-CMultiply* CMultiply::list(int Number, D3DXVECTOR3 Pos, bool extinction)
+CMultiply* CMultiply::Create(int Number, D3DXVECTOR3 Pos, bool extinction)
 {
-	CMultiply * pObject = nullptr;
-	pObject = new CMultiply;
+	CMultiply * pObject = new CMultiply;
 
 	if (pObject != nullptr)
 	{
@@ -183,7 +183,7 @@ CMultiply::~CMultiply()
 //=============================================================================
 void CMultiply::Uninit()
 {
-	for (int nCntScore = 0; nCntScore <= RATE; nCntScore++)
+	for (int nCntScore = 0; nCntScore < KETA; nCntScore++)
 	{
 		if (Fastratio[nCntScore] == nullptr)
 		{

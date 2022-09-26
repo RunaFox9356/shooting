@@ -28,6 +28,8 @@
 #include "text.h"
 
 #include "crystal.h"
+
+#include "multiply.h"
 CMagicBox* CTutorial::m_MagicBox;	
 CParticleManager* CTutorial::m_PaticleManager;
 CPlayer * CTutorial::m_Player;
@@ -102,8 +104,9 @@ HRESULT CTutorial::Init(void)
 	m_Enemy->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_Enemy->SetPos(D3DXVECTOR3(550, 0.0f, 0.0f));
 	m_Enemy->SetSize(Size);
-	m_Enemy->SetLife(1000000);
+	m_Enemy->SetLife(1000);
 
+	CMultiply::SetRate(0);
 	return S_OK;
 
 }
@@ -177,7 +180,7 @@ void CTutorial::Update(void)
 		m_Enemy->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		m_Enemy->SetPos(D3DXVECTOR3(550, 0.0f, 0.0f));
 		m_Enemy->SetSize(Size);
-		m_Enemy->SetLife(1000000);
+		m_Enemy->SetLife(1000);
 	}
 
 

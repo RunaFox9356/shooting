@@ -1,6 +1,6 @@
 //============================
 //
-// NUMBER
+// MULTIPLY@H//‚±‚ê‚ÍŠJ”­‰Šú‚É‚Â‚­‚Á‚½¸”sì
 // Author:hamada ryuuga
 //
 //============================
@@ -19,31 +19,34 @@ public:
 
 };
 
-#define MAXRATE (10)
-#define RATE (MAXRATE-1)
+//#define MAXRATE (10)
+//#define RATE (MAXRATE-1)
 
 class CMultiply : public CObject
 {
+private:
+	static const int KETA = 3;
+
 public:
 	CMultiply();
 	 ~CMultiply();
+
 	 HRESULT Init() override
 	 {
-		 for (int i = 0; i < 10; i++)
+		 for (int i = 0; i < KETA; i++)
 		 {
 			 Fastratio[i] = nullptr;
 		 }
 		 return S_OK;
 	 };
 	 void Uninit()override;
-	 void Update() override ;
+	 void Update() override;
 	 void Draw() override {};
 
-
 	void set(int Number, D3DXVECTOR3 Pos, bool extinction);
-	static CMultiply* FastSet(int Number, D3DXVECTOR3 Pos);
+	static void FastSet(int Number, D3DXVECTOR3 Pos);
 
-	static CMultiply* list(int Number, D3DXVECTOR3 Pos ,bool extinction);
+	static CMultiply* Create(int Number, D3DXVECTOR3 Pos ,bool extinction);
 
 	static void  SetRate(int Rete) ;
 	static int*  GetRate() { return &m_Rate; };
@@ -54,8 +57,8 @@ private:
 	static int m_Rate;		//”{—¦
 	static int m_RateWait;
 	static bool m_Decrease;
-	CNumber * ratio[MAXRATE];
-	static CNumber * Fastratio[MAXRATE];
+	CNumber * ratio[KETA];
+	static CNumber * Fastratio[KETA];
 };
 
 #endif

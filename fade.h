@@ -24,8 +24,8 @@ public:
 	//画面(モード)の種類
 	enum FADE
 	{
-		FADEIN = 0,		//タイトル画面
-		FADEOUT,			//フェード画面
+		FADEIN = 0,		
+		FADEOUT,			
 		FADENON,
 		FADEMAX
 	};
@@ -36,7 +36,7 @@ public:
 	void Draw()override;	// 描画
 	static CFade* Create();
 	void CFade::NextMode(CManager::MODE nextMode);
-
+	FADE * GetFade() { return&fade; };
 private:
 
 	float m_FadeSp;

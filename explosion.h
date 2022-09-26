@@ -17,13 +17,20 @@ class CExplosion : public CObject2d
 {
 
 public:
+	enum PosType
+	{
+		TYPE_2D = 0,	// ìÆÇ≠Ç‚Å[Ç¬
+		TYPE_3D,		// ìÆÇ©Ç»Ç¢Ç‚Å[Ç¬
+		MAX			// Ç†ÇÒÇΩÇæÇÍÇ‚ÅH
+	};
+
 	CExplosion();
 	~CExplosion() override;
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	static CExplosion* Create(D3DXVECTOR3 pos);
+	static CExplosion* Create(D3DXVECTOR3 pos, int timer, bool b3D);
 private:
 	void SetAnimation(const int U, const int V);
 
@@ -35,5 +42,8 @@ private:
 	int m_DivisionY;
 	int m_DivisionMAX;
 	int m_AnimationSpeed;
+
+	int m_Timar;
+	int m_TimaCount;
 };
 #endif

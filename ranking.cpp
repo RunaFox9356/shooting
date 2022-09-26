@@ -53,11 +53,14 @@ void OnLoginGet(const LoginResult& , void* )
 
 void OnLoginSet(const LoginResult& , void* )
 {
-	printf("Congratulations, you made your first successful API call!\n");
-	finished = true;
-	
-	CRanking::GoScore();
-	CRanking::SetName();
+	if (CRanking::GetMyScore() != 0)
+	{
+		printf("Congratulations, you made your first successful API call!\n");
+		finished = true;
+
+		CRanking::GoScore();
+		CRanking::SetName();
+	}
 	
 }
 
@@ -167,20 +170,21 @@ void CRanking::Update(void)
 	if (finished)
 	{
 		m_Object2d[2]->SetTexture(CTexture::TEXTURE_RANKINTITLEON);
-	}
-	
-	if (CInputpInput->Trigger(CInput::KEY_DECISION))
-	{
-		//モードの設定
-		if (m_Score == 0)
+
+
+		if (CInputpInput->Trigger(CInput::KEY_DECISION))
 		{
-			CManager::GetFade()->NextMode(CManager::MODE_TITLE);
-			return;
-		}
-		else
-		{
-			CManager::GetFade()->NextMode(CManager::MODE_RESULT);
-			return;
+			//モードの設定
+			if (m_Score == 0)
+			{
+				CManager::GetFade()->NextMode(CManager::MODE_TITLE);
+				return;
+			}
+			else
+			{
+				CManager::GetFade()->NextMode(CManager::MODE_RESULT);
+				return;
+			}
 		}
 	}
 }
@@ -225,7 +229,7 @@ void CRanking::OnlineSetScore()
 	request.CustomId = m_PlayName;//GetMACAddr();
 
 	PlayFabClientAPI::LoginWithCustomID(request, OnLoginSet, OnLoginFail);
-
+	CRanking::APIUp();
 	
 }
 

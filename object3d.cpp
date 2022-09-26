@@ -324,7 +324,7 @@ void CObject3d::HitLife(int Damage)
 		{//LIFE‚ªs‚«‚½‚Æ‚«
 	
 			CMultiply::SetRate((1 + *CMultiply::GetRate()));
-			CMultiply::list(*CMultiply::GetRate(), m_pos, true);
+			CMultiply::Create(*CMultiply::GetRate(), m_pos, true);
 
 			for (int i = 0; i < 5; i++)
 			{

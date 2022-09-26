@@ -38,6 +38,7 @@ public:
 	static void OnlineSetScore();
 	static void SetScore(int nScore);
 	static void GetScore();
+	static int GetMyScore() { return m_Score; };
 	static void SetName();
 	static void SetPlayNeme(const std::string PlayName) { m_PlayName = PlayName; };
 	static std::string GetMACAddr();

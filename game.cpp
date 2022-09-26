@@ -89,6 +89,7 @@ HRESULT CGame::Init(void)
 	m_Pause->Init();
 	m_Pause->SetUp(CObject::PAUSE);
 
+	CMultiply::SetRate(0);
 	return S_OK;
 }
 

@@ -189,7 +189,7 @@ HRESULT CTitle::Init(void)
 	CManager::GetSound()->Play(CSound::LABEL_BGM_TITLE);
 
 	CRanking::SetScore(0);
-
+	
 	return S_OK;
 }
 
