@@ -110,11 +110,13 @@ void CPause::Update(void)
 		{
 			m_NextMode = 0;
 			Set();
+			//”wŒi
 			m_Bg->SetCollar(PositionVec4(0.3f, 0.3f, 0.3f, 0.8f));
 			for (int i = 0; i < 4; i++)
-			{
+			{//‘S•”ˆê‰ñ•Ï‚¦‚é
 				m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			}
+			//‘I‘ð‚µ‚Ä‚é‚â‚Â
 			m_object2d[m_NextMode]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 

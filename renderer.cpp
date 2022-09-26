@@ -188,7 +188,6 @@ void CRenderer::Update()
 		C3dpolygon::PolygonReset();
 		// ƒ|ƒŠƒSƒ“‚ÌXVˆ—
 	
-
 		pLight->Update();
 		if (pPause == nullptr)
 		{
@@ -199,6 +198,7 @@ void CRenderer::Update()
 			if (pPause->Get())
 			{
 				CObject::TypeUpdate(CObject::PAUSE);
+				//pPause->Update();
 			}
 			else
 			{

@@ -27,7 +27,7 @@ public:
 	void Uninit() override;
 	void Update() override;
 	void Draw() override;
-	static CText* Create(Type talkType, int DeleteTime, int SpeedText,char * Text);
+	static CText* Create(Type talkType, int DeleteTime, int SpeedText, const char * Text);
 
 	void Releasetimer(int nTimar);
 private:
@@ -47,7 +47,7 @@ private:
 	std::string m_Text;
 	std::string m_ALLText;
 
-	void TextLetter(char * Text, int SpeedText);
+	void TextLetter(const char * Text, int SpeedText);
 };
 
 

@@ -22,7 +22,7 @@ public:
 //#define MAXRATE (10)
 //#define RATE (MAXRATE-1)
 
-class CMultiply : public CObject
+class CMultiply : public CObject2d
 {
 private:
 	static const int KETA = 3;
@@ -47,7 +47,6 @@ public:
 	static void FastSet(int Number, D3DXVECTOR3 Pos);
 
 	static CMultiply* Create(int Number, D3DXVECTOR3 Pos ,bool extinction);
-
 	static void  SetRate(int Rete) ;
 	static int*  GetRate() { return &m_Rate; };
 

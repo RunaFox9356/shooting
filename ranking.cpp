@@ -28,7 +28,10 @@
 
 #include "sound.h"
 
+#include "text.h"
+
 #pragma comment(lib, "iphlpapi.lib")
+
 
 
 using namespace PlayFab;
@@ -40,11 +43,11 @@ CScore *CRanking::m_Ranking[MAX_RANK];
 int CRanking::m_Score;
 bool CRanking::m_Stop;
 std::string  CRanking::m_PlayName;
+std::string CRanking::m_Name[5];
 
 void OnLoginGet(const LoginResult& , void* )
 {
 	printf("Congratulations, you made your first successful API call!\n");
-	finished = true;
 	CRanking::GetScore();
 
 	
@@ -56,7 +59,7 @@ void OnLoginSet(const LoginResult& , void* )
 	if (CRanking::GetMyScore() != 0)
 	{
 		printf("Congratulations, you made your first successful API call!\n");
-		finished = true;
+
 
 		CRanking::GoScore();
 		CRanking::SetName();
@@ -70,7 +73,7 @@ void OnLoginFail(const PlayFabError& error, void*)
 	printf("Here's some debug information:\n");
 	printf(error.GenerateErrorReport().c_str());
 	printf("\n");
-	finished = true;
+
 }
 
 //========================
@@ -128,7 +131,7 @@ inline HRESULT CRanking::Init(void)
 
 	finished = false;
 	m_Stop = false;
-	
+	m_RankingSet = false;
 	
 
 	m_Ranking[5] = CScore::Create(pos);
@@ -171,6 +174,18 @@ void CRanking::Update(void)
 	{
 		m_Object2d[2]->SetTexture(CTexture::TEXTURE_RANKINTITLEON);
 
+
+		if (!m_RankingSet)
+		{
+			std::string Name;
+			m_RankingSet = true;
+			for (int i = 0; i < 5; i++)
+			{
+				Name += m_Name[i];
+				Name += "\n";
+			}
+			CText::Create(CText::GON, 300, 10, Name.c_str());
+		}
 
 		if (CInputpInput->Trigger(CInput::KEY_DECISION))
 		{
@@ -241,21 +256,28 @@ void CRanking::GetScore()
 	GetLeaderboardRequest req;
 
 	req.StatisticName = "ScoreFox";//ゲームマネージャーでランキング名のやつ
-
+	
 	PlayFabClientAPI::GetLeaderboard(req,
 		[](const ClientModels::GetLeaderboardResult& resul, void*)
 	{
+	
 		for (auto item : resul.Leaderboard)
 		{
 			if (item.Position <= 4)
 			{
-				//const char * Name = item.DisplayName.c_str();//なまえをキャラに変換
+				m_Name[item.Position - 1] += item.Position;
+				m_Name[item.Position - 1] += "位は";
+				m_Name[item.Position - 1] += item.DisplayName;//なまえをキャラに変換
 				// 表示
 				m_Ranking[item.Position]->Set(item.StatValue);	
+	
 			}
 		}
+		finished = true;
 	});
-	finished = true;
+	
+	
+	
 }
 
 //========================

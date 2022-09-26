@@ -173,7 +173,8 @@ bool CInput::Press(STAN_DART_INPUT_KEY key)
 		break;
 
 	case CInput::KEY_DELETE:
-		if (m_pKeyboard->GetKeyboardPress(DIK_BACKSPACE))
+		if (m_pKeyboard->GetKeyboardPress(DIK_BACKSPACE)
+			|| m_pKeyJoypad->GetJoypadPress(CInputController::JOYKEY_B, 0))
 		{
 			return true;
 		}
@@ -186,7 +187,7 @@ bool CInput::Press(STAN_DART_INPUT_KEY key)
 		break;
 	case CInput::KEY_PAUSE:
 		if (m_pKeyboard->GetKeyboardPress(DIK_P)
-			|| m_pKeyJoypad->GetJoypadTrigger(CInputController::JOYKEY_START, 0))
+			|| m_pKeyJoypad->GetJoypadPress(CInputController::JOYKEY_START, 0))
 		{
 			return true;
 		}

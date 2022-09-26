@@ -148,7 +148,7 @@ void CText::Draw()
 //=============================================================================
 // ê∂ê¨ä÷êî
 //=============================================================================
-CText *CText::Create(Type talkType,int DeleteTime, int SpeedText, char * Text)
+CText *CText::Create(Type talkType,int DeleteTime, int SpeedText,const char * Text)
 {
 	CText * pObject = nullptr;
 	pObject = new CText(3);
@@ -194,7 +194,7 @@ void CText::Releasetimer(int nTimar)
 //=============================================================================
 // ÇØÇ∑Ç‹Ç≈ÇÃéûä‘ê›íËä÷êî
 //=============================================================================
-void CText::TextLetter(char * Text, int SpeedText)
+void CText::TextLetter(const char * Text, int SpeedText)
 {
 	m_ALLText = Text;
 	m_TextSize = m_ALLText.size();

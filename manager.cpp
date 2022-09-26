@@ -21,6 +21,8 @@
 
 #include "ranking.h"
 #include "tutorial.h"
+
+#include "multiply.h"
 //-----------------------------------------------------------------------------
 // Ã“Iƒƒ“ƒo[•Ï”‚Ì‰Šú‰»
 //-----------------------------------------------------------------------------
@@ -85,6 +87,7 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 
 	m_Fade = CFade::Create();
 
+	
 	
 	return S_OK;
 }

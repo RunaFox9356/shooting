@@ -95,10 +95,9 @@ void CMultiply::FastSet(int Number, D3DXVECTOR3 Pos)
 	for (int i = KETA-1; i >= 0; i--)
 	{
 	
-			Fastratio[i] = CNumber::Create();
-			Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));	
+		Fastratio[i] = CNumber::Create();
+		Fastratio[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));	
 		
-
 		aPosTexU[i] = 0;
 		
 	}

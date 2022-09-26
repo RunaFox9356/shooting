@@ -6,11 +6,11 @@
 //============================
 
 #include "explosion.h"
-
+#include "utility.h"
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CExplosion::CExplosion():CObject2d(1)
+CExplosion::CExplosion():CObject2d(0)
 {
 }
 
@@ -104,7 +104,8 @@ CExplosion *CExplosion::Create(D3DXVECTOR3 pos,int timer,bool b3D)
 		D3DXVECTOR3 Poppos = pos;
 		if (b3D)
 		{
-			//Poppos =
+			Poppos = ScreenCastWorld(&Poppos,			// スクリーン座標
+				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));								// スクリーンサイズ
 		}
 		pObject->Init();
 		pObject->SetPos(pos);

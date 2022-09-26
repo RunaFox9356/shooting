@@ -42,23 +42,26 @@ public:
 	static void SetName();
 	static void SetPlayNeme(const std::string PlayName) { m_PlayName = PlayName; };
 	static std::string GetMACAddr();
+	static void SetName(int number, std::string Name) { m_Name[number] = Name; };
 
 private:
 
 	static int m_Score;
 	static CScore *m_Ranking[MAX_RANK];
 	static std::string m_PlayName;
-
+	static	std::string m_Name[5];
+	static bool m_Stop;
 	CObject2d *m_Object2d[4];
 
 	CName*m_ListName[3];
 	CName*m_PlayNameSet[10];
 
 	D3DXVECTOR3 m_NemePos;
+
 	int m_NowPlay;
 
 	bool m_OnrankingSet;
-	static bool m_Stop;
+	bool m_RankingSet;
 };
 
 
