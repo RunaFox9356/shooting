@@ -23,6 +23,7 @@
 #include "game.h"
 #include "magiccircle.h"
 #include "tutorial.h"
+#include "explosion.h"
 
 //------------------------------------
 // static•Ï”
@@ -623,5 +624,10 @@ void CPlayer::TutorialMove()	//“®‚«ƒZƒbƒg
 	if (m_rot.y <= -D3DX_PI)
 	{
 		m_rot.y += D3DX_PI * 2;
+	}
+
+	if (GetLife() <= 0)
+	{
+		CExplosion::Create(m_pos, 0, true);
 	}
 }

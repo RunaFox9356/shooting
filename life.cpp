@@ -77,7 +77,7 @@ void CLife::Update()
 	{
 		SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 1.0f));
 	}
-	if (m_Life <= CPlayer::MAXLIFE / 10.0f)
+	if (m_Life <= 50)
 	{
 		SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
 	}
@@ -154,6 +154,11 @@ void CLife::SetDamage(const int Damage)
 {
 	m_move.x -= Damage;
 	//m_pos.x -= Damage;
+	m_Life -= Damage;
+	if (m_Life >= CPlayer::MAXLIFE)
+	{
+		m_Life = CPlayer::MAXLIFE;
+	}
 	if (Damage >= 0)
 	{
 		CPlayer* cPlayer = CGame::GetPlayer();

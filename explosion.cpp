@@ -108,8 +108,8 @@ CExplosion *CExplosion::Create(D3DXVECTOR3 pos,int timer,bool b3D)
 				D3DXVECTOR3((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f));								// スクリーンサイズ
 		}
 		pObject->Init();
-		pObject->SetPos(pos);
-		pObject->SetSize(D3DXVECTOR3(100.0f, 100.0f, 100.0f));
+		pObject->SetPos(Poppos);
+		pObject->SetSize(D3DXVECTOR3(300.0f, 300.0f, 0.0f));
 		pObject->SetAnimation(7, 1);
 		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		pObject->m_Timar = timer;
