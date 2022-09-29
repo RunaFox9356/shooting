@@ -33,10 +33,6 @@ public:
 
 	 HRESULT Init() override
 	 {
-		 for (int i = 0; i < KETA; i++)
-		 {
-			 Fastratio[i] = nullptr;
-		 }
 		 return S_OK;
 	 };
 	 void Uninit()override;
@@ -58,7 +54,6 @@ private:
 	static int m_RateWait;
 	static bool m_Decrease;
 	CNumber * ratio[KETA];
-	static CNumber * Fastratio[KETA];
 };
 
 #endif

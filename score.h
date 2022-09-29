@@ -14,7 +14,6 @@
 
 class CNumber;
 
-//プロトタイプ宣言
 class CScore : public CObject
 {
 public:

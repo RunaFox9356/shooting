@@ -154,7 +154,6 @@ CDeath *CDeath::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move)
 
 	if (pObject != nullptr)
 	{
-
 		pObject->Init();
 		pObject->SetMove(move);
 		pObject->SetPos(D3DXVECTOR3(pos.x, pos.y, 0.0f));
@@ -186,7 +185,6 @@ void CDeath::SetAnimation(const int U, const int V)
 		, 1.0f / m_DivisionY * (m_PatternAnimY % (m_DivisionY)+1.0f / m_DivisionY* m_DivisionY)));
 
 }
-
 
 //=============================================================================
 // コンストラクト関数

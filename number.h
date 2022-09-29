@@ -10,15 +10,12 @@
 
 #include "object2d.h"
 
-
-
 class CNumber : public CObject2d
 {
 public:
-
-	
 	CNumber(int list);
 	~CNumber();
+
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;

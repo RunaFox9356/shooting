@@ -138,6 +138,12 @@ CPlayer *CPlayer::Create()
 //------------------------------------
 void CPlayer::Move()	//動きセット
 {
+
+	if (GetLife() <= 0)
+	{
+		CExplosion::Create(m_pos, 0, true);
+	}
+
 	CInput *CInputpInput = CInput::GetKey();
 	D3DXVECTOR3 *Camerarot = CRenderer::GetCamera()->GetRot();
 	float consumption = 0.0f;
@@ -392,7 +398,7 @@ void CPlayer::TitleMove()
 		m_pos.x = SCREEN_WIDTH*0.5f;
 	}
 	
-
+	
 }
 
 //------------------------------------
@@ -626,8 +632,5 @@ void CPlayer::TutorialMove()	//動きセット
 		m_rot.y += D3DX_PI * 2;
 	}
 
-	if (GetLife() <= 0)
-	{
-		CExplosion::Create(m_pos, 0, true);
-	}
+
 }

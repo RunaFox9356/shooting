@@ -13,7 +13,6 @@
 int CMultiply::m_Rate;
 int CMultiply::m_RateWait;
 bool CMultiply::m_Decrease;
-CNumber * CMultiply::Fastratio[KETA] = {};
 
 //=============================================================================
 // ƒZƒbƒgŠÖ”
@@ -131,7 +130,7 @@ void CMultiply::Update()
 			{
 				m_Rate = 0;
 			}
-			CGame::GetMultiply()->set(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f), false,false);
+			//CGame::GetMultiply()->set(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f), false,false);
 		}
 	}
 

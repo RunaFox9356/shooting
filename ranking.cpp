@@ -95,7 +95,10 @@ CRanking::~CRanking()
 //========================
 inline HRESULT CRanking::Init(void)
 {
-
+	for (int i = 0; i < 3; i++)
+	{
+		m_Name[i] = "";
+	}
 	D3DXVECTOR3 pos = D3DXVECTOR3(CManager::Pos.x, 100.0f, 0.0f);
 	for (int i = 0; i < MAX_RANK - 1; i++)
 	{
@@ -179,7 +182,7 @@ void CRanking::Update(void)
 		{
 			std::string Name;
 			m_RankingSet = true;
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 3;i++)
 			{
 				Name += m_Name[i];
 				Name += "\n";
@@ -265,9 +268,27 @@ void CRanking::GetScore()
 		{
 			if (item.Position <= 4)
 			{
-				m_Name[item.Position - 1] += item.Position;
-				m_Name[item.Position - 1] += "ˆÊ‚Í";
-				m_Name[item.Position - 1] += item.DisplayName;//‚È‚Ü‚¦‚ðƒLƒƒƒ‰‚É•ÏŠ·
+				switch (item.Position)
+				{
+					case 0:
+						m_Name[item.Position] += "‚¢‚¿‚¢‚Í";
+						break;
+					case 1:
+						m_Name[item.Position] += "‚É‚¢‚¢‚Í";
+					 break;
+					case 2:
+						m_Name[item.Position] += "‚³‚ñ‚¢‚Í";
+						break;
+					case 3:
+					
+						break;
+				
+				default:
+					break;
+				}
+				
+
+				m_Name[item.Position] += item.DisplayName;//‚È‚Ü‚¦‚ðƒLƒƒƒ‰‚É•ÏŠ·
 				// •\Ž¦
 				m_Ranking[item.Position]->Set(item.StatValue);	
 	
