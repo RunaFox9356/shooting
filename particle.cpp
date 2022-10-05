@@ -65,7 +65,7 @@ void CParticle::Update()
 	m_data.move *= m_data.fAttenuation;			// ˆÚ“®—Ê‚Ì„ˆÚ
 	m_data.fWeight += m_data.fWeightTransition;	// d‚³‚Ì„ˆÚ
 	m_data.move.x -= 0.1f;
-	D3DXCOLOR myColor = CObject2d::GetCollar();
+	D3DXCOLOR myColor = CObject2d::GetColar();
 	if (m_data.color.bColTransition)
 	{// F‚Ì„ˆÚ
 		if (m_data.color.nEndTime >= m_data.color.nCntTransitionTime)
