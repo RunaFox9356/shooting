@@ -12,7 +12,7 @@
 
 int CMultiply::m_Rate;
 int CMultiply::m_RateWait;
-bool CMultiply::m_Decrease;
+
 
 //=============================================================================
 // ƒZƒbƒgŠÖ”
@@ -91,7 +91,7 @@ void CMultiply::SetRate(int Rete)
 	if (m_Rate <= 256)
 	{
 		m_RateWait = 6000;
-		m_Decrease = false;
+	
 		m_Rate = Rete;
 		set(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f), false,false);
 	}
@@ -124,13 +124,13 @@ void CMultiply::Update()
 		if (m_RateWait <= 0)
 		{
 
-			m_Decrease = false;
+			m_RateWait = 1000;
 			m_Rate--;
 			if (m_Rate <= 0)
 			{
 				m_Rate = 0;
 			}
-			//CGame::GetMultiply()->set(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f), false,false);
+			CGame::GetMultiply()->set(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f), false,false);
 		}
 	}
 

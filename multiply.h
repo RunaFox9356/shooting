@@ -52,7 +52,6 @@ private:
 
 	static int m_Rate;		//”{—¦
 	static int m_RateWait;
-	static bool m_Decrease;
 	CNumber * ratio[KETA];
 };
 
