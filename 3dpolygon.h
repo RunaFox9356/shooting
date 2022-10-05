@@ -41,7 +41,7 @@ public:
 	void SetTexture(CTexture::TEXTURE texture);
 	void SetTex(PositionVec4 Tex);
 	void SetSize(const D3DXVECTOR3 &size);
-	void SetCollar(PositionVec4 Collar);
+	void SetColar(PositionVec4 Collar);
 	LPDIRECT3DVERTEXBUFFER9 &GetVtx();
 
 	static void PolygonReset() { m_MaxPolygon = 0; };

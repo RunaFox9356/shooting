@@ -97,7 +97,7 @@ CHit *CHit::Create(D3DXVECTOR3 pos,int Type)
 	{
 		pObject->Init();
 		pObject->SetPos(D3DXVECTOR3(pos.x, pos.y+50.0f, 0.0f));
- 		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+ 		pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
   		pObject->SetAnimation(8,1);
 		//CManager::GetSound()->Play(CSound::LABEL_SE_HIT);
 		int nType = Type;

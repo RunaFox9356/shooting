@@ -102,7 +102,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 		pObject->Init();
 		pObject->SetMove(D3DXVECTOR3(15.0f, 0.0f, 0.0f));
 		pObject->SetPos(D3DXVECTOR3(pos.x+640.0f, pos.y, 0.0f));
-		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
+		pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		pObject->m_NouPlayer = type;
 		pObject->SetTexture(CTexture::TEXTURE_NONE);
 		switch (type)
@@ -118,7 +118,7 @@ CSorcey *CSorcey::Create(D3DXVECTOR3 pos , CPlayer::NOWMAGIC type)
 			pObject->SetAnimation(1, 8);
 			pObject->SetTexture(CTexture::TEXTURE_ICEAREA);
 			pObject->SetSize(D3DXVECTOR3(100.0f, 100.0f, 0.0f));
-			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 			pObject->SetPos(D3DXVECTOR3(pos.x, pos.y, 0.0f));
 			CManager::GetSound()->Play(CSound::LABEL_SE_ICE);
 			pObject->SetSpeed(10);

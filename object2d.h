@@ -43,7 +43,7 @@ public:
 	void SetTexture(CTexture::TEXTURE texture);
 	void SetTex(PositionVec4 Tex);
 	CTexture::TEXTURE GetTexture(); 
-	void SetCollar(PositionVec4 Collar);
+	void SetColar(PositionVec4 Collar);
 
 	D3DXCOLOR GetColar() { return D3DXCOLOR(m_col.P0, m_col.P1, m_col.P2, m_col.P3); };
 	D3DXVECTOR3 GetSize() { return m_Size; };

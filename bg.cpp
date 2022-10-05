@@ -114,7 +114,7 @@ CBg *CBg::Create()
 		pObject->Init();
 		pObject->SetSize(D3DXVECTOR3(640.0f, 360.0f,0.0f));
 		pObject->SetPos(D3DXVECTOR3(0.0f, 0.0f,10200.0f));
-		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.5f));
+		pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.5f));
 
 	}
 

@@ -162,25 +162,25 @@ void CCrystal::Update()
 						switch (m_myType)
 						{
 						case NOW_FIRE:
-							SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
+							SetColar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
 							break;
 						case NOW_ICE:
-							SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
+							SetColar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
 							break;
 						case NOW_STORM:
-							SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
+							SetColar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
 							break;
 						case NOW_SUN:
-							SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
+							SetColar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
 							break;
 						default:
-							SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+							SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 							break;
 						}
 					}
 					else
 					{
-						SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+						SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 					}
 					pObject[nObject]->Release();
 					if (Type != CObject::RANKUPBULLET)
@@ -245,19 +245,19 @@ CCrystal *CCrystal::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move)
 		switch (m_popType)
 		{
 		case NOW_FIRE:
-			pObject->SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
+			pObject->SetColar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
 			break;
 		case NOW_ICE:
-			pObject->SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
+			pObject->SetColar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
 			break;
 		case NOW_STORM:
-			pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
+			pObject->SetColar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		case NOW_SUN:
-			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
+			pObject->SetColar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		default:
-			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+			pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			break;
 		}
 	}

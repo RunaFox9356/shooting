@@ -66,7 +66,7 @@ void CNumber::Update()
 
 		m_pos.y -= 1.0f;
 
-		CObject2d::SetCollar(col);
+		CObject2d::SetColar(col);
 
 		if (m_DesTimar <= 0)
 		{

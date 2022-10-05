@@ -68,7 +68,7 @@ HRESULT CTutorial::Init(void)
 	m_Bg[0]->SetTexture(CTexture::TEXTURE_TUTORIAL);
 	m_Bg[0]->SetSize(CManager::Pos);
 
-	m_Bg[0]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+	m_Bg[0]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 	m_Player = nullptr;
 	m_Player = CPlayer::Create();

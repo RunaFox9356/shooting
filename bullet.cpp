@@ -184,23 +184,23 @@ CBullet *CBullet::Create(D3DXVECTOR3 pos ,D3DXVECTOR3 move, int magic)
 		switch (magic)
 		{
 		case CPlayer::NOW_FIRE:
-			pObject->SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
+			pObject->SetColar(PositionVec4(1.0f, 0.0f, 0.0f, 0.8f));
 
 			break;
 		case CPlayer::NOW_ICE:
-			pObject->SetCollar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
+			pObject->SetColar(PositionVec4(0.0f, 0.0f, 1.0f, 0.8f));
 			break;
 		case CPlayer::NOW_STORM:
-			pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
+			pObject->SetColar(PositionVec4(0.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		case CPlayer::NOW_SUN:
-			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
+			pObject->SetColar(PositionVec4(1.0f, 1.0f, 0.0f, 0.8f));
 			break;
 		case CPlayer::NOW_NON:
-			pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+			pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			break;
 		default:
-				pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+				pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			break;
 		}
 	}

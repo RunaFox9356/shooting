@@ -83,7 +83,7 @@ void CDangerousManager::Update()
 			m_object2d[i]->SetMove(m_move);
 			
 			float a = sinf((float)m_PopTimeCount*0.08f);
-			m_object2d[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, a));	
+			m_object2d[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, a));	
 		}
 	}
 	if (m_PopTimeCount >= m_PopTime+ m_DesTime)
@@ -217,7 +217,7 @@ CDangerous *CDangerous::Create(const D3DXVECTOR3 & pos)
 		pObject->SetSize(D3DXVECTOR3(0.0f,125.0f, 0.0f));
 		pObject->SetTexture(CTexture::TEXTURE_DANGEROUS);
 		pObject->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 
 	return pObject;

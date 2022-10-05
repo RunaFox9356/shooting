@@ -75,11 +75,11 @@ void CExplosion::Update()
 			, U *(m_PatternAnimX)+U
 			, V * (m_PatternAnimY)
 			, V * (m_PatternAnimY)+V));
-		SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	else
 	{
-		SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
+		SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 	}
 }
 
@@ -111,7 +111,7 @@ CExplosion *CExplosion::Create(D3DXVECTOR3 pos,int timer,bool b3D)
 		pObject->SetPos(Poppos);
 		pObject->SetSize(D3DXVECTOR3(300.0f, 300.0f, 0.0f));
 		pObject->SetAnimation(7, 1);
-		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 		pObject->m_Timar = timer;
 	}
 	return pObject;

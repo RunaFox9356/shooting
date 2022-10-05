@@ -236,7 +236,7 @@ void  C3dpolygon::SetSize(const D3DXVECTOR3 &size)
 //=============================================================================---
 //頂点Collarの設定
 //=============================================================================---
-void C3dpolygon::SetCollar(PositionVec4 Collar)
+void C3dpolygon::SetColar(PositionVec4 Collar)
 {
 	VERTEX_3D *pVtx; //頂点へのポインタ
 

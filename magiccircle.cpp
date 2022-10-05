@@ -182,7 +182,7 @@ CMagicCircleManager * CMagicCircleManager::Create(D3DXVECTOR3 pos)
 			object->MagicCircle[i]->SetTexture((CTexture::TEXTURE)((int)CTexture::TEXTURE_MAGICCIRCLE1 + rand() % 4 + 0));
 			object->MagicCircle[i]->SetSize(D3DXVECTOR3(1.0f + (10.0f*i), 1.0f + (10.0f*i), 0.0f));
 			object->MagicCircle[i]->SetDefaultSize(D3DXVECTOR3(100.0f + (70.0f*i), 100.0f + (70.0f * i), 0.0f));
-			//object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+			//object->MagicCircle[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 			//F‚ÌÝ’è
 
 			if (*CManager::GetMode() == CManager::MODE_GAME)
@@ -190,19 +190,19 @@ CMagicCircleManager * CMagicCircleManager::Create(D3DXVECTOR3 pos)
 				switch (CGame::GetMagicBox()->GetcMagic(i).GetTexture())
 				{
 				case CTexture::TEXTURE_FIRE:
-					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 0.2f, 0.2f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(1.0f, 0.2f, 0.2f, 0.8f));
 					break;
 				case CTexture::TEXTURE_ICE:
-					object->MagicCircle[i]->SetCollar(PositionVec4(0.2f, 0.2f, 1.0f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(0.2f, 0.2f, 1.0f, 0.8f));
 					break;
 				case CTexture::TEXTURE_STORM:
-					object->MagicCircle[i]->SetCollar(PositionVec4(0.0f, 1.0f, 0.2f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(0.0f, 1.0f, 0.2f, 0.8f));
 					break;
 				case CTexture::TEXTURE_THUNDER:
-					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 0.2f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(1.0f, 1.0f, 0.2f, 0.8f));
 					break;
 				default:
-					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 					break;
 				}
 			}
@@ -211,19 +211,19 @@ CMagicCircleManager * CMagicCircleManager::Create(D3DXVECTOR3 pos)
 				switch (CTutorial::GetMagicBox()->GetcMagic(i).GetTexture())
 				{
 				case CTexture::TEXTURE_FIRE:
-					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 0.2f, 0.2f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(1.0f, 0.2f, 0.2f, 0.8f));
 					break;
 				case CTexture::TEXTURE_ICE:
-					object->MagicCircle[i]->SetCollar(PositionVec4(0.2f, 0.2f, 1.0f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(0.2f, 0.2f, 1.0f, 0.8f));
 					break;
 				case CTexture::TEXTURE_STORM:
-					object->MagicCircle[i]->SetCollar(PositionVec4(0.0f, 1.0f, 0.2f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(0.0f, 1.0f, 0.2f, 0.8f));
 					break;
 				case CTexture::TEXTURE_THUNDER:
-					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 0.2f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(1.0f, 1.0f, 0.2f, 0.8f));
 					break;
 				default:
-					object->MagicCircle[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+					object->MagicCircle[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
 					break;
 				}
 			}

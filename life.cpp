@@ -75,11 +75,11 @@ void CLife::Update()
 	
 	if (m_Life <= CPlayer::MAXLIFE / 2.0f)
 	{
-		SetCollar(PositionVec4(1.0f, 1.0f, 0.0f, 1.0f));
+		SetColar(PositionVec4(1.0f, 1.0f, 0.0f, 1.0f));
 	}
 	if (m_Life <= 50)
 	{
-		SetCollar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
+		SetColar(PositionVec4(1.0f, 0.0f, 0.0f, 1.0f));
 	}
 	
 	m_move.x += (0.0f - m_move.x)* 0.5f;//（目的の値-現在の値）＊減衰係数
@@ -123,7 +123,7 @@ CLife *CLife::Create(const D3DXVECTOR3 & pos,float Life)
 		pObject->m_Life = Life;
 		pObject->Init();
 		pObject->SetSize(D3DXVECTOR3(0.0f, 20.0f, 0.0f));
-		pObject->SetCollar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
+		pObject->SetColar(PositionVec4(0.0f, 1.0f, 0.0f, 1.0f));
 		pObject->SetTexture(CTexture::TEXTURE_NONE);
 		pObject->SetMove(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		

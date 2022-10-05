@@ -151,7 +151,7 @@ void CMagicBox::Magicplay(CTexture::TEXTURE TEX)
 			cMagic[1]->SelectTex(cMagic[0]->GetTexture());
 			cMagic[0]->SelectTex(TEX);
 			CPlayer::SetMagic((CPlayer::NOWMAGIC)TEX);
-			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			cMagic[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 			i = 2;
 		}
 		
@@ -167,7 +167,7 @@ void CMagicBox::Magicplay(CTexture::TEXTURE TEX)
 	{
 		if (CTexture::TEXTURE_NONE == cMagic[i]->GetTexture())
 		{
-			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
+			cMagic[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		}
 	}
 	cMagic[0]->SetPos(D3DXVECTOR3(m_pos.x - 150.0f, m_pos.y - 50.0f, m_pos.z));
@@ -188,7 +188,7 @@ void CMagicBox::MagicRelease(void)
 			cMagic[0]->SelectTex(cMagic[1]->GetTexture());
 			cMagic[1]->SelectTex(cMagic[2]->GetTexture());
 			cMagic[2]->SelectTex(CTexture::TEXTURE_NONE);
-			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+			cMagic[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 			CPlayer::SetMagic((CPlayer::NOWMAGIC)cMagic[0]->GetTexture());
 			i = 2;
 		}
@@ -206,7 +206,7 @@ void CMagicBox::MagicRelease(void)
 	{
 		if (CTexture::TEXTURE_NONE == cMagic[i]->GetTexture())
 		{
-			cMagic[i]->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
+			cMagic[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.0f));
 		}
 	}
 	cMagic[0]->SetPos(D3DXVECTOR3(m_pos.x-150.0f, m_pos.y - 50.0f, m_pos.z));

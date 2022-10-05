@@ -159,7 +159,7 @@ CDeath *CDeath::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move)
 		pObject->SetPos(D3DXVECTOR3(pos.x, pos.y, 0.0f));
 		pObject->SetSize(D3DXVECTOR3(50.0f, 50.0f, 0.0f));
 		pObject->SetAnimation(5, 4);
-		pObject->SetCollar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
+		pObject->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 
 	return pObject;

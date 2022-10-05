@@ -245,7 +245,7 @@ void CObject2d::SetTex(PositionVec4 Tex)
 //=============================================================================
 //セットカラー
 //=============================================================================
-void CObject2d::SetCollar(PositionVec4 Collar)
+void CObject2d::SetColar(PositionVec4 Collar)
 {
 	VERTEX_2D *pVtx; //頂点へのポインタ
 
