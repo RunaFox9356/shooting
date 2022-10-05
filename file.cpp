@@ -64,6 +64,10 @@ void OutputStatus()
 	writing_file.close();*/
 }
 
+
+//============================
+// エフェクトの取得（置くだけ）
+//============================
 void LoadJson(const char* cUrl)
 {
 	std::ifstream ifs(cUrl);

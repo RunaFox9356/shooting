@@ -92,11 +92,11 @@ void CText::Update()
 			if (m_AddLetter <= m_TextSize)
 			{
 				m_Text+=m_ALLText[m_AddLetter];
-				/*if (m_AddLetter + 1 <= m_TextSize)
+				if (m_AddLetter + 1 <= m_TextSize)
 				{
 					m_Text += m_ALLText[m_AddLetter + 1];
-				}*/
-				m_AddLetter++;
+				}
+				m_AddLetter+=2;
 			}
 			m_AddCount = 0;
 		}

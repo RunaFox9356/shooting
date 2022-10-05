@@ -225,7 +225,7 @@ void CRenderer::Draw()
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
 	{
 		pCamera[0]->Set(0);
-		CObject::AllDraw();	
+		CObject::AllDraw();
 
 #ifdef _DEBUG
 		// FPS•\Ž¦

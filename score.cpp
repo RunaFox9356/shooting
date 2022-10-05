@@ -95,7 +95,7 @@ void  CScore::Set(int nScore)
 	{
 		if (aPosTexU[nCntScore] != 0)
 		{
-			m_pNumber[nCntScore]->SetSpeed(5.0f);
+			m_pNumber[nCntScore]->SetSpeed(0.0f);
 			m_pNumber[nCntScore]->SetNumber(aPosTexU[nCntScore]);
 		}
 		else

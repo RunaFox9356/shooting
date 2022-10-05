@@ -14,7 +14,9 @@ namespace hmd
 	float easeInQuad(float X);
 }
 
-
+//=============================================================================
+//回転と移動を反映行列
+//=============================================================================
 D3DXMATRIX *hmd::giftmtx(D3DXMATRIX *pOut, D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 {
 	// TODO: 関数化する
@@ -38,9 +40,9 @@ D3DXMATRIX *hmd::giftmtx(D3DXMATRIX *pOut, D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 }
 
 
-//
+//=============================================================================
 //イージング
-//
+//=============================================================================
 float hmd::easeInSine(float X)
 {
 	return 1 - cos((X * D3DX_PI) / 2);
