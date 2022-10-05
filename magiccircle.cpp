@@ -182,7 +182,7 @@ CMagicCircleManager * CMagicCircleManager::Create(D3DXVECTOR3 pos)
 			object->MagicCircle[i]->SetTexture((CTexture::TEXTURE)((int)CTexture::TEXTURE_MAGICCIRCLE1 + rand() % 4 + 0));
 			object->MagicCircle[i]->SetSize(D3DXVECTOR3(1.0f + (10.0f*i), 1.0f + (10.0f*i), 0.0f));
 			object->MagicCircle[i]->SetDefaultSize(D3DXVECTOR3(100.0f + (70.0f*i), 100.0f + (70.0f * i), 0.0f));
-			//object->MagicCircle[i]->SetColar(PositionVec4(1.0f, 1.0f, 1.0f, 0.8f));
+
 			//F‚Ìİ’è
 
 			if (*CManager::GetMode() == CManager::MODE_GAME)
