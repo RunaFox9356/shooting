@@ -188,7 +188,7 @@
     <ClCompile Include="motion.cpp" />
     <ClCompile Include="multiply.cpp" />
     <ClCompile Include="name.cpp" />
-    <ClCompile Include="nemeset.cpp" />
+    <ClCompile Include="nameset.cpp" />
     <ClCompile Include="number.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="object2d.cpp" />
@@ -246,7 +246,7 @@
     <ClInclude Include="motion.h" />
     <ClInclude Include="multiply.h" />
     <ClInclude Include="name.h" />
-    <ClInclude Include="nemeset.h" />
+    <ClInclude Include="nameset.h" />
     <ClInclude Include="number.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="object2d.h" />

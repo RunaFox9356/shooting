@@ -4,18 +4,18 @@
 // Author : hamada ryuuga
 //
 //**************************************************
-#include "nemeset.h"
+#include "nameset.h"
 #include "input.h"
 #include "manager.h"
 #include "object2d.h"
 #include "ranking.h"
 #include "fade.h"
-std::string  CNemeSet::m_PlayName;
+std::string  CNameSet::m_PlayName;
 
 //==================================
 // コンストラクター
 //==================================
-CNemeSet::CNemeSet()
+CNameSet::CNameSet()
 {
 
 	if (m_object2d[0] != nullptr)
@@ -41,14 +41,14 @@ CNemeSet::CNemeSet()
 //==================================
 // デストラクタ
 //==================================
-CNemeSet::~CNemeSet()
+CNameSet::~CNameSet()
 {
 }
 
 //================
 //初期化処理
 //================
-HRESULT CNemeSet::Init(void)
+HRESULT CNameSet::Init(void)
 {
 	m_PlayName = "";
 	m_NowPlay = 0;
@@ -85,7 +85,7 @@ HRESULT CNemeSet::Init(void)
 //================
 //破棄
 //================
-void CNemeSet::Uninit(void)
+void CNameSet::Uninit(void)
 {
 
 
@@ -94,7 +94,7 @@ void CNemeSet::Uninit(void)
 //============================
 //更新処理
 //============================
-void CNemeSet::Update(void)
+void CNameSet::Update(void)
 {
 	CInput *CInputpInput = CInput::GetKey();
 	if (CInputpInput->Trigger(CInput::KEY_DELETE))
@@ -122,20 +122,20 @@ void CNemeSet::Update(void)
 			return;
 		}
 
-		CNemeSet::RankingNeme();
+		CNameSet::RankingNeme();
 	}	
 }
 //============================
 //描画処理
 //============================
-void CNemeSet::Draw(void)
+void CNameSet::Draw(void)
 {
 }
 
 //==================================
 //rankingに名まえをねじ込む
 //==================================
-void CNemeSet::RankingNeme()
+void CNameSet::RankingNeme()
 {
 	CName::ALPHABET Type = m_ListName[1]->GetAlphabet();
 

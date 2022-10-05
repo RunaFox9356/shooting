@@ -5,18 +5,18 @@
 //
 //**************************************************
 
-#ifndef _NEMESET_H_
-#define _NEMESET_H_
+#ifndef _NAMESET_H_
+#define _NAMESET_H_
 
 #include"main.h"
 #include "object2d.h"
 #include "name.h"
 
-class CNemeSet :public CObject
+class CNameSet :public CObject
 {
 public:
-	CNemeSet();
-	~CNemeSet();
+	CNameSet();
+	~CNameSet();
 	HRESULT Init() override;
 	void Uninit() override;
 	void Update() override;
