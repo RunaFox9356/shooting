@@ -212,6 +212,7 @@
     <ClCompile Include="title.cpp" />
     <ClCompile Include="tutorial.cpp" />
     <ClCompile Include="utility.cpp" />
+    <ClCompile Include="words.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3dpolygon.h" />
@@ -271,6 +272,7 @@
     <ClInclude Include="title.h" />
     <ClInclude Include="tutorial.h" />
     <ClInclude Include="utility.h" />
+    <ClInclude Include="words.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="pori.rc" />

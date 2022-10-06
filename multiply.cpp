@@ -9,6 +9,7 @@
 #include "number.h"
 #include "utility.h"
 #include "game.h"
+#include "manager.h"
 
 int CMultiply::m_Rate;
 int CMultiply::m_RateWait;
@@ -19,7 +20,7 @@ int CMultiply::m_RateWait;
 //=============================================================================
 void CMultiply::set(int Number, D3DXVECTOR3 Pos, bool extinction, bool b3D)
 {
-	int aPosTexU[100];
+	int aPosTexU[3];
 	int nModScore = Number;
 	int nDigits;
 
@@ -130,7 +131,24 @@ void CMultiply::Update()
 			{
 				m_Rate = 0;
 			}
-			CGame::GetMultiply()->set(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f), false,false);
+			switch (*CManager::GetMode())
+			{
+			case CManager::MODE_TITLE:
+				break;
+			case CManager::MODE_GAME:
+				CGame::GetMultiply()->set(m_Rate, D3DXVECTOR3(150.0f, 200.0f, 0.0f), false, false);
+				break;
+			case CManager::MODE_RESULT:
+				break;
+			case CManager::MODE_RANKING:
+				break;
+			case CManager::MODE_TUTORIAL:
+				
+				break;
+			default:
+				break;
+			}
+			
 		}
 	}
 

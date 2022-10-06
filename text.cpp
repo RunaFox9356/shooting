@@ -51,6 +51,8 @@ HRESULT CText::Init()
 	D3DXCreateFont(CManager::GetRenderer()->GetDevice(), 38, 0, 0, 0, FALSE, SHIFTJIS_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("FZƒSƒ“ƒ^‚©‚È"), &m_pFont);
 
+
+
 	m_isRelease = false;
 	m_DesTimar = 0;
 

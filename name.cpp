@@ -36,7 +36,9 @@ HRESULT CName::Init()
 	m_DivisionX = 7;
 	m_DivisionY = 4;
 	m_DivisionMAX = m_DivisionX*m_DivisionY;
+
 	m_Type = A;
+
 	SetColar(PositionVec4(0.8f, 0.0f, 0.0f, 1.0f));
 	int X = m_Type%m_DivisionX;
 	int Y = m_Type/m_DivisionX;
@@ -50,8 +52,6 @@ HRESULT CName::Init()
 		DivisionX*X + DivisionX,
 		DivisionY*Y,
 		DivisionY*Y + DivisionY));
-
-	
 
 	return S_OK;
 }

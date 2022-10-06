@@ -43,6 +43,9 @@
     <Filter Include="オブジェクト\モデル系\UI\数字">
       <UniqueIdentifier>{893ba109-c22b-4607-bdee-b9db01165e51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="font">
+      <UniqueIdentifier>{8802499e-9524-4ea5-9b24-d17212867de9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="object.cpp">
@@ -201,9 +204,6 @@
     <ClCompile Include="bosscraziness.cpp">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
-    <ClCompile Include="text.cpp">
-      <Filter>オブジェクト\モデル系\UI</Filter>
-    </ClCompile>
     <ClCompile Include="bossdeath.cpp">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClCompile>
@@ -212,6 +212,12 @@
     </ClCompile>
     <ClCompile Include="nameset.cpp">
       <Filter>メイン\画面遷移</Filter>
+    </ClCompile>
+    <ClCompile Include="text.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="words.cpp">
+      <Filter>font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,9 +380,6 @@
     <ClInclude Include="bosscraziness.h">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClInclude>
-    <ClInclude Include="text.h">
-      <Filter>オブジェクト\モデル系\UI</Filter>
-    </ClInclude>
     <ClInclude Include="bossdeath.h">
       <Filter>オブジェクト\モデル系\敵系統</Filter>
     </ClInclude>
@@ -385,6 +388,12 @@
     </ClInclude>
     <ClInclude Include="nameset.h">
       <Filter>メイン\画面遷移</Filter>
+    </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="words.h">
+      <Filter>font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

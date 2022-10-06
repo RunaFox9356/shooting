@@ -34,7 +34,7 @@
 #include "text.h"
 
 #include "bossdeath.h"
-
+#include "words.h"
 
 CMagicBox* CGame::m_MagicBox = nullptr;
 CParticleManager*CGame::m_PaticleManager = nullptr;
@@ -144,7 +144,8 @@ void CGame::Update(void)
 
 	CInput *CInputpInput = CInput::GetKey();
 
-	
+#ifdef _DEBUG
+
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
 	{
 		//ƒ‚[ƒh‚ÌÝ’è
@@ -154,12 +155,16 @@ void CGame::Update(void)
 	}
 	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
-		CDeathManager::Create(10, 25);
+		CWords::Create("‚¢");
+
+		//CDeathManager::Create(10, 25);
 		//CText::Create(CText::GON,120, 10, "ƒ‚ƒ“ƒnƒ“‚½‚Ì‚µ‚¢...");
 		//CDangerousManager::BossPopStaging();
 		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		return;
 	}
+
+#endif // DEBUG
 	if (GetMaxEnemy() <= 0)
 	{
 		if (GetMaxBoss())
