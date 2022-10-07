@@ -20,6 +20,7 @@ const char* CFont::s_FileName[] =
 {// フォントのパス
 	"data/font/FZゴンタかな.otf",
 	"data/font/meiryob.ttc",
+	"data/font/HGRPP1.TTC",
 };
 
 static_assert(sizeof(CFont::s_FileName) / sizeof(CFont::s_FileName[0]) == CFont::FONT_MAX, "aho");
@@ -30,7 +31,8 @@ static_assert(sizeof(CFont::s_FileName) / sizeof(CFont::s_FileName[0]) == CFont:
 const char* CFont::s_FontName[] =
 {// フォントのなまえ
 	"FZゴンタかな",
-	"meiryob",
+	"メイリオ",
+	"HGS創英角ポップ体 標準",
 };
 
 static_assert(sizeof(CFont::s_FontName) / sizeof(CFont::s_FontName[0]) == CFont::FONT_MAX, "aho");
@@ -79,11 +81,7 @@ void CFont::Load(FONT inTexture)
 		CLIP_DEFAULT_PRECIS, PROOF_QUALITY, FIXED_PITCH | FF_MODERN };
 	
 	
-	strcpy(m_lf[inTexture].lfFaceName, s_FileName[inTexture]);
-	
-	
-
-	
+	strcpy(m_lf[inTexture].lfFaceName, s_FontName[inTexture]);
 	
 }
 
@@ -189,6 +187,7 @@ void CFont::ReleaseAll(void)
 			m_texFont[i] = NULL;
 		}
 	}
+
 }
 
 //=============================================================================--------------

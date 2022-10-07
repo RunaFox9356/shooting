@@ -97,7 +97,7 @@ void CText::Update()
 				m_Text+=m_ALLText[m_AddLetter];
 				
 				if (hmd::is_sjis_lead_byte(m_ALLText[m_AddLetter]) 
-						&& m_AddLetter < m_ALLText.size())
+						&& m_AddLetter < m_TextSize)
 				{
 					m_AddLetter++;
 					m_Text += m_ALLText[m_AddLetter];
@@ -206,5 +206,6 @@ void CText::TextLetter(const char * Text, int SpeedText)
 	m_TextSize = m_ALLText.size();
 	m_Addnumber = SpeedText;
 	m_AddLetter = 0;
+	m_words = new CWords[m_TextSize];
 }
 

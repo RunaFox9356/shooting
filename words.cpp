@@ -83,7 +83,7 @@ HRESULT CWords::Init(void)
 	m_pVtxBuff->Unlock();
 
 
-	m_pTex = CManager::GetFont()->GetFont(m_words, CFont::FONT_GON);
+	
 	
 
 	return S_OK;
@@ -184,14 +184,14 @@ void CWords::Draw(void)
 //------------------------------------
 // create
 //------------------------------------
-CWords *CWords::Create(const char*Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size)
+CWords *CWords::Create(const char*Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size, CFont::FONT Type)
 {
 	CWords * pObject = nullptr;
 	pObject = new CWords;
 
 	if (pObject != nullptr)
 	{
-		pObject->Setwords(Text);
+		pObject->Setwords(Text, Type);
 		pObject->SetPos(pos);
 		pObject->SetSize(Size);
 		pObject->Init();
@@ -200,6 +200,13 @@ CWords *CWords::Create(const char*Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size)
 	return pObject;
 }
 
+//=============================================================================
+// GetPosŠÖ”
+//=============================================================================
+void CWords::Setwords(const char*Text, CFont::FONT Type)
+{ 
+	m_pTex = CManager::GetFont()->GetFont(Text, Type);
+}
 
 
 //=============================================================================

@@ -9,7 +9,7 @@
 
 #include "main.h"
 #include "object.h"
-
+#include "font.h"
 
 class CWords : public CObject
 {
@@ -28,7 +28,7 @@ public:
 	void Uninit(void)override;	// îjä¸
 	void Update(void)override;	// çXêV
 	void Draw()override;	// ï`âÊ
-	static CWords *CWords::Create(const char * Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size);
+	static CWords *CWords::Create(const char * Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size, CFont::FONT Type);
 
 	virtual const D3DXVECTOR3 *GetPos() const;
 
@@ -47,7 +47,7 @@ public:
 	void SetMoveRot(D3DXVECTOR3 inMoveRot) { m_moveRot = inMoveRot; };
 
 private:
-	void Setwords(const char*Text) { m_words = Text; }
+	void Setwords(const char*Text, CFont::FONT Type);
 
 	int  m_nTimer;
 	float m_nScale;

@@ -124,6 +124,14 @@ void CManager::Uninit()
 		delete m_Sound;
 		m_Sound = nullptr;
 	}
+	if (m_pFont != nullptr)
+	{// I—¹ˆ—
+
+		m_pFont->ReleaseAll();
+		delete m_pFont;
+		m_pFont = nullptr;
+	}
+
 	
 	//“ü—Íˆ—‚ÌI—¹ˆ—
 	m_Input->Uninit();

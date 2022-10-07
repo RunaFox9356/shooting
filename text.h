@@ -9,6 +9,7 @@
 #define _TEXT_H_
 
 #include "object2d.h"
+#include "words.h"
 
 class CText : public CObject2d
 {
@@ -45,7 +46,7 @@ private:
 
 	std::string m_Text;
 	std::string m_ALLText;
-
+	CWords* m_words;
 	void TextLetter(const char * Text, int SpeedText);
 };
 

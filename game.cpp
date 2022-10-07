@@ -149,14 +149,16 @@ void CGame::Update(void)
 	if (CInputpInput->Trigger(CInput::KEY_DEBUG))
 	{
 		//ƒ‚[ƒh‚ÌÝ’è
-		CWords::Create("‚ ", D3DXVECTOR3(650, 300, 0), D3DXVECTOR3(100, 100, 0));
+		CWords::Create("‚ ", D3DXVECTOR3(450, 300, 0), D3DXVECTOR3(100, 100, 0), CFont::FONT::FONT_GON);
+		CWords::Create("‚¢", D3DXVECTOR3(650, 300, 0), D3DXVECTOR3(100, 200, 0), CFont::FONT::FONT_MEIRIO);
+		CWords::Create("‚¤", D3DXVECTOR3(850, 300, 0), D3DXVECTOR3(100, 100, 0), CFont::FONT::FONT_SOUEIKAKU);
 		//CManager::GetFade()->NextMode(CManager::MODE_RESULT);
 		//CManager::SetMode(CManager::MODE_RESULT);
 		return;
 	}
 	if (CInputpInput->Trigger(CInput::KEY_F2))
 	{
-		CWords::Create("‚¢", D3DXVECTOR3(650, 300,0), D3DXVECTOR3(100, 100, 0));
+
 
 		//CDeathManager::Create(10, 25);
 		//CText::Create(CText::GON,120, 10, "ƒ‚ƒ“ƒnƒ“‚½‚Ì‚µ‚¢...");
