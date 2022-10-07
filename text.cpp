@@ -30,6 +30,10 @@ CText::~CText()
 //=============================================================================
 HRESULT CText::Init()
 {
+	m_newlineCount = 0;
+	m_wordsPopCount = 0;
+	m_wordsPopCountX = 0;
+	m_AddCount = 0;
 	m_Text = "";
 	CObject2d::Init();
 	
@@ -65,7 +69,6 @@ HRESULT CText::Init()
 //=============================================================================
 void CText::Uninit()
 {
-	CObject2d::Uninit();
 
 	DESIGNVECTOR design;
 
@@ -74,7 +77,16 @@ void CText::Uninit()
 		FR_PRIVATE,
 		&design
 	);
-	
+	for (int wordsCount = 0; wordsCount < m_TextSize; wordsCount++)
+	{
+		if (m_words[wordsCount] != nullptr)
+		{
+			m_words[wordsCount]->Uninit();
+		}
+	}
+	delete[] m_words;
+
+	CObject2d::Uninit();
 }
 
 //=============================================================================
@@ -94,21 +106,47 @@ void CText::Update()
 		{
 			if (m_AddLetter <= m_TextSize)
 			{
-				m_Text+=m_ALLText[m_AddLetter];
-				
-				if (hmd::is_sjis_lead_byte(m_ALLText[m_AddLetter]) 
+				m_Text += m_ALLText[m_AddLetter];
+				std::string Txt = m_Text;
+				if (Txt != "")
+				{//空白チェック
+					if (hmd::is_sjis_lead_byte(m_ALLText[m_AddLetter])
 						&& m_AddLetter < m_TextSize)
-				{
-					m_AddLetter++;
-					m_Text += m_ALLText[m_AddLetter];
-					m_AddLetter++;
+					{
+
+						m_AddLetter++;
+						m_Text += m_ALLText[m_AddLetter];
+						m_AddLetter++;
+						m_words[m_wordsPopCount] = CWords::Create(m_Text.c_str(),
+													D3DXVECTOR3(50.0f * (m_wordsPopCountX + 1),m_pos.y + m_newlineCount*50.0f, m_pos.z), 
+													D3DXVECTOR3(20.0f, 20.0f, 0.0f), 
+													CFont::FONT_GON);
+						m_wordsPopCount++;
+						m_wordsPopCountX++;
+					}
+					else
+					{
+						if (m_Text != "\n")
+						{
+							m_AddLetter++;
+							m_words[m_wordsPopCount] = CWords::Create(m_Text.c_str(),
+														D3DXVECTOR3(50.0f * (m_wordsPopCountX + 1), m_pos.y + m_newlineCount*50.0f, m_pos.z),
+														D3DXVECTOR3(20.0f, 20.0f, 0.0f),
+														CFont::FONT_MEIRIO);
+							m_wordsPopCount++;
+							m_wordsPopCountX++;
+						}
+						else
+						{
+							m_wordsPopCountX = 0;
+							m_AddLetter++;
+							m_newlineCount++;
+						}
+					}
+
 				}
-				else
-				{
-					m_AddLetter++;
-				}
-				
 			}
+			m_Text = "";
 			m_AddCount = 0;
 		}
 	
@@ -138,9 +176,9 @@ void CText::Draw()
 	RECT rect = { 60, 500, SCREEN_WIDTH, SCREEN_HEIGHT };
 	TCHAR str[256];
 
-	wsprintf(str, _T(m_Text.c_str()));
+	//wsprintf(str, _T(m_Text.c_str()));
 
-	m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
+	//m_pFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xff, 0xff, 0xff));
 
 
 	// 新規深度値 <= Zバッファ深度値 (初期設定)
@@ -204,8 +242,13 @@ void CText::TextLetter(const char * Text, int SpeedText)
 {
 	m_ALLText = Text;
 	m_TextSize = m_ALLText.size();
-	m_Addnumber = SpeedText;
+ 	m_Addnumber = SpeedText;
 	m_AddLetter = 0;
-	m_words = new CWords[m_TextSize];
+	m_words = new CWords*[m_TextSize];
+	for (int wordsCount = 0; wordsCount < m_TextSize; wordsCount++)
+	{
+		m_words[wordsCount] = nullptr;
+	}
+
 }
 

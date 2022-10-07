@@ -17,7 +17,7 @@
 //------------------------------------
 // コンストラクタ
 //------------------------------------
-CWords::CWords(int list) :CObject(2)
+CWords::CWords(int list) :CObject(3)
 {
 }
 
@@ -191,10 +191,11 @@ CWords *CWords::Create(const char*Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size, CFont
 
 	if (pObject != nullptr)
 	{
-		pObject->Setwords(Text, Type);
+	
 		pObject->SetPos(pos);
 		pObject->SetSize(Size);
 		pObject->Init();
+		pObject->Setwords(Text, Type);
 
 	}
 	return pObject;
@@ -204,8 +205,17 @@ CWords *CWords::Create(const char*Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size, CFont
 // GetPos関数
 //=============================================================================
 void CWords::Setwords(const char*Text, CFont::FONT Type)
-{ 
-	m_pTex = CManager::GetFont()->GetFont(Text, Type);
+{
+	std::string Txt = Text;
+	if (Txt != "")
+	{
+		m_pTex = CManager::GetFont()->GetFont(Text, Type);
+	}
+	else
+	{
+		m_pTex = nullptr;
+		SetColar(D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
+	}
 }
 
 

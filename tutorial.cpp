@@ -193,13 +193,14 @@ void CTutorial::Update(void)
 				|| CInputpInput->Press(CInput::KEY_LEFT))
 			)
 		{
+		
 			CText::Create(CText::GON, 300,10, "ナイス！！うまいのじゃ！\nタマをうってみるのじゃ！");
 			m_MoveClear = true;
 			m_NextTaskCount = 0;
 		}
 		else if (!m_AttackClear && CInputpInput->Press(CInput::KEY_SHOT)&& m_MoveClear)
 		{
-			CText::Create(CText::GON, 300,10, "ナイス！！うまいのじゃ！\nつぎはマホウをハツドウしてみのじゃ！");
+			CText::Create(CText::GON, 300,5, "ナイス！！うまいのじゃ！\nつぎはマホウをハツドウしてみるのじゃ！");
 			m_AttackClear = true;
 			m_NextTaskCount = 0;
 		}

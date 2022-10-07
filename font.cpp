@@ -32,7 +32,7 @@ const char* CFont::s_FontName[] =
 {// フォントのなまえ
 	"FZゴンタかな",
 	"メイリオ",
-	"HGS創英角ポップ体 標準",
+	"HG創英角ポップ体",
 };
 
 static_assert(sizeof(CFont::s_FontName) / sizeof(CFont::s_FontName[0]) == CFont::FONT_MAX, "aho");
