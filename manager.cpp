@@ -23,11 +23,13 @@
 #include "tutorial.h"
 
 #include "multiply.h"
+#include "font.h"
 //=============================================================================
 // 静的メンバー変数の初期化
 //=============================================================================
 CRenderer * CManager::m_cRenderer = nullptr; 
 CTexture * CManager::m_pTexture = nullptr;
+CFont * CManager::m_pFont = nullptr;
 CFade*  CManager::m_Fade = nullptr;
 CObject*CManager::m_Game = nullptr;
 CSound*CManager::m_Sound = nullptr;
@@ -80,6 +82,9 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	m_pTexture = nullptr;
 	m_pTexture = new CTexture;
 	
+	m_pFont = nullptr;
+	m_pFont = new CFont;
+
 	m_mode = CManager::MODE_TITLE;	//現在のモード
 
 	//モードの設定
@@ -185,6 +190,15 @@ CManager::MODE * CManager::GetMode()
 CSound * CManager::GetSound()
 {
 	return m_Sound;
+}
+
+
+//=============================================================================
+// GetSound
+//=============================================================================
+CFont * CManager::GetFont()
+{
+	return m_pFont;
 }
 
 

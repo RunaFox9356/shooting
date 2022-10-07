@@ -219,6 +219,9 @@
     <ClCompile Include="words.cpp">
       <Filter>font</Filter>
     </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -393,6 +396,9 @@
       <Filter>font</Filter>
     </ClInclude>
     <ClInclude Include="words.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
       <Filter>font</Filter>
     </ClInclude>
   </ItemGroup>

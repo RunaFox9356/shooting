@@ -19,6 +19,7 @@ class CResult;
 class CTitle;
 class CFade;
 class CSound;
+class CFont;
 
 class CManager
 {
@@ -53,13 +54,14 @@ public:
 	static MODE* GetMode();	//
 	static void SetMode(CManager::MODE mode);
 	static CSound * CManager::GetSound();
-
+	static CFont * CManager::GetFont();
 private:
 	static CTexture *m_pTexture;
 	static CRenderer * m_cRenderer;
 	static CFade* m_Fade;
 	static CObject*m_Game;
 	static CSound*m_Sound;
+	static CFont* m_pFont;
 	static MODE m_mode;
 
 	CInput *m_Input;

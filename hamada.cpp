@@ -7,13 +7,6 @@
 
 #include "hamada.h"
 
-namespace hmd
-{
-	D3DXMATRIX *giftmtx(D3DXMATRIX *pOut,D3DXVECTOR3 pos, D3DXVECTOR3 rot);
-	float easeInSine(float X);
-	float easeInQuad(float X);
-}
-
 //=============================================================================
 //回転と移動を反映行列
 //=============================================================================
@@ -51,4 +44,12 @@ float hmd::easeInSine(float X)
 float hmd::easeInQuad(float X)
 {
 	return X * X;
+}
+
+//=============================================================================
+//1バイト文字をシフトJISかどうか判定する関数
+//=============================================================================
+bool hmd::is_sjis_lead_byte(int c)
+{
+	return (((c & 0xffu) ^ 0x20u) - 0xa1) < 94u / 2;
 }

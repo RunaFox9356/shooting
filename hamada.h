@@ -17,6 +17,7 @@ namespace hmd
 	D3DXMATRIX *giftmtx(D3DXMATRIX *pOut,D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 	float easeInSine(float X);
 	float easeInQuad(float X);
+	bool is_sjis_lead_byte(int c);
 }
 
 

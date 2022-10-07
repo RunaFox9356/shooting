@@ -28,7 +28,7 @@ public:
 	void Uninit(void)override;	// 破棄
 	void Update(void)override;	// 更新
 	void Draw()override;	// 描画
-	static CWords *CWords::Create(const char * Text);
+	static CWords *CWords::Create(const char * Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size);
 
 	virtual const D3DXVECTOR3 *GetPos() const;
 
@@ -44,7 +44,7 @@ public:
 	D3DXVECTOR3 &GetMove() { return m_move; };
 	LPDIRECT3DVERTEXBUFFER9 &GetVtx() { return m_pVtxBuff; };
 	void SetRot(D3DXVECTOR3 Rot) { m_rot = Rot; };
-
+	void SetMoveRot(D3DXVECTOR3 inMoveRot) { m_moveRot = inMoveRot; };
 
 private:
 	void Setwords(const char*Text) { m_words = Text; }
@@ -55,6 +55,7 @@ private:
 	D3DXVECTOR3 m_move; //polygonの位置
 	D3DXVECTOR3 m_pos; //polygonの位置
 	D3DXVECTOR3 m_rot;
+	D3DXVECTOR3 m_moveRot;
 	D3DXCOLOR m_col;
 	D3DXMATRIX m_mtxWorld;					// マトリックス
 	const char *m_words;

@@ -169,6 +169,7 @@
     <ClCompile Include="dangerous.cpp" />
     <ClCompile Include="explosion.cpp" />
     <ClCompile Include="fade.cpp" />
+    <ClCompile Include="font.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="hamada.cpp" />
     <ClCompile Include="hit.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="dangerous.h" />
     <ClInclude Include="explosion.h" />
     <ClInclude Include="fade.h" />
+    <ClInclude Include="font.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="hamada.h" />
     <ClInclude Include="hit.h" />

@@ -12,6 +12,7 @@
 #include "manager.h"
 #
 #include "object.h"
+#include "font.h"
 
 //------------------------------------
 // コンストラクタ
@@ -33,7 +34,7 @@ CWords::~CWords()
 HRESULT CWords::Init(void)
 {
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
+	m_moveRot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 
 	//頂点バッファの生成
@@ -81,107 +82,9 @@ HRESULT CWords::Init(void)
 	//頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();
 
-	// フォントを使えるようにする
-	DESIGNVECTOR design;
 
-	AddFontResourceEx(
-		"data/font/FZゴンタかな.otf", //ttfファイルへのパス
-		FR_PRIVATE,
-		&design
-	);
-
-	// フォントの生成
-	int fontsize = 38;
-
-	LOGFONT lf = { fontsize, 0, 0, 0, 0, 0, 0, 0, SHIFTJIS_CHARSET, OUT_TT_ONLY_PRECIS,
-		CLIP_DEFAULT_PRECIS, PROOF_QUALITY, FIXED_PITCH | FF_MODERN, _T("FZゴンタかな") };
-
-	if (!(m_hFont = CreateFontIndirect(&lf)))
-	{
+	m_pTex = CManager::GetFont()->GetFont(m_words, CFont::FONT_GON);
 	
-	}
-
-	//// デバッグ情報表示用フォントの生成
-	//D3DXCreateFont(CManager::GetRenderer()->GetDevice(), 38, 0, 0, 0, FALSE, SHIFTJIS_CHARSET,
-	//	OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("FZゴンタかな"), &m_pFont);
-
-	// デバイスコンテキスト取得
-	// デバイスにフォントを持たせないとGetGlyphOutline関数はエラーとなる
-	HDC hdc = GetDC(NULL);
-	HFONT oldFont = (HFONT)SelectObject(hdc, m_hFont);
-
-
-	
-	std::string words = m_words;
-	// 文字コード取得
-	const char *c = words.c_str();
-	UINT code = 0;
-#if _UNICODE
-	// unicodeの場合、文字コードは単純にワイド文字のUINT変換です
-	code = (UINT)*c;
-#else
-	// マルチバイト文字の場合、
-	// 1バイト文字のコードは1バイト目のUINT変換、
-	// 2バイト文字のコードは[先導コード]*256 + [文字コード]です
-	if (IsDBCSLeadByte(*c))
-		code = (BYTE)c[0] << 8 | (BYTE)c[1];
-	else
-		code = c[0];
-#endif
-
-	// フォントビットマップ取得
-	TEXTMETRIC TM;
-	GetTextMetrics(hdc, &TM);
-	GLYPHMETRICS GM;
-	CONST MAT2 Mat = { { 0,1 },{ 0,0 },{ 0,0 },{ 0,1 } };
-	DWORD size = GetGlyphOutline(hdc, code, GGO_GRAY4_BITMAP, &GM, 2, NULL, &Mat);
-	BYTE *ptr = new BYTE[size];
-	GetGlyphOutline(hdc, code, GGO_GRAY4_BITMAP, &GM, size, ptr, &Mat);
-
-	// デバイスコンテキストとフォントハンドルの開放
-	SelectObject(hdc, oldFont);
-	DeleteObject(m_hFont);
-	ReleaseDC(NULL, hdc);
-
-	// テクスチャ作成
-	if (FAILED(pDevice->CreateTexture(GM.gmCellIncX, TM.tmHeight, 1, D3DUSAGE_DYNAMIC, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &m_pTex, NULL)))
-		if (FAILED(pDevice->CreateTexture(GM.gmCellIncX, TM.tmHeight, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &m_pTex, NULL)))
-		{
-			return 0;
-		}
-
-	// テクスチャにフォントビットマップ書き込み
-	D3DLOCKED_RECT LockedRect;
-	if (FAILED(m_pTex->LockRect(0, &LockedRect, NULL, D3DLOCK_DISCARD)))
-		if (FAILED(m_pTex->LockRect(0, &LockedRect, NULL, 0)))
-		{
-			return 0;
-		}
-
-
-	// フォント情報の書き込み
-	// iOfs_x, iOfs_y : 書き出し位置(左上)
-	// iBmp_w, iBmp_h : フォントビットマップの幅高
-	// Level : α値の段階 (GGO_GRAY4_BITMAPなので17段階)
-	int iOfs_x = GM.gmptGlyphOrigin.x;
-	int iOfs_y = TM.tmAscent - GM.gmptGlyphOrigin.y;
-	int iBmp_w = GM.gmBlackBoxX + (4 - (GM.gmBlackBoxX % 4)) % 4;
-	int iBmp_h = GM.gmBlackBoxY;
-	int Level = 17;
-	int x, y;
-	DWORD Alpha, Color;
-	FillMemory(LockedRect.pBits, LockedRect.Pitch * TM.tmHeight, 0);
-	for (y = iOfs_y; y<iOfs_y + iBmp_h; y++)
-		for (x = iOfs_x; x<iOfs_x + GM.gmBlackBoxX; x++) {
-			Alpha = (255 * ptr[x - iOfs_x + iBmp_w*(y - iOfs_y)]) / (Level - 1);
-			Color = 0x00ffffff | (Alpha << 24);
-			memcpy((BYTE*)LockedRect.pBits + LockedRect.Pitch*y + 4 * x, &Color, sizeof(DWORD));
-		}
-
-	m_pTex->UnlockRect(0);
-
-	delete[] ptr;
-
 
 	return S_OK;
 }
@@ -192,19 +95,14 @@ HRESULT CWords::Init(void)
 void CWords::Uninit(void)
 {
 
-	DESIGNVECTOR design;
 
-	RemoveFontResourceEx(
-		TEXT("Data/font/FZゴンタかな.otf"), //ttfファイルへのパス
-		FR_PRIVATE,
-		&design
-	);
+	
 
-	if (m_pTex != nullptr)
-	{
-		m_pTex->Release();
-		m_pTex = nullptr;
-	}
+	//if (m_pTex != nullptr)
+	//{
+	//	m_pTex->Release();
+	//	m_pTex = nullptr;
+	//}
 
 	// 破棄
 	if (m_pVtxBuff != nullptr)
@@ -222,7 +120,7 @@ void CWords::Uninit(void)
 //------------------------------------
 void CWords::Update(void)
 {
-
+	m_rot.z += m_moveRot.z;
 
 	VERTEX_2D *pVtx; //頂点へのポインタ
 
@@ -286,7 +184,7 @@ void CWords::Draw(void)
 //------------------------------------
 // create
 //------------------------------------
-CWords *CWords::Create(const char*Text)
+CWords *CWords::Create(const char*Text, D3DXVECTOR3 pos, D3DXVECTOR3 Size)
 {
 	CWords * pObject = nullptr;
 	pObject = new CWords;
@@ -294,9 +192,10 @@ CWords *CWords::Create(const char*Text)
 	if (pObject != nullptr)
 	{
 		pObject->Setwords(Text);
-		pObject->SetSize(D3DXVECTOR3(100.0f, 100.0f, 100));
-		pObject->SetPos(D3DXVECTOR3(100.0f, 100.0f, 0.0f));
+		pObject->SetPos(pos);
+		pObject->SetSize(Size);
 		pObject->Init();
+
 	}
 	return pObject;
 }

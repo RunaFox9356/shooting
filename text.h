@@ -28,7 +28,6 @@ public:
 	void Update() override;
 	void Draw() override;
 	static CText* Create(Type talkType, int DeleteTime, int SpeedText, const char * Text);
-
 	void Releasetimer(int nTimar);
 private:
 	PositionVec4 col;

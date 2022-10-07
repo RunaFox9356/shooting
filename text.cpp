@@ -8,6 +8,7 @@
 #include "text.h"
 #include "manager.h"
 #include "renderer.h"
+#include "hamada.h"
 #include <Shlwapi.h>
 
 //=============================================================================
@@ -94,18 +95,23 @@ void CText::Update()
 			if (m_AddLetter <= m_TextSize)
 			{
 				m_Text+=m_ALLText[m_AddLetter];
-				if (m_AddLetter + 1 <= m_TextSize)
+				
+				if (hmd::is_sjis_lead_byte(m_ALLText[m_AddLetter]) 
+						&& m_AddLetter < m_ALLText.size())
 				{
-					m_Text += m_ALLText[m_AddLetter + 1];
+					m_AddLetter++;
+					m_Text += m_ALLText[m_AddLetter];
+					m_AddLetter++;
 				}
-				m_AddLetter+=2;
+				else
+				{
+					m_AddLetter++;
+				}
+				
 			}
 			m_AddCount = 0;
 		}
-		//col.P3 -= 1.0f / m_DesTimarMax;
-
-		//m_pos.y -= 1.0f;
-
+	
 		CObject2d::SetColar(col);
 
 		if (m_DesTimar <= 0)
@@ -201,3 +207,4 @@ void CText::TextLetter(const char * Text, int SpeedText)
 	m_Addnumber = SpeedText;
 	m_AddLetter = 0;
 }
+
