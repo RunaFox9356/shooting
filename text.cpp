@@ -132,7 +132,7 @@ void CText::Update()
 							m_words[m_wordsPopCount] = CWords::Create(m_Text.c_str(),
 														D3DXVECTOR3(50.0f * (m_wordsPopCountX + 1), m_pos.y + m_newlineCount*50.0f, m_pos.z),
 														D3DXVECTOR3(20.0f, 20.0f, 0.0f),
-														CFont::FONT_MEIRIO);
+														CFont::FONT_GON);
 							m_wordsPopCount++;
 							m_wordsPopCountX++;
 						}
