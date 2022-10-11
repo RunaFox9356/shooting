@@ -8,7 +8,7 @@
 #include "dangerous.h"
 #include "hamada.h"
 #include "manager.h"
-#include "player.h"
+ 
 #include "game.h"
 #include "enemy.h"
 

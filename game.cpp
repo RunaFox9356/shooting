@@ -104,6 +104,7 @@ void CGame::Uninit(void)
 {
 	CManager::GetSound()->Stop();
 	CModelManager::ReleaseAll();
+	
 	CRanking::SetScore(CScore::GetScore());
 
 	if (m_PaticleManager != nullptr)
@@ -163,7 +164,7 @@ void CGame::Update(void)
 		//CDeathManager::Create(10, 25);
 		//CText::Create(CText::GON,120, 10, "ƒ‚ƒ“ƒnƒ“‚½‚Ì‚µ‚¢...");
 		//CDangerousManager::BossPopStaging();
-		//CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
+		CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		return;
 	}
 

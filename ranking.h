@@ -33,16 +33,14 @@ public:
 	void Update();
 	void Draw();
 
-	static void APIUp();
-	static void GoScore();
-	static void OnlineSetScore();
 	static void SetScore(int nScore);
-	static void GetScore();
-	static int GetMyScore() { return m_Score; };
-	static void SetName();
 	static void SetPlayNeme(const std::string PlayName) { m_PlayName = PlayName; };
-	static std::string GetMACAddr();
 	static void SetName(int number, std::string Name) { m_Name[number] = Name; };
+
+	static void GetScore();
+
+	static int GetMyScore() { return m_Score; };
+
 
 private:
 
@@ -50,7 +48,7 @@ private:
 	static CScore *m_Ranking[MAX_RANK];
 	static std::string m_PlayName;
 	static	std::string m_Name[5];
-	static bool m_Stop;
+	
 	CObject2d *m_Object2d[4];
 
 	CName*m_ListName[3];

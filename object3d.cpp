@@ -371,6 +371,7 @@ void CObject3d::HitLife(int Damage)
 		if (m_Life <= 0)
 		{
 			//LIFE‚ªs‚«‚½‚Æ‚«Player‚È‚ç‰æ–Ê‘JˆÚ
+
 			CManager::GetFade()->NextMode(CManager::MODE_NAMESET);
 		}
 	}

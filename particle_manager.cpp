@@ -8,9 +8,10 @@
 // include
 //=========================================
 #include "particle_manager.h"
+ 
 #include "file.h"
-
 #include <assert.h>
+
 
 int CParticleManager::m_MaxIndex = 0;
 //=============================================================================

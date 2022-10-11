@@ -14,67 +14,26 @@
 #include "name.h"
 #include "fade.h"
 
-#include "playfab/PlayFabError.h"
-#include "playfab/PlayFabClientDataModels.h"
-#include "playfab/PlayFabClientApi.h"
-#include "playfab/PlayFabSettings.h"
-#include "playfab/PlayFabApiSettings.h"
-#include <windows.h>
-#include <functional>
-#include <iphlpapi.h>
-#include <string>
-
-#include <thread>
+#include "playhave.h"
 
 #include "sound.h"
 
 #include "text.h"
 
-#pragma comment(lib, "iphlpapi.lib")
 
+#include "playfab/PlayFabError.h"
 
-
-using namespace PlayFab;
-using namespace ClientModels;
 
 bool finished = false;
 
 CScore *CRanking::m_Ranking[MAX_RANK];
 int CRanking::m_Score;
-bool CRanking::m_Stop;
 std::string  CRanking::m_PlayName;
 std::string CRanking::m_Name[5];
 
-void OnLoginGet(const LoginResult& , void* )
-{
-	printf("Congratulations, you made your first successful API call!\n");
-	CRanking::GetScore();
-
-	
-	Sleep(1000);
-}
-
-void OnLoginSet(const LoginResult& , void* )
-{
-	if (CRanking::GetMyScore() != 0)
-	{
-		printf("Congratulations, you made your first successful API call!\n");
 
 
-		CRanking::GoScore();
-		CRanking::SetName();
-	}
-	
-}
 
-void OnLoginFail(const PlayFabError& error, void*)
-{
-	printf("Something went wrong with your first API call.\n");
-	printf("Here's some debug information:\n");
-	printf(error.GenerateErrorReport().c_str());
-	printf("\n");
-
-}
 
 //========================
 // コンストラクタ
@@ -109,7 +68,7 @@ inline HRESULT CRanking::Init(void)
 
 	CManager::GetSound()->Play(CSound::LABEL_BGM_RANKING);
 	
-	CRanking::OnlineSetScore();
+
 	
 
 	m_NowPlay = 0;
@@ -133,25 +92,17 @@ inline HRESULT CRanking::Init(void)
 
 
 	finished = false;
-	m_Stop = false;
+
 	m_RankingSet = false;
 	
 
 	m_Ranking[5] = CScore::Create(pos);
 	m_Ranking[5]->Set(m_Score);
 
-	PlayFabSettings::staticSettings->titleId = ("323A0");
-
-	LoginWithCustomIDRequest request;
-	request.CreateAccount = true;
-	request.CustomId = GetMACAddr();
-
-	PlayFabClientAPI::LoginWithCustomID(request, OnLoginGet, OnLoginFail);
-
+	//CPlayhave::OnlineSetScore();
+	GetScore();
 	
-	std::thread Up(CRanking::APIUp);
-	//切り離す
-	Up.detach();
+	
 
 	return E_NOTIMPL;
 }
@@ -162,7 +113,7 @@ inline HRESULT CRanking::Init(void)
 void CRanking::Uninit(void)
 {
 	CManager::GetSound()->Stop();
-	m_Stop = true;
+	
 }
 
 //========================
@@ -170,7 +121,6 @@ void CRanking::Uninit(void)
 //========================
 void CRanking::Update(void)
 {
-
 	CInput *CInputpInput = CInput::GetKey();
 
 	if (finished)
@@ -214,150 +164,52 @@ void CRanking::Draw()
 {
 }
 
-//========================
-// SET
-//========================
-void CRanking::GoScore()
-{
-	UpdatePlayerStatisticsRequest req;
-	StatisticUpdate statistic;
-	statistic.StatisticName = "ScoreFox";//ゲームマネージャーでランキング名のやつ
 
-	statistic.Value = m_Score;//小さい順にするためにの-１かける
 
-	req.Statistics.push_back(statistic);
-
-	PlayFabClientAPI::UpdatePlayerStatistics(req,
-		[](const ClientModels::UpdatePlayerStatisticsResult& , void*)
-	{//成功時
-
-	});
-}
-
-//========================
-// OnlineSetScore
-//========================
-void CRanking::OnlineSetScore()
-{
-
-	PlayFabSettings::staticSettings->titleId = ("323A0");
-
-	LoginWithCustomIDRequest request;
-	request.CreateAccount = true;
-	request.CustomId = m_PlayName;//GetMACAddr();
-
-	PlayFabClientAPI::LoginWithCustomID(request, OnLoginSet, OnLoginFail);
-	CRanking::APIUp();
-	
-}
-
-//========================
-// GetScore
-//========================
 void CRanking::GetScore()
 {
-	GetLeaderboardRequest req;
 
-	req.StatisticName = "ScoreFox";//ゲームマネージャーでランキング名のやつ
-	
-	PlayFabClientAPI::GetLeaderboard(req,
-		[](const ClientModels::GetLeaderboardResult& resul, void*)
-	{
-	
+
+	CPlayhave::GetScore([](const ClientModels::GetLeaderboardResult& resul) {
+
 		for (auto item : resul.Leaderboard)
 		{
 			if (item.Position <= 4)
 			{
 				switch (item.Position)
 				{
-					case 0:
-						m_Name[item.Position] += "いちいは";
-						break;
-					case 1:
-						m_Name[item.Position] += "にいいは";
-					 break;
-					case 2:
-						m_Name[item.Position] += "さんいは";
-						break;
-					case 3:
-					
-						break;
-				
+				case 0:
+					m_Name[item.Position] += "いちいは";
+					break;
+				case 1:
+					m_Name[item.Position] += "にいいは";
+					break;
+				case 2:
+					m_Name[item.Position] += "さんいは";
+					break;
+				case 3:
+
+					break;
+
 				default:
 					break;
 				}
-				
+
 
 				m_Name[item.Position] += item.DisplayName;//なまえをキャラに変換
-				// 表示
-				m_Ranking[item.Position]->Set(item.StatValue);	
-	
+														  // 表示
+				m_Ranking[item.Position]->Set(item.StatValue);
+
 			}
 		}
 		finished = true;
-	});
 	
 	
-	
-}
-
-//========================
-// rankingの名まえのSet
-//========================
-void CRanking::SetName()
-{
-	UpdateUserTitleDisplayNameRequest req;
-
-	req.DisplayName = m_PlayName;
-	PlayFabClientAPI::UpdateUserTitleDisplayName(req, [](const UpdateUserTitleDisplayNameResult result, void*)
-	{
-		//成功
-
 	});
 }
 
-//========================
-// 任意のネットワークアダプタのMACアドレスを取得
-//========================
-std::string CRanking::GetMACAddr()
-{
-	PIP_ADAPTER_INFO adapterInfo;
-	DWORD dwBufLen = sizeof(IP_ADAPTER_INFO);
 
-	adapterInfo = (IP_ADAPTER_INFO *)malloc(sizeof(IP_ADAPTER_INFO));
-	if (adapterInfo == NULL)
-	{
-		return "";
-	}
 
-	if (GetAdaptersInfo(adapterInfo, &dwBufLen) == ERROR_BUFFER_OVERFLOW)
-	{
-		free(adapterInfo);
-		adapterInfo = (IP_ADAPTER_INFO *)malloc(dwBufLen);
-		if (adapterInfo == NULL) {
-			return "";
-		}
-	}
-
-	char pOutMacAddr[64];
-	if (GetAdaptersInfo(adapterInfo, &dwBufLen) == NO_ERROR)
-	{
-		PIP_ADAPTER_INFO pAdapterInfo = adapterInfo;
-		sprintf(pOutMacAddr, "%02X:%02X:%02X:%02X:%02X:%02X",
-				pAdapterInfo->Address[0], pAdapterInfo->Address[1],
-				pAdapterInfo->Address[2], pAdapterInfo->Address[3],
-				pAdapterInfo->Address[4], pAdapterInfo->Address[5]);
-
-		pAdapterInfo = pAdapterInfo->Next;
-	}
-	else
-	{
-		// macアドレスが見つからない場合は固定文字列
-		sprintf(pOutMacAddr, "user");
-	}
-	free(adapterInfo);
-	return std::string(pOutMacAddr);
-}
 
 //========================
 //ランキングの値をねじ込む
@@ -367,9 +219,4 @@ void CRanking::SetScore(int nScore)
 	m_Score = nScore;
 }
 
-void CRanking::APIUp()
-{
-	Sleep(2000);
-	while (PlayFabClientAPI::Update() != 0 && !m_Stop)
-		Sleep(1);
-}
+

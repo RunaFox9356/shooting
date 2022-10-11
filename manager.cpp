@@ -24,6 +24,7 @@
 
 #include "multiply.h"
 #include "font.h"
+#include "playhave.h"
 //=============================================================================
 // 静的メンバー変数の初期化
 //=============================================================================
@@ -57,13 +58,15 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 {
 	m_cRenderer = new CRenderer;
 
-	m_Input = CInput::Create();
+	
 
 	// 初期化処理
 	if (FAILED(m_cRenderer->Init(hWnd, TRUE)))	//画面サイズ
 	{//初期化処理が失敗した場合
 		return -1;
 	}
+	m_Input = CInput::Create();
+
 	//入力処理の初期化処理
 	if (FAILED(m_Input->Init(hInstance, hWnd)))
 	{
@@ -143,6 +146,7 @@ void CManager::Uninit()
 //=============================================================================
 void CManager::Update()
 {
+	CPlayhave::APIUp();
 	//入力処理の更新処理
 	m_Input->Update();
 	m_cRenderer->Update();
