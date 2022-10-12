@@ -174,7 +174,7 @@ void CText::Draw()
 
 
 	RECT rect = { 60, 500, SCREEN_WIDTH, SCREEN_HEIGHT };
-	TCHAR str[256];
+	//TCHAR str[256];
 
 	//wsprintf(str, _T(m_Text.c_str()));
 

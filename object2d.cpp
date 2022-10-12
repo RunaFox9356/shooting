@@ -164,6 +164,7 @@ void CObject2d::Draw()
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP,		//プリミティブの種類
 		0,
 		2);
+
 	//プリミティブ(ポリゴン)数
 	pDevice->SetTexture(0, NULL);
 }

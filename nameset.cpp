@@ -151,7 +151,7 @@ void CNameSet::RankingNeme()
 		if (m_PlayName != "")
 		{
 			CPlayhave::SetScore(m_PlayName, CRanking::GetMyScore());
-			CManager::SetMode(CManager::MODE_RANKING);
+			CManager::GetFade()->NextMode(CManager::MODE_RANKING);
 			return;
 		}
 		else

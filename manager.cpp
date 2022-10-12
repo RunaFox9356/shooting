@@ -92,7 +92,7 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 
 	//ÉÇÅ[ÉhÇÃê›íË
 	SetMode(m_mode);
-
+	m_Fade = nullptr;
 	m_Fade = CFade::Create();
 
 	

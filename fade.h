@@ -12,7 +12,7 @@
 #include "object2d.h"
 
 class  CMotion;
-
+class  CWords;
 class CFade : public CObject2d
 {
 
@@ -44,6 +44,8 @@ private:
 	bool m_Bake;
 	CManager::MODE m_NextMode;
 	FADE fade;
+	CObject2d *m_object2d[2];
+	CWords * m_Words[10]; //NowLoading
 
 };
 #endif

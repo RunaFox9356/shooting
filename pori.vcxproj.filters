@@ -225,6 +225,9 @@
     <ClCompile Include="playhave.cpp">
       <Filter>システム</Filter>
     </ClCompile>
+    <ClCompile Include="kitune.cpp">
+      <Filter>オブジェクト</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="playhave.h">
       <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="kitune.h">
+      <Filter>オブジェクト</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,12 +8,13 @@
 #include <stdio.h>
 #include <assert.h>
 #include "fade.h"
-
-
+#include "font.h"
+#include "words.h"
+#include "kitune.h"
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CFade::CFade() :CObject2d(3)
+CFade::CFade() :CObject2d(4)
 {
 }
 
@@ -31,8 +32,9 @@ HRESULT CFade::Init(void)
 {
 	// 現在のモーション番号の保管
 	CObject2d::Init();
-	m_FadeSp = 0.07f;
+	m_FadeSp = 0.04f;
 	m_FadeSet = 0.0f;
+	CObject2d::SetTexture(CTexture::TEXTURE_NONE);
 
 	return S_OK;
 }
@@ -44,6 +46,7 @@ void CFade::Uninit(void)
 {
 	// 現在のモーション番号の保管
 	 CObject2d::Uninit();
+
 }
 
 //=============================================================================
@@ -51,6 +54,7 @@ void CFade::Uninit(void)
 //=============================================================================
 void CFade::Update(void)
 {
+	
 	if (fade != FADENON)
 	{
 		// 現在のモーション番号の保管
@@ -74,12 +78,11 @@ void CFade::Update(void)
 		if (m_FadeSet <= 0.0f)
 		{
 			fade = FADENON;
-
 			m_FadeSet = 0.0f;
-
 			return;
 		}
-		SetColar(PositionVec4(0.0f, 0.0f, 0.0f, m_FadeSet));
+		//m_object2d[0]->SetColar(PositionVec4(0.0f, 0.0f, 0.0f, m_FadeSet));
+		SetColar(PositionVec4(0.0f, 0.0f, 0.0f, m_FadeSet));		
 	}
 }
 
@@ -106,6 +109,7 @@ CFade* CFade::Create()
 		pObject->SetSize(D3DXVECTOR3(1280.0f, 720.0f, 0.0f));
 		pObject->SetColar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
 		pObject->SetUp(CObject::MODE);
+
 		pObject->fade = FADENON;
 	}
 	return pObject;
@@ -123,6 +127,21 @@ void CFade::NextMode(CManager::MODE nextMode)
 		m_NextMode = nextMode;
 		SetSize(D3DXVECTOR3(1280.0f, 720.0f, 0.0f));
 		SetColar(PositionVec4(0.0f, 0.0f, 0.0f, 0.0f));
+		m_FadeSet = 0.0f;
 		fade = FADEIN;
+
+		m_Words[0] = CWords::Create("N", D3DXVECTOR3(300.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[1] = CWords::Create("o", D3DXVECTOR3(350.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[2] = CWords::Create("w", D3DXVECTOR3(400.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[3] = CWords::Create("L", D3DXVECTOR3(450.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[4] = CWords::Create("o", D3DXVECTOR3(500.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[5] = CWords::Create("a", D3DXVECTOR3(550.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[6] = CWords::Create("d", D3DXVECTOR3(600.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[7] = CWords::Create("i", D3DXVECTOR3(650.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[8] = CWords::Create("n", D3DXVECTOR3(700.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+		m_Words[9] = CWords::Create("g", D3DXVECTOR3(750.0f, 600.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
+
+		m_object2d[0] = CKitune::Create(D3DXVECTOR3(200.0f, 600.0f, 0.0f), 5, false);
+
 	}
 }
