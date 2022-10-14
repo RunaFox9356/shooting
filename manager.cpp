@@ -24,7 +24,9 @@
 
 #include "multiply.h"
 #include "font.h"
-#include "playhave.h"
+#include "playfab.h"
+
+#include "loading.h"
 //=============================================================================
 // 静的メンバー変数の初期化
 //=============================================================================
@@ -88,7 +90,7 @@ HRESULT CManager::Init(HWND hWnd, bool bWindow, HINSTANCE hInstance)
 	m_pFont = nullptr;
 	m_pFont = new CFont;
 
-	m_mode = CManager::MODE_TITLE;	//現在のモード
+	m_mode = CManager::MODE_LOADING;	//現在のモード
 
 	//モードの設定
 	SetMode(m_mode);
@@ -146,7 +148,7 @@ void CManager::Uninit()
 //=============================================================================
 void CManager::Update()
 {
-	CPlayhave::APIUp();
+	CPlayfab::APIUp();
 	//入力処理の更新処理
 	m_Input->Update();
 	m_cRenderer->Update();
@@ -223,7 +225,6 @@ void CManager::SetMode(MODE mode)
 	if (m_Game != nullptr)
 	{
 		m_Game->Uninit();
-		m_Game->Release();
 	}
 
 	// ポリゴンの終了処理
@@ -248,6 +249,9 @@ void CManager::SetMode(MODE mode)
 		break;
 	case CManager::MODE_TUTORIAL:
 		m_Game = new CTutorial;
+		break;
+	case CManager::MODE_LOADING:
+		m_Game = new CLoading;
 		break;
 	default:
 		break;

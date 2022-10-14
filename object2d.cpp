@@ -37,9 +37,10 @@ CObject2d::~CObject2d()
 //=============================================================================
 HRESULT CObject2d::Init()
 {
+
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_nScale = 10.0f;
-
+	m_nTimer = 0;
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();	//デバイスの取得
 
 	m_texture = CTexture::TEXTURE_NONE;

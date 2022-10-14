@@ -83,7 +83,7 @@ HRESULT CPause::Init(void)
 //================
 void CPause::Uninit(void)
 {
-	
+	Release();
 }
 
 //==================

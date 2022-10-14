@@ -4,8 +4,8 @@
 // Author  : hamada ryuuga
 //
 //**************************************************
-#ifndef _PLAYHAVE_H_
-#define _PLAYHAVE_H_
+#ifndef _PLAYFAB_H_
+#define _PLAYFAB_H_
 
 
 #include "playfab/PlayFabError.h"
@@ -39,7 +39,7 @@ using namespace ClientModels;
 //=============================================================================
 
 
-class CPlayhave : public CObject
+class CPlayfab : public CObject
 {
 
 public:
@@ -47,7 +47,7 @@ public:
 	static void APIUp();
 
 	static std::string GetMACAddr();
-	static void GetMasterData();
+	static void GetMasterData(std::function<void()> func);
 	static std::string GetMasterValue(const char* key){ return m_Data.at(key); }
 
 	static void GetScore(std::function<void(const ClientModels::GetLeaderboardResult& resul)> func);

@@ -176,6 +176,7 @@
     <ClCompile Include="inputcontroller.cpp" />
     <ClCompile Include="kitune.cpp" />
     <ClCompile Include="life.cpp" />
+    <ClCompile Include="loading.cpp" />
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="magiccircle.cpp" />
     <ClCompile Include="maruneko.cpp" />
@@ -200,7 +201,7 @@
     <ClCompile Include="particle_manager.cpp" />
     <ClCompile Include="pause.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="playhave.cpp" />
+    <ClCompile Include="playfab.cpp" />
     <ClCompile Include="raccoon.cpp" />
     <ClCompile Include="ranking.cpp" />
     <ClCompile Include="renderer.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="inputcontroller.h" />
     <ClInclude Include="kitune.h" />
     <ClInclude Include="life.h" />
+    <ClInclude Include="loading.h" />
     <ClInclude Include="magic.h" />
     <ClInclude Include="magiccircle.h" />
     <ClInclude Include="maruneko.h" />
@@ -262,7 +264,7 @@
     <ClInclude Include="particle_manager.h" />
     <ClInclude Include="pause.h" />
     <ClInclude Include="player.h" />
-    <ClInclude Include="playhave.h" />
+    <ClInclude Include="playfab.h" />
     <ClInclude Include="raccoon.h" />
     <ClInclude Include="ranking.h" />
     <ClInclude Include="renderer.h" />

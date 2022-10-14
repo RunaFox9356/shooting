@@ -82,7 +82,7 @@ HRESULT CWords::Init(void)
 	//頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();
 
-
+	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	
 	
 
@@ -148,7 +148,7 @@ void CWords::Update(void)
 
 
 	//ここにmoveをいれる
-
+	m_pos += m_move;
 }
 
 //------------------------------------

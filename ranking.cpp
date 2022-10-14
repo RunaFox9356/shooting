@@ -14,7 +14,7 @@
 #include "name.h"
 #include "fade.h"
 
-#include "playhave.h"
+#include "playfab.h"
 
 #include "sound.h"
 
@@ -99,7 +99,7 @@ inline HRESULT CRanking::Init(void)
 	m_Ranking[5] = CScore::Create(pos);
 	m_Ranking[5]->Set(m_Score);
 
-	//CPlayhave::OnlineSetScore();
+	//CPlayfab::OnlineSetScore();
 	GetScore();
 	
 	
@@ -113,7 +113,7 @@ inline HRESULT CRanking::Init(void)
 void CRanking::Uninit(void)
 {
 	CManager::GetSound()->Stop();
-	
+	Release();
 }
 
 //========================
@@ -170,7 +170,7 @@ void CRanking::GetScore()
 {
 
 
-	CPlayhave::GetScore([](const ClientModels::GetLeaderboardResult& resul) {
+	CPlayfab::GetScore([](const ClientModels::GetLeaderboardResult& resul) {
 
 		for (auto item : resul.Leaderboard)
 		{

@@ -249,6 +249,8 @@ void CTitle::Uninit(void)
 		}
 	}*/
 	CModelManager::ReleaseAll();
+
+	Release();
 }
 
 //==================

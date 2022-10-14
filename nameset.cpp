@@ -10,7 +10,7 @@
 #include "object2d.h"
 #include "ranking.h"
 #include "fade.h"
-#include "playhave.h"
+#include "playfab.h"
 
 std::string  CNameSet::m_PlayName;
 
@@ -90,7 +90,7 @@ HRESULT CNameSet::Init(void)
 void CNameSet::Uninit(void)
 {
 
-
+	Release();
 }
 
 //============================
@@ -118,7 +118,7 @@ void CNameSet::Update(void)
 		if (m_NowPlay >= 7)
 		{
 			//モードの設定
-			CPlayhave::SetScore(m_PlayName, CRanking::GetMyScore());
+			CPlayfab::SetScore(m_PlayName, CRanking::GetMyScore());
 
 			CManager::GetFade()->NextMode(CManager::MODE_RANKING);
 			return;
@@ -150,7 +150,7 @@ void CNameSet::RankingNeme()
 		//モードの設定
 		if (m_PlayName != "")
 		{
-			CPlayhave::SetScore(m_PlayName, CRanking::GetMyScore());
+			CPlayfab::SetScore(m_PlayName, CRanking::GetMyScore());
 			CManager::GetFade()->NextMode(CManager::MODE_RANKING);
 			return;
 		}

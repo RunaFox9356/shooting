@@ -4,7 +4,7 @@
 // Author : hamada ryuuga
 //
 //**************************************************
-#pragma once
+
 #ifndef _TITLE_H_
 #define _TITLE_H_
 

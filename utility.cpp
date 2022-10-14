@@ -165,3 +165,20 @@ bool CollisionCircle(D3DXVECTOR3 Pos1, float fRadius1, D3DXVECTOR3 Pos2, float f
 	return false;
 }
 
+//=========================================
+// 2Dベクトルの外積
+// Author: Yuda Kaito
+//=========================================
+float Vec2Cross(D3DXVECTOR3* v1, D3DXVECTOR3* v2)
+{
+	return v1->x * v2->z - v1->z * v2->x;
+}
+
+//=========================================
+// 2Dベクトルの内積
+// Author: hamada ryuuga
+//=========================================
+float Vec2Dot(D3DXVECTOR3* v1, D3DXVECTOR3* v2)
+{
+	return v1->x * v2->x + v1->z * v2->z;
+}

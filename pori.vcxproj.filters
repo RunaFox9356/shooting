@@ -222,11 +222,14 @@
     <ClCompile Include="font.cpp">
       <Filter>font</Filter>
     </ClCompile>
-    <ClCompile Include="playhave.cpp">
-      <Filter>システム</Filter>
-    </ClCompile>
     <ClCompile Include="kitune.cpp">
       <Filter>オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="playfab.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="loading.cpp">
+      <Filter>メイン\画面遷移</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -407,11 +410,14 @@
     <ClInclude Include="font.h">
       <Filter>font</Filter>
     </ClInclude>
-    <ClInclude Include="playhave.h">
-      <Filter>システム</Filter>
-    </ClInclude>
     <ClInclude Include="kitune.h">
       <Filter>オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="playfab.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="loading.h">
+      <Filter>メイン\画面遷移</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

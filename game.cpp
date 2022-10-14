@@ -126,7 +126,7 @@ void CGame::Uninit(void)
 		m_Pause->Uninit();
 		m_Pause = nullptr;
 	}
-
+	Release();
 }
 
 //========================

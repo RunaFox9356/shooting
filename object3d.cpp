@@ -105,6 +105,8 @@ void CObject3d::Uninit(void)
 		delete m_pMotion;
 		m_pMotion = nullptr;
 	}
+
+
 	Release();
 }
 

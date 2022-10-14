@@ -136,9 +136,11 @@ void CTutorial::Uninit(void)
 		m_PaticleManager = nullptr;
 
 	}
-
+	
 	CManager::GetSound()->Stop();
 	CModelManager::ReleaseAll();
+
+	Release();
 }
 
 //========================

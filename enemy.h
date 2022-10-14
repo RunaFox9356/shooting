@@ -65,8 +65,8 @@ public:
 	void Collision();	// “–‚½‚è”»’è
 	TYPE GetType() { return m_EnemyType; };
 	static void  LoadEnemy(const char * pFdata);
+	static void  CEnemy::LoadEnemyOnline(const char * pFdata);
 	static CEnemy *Create(const int Type);
-
 	static void SetBossCraziness();
 	static void SetBoss();
 

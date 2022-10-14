@@ -5,7 +5,7 @@
 //
 //**************************************************
 
-#include "playhave.h"
+#include "playfab.h"
 #include "ranking.h"
 
 //=============================================================================
@@ -13,8 +13,8 @@
 //=============================================================================
 
 
-std::string CPlayhave::m_PlayName;
-std::map<std::string, std::string>CPlayhave::m_Data;
+std::string CPlayfab::m_PlayName;
+std::map<std::string, std::string>CPlayfab::m_Data;
 
 
 void OnLoginFail(const PlayFabError& error, void*)
@@ -33,7 +33,7 @@ void OnLoginFail(const PlayFabError& error, void*)
 //ログイン
 //========================
 
-LoginWithCustomIDRequest CPlayhave::IdSet(char*Id)
+LoginWithCustomIDRequest CPlayfab::IdSet(char*Id)
 {
 	PlayFabSettings::staticSettings->titleId = (Id);
 
@@ -55,7 +55,7 @@ LoginWithCustomIDRequest CPlayhave::IdSet(char*Id)
 //========================
 //オンライン更新
 //========================
-void CPlayhave::APIUp()
+void CPlayfab::APIUp()
 {
 	PlayFabClientAPI::Update();
 }
@@ -63,7 +63,7 @@ void CPlayhave::APIUp()
 //========================
 // 任意のネットワークアダプタのMACアドレスを取得
 //========================
-std::string CPlayhave::GetMACAddr()
+std::string CPlayfab::GetMACAddr()
 {
 	PIP_ADAPTER_INFO adapterInfo;
 	DWORD dwBufLen = sizeof(IP_ADAPTER_INFO);
@@ -106,7 +106,7 @@ std::string CPlayhave::GetMACAddr()
 //========================
 // GetScore
 //========================
-void CPlayhave::GetScore(std::function<void(const ClientModels::GetLeaderboardResult&)> func)
+void CPlayfab::GetScore(std::function<void(const ClientModels::GetLeaderboardResult&)> func)
 {
 	LoginWithCustomIDRequest request = IdSet("323A0");
 	
@@ -127,18 +127,19 @@ void CPlayhave::GetScore(std::function<void(const ClientModels::GetLeaderboardRe
 //========================
 // GetMasterData
 //========================
-void CPlayhave::GetMasterData()
+void CPlayfab::GetMasterData(std::function<void()> func)
 {
 
 	LoginWithCustomIDRequest request = IdSet("323A0");
 
-	PlayFabClientAPI::LoginWithCustomID(request, [](PlayFab::ClientModels::LoginResult result, void* customData) {
+	PlayFabClientAPI::LoginWithCustomID(request, [func](PlayFab::ClientModels::LoginResult result, void* customData) {
 
 		GetTitleDataRequest req;
 
 		PlayFabClientAPI::GetTitleData(req,
-			[](const ClientModels::GetTitleDataResult& result, void*)
+			[func](const ClientModels::GetTitleDataResult& result, void*)
 		{//成功時
+			func();
 			m_Data = result.Data;
 		});
 	});
@@ -148,7 +149,7 @@ void CPlayhave::GetMasterData()
 //========================
 // SetScore
 //========================
-void CPlayhave::SetScore(const std::string playName, const int score)
+void CPlayfab::SetScore(const std::string playName, const int score)
 {
 	m_PlayName = playName;
 
