@@ -35,6 +35,7 @@ HRESULT CLoading::Init(void)
 	m_Sin = 0;
 	m_moveType = 0;
 	m_timer = 0;
+
 	m_Words[0] = CWords::Create("N", D3DXVECTOR3(300.0f, 650.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
 	m_Words[1] = CWords::Create("o", D3DXVECTOR3(350.0f, 650.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
 	m_Words[2] = CWords::Create("w", D3DXVECTOR3(400.0f, 650.0f, 0.0f), D3DXVECTOR3(25.0f, 25.0f, 0.0f), CFont::FONT_GON);
@@ -60,7 +61,6 @@ HRESULT CLoading::Init(void)
 //================
 void CLoading::Uninit(void)
 {
-
 	Release();
 }
 
@@ -82,16 +82,8 @@ void CLoading::Update(void)
 		}
 		else
 		{
-			
-			
-			
-			move.x = -5.0f;
-			
-			
-			
+			move.x = -5.0f;	
 		}
-		
-
 	}
 	for (int i = 0; i < 10; i++)
 	{
@@ -99,8 +91,6 @@ void CLoading::Update(void)
 
 		m_Words[i]->SetMove(D3DXVECTOR3(0.0f, move.y, 0.0f));
 	}
-
-	
 	
 #ifdef _DEBUG
 	CInput *CInputpInput = CInput::GetKey();

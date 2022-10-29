@@ -720,7 +720,6 @@ void CModelManager::ReleaseAll()
 			delete ms_ModelManager;
 			ms_ModelManager = nullptr;
 		}
-	
 	}
 }
 
